@@ -48,6 +48,9 @@ The terminal shows the live agent conversation. Reports go to
 `demo-app/guardian-out/` as `guardian-report.json`, `guardian-report.md` and
 `guardian.sarif`.
 
+Open [`ARCHITECTURE.html`](ARCHITECTURE.html) for the interactive visual
+architecture, agent hierarchy and innovation showcase.
+
 | Key | Effect |
 |---|---|
 | `GITHUB_TOKEN` | Enables the GHSA source |
