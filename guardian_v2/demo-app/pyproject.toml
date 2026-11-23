@@ -1,0 +1,4 @@
+[project]
+name = "guardian-demo-app"
+version = "1.0.0"
+dependencies = ["Flask==2.0.1", "Werkzeug==2.0.1", "Jinja2==3.0.1", "requests==2.25.1"]

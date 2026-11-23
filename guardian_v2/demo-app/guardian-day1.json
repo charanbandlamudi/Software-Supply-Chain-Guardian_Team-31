@@ -1,0 +1,32 @@
+{
+  "sbom": "inputs/sbom.cdx.json",
+  "python_graph": "inputs/pipdeptree.json",
+  "python_manifest": "requirements.txt",
+  "npm_lock": "package-lock.json",
+  "npm_manifest": "package.json",
+  "npm_copy": [
+    "frontend"
+  ],
+  "npm_smoke": "frontend/index.js",
+  "source_dirs": [
+    "src",
+    "frontend"
+  ],
+  "dockerfiles": [
+    "Dockerfile"
+  ],
+  "workflows": [
+    ".github/workflows/ci.yml"
+  ],
+  "smoke_test": "src/smoke_test.py",
+  "out_dir": "guardian-out-day1",
+  "context": {
+    "exposure": "internet",
+    "mission": "medium"
+  },
+  "npm_lock_baseline": "baseline/package-lock.json",
+  "internal_namespaces": [
+    "@bgsw-internal/"
+  ],
+  "min_release_age_days": 14
+}

@@ -2,5 +2,12 @@
 data/repos/
 data/scans/*/repo/
 __pycache__/
+.pytest_cache/
+*.py[cod]
 .env
+**/.env
+dist/
+build/
+*.egg-info/
+.guardian_cache/
 .DS_Store

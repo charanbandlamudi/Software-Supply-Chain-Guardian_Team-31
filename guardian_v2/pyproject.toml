@@ -1,0 +1,20 @@
+[project]
+name = "guardian-v2"
+version = "0.2.0"
+description = "LangGraph implementation of the Software Supply Chain Guardian"
+requires-python = ">=3.11"
+dependencies = [
+    "langgraph>=0.2",
+    "univers",
+    "packaging",
+    "cvss",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "Flask",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

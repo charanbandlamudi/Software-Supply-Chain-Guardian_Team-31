@@ -1,0 +1,4706 @@
+{
+  "run_id": "9dcd6128",
+  "stage": "day1",
+  "inventory": {
+    "components": [
+      {
+        "purl": "pkg:pypi/flask@2.0.1",
+        "direct": true,
+        "scope": "prod",
+        "sources": [
+          "graph",
+          "sbom"
+        ],
+        "reachability": "imported",
+        "origin": {
+          "registry": "pypi.org",
+          "download_host": "files.pythonhosted.org",
+          "repo": "https://github.com/pallets/flask/",
+          "trusted_host": true
+        }
+      },
+      {
+        "purl": "pkg:pypi/jinja2@3.0.1",
+        "direct": true,
+        "scope": "prod",
+        "sources": [
+          "graph",
+          "sbom"
+        ],
+        "reachability": "used_transitively",
+        "origin": {
+          "registry": "pypi.org",
+          "download_host": "files.pythonhosted.org",
+          "repo": "https://github.com/pallets/jinja/",
+          "trusted_host": true
+        }
+      },
+      {
+        "purl": "pkg:pypi/markupsafe@3.0.4",
+        "direct": false,
+        "scope": "prod",
+        "sources": [
+          "graph",
+          "sbom"
+        ],
+        "reachability": "used_transitively",
+        "origin": {
+          "registry": "pypi.org",
+          "download_host": "files.pythonhosted.org",
+          "repo": "https://github.com/pallets/markupsafe/",
+          "trusted_host": true
+        }
+      },
+      {
+        "purl": "pkg:pypi/werkzeug@2.0.1",
+        "direct": true,
+        "scope": "prod",
+        "sources": [
+          "graph",
+          "sbom"
+        ],
+        "reachability": "used_transitively",
+        "origin": {
+          "registry": "pypi.org",
+          "download_host": "files.pythonhosted.org",
+          "repo": "https://github.com/pallets/werkzeug/",
+          "trusted_host": true
+        }
+      },
+      {
+        "purl": "pkg:pypi/certifi@2026.11.20",
+        "direct": false,
+        "scope": "prod",
+        "sources": [
+          "graph",
+          "sbom"
+        ],
+        "reachability": "used_transitively",
+        "origin": {
+          "registry": "pypi.org",
+          "download_host": "files.pythonhosted.org",
+          "repo": "https://github.com/certifi/python-certifi",
+          "trusted_host": true
+        }
+      },
+      {
+        "purl": "pkg:pypi/chardet@4.0.0",
+        "direct": false,
+        "scope": "prod",
+        "sources": [
+          "graph",
+          "sbom"
+        ],
+        "reachability": "used_transitively",
+        "origin": {
+          "registry": "pypi.org",
+          "download_host": "files.pythonhosted.org",
+          "repo": null,
+          "trusted_host": true
+        }
+      },
+      {
+        "purl": "pkg:pypi/click@8.5.1",
+        "direct": false,
+        "scope": "prod",
+        "sources": [
+          "graph",
+          "sbom"
+        ],
+        "reachability": "used_transitively",
+        "origin": {
+          "registry": "pypi.org",
+          "download_host": "files.pythonhosted.org",
+          "repo": "https://github.com/pallets/click/",
+          "trusted_host": true
+        }
+      },
+      {
+        "purl": "pkg:pypi/idna@2.10",
+        "direct": false,
+        "scope": "prod",
+        "sources": [
+          "graph",
+          "sbom"
+        ],
+        "reachability": "used_transitively",
+        "origin": {
+          "registry": "pypi.org",
+          "download_host": "files.pythonhosted.org",
+          "repo": "https://github.com/kjd/idna",
+          "trusted_host": true
+        }
+      },
+      {
+        "purl": "pkg:pypi/itsdangerous@2.2.0",
+        "direct": false,
+        "scope": "prod",
+        "sources": [
+          "graph",
+          "sbom"
+        ],
+        "reachability": "used_transitively",
+        "origin": {
+          "registry": "pypi.org",
+          "download_host": "files.pythonhosted.org",
+          "repo": "https://github.com/pallets/itsdangerous/",
+          "trusted_host": true
+        }
+      },
+      {
+        "purl": "pkg:pypi/pip@24.0",
+        "direct": false,
+        "scope": "environment",
+        "sources": [
+          "graph",
+          "sbom"
+        ],
+        "reachability": "not_in_runtime",
+        "origin": {
+          "registry": "pypi.org",
+          "download_host": "files.pythonhosted.org",
+          "repo": "https://github.com/pypa/pip",
+          "trusted_host": true
+        }
+      },
+      {
+        "purl": "pkg:pypi/requests@2.25.1",
+        "direct": true,
+        "scope": "prod",
+        "sources": [
+          "graph",
+          "sbom"
+        ],
+        "reachability": "imported",
+        "origin": {
+          "registry": "pypi.org",
+          "download_host": "files.pythonhosted.org",
+          "repo": "https://github.com/psf/requests",
+          "trusted_host": true
+        }
+      },
+      {
+        "purl": "pkg:pypi/urllib3@1.26.20",
+        "direct": false,
+        "scope": "prod",
+        "sources": [
+          "graph",
+          "sbom"
+        ],
+        "reachability": "used_transitively",
+        "origin": {
+          "registry": "pypi.org",
+          "download_host": "files.pythonhosted.org",
+          "repo": null,
+          "trusted_host": true
+        }
+      },
+      {
+        "purl": "pkg:npm/lodash@4.17.15",
+        "direct": true,
+        "scope": "prod",
+        "sources": [
+          "lockfile"
+        ],
+        "reachability": "imported",
+        "origin": {
+          "registry": "registry.npmjs.org",
+          "download_host": "registry.npmjs.org",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.15.tgz",
+          "trusted_host": true
+        }
+      },
+      {
+        "purl": "pkg:npm/mkdirp@0.5.5",
+        "direct": true,
+        "scope": "prod",
+        "sources": [
+          "lockfile"
+        ],
+        "reachability": "imported",
+        "origin": {
+          "registry": "registry.npmjs.org",
+          "download_host": "registry.npmjs.org",
+          "resolved": "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.5.tgz",
+          "trusted_host": true
+        }
+      },
+      {
+        "purl": "pkg:npm/minimist@1.2.5",
+        "direct": false,
+        "scope": "prod",
+        "sources": [
+          "lockfile"
+        ],
+        "reachability": "used_transitively",
+        "origin": {
+          "registry": "registry.npmjs.org",
+          "download_host": "npm-mirror.example-cdn.net",
+          "resolved": "https://npm-mirror.example-cdn.net/minimist/-/minimist-1.2.5.tgz",
+          "trusted_host": false
+        }
+      },
+      {
+        "purl": "pkg:npm/lodahs@1.0.0",
+        "direct": true,
+        "scope": "prod",
+        "sources": [
+          "lockfile"
+        ],
+        "reachability": "not_imported",
+        "origin": {
+          "registry": "registry.npmjs.org",
+          "download_host": "registry.npmjs.org",
+          "resolved": "https://registry.npmjs.org/lodahs/-/lodahs-1.0.0.tgz",
+          "trusted_host": true
+        }
+      }
+    ],
+    "edges": [
+      {
+        "from": "pkg:pypi/flask@2.0.1",
+        "to": "pkg:pypi/jinja2@3.0.1",
+        "constraint": null,
+        "source": "sbom"
+      },
+      {
+        "from": "pkg:pypi/flask@2.0.1",
+        "to": "pkg:pypi/werkzeug@2.0.1",
+        "constraint": null,
+        "source": "sbom"
+      },
+      {
+        "from": "pkg:pypi/flask@2.0.1",
+        "to": "pkg:pypi/click@8.5.1",
+        "constraint": null,
+        "source": "sbom"
+      },
+      {
+        "from": "pkg:pypi/flask@2.0.1",
+        "to": "pkg:pypi/itsdangerous@2.2.0",
+        "constraint": null,
+        "source": "sbom"
+      },
+      {
+        "from": "pkg:pypi/jinja2@3.0.1",
+        "to": "pkg:pypi/markupsafe@3.0.4",
+        "constraint": null,
+        "source": "sbom"
+      },
+      {
+        "from": "pkg:pypi/requests@2.25.1",
+        "to": "pkg:pypi/certifi@2026.11.20",
+        "constraint": null,
+        "source": "sbom"
+      },
+      {
+        "from": "pkg:pypi/requests@2.25.1",
+        "to": "pkg:pypi/chardet@4.0.0",
+        "constraint": null,
+        "source": "sbom"
+      },
+      {
+        "from": "pkg:pypi/requests@2.25.1",
+        "to": "pkg:pypi/idna@2.10",
+        "constraint": null,
+        "source": "sbom"
+      },
+      {
+        "from": "pkg:pypi/requests@2.25.1",
+        "to": "pkg:pypi/urllib3@1.26.20",
+        "constraint": null,
+        "source": "sbom"
+      },
+      {
+        "from": "pkg:pypi/urllib3@1.26.20",
+        "to": "pkg:pypi/certifi@2026.11.20",
+        "constraint": null,
+        "source": "sbom"
+      },
+      {
+        "from": "pkg:pypi/urllib3@1.26.20",
+        "to": "pkg:pypi/idna@2.10",
+        "constraint": null,
+        "source": "sbom"
+      },
+      {
+        "from": "pkg:npm/mkdirp@0.5.5",
+        "to": "pkg:npm/minimist@1.2.5",
+        "constraint": "^1.2.5",
+        "source": "npm-lock"
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": "MALICIOUS_PACKAGE::pkg:npm/lodahs@1.0.0",
+      "type": "malicious_package",
+      "canonical_id": "MALICIOUS_PACKAGE",
+      "aliases": [],
+      "component_purl": "pkg:npm/lodahs@1.0.0",
+      "score": 78.0,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Act",
+        "exploitation": "active",
+        "automatable": true,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 38.0,
+        "base_source": "calibrated detector base",
+        "exploit": 30.0,
+        "exploitation": "active",
+        "reachability": [
+          "executes at install time (import status: not_imported)",
+          1.0
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          2,
+          10.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "not_imported",
+      "kev": null,
+      "epss": null,
+      "sources": [
+        "guardian-detector"
+      ],
+      "source_conflicts": null,
+      "paths": [],
+      "introduced_by": null,
+      "recommended_fix": null,
+      "summary": "lodahs has been replaced on the registry by a security holding package; the locked version 1.0.0 was removed as malicious.",
+      "evidence_ids": [
+        "EV-anomaly-malicious_package-9c7a0a7f7e6e8d73",
+        "EV-input-eb1ad9bfc9fb5256"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "INTEGRITY_MISMATCH::pkg:npm/minimist@1.2.5",
+      "type": "integrity_mismatch",
+      "canonical_id": "INTEGRITY_MISMATCH",
+      "aliases": [],
+      "component_purl": "pkg:npm/minimist@1.2.5",
+      "score": 59.0,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Attend",
+        "exploitation": "poc",
+        "automatable": true,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 34.0,
+        "base_source": "calibrated detector base",
+        "exploit": 15.0,
+        "exploitation": "poc",
+        "reachability": [
+          "executes at install time (import status: used_transitively)",
+          1.0
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          2,
+          10.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": null,
+      "epss": null,
+      "sources": [
+        "guardian-detector"
+      ],
+      "source_conflicts": null,
+      "paths": [],
+      "introduced_by": null,
+      "recommended_fix": null,
+      "summary": "Lockfile integrity for minimist@1.2.5 differs from the registry's published hash.",
+      "evidence_ids": [
+        "EV-anomaly-integrity_mismatch-f02b7e630a642178",
+        "EV-input-eb1ad9bfc9fb5256"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "LOCKFILE_TAMPERING::pkg:npm/minimist@1.2.5",
+      "type": "lockfile_tampering",
+      "canonical_id": "LOCKFILE_TAMPERING",
+      "aliases": [],
+      "component_purl": "pkg:npm/minimist@1.2.5",
+      "score": 59.0,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Attend",
+        "exploitation": "poc",
+        "automatable": true,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 34.0,
+        "base_source": "calibrated detector base",
+        "exploit": 15.0,
+        "exploitation": "poc",
+        "reachability": [
+          "executes at install time (import status: used_transitively)",
+          1.0
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          2,
+          10.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": null,
+      "epss": null,
+      "sources": [
+        "guardian-detector"
+      ],
+      "source_conflicts": null,
+      "paths": [],
+      "introduced_by": null,
+      "recommended_fix": null,
+      "summary": "minimist@1.2.5: integrity/resolved URL changed in the lockfile without a version change.",
+      "evidence_ids": [
+        "EV-anomaly-lockfile_tampering-c0c1ee9d4c9f02a9",
+        "EV-input-eb1ad9bfc9fb5256"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2026-4800::pkg:npm/lodash@4.17.15",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-4800",
+      "aliases": [
+        "GHSA-r5fr-rjxr-66jc"
+      ],
+      "component_purl": "pkg:npm/lodash@4.17.15",
+      "score": 49.8,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 32.4,
+        "base_source": "cvss",
+        "exploit": 17.4,
+        "exploitation": "none",
+        "reachability": [
+          "imported",
+          0.9
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "imported",
+      "kev": false,
+      "epss": {
+        "epss": 0.0287,
+        "percentile": 0.87141
+      },
+      "sources": [
+        "npm-audit",
+        "osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:npm/lodash@4.17.15"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:npm/lodash@4.17.15"
+      ],
+      "recommended_fix": "4.18.0",
+      "summary": "lodash vulnerable to Code Injection via `_.template` imports key names",
+      "evidence_ids": [
+        "EV-npm-audit-ca383ecc0a1803bf",
+        "EV-osv-f86178cf6d657caf",
+        "EV-ast-import-scan-4d01d92d5dac512e"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2021-23337::pkg:npm/lodash@4.17.15",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2021-23337",
+      "aliases": [
+        "GHSA-35jh-r3h4-6jhm"
+      ],
+      "component_purl": "pkg:npm/lodash@4.17.15",
+      "score": 48.5,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 28.8,
+        "base_source": "cvss",
+        "exploit": 19.5,
+        "exploitation": "none",
+        "reachability": [
+          "imported",
+          0.9
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "imported",
+      "kev": false,
+      "epss": {
+        "epss": 0.20158,
+        "percentile": 0.97523
+      },
+      "sources": [
+        "npm-audit",
+        "osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:npm/lodash@4.17.15"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:npm/lodash@4.17.15"
+      ],
+      "recommended_fix": "4.17.21",
+      "summary": "Command Injection in lodash",
+      "evidence_ids": [
+        "EV-npm-audit-ca383ecc0a1803bf",
+        "EV-osv-3268f1c34ac513fb",
+        "EV-ast-import-scan-4d01d92d5dac512e"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2020-8203::pkg:npm/lodash@4.17.15",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2020-8203",
+      "aliases": [
+        "GHSA-p6mc-m468-83gw"
+      ],
+      "component_purl": "pkg:npm/lodash@4.17.15",
+      "score": 48.3,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 29.6,
+        "base_source": "cvss",
+        "exploit": 18.5,
+        "exploitation": "none",
+        "reachability": [
+          "imported",
+          0.9
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "imported",
+      "kev": false,
+      "epss": {
+        "epss": 0.05213,
+        "percentile": 0.92702
+      },
+      "sources": [
+        "npm-audit",
+        "osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:npm/lodash@4.17.15"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:npm/lodash@4.17.15"
+      ],
+      "recommended_fix": "4.17.19",
+      "summary": "Prototype Pollution in lodash",
+      "evidence_ids": [
+        "EV-npm-audit-ca383ecc0a1803bf",
+        "EV-osv-95ab1b20b5b1e6e7",
+        "EV-ast-import-scan-4d01d92d5dac512e"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "DANGEROUS_WORKFLOW::/home/pranaav/bosch/codebase/Software-Supply-Chain-Guardian_Team-31/guardian_v2/demo-app/.github/workflows/ci.yml:2",
+      "type": "dangerous_workflow",
+      "canonical_id": "DANGEROUS_WORKFLOW",
+      "aliases": [],
+      "component_purl": "file:/home/pranaav/bosch/codebase/Software-Supply-Chain-Guardian_Team-31/guardian_v2/demo-app/.github/workflows/ci.yml",
+      "score": 47.0,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Attend",
+        "exploitation": "poc",
+        "automatable": true,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 32.0,
+        "base_source": "calibrated detector base",
+        "exploit": 15.0,
+        "exploitation": "poc",
+        "reachability": [
+          "n/a: CI/container configuration",
+          1.0
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "n/a",
+      "kev": null,
+      "epss": null,
+      "sources": [
+        "guardian-detector"
+      ],
+      "source_conflicts": null,
+      "paths": [],
+      "introduced_by": null,
+      "recommended_fix": null,
+      "summary": "pull_request_target checks out untrusted PR code with repository secrets available.",
+      "evidence_ids": [
+        "EV-cicd-2b92c6891ea7f1c4"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": {
+        "file": "/home/pranaav/bosch/codebase/Software-Supply-Chain-Guardian_Team-31/guardian_v2/demo-app/.github/workflows/ci.yml",
+        "line": 2
+      }
+    },
+    {
+      "id": "VULN::CVE-2021-44906::pkg:npm/minimist@1.2.5",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2021-44906",
+      "aliases": [
+        "GHSA-xvch-5gv4-984h"
+      ],
+      "component_purl": "pkg:npm/minimist@1.2.5",
+      "score": 46.5,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 39.2,
+        "base_source": "cvss",
+        "exploit": 18.4,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.04581,
+        "percentile": 0.91855
+      },
+      "sources": [
+        "npm-audit",
+        "osv"
+      ],
+      "source_conflicts": [
+        {
+          "field": "affected",
+          "by_source": {
+            "npm-audit": true,
+            "osv": false
+          }
+        }
+      ],
+      "paths": [
+        [
+          "app",
+          "pkg:npm/mkdirp@0.5.5",
+          "pkg:npm/minimist@1.2.5"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:npm/mkdirp@0.5.5"
+      ],
+      "recommended_fix": "1.2.6",
+      "summary": "Prototype Pollution in minimist",
+      "evidence_ids": [
+        "EV-npm-audit-ca383ecc0a1803bf",
+        "EV-osv-e23a5d50b0deb42e"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2023-30861::pkg:pypi/flask@2.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2023-30861",
+      "aliases": [
+        "GHSA-m2qf-hxjv-5gpq",
+        "PYSEC-2023-62"
+      ],
+      "component_purl": "pkg:pypi/flask@2.0.1",
+      "score": 44.6,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 30.0,
+        "base_source": "cvss",
+        "exploit": 14.0,
+        "exploitation": "none",
+        "reachability": [
+          "imported",
+          0.9
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "imported",
+      "kev": false,
+      "epss": {
+        "epss": 0.0125,
+        "percentile": 0.7015
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1"
+      ],
+      "recommended_fix": "2.2.5",
+      "summary": "When all of the following conditions are met, a response containing data intended for one client may be cached and subsequently sent by a proxy to other clients. If the proxy also caches `Set-Cookie` headers, it may send one client's `session` cookie to other clients. The severity depends on the application's use of the session, and the proxy's behavior regarding cookies. The risk depends on _all_",
+      "evidence_ids": [
+        "EV-osv-75f2ce85bb313235",
+        "EV-osv-eb912c42f7da6160",
+        "EV-pypi-346341e476e20a46",
+        "EV-ast-import-scan-e9761d65cc446de6"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2024-34069::pkg:pypi/werkzeug@2.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2024-34069",
+      "aliases": [
+        "GHSA-2g68-c3qc-8985",
+        "PYSEC-2026-2043"
+      ],
+      "component_purl": "pkg:pypi/werkzeug@2.0.1",
+      "score": 43.3,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 30.0,
+        "base_source": "cvss",
+        "exploit": 17.8,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.03397,
+        "percentile": 0.8914
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/werkzeug@2.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/werkzeug@2.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/werkzeug@2.0.1"
+      ],
+      "recommended_fix": "3.0.3",
+      "summary": "The debugger in affected versions of Werkzeug can allow an attacker to execute code on a developer's machine under some circumstances. This requires the attacker to get the developer to interact with a domain and subdomain they control, and enter the debugger PIN, but if they are successful it allows access to the debugger even if it is only running on localhost. This also requires the attacker to",
+      "evidence_ids": [
+        "EV-osv-453da7c688451ae0",
+        "EV-osv-c44ffb9095ee9d7b",
+        "EV-pypi-7b21d6280d7e087d"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2023-32681::pkg:pypi/requests@2.25.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2023-32681",
+      "aliases": [
+        "GHSA-j8r2-6x86-q33q",
+        "PYSEC-2023-74"
+      ],
+      "component_purl": "pkg:pypi/requests@2.25.1",
+      "score": 42.7,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 24.4,
+        "base_source": "cvss",
+        "exploit": 17.5,
+        "exploitation": "none",
+        "reachability": [
+          "imported",
+          0.9
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "imported",
+      "kev": false,
+      "epss": {
+        "epss": 0.02974,
+        "percentile": 0.87593
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/requests@2.25.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/requests@2.25.1"
+      ],
+      "recommended_fix": "2.31.0",
+      "summary": "### Impact\n\nSince Requests v2.3.0, Requests has been vulnerable to potentially leaking `Proxy-Authorization` headers to destination servers, specifically during redirects to an HTTPS origin. This is a product of how `rebuild_proxies` is used to recompute and [reattach the `Proxy-Authorization` header](https://github.com/psf/requests/blob/f2629e9e3c7ce3c3c8c025bcd8db551101cbc773/requests/sessions.p",
+      "evidence_ids": [
+        "EV-osv-a8cf62be7bef83ee",
+        "EV-osv-b1406bba8bb42234",
+        "EV-pypi-952d4e813274bdfa",
+        "EV-ast-import-scan-4b3df68a2ed11f1f"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2025-13465::pkg:npm/lodash@4.17.15",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2025-13465",
+      "aliases": [
+        "GHSA-xxjr-mmjv-4gpg"
+      ],
+      "component_purl": "pkg:npm/lodash@4.17.15",
+      "score": 42.7,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 26.0,
+        "base_source": "cvss",
+        "exploit": 15.9,
+        "exploitation": "none",
+        "reachability": [
+          "imported",
+          0.9
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "imported",
+      "kev": false,
+      "epss": {
+        "epss": 0.01823,
+        "percentile": 0.7933
+      },
+      "sources": [
+        "npm-audit",
+        "osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:npm/lodash@4.17.15"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:npm/lodash@4.17.15"
+      ],
+      "recommended_fix": "4.17.23",
+      "summary": "Lodash has Prototype Pollution Vulnerability in `_.unset`, `_.omit`, and `_.pullAt` functions",
+      "evidence_ids": [
+        "EV-npm-audit-ca383ecc0a1803bf",
+        "EV-osv-2a7892b881d75e88",
+        "EV-ast-import-scan-4d01d92d5dac512e"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2020-28500::pkg:npm/lodash@4.17.15",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2020-28500",
+      "aliases": [
+        "GHSA-29mw-wpgm-hmr9"
+      ],
+      "component_purl": "pkg:npm/lodash@4.17.15",
+      "score": 41.1,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 21.2,
+        "base_source": "cvss",
+        "exploit": 18.9,
+        "exploitation": "none",
+        "reachability": [
+          "imported",
+          0.9
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "imported",
+      "kev": false,
+      "epss": {
+        "epss": 0.07424,
+        "percentile": 0.9459
+      },
+      "sources": [
+        "npm-audit",
+        "osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:npm/lodash@4.17.15"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:npm/lodash@4.17.15"
+      ],
+      "recommended_fix": "4.17.21",
+      "summary": "Regular Expression Denial of Service (ReDoS) in lodash",
+      "evidence_ids": [
+        "EV-npm-audit-ca383ecc0a1803bf",
+        "EV-osv-75a505d298d6e520",
+        "EV-ast-import-scan-4d01d92d5dac512e"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2023-25577::pkg:pypi/werkzeug@2.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2023-25577",
+      "aliases": [
+        "GHSA-xg9f-g7g7-2323",
+        "PYSEC-2023-58"
+      ],
+      "component_purl": "pkg:pypi/werkzeug@2.0.1",
+      "score": 40.8,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 30.0,
+        "base_source": "cvss",
+        "exploit": 14.7,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.0142,
+        "percentile": 0.73528
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/werkzeug@2.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/werkzeug@2.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/werkzeug@2.0.1"
+      ],
+      "recommended_fix": "2.2.3",
+      "summary": "Werkzeug's multipart form data parser will parse an unlimited number of parts, including file parts. Parts can be a small amount of bytes, but each requires CPU time to parse and may use more memory as Python data. If a request can be made to an endpoint that accesses `request.data`, `request.form`, `request.files`, or `request.get_data(parse_form_data=False)`, it can cause unexpectedly high resou",
+      "evidence_ids": [
+        "EV-osv-295f8c26bb8565b0",
+        "EV-osv-3da99e9722b49d95",
+        "EV-pypi-7b21d6280d7e087d"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2023-46136::pkg:pypi/werkzeug@2.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2023-46136",
+      "aliases": [
+        "GHSA-hrfv-mqp8-q5rw",
+        "PYSEC-2023-221"
+      ],
+      "component_purl": "pkg:pypi/werkzeug@2.0.1",
+      "score": 40.4,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 30.0,
+        "base_source": "cvss",
+        "exploit": 14.2,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.01288,
+        "percentile": 0.70951
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/werkzeug@2.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/werkzeug@2.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/werkzeug@2.0.1"
+      ],
+      "recommended_fix": "2.3.8",
+      "summary": "Werkzeug multipart data parser needs to find a boundary that may be between consecutive chunks. That's why parsing is based on looking for newline characters. Unfortunately, code looking for partial boundary in the buffer is written inefficiently, so if we upload a file that starts with CR or LF and then is followed by megabytes of data without these characters: all of these bytes are appended chu",
+      "evidence_ids": [
+        "EV-osv-645f619cf16bc281",
+        "EV-osv-8e5bffbd34829bb9",
+        "EV-pypi-7b21d6280d7e087d"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "UNTRUSTED_RESOLVED_URL::pkg:npm/minimist@1.2.5",
+      "type": "untrusted_resolved_url",
+      "canonical_id": "UNTRUSTED_RESOLVED_URL",
+      "aliases": [],
+      "component_purl": "pkg:npm/minimist@1.2.5",
+      "score": 40.0,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 30.0,
+        "base_source": "calibrated detector base",
+        "exploit": 0.0,
+        "exploitation": "none",
+        "reachability": [
+          "executes at install time (import status: used_transitively)",
+          1.0
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          2,
+          10.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": null,
+      "epss": null,
+      "sources": [
+        "guardian-detector"
+      ],
+      "source_conflicts": null,
+      "paths": [],
+      "introduced_by": null,
+      "recommended_fix": null,
+      "summary": "Lockfile resolves minimist from untrusted host npm-mirror.example-cdn.net.",
+      "evidence_ids": [
+        "EV-anomaly-untrusted_resolved_url-b7b557b0790ae856",
+        "EV-input-eb1ad9bfc9fb5256"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2024-49767::pkg:pypi/werkzeug@2.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2024-49767",
+      "aliases": [
+        "GHSA-q34m-jh98-gwm2",
+        "PYSEC-2026-1860",
+        "PYSEC-2026-3417"
+      ],
+      "component_purl": "pkg:pypi/werkzeug@2.0.1",
+      "score": 39.6,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 30.0,
+        "base_source": "cvss",
+        "exploit": 13.3,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.01095,
+        "percentile": 0.66376
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/werkzeug@2.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/werkzeug@2.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/werkzeug@2.0.1"
+      ],
+      "recommended_fix": "3.0.6",
+      "summary": "Applications using Werkzeug to parse `multipart/form-data` requests are vulnerable to resource exhaustion. A specially crafted form body can bypass the `Request.max_form_memory_size` setting.\n\n\nThe `Request.max_content_length` setting, as well as resource limits provided by deployment software and platforms, are also available to limit the resources used during a request. This vulnerability does n",
+      "evidence_ids": [
+        "EV-osv-bdc57b05071f095f",
+        "EV-osv-deb590cdb0d141cb",
+        "EV-pypi-7b21d6280d7e087d"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2026-21441::pkg:pypi/urllib3@1.26.20",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-21441",
+      "aliases": [
+        "GHSA-38jv-5279-wg99",
+        "PYSEC-2026-1996"
+      ],
+      "component_purl": "pkg:pypi/urllib3@1.26.20",
+      "score": 39.2,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 30.0,
+        "base_source": "cvss",
+        "exploit": 17.5,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.02922,
+        "percentile": 0.87386
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/requests@2.25.1",
+          "pkg:pypi/urllib3@1.26.20"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/requests@2.25.1"
+      ],
+      "recommended_fix": "2.6.3",
+      "summary": "### Impact\n\nurllib3's [streaming API](https://urllib3.readthedocs.io/en/2.6.2/advanced-usage.html#streaming-and-i-o) is designed for the efficient handling of large HTTP responses by reading the content in chunks, rather than loading the entire response body into memory at once.\n\nurllib3 can perform decoding or decompression based on the HTTP `Content-Encoding` header (e.g., `gzip`, `deflate`, `br",
+      "evidence_ids": [
+        "EV-osv-15c6e679574d6887",
+        "EV-osv-28bd7f7649d6f577",
+        "EV-pypi-7f3d20596739dd3f"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2025-66418::pkg:pypi/urllib3@1.26.20",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2025-66418",
+      "aliases": [
+        "GHSA-gm62-xv2j-4w53",
+        "PYSEC-2026-1998"
+      ],
+      "component_purl": "pkg:pypi/urllib3@1.26.20",
+      "score": 38.6,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 35.6,
+        "base_source": "cvss",
+        "exploit": 11.0,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00731,
+        "percentile": 0.55227
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/requests@2.25.1",
+          "pkg:pypi/urllib3@1.26.20"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/requests@2.25.1"
+      ],
+      "recommended_fix": "2.6.0",
+      "summary": "## Impact\n\nurllib3 supports chained HTTP encoding algorithms for response content according to RFC 9110 (e.g., `Content-Encoding: gzip, zstd`).\n\nHowever, the number of links in the decompression chain was unbounded allowing a malicious server to insert a virtually unlimited number of compression steps leading to high CPU usage and massive memory allocation for the decompressed data.\n\n\n## Affected ",
+      "evidence_ids": [
+        "EV-osv-44f5f2d3a4e5aa1a",
+        "EV-osv-d9dbff30eefc4378",
+        "EV-pypi-7f3d20596739dd3f"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2025-66471::pkg:pypi/urllib3@1.26.20",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2025-66471",
+      "aliases": [
+        "GHSA-2xpw-w6gg-jr37",
+        "PYSEC-2026-1994"
+      ],
+      "component_purl": "pkg:pypi/urllib3@1.26.20",
+      "score": 38.6,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 35.6,
+        "base_source": "cvss",
+        "exploit": 11.0,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00731,
+        "percentile": 0.55227
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/requests@2.25.1",
+          "pkg:pypi/urllib3@1.26.20"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/requests@2.25.1"
+      ],
+      "recommended_fix": "2.6.0",
+      "summary": "### Impact\n\nurllib3's [streaming API](https://urllib3.readthedocs.io/en/2.5.0/advanced-usage.html#streaming-and-i-o) is designed for the efficient handling of large HTTP responses by reading the content in chunks, rather than loading the entire response body into memory at once.\n\nWhen streaming a compressed response, urllib3 can perform decoding or decompression based on the HTTP `Content-Encoding",
+      "evidence_ids": [
+        "EV-osv-4a8d2850f7173d27",
+        "EV-osv-72ed23374243a804",
+        "EV-pypi-7f3d20596739dd3f"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "TYPOSQUAT_SUSPECT::pkg:npm/lodahs@1.0.0",
+      "type": "typosquat_suspect",
+      "canonical_id": "TYPOSQUAT_SUSPECT",
+      "aliases": [],
+      "component_purl": "pkg:npm/lodahs@1.0.0",
+      "score": 38.0,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 28.0,
+        "base_source": "calibrated detector base",
+        "exploit": 0.0,
+        "exploitation": "none",
+        "reachability": [
+          "executes at install time (import status: not_imported)",
+          1.0
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          2,
+          10.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "not_imported",
+      "kev": null,
+      "epss": null,
+      "sources": [
+        "guardian-detector"
+      ],
+      "source_conflicts": null,
+      "paths": [],
+      "introduced_by": null,
+      "recommended_fix": null,
+      "summary": "'lodahs' is within edit distance 2 of popular package 'lodash'.",
+      "evidence_ids": [
+        "EV-anomaly-typosquat_suspect-a1341eb9f790887f",
+        "EV-input-eb1ad9bfc9fb5256"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2024-56326::pkg:pypi/jinja2@3.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2024-56326",
+      "aliases": [
+        "GHSA-q2x7-8rv6-6q7h",
+        "PYSEC-2026-1475"
+      ],
+      "component_purl": "pkg:pypi/jinja2@3.0.1",
+      "score": 37.2,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 31.2,
+        "base_source": "cvss",
+        "exploit": 9.0,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00522,
+        "percentile": 0.45161
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/jinja2@3.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/jinja2@3.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/jinja2@3.0.1"
+      ],
+      "recommended_fix": "3.1.5",
+      "summary": "An oversight in how the Jinja sandboxed environment detects calls to `str.format` allows an attacker that controls the content of a template to execute arbitrary Python code.\n\nTo exploit the vulnerability, an attacker needs to control the content of a template. Whether that is the case depends on the type of application using Jinja. This vulnerability impacts users of applications which execute un",
+      "evidence_ids": [
+        "EV-osv-a8eff87ae0fa4cc8",
+        "EV-osv-f261ba20db6aba9b",
+        "EV-pypi-7cd22c42a631f7e5"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2024-3651::pkg:pypi/idna@2.10",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2024-3651",
+      "aliases": [
+        "GHSA-jjg7-2v4v-x38h",
+        "PYSEC-2024-60"
+      ],
+      "component_purl": "pkg:pypi/idna@2.10",
+      "score": 37.1,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 30.0,
+        "base_source": "cvss",
+        "exploit": 14.6,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.01386,
+        "percentile": 0.72929
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/requests@2.25.1",
+          "pkg:pypi/idna@2.10"
+        ],
+        [
+          "app",
+          "pkg:pypi/requests@2.25.1",
+          "pkg:pypi/urllib3@1.26.20",
+          "pkg:pypi/idna@2.10"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/requests@2.25.1"
+      ],
+      "recommended_fix": "3.7",
+      "summary": "### Impact\nA specially crafted argument to the `idna.encode()` function could consume significant resources. This may lead to a denial-of-service.\n\n### Patches\nThe function has been refined to reject such strings without the associated resource consumption in version 3.7.\n\n### Workarounds\nDomain names cannot exceed 253 characters in length, if this length limit is enforced prior to passing the dom",
+      "evidence_ids": [
+        "EV-osv-845ad418d6dc21cb",
+        "EV-osv-e5544ee00a5b70d1",
+        "EV-pypi-a536114a85875375"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2024-56201::pkg:pypi/jinja2@3.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2024-56201",
+      "aliases": [
+        "GHSA-gmj6-6f8f-6699",
+        "PYSEC-2026-1472"
+      ],
+      "component_purl": "pkg:pypi/jinja2@3.0.1",
+      "score": 37.0,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 35.2,
+        "base_source": "cvss",
+        "exploit": 4.8,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00307,
+        "percentile": 0.23922
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/jinja2@3.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/jinja2@3.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/jinja2@3.0.1"
+      ],
+      "recommended_fix": "3.1.5",
+      "summary": "A bug in the Jinja compiler allows an attacker that controls both the content and filename of a template to execute arbitrary Python code, regardless of if Jinja's sandbox is used.\n\nTo exploit the vulnerability, an attacker needs to control both the filename and the contents of a template. Whether that is the case depends on the type of application using Jinja. This vulnerability impacts users of ",
+      "evidence_ids": [
+        "EV-osv-4897bbd78ef382a2",
+        "EV-osv-fd8f755dc1827cc3",
+        "EV-pypi-7cd22c42a631f7e5"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2026-97689::pkg:pypi/urllib3@1.26.20",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-97689",
+      "aliases": [
+        "GHSA-vxq7-64xx-v4gw",
+        "PYSEC-2026-4177"
+      ],
+      "component_purl": "pkg:pypi/urllib3@1.26.20",
+      "score": 36.3,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 35.6,
+        "base_source": "cvss",
+        "exploit": 7.8,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.0044,
+        "percentile": 0.39049
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/requests@2.25.1",
+          "pkg:pypi/urllib3@1.26.20"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/requests@2.25.1"
+      ],
+      "recommended_fix": "2.8.0",
+      "summary": "## Impact\n\nurllib3's [streaming API](https://urllib3.readthedocs.io/en/2.7.0/advanced-usage.html#streaming-and-i-o) is designed for efficiently handling large HTTP responses by reading the content in chunks, rather than loading the entire response body into memory at once. When decoding a [chunked-transfer-encoded response](https://httpwg.org/specs/rfc9112.html#chunked.encoding), this API reads ea",
+      "evidence_ids": [
+        "EV-osv-4c888e2e5494d117",
+        "EV-osv-8f14dbcfeb4374dd",
+        "EV-pypi-7f3d20596739dd3f"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2022-29361::pkg:pypi/werkzeug@2.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2022-29361",
+      "aliases": [
+        "PYSEC-2022-203"
+      ],
+      "component_purl": "pkg:pypi/werkzeug@2.0.1",
+      "score": 36.2,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 20.0,
+        "base_source": "default 5.0: no CVSS from reachable sources",
+        "exploit": 19.0,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.08067,
+        "percentile": 0.94933
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/werkzeug@2.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/werkzeug@2.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/werkzeug@2.0.1"
+      ],
+      "recommended_fix": "2.1.1",
+      "summary": "** DISPUTED ** Improper parsing of HTTP requests in Pallets Werkzeug v2.1.0 and below allows attackers to perform HTTP Request Smuggling using a crafted HTTP request with multiple requests included inside the body. NOTE: the vendor's position is that this behavior can only occur in unsupported configurations involving development mode and an HTTP server from outside the Werkzeug project.",
+      "evidence_ids": [
+        "EV-osv-099540e0d8db545d",
+        "EV-pypi-7b21d6280d7e087d"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2024-47081::pkg:pypi/requests@2.25.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2024-47081",
+      "aliases": [
+        "GHSA-9hjg-9r4m-mvj7",
+        "PYSEC-2026-1872"
+      ],
+      "component_purl": "pkg:pypi/requests@2.25.1",
+      "score": 35.7,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 21.2,
+        "base_source": "cvss",
+        "exploit": 12.9,
+        "exploitation": "none",
+        "reachability": [
+          "imported",
+          0.9
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "imported",
+      "kev": false,
+      "epss": {
+        "epss": 0.01022,
+        "percentile": 0.64344
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/requests@2.25.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/requests@2.25.1"
+      ],
+      "recommended_fix": "2.32.4",
+      "summary": "### Impact\n\nDue to a URL parsing issue, Requests releases prior to 2.32.4 may leak .netrc credentials to third parties for specific maliciously-crafted URLs.\n\n### Workarounds\nFor older versions of Requests, use of the .netrc file can be disabled with `trust_env=False` on your Requests Session ([docs](https://requests.readthedocs.io/en/latest/api/#requests.Session.trust_env)).\n\n### References\nhttps",
+      "evidence_ids": [
+        "EV-osv-a1e75074eccbb8aa",
+        "EV-osv-aaf80fba462800e5",
+        "EV-pypi-952d4e813274bdfa",
+        "EV-ast-import-scan-4b3df68a2ed11f1f"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2024-49766::pkg:pypi/werkzeug@2.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2024-49766",
+      "aliases": [
+        "GHSA-f9vj-2wh5-fj8j",
+        "PYSEC-2026-2045"
+      ],
+      "component_purl": "pkg:pypi/werkzeug@2.0.1",
+      "score": 34.2,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 25.2,
+        "base_source": "cvss",
+        "exploit": 11.3,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00776,
+        "percentile": 0.56736
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/werkzeug@2.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/werkzeug@2.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/werkzeug@2.0.1"
+      ],
+      "recommended_fix": "3.0.6",
+      "summary": "On Python < 3.11 on Windows, `os.path.isabs()` does not catch UNC paths like `//server/share`. Werkzeug's `safe_join()` relies on this check, and so can produce a path that is not safe, potentially allowing unintended access to data. Applications using Python >= 3.11, or not using Windows, are not vulnerable.",
+      "evidence_ids": [
+        "EV-osv-7d8dcc3156f72a8a",
+        "EV-osv-80acbb1563ad1628",
+        "EV-pypi-7b21d6280d7e087d"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2025-66221::pkg:pypi/werkzeug@2.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2025-66221",
+      "aliases": [
+        "GHSA-hgf8-39gv-g3f2",
+        "PYSEC-2026-2046"
+      ],
+      "component_purl": "pkg:pypi/werkzeug@2.0.1",
+      "score": 32.6,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 25.2,
+        "base_source": "cvss",
+        "exploit": 9.4,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00547,
+        "percentile": 0.46756
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/werkzeug@2.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/werkzeug@2.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/werkzeug@2.0.1"
+      ],
+      "recommended_fix": "3.1.4",
+      "summary": "Werkzeug's `safe_join` function allows path segments with Windows device names. On Windows, there are special device names such as `CON`, `AUX`, etc that are implicitly present and readable in every directory. `send_from_directory` uses `safe_join` to safely serve files at user-specified paths under a directory. If the application is running on Windows, and the requested path ends with a special d",
+      "evidence_ids": [
+        "EV-osv-0fcc8aca31ef7863",
+        "EV-osv-bf1bb0bd956e75ae",
+        "EV-pypi-7b21d6280d7e087d"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2024-34064::pkg:pypi/jinja2@3.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2024-34064",
+      "aliases": [
+        "GHSA-h75v-3vvj-5mfj",
+        "PYSEC-2026-1474"
+      ],
+      "component_purl": "pkg:pypi/jinja2@3.0.1",
+      "score": 32.4,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 21.6,
+        "base_source": "cvss",
+        "exploit": 12.6,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00979,
+        "percentile": 0.63066
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/jinja2@3.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/jinja2@3.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/jinja2@3.0.1"
+      ],
+      "recommended_fix": "3.1.4",
+      "summary": "The `xmlattr` filter in affected versions of Jinja accepts keys containing non-attribute characters. XML/HTML attributes cannot contain spaces, `/`, `>`, or `=`, as each would then be interpreted as starting a separate attribute. If an application accepts keys (as opposed to only values) as user input, and renders these in pages that other users see as well, an attacker could use this to inject ot",
+      "evidence_ids": [
+        "EV-osv-01057001c8b0670a",
+        "EV-osv-994321f7312a0396",
+        "EV-pypi-7cd22c42a631f7e5"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2024-22195::pkg:pypi/jinja2@3.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2024-22195",
+      "aliases": [
+        "GHSA-h5c8-rqwp-cp95",
+        "PYSEC-2026-1473"
+      ],
+      "component_purl": "pkg:pypi/jinja2@3.0.1",
+      "score": 31.9,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 21.6,
+        "base_source": "cvss",
+        "exploit": 12.1,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00892,
+        "percentile": 0.6032
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/jinja2@3.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/jinja2@3.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/jinja2@3.0.1"
+      ],
+      "recommended_fix": "3.1.3",
+      "summary": "The `xmlattr` filter in affected versions of Jinja accepts keys containing spaces. XML/HTML attributes cannot contain spaces, as each would then be interpreted as a separate attribute. If an application accepts keys (as opposed to only values) as user input, and renders these in pages that other users see as well, an attacker could use this to inject other attributes and perform XSS. Note that acc",
+      "evidence_ids": [
+        "EV-osv-89ce3f170f5ca29f",
+        "EV-osv-c1a77c4866210938",
+        "EV-pypi-7cd22c42a631f7e5"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2026-102598::pkg:pypi/werkzeug@2.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-102598",
+      "aliases": [
+        "GHSA-g6x2-hccm-hh4m",
+        "PYSEC-2026-4312"
+      ],
+      "component_purl": "pkg:pypi/werkzeug@2.0.1",
+      "score": 30.2,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 25.2,
+        "base_source": "cvss",
+        "exploit": 6.3,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.0037,
+        "percentile": 0.31551
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/werkzeug@2.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/werkzeug@2.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/werkzeug@2.0.1"
+      ],
+      "recommended_fix": "3.1.9",
+      "summary": "Werkzeug's `safe_join` function allows Windows device names as filenames when they have an empty ADS marker on NTFS.\n\nThis was previously reported as https://github.com/pallets/werkzeug/security/advisories/GHSA-hgf8-39gv-g3f2, but the added filtering failed to account for the fact Windows allows special device names with an empty ADS marker, such as `NUL:`.\n\n`send_from_directory` uses `safe_join` ",
+      "evidence_ids": [
+        "EV-osv-388d4a38ceb4106e",
+        "EV-osv-47fb889544cca4af",
+        "EV-pypi-7b21d6280d7e087d"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2024-35195::pkg:pypi/requests@2.25.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2024-35195",
+      "aliases": [
+        "GHSA-9wx4-h78v-vm56",
+        "PYSEC-2026-1873"
+      ],
+      "component_purl": "pkg:pypi/requests@2.25.1",
+      "score": 30.2,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 22.4,
+        "base_source": "cvss",
+        "exploit": 5.6,
+        "exploitation": "none",
+        "reachability": [
+          "imported",
+          0.9
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "imported",
+      "kev": false,
+      "epss": {
+        "epss": 0.0034,
+        "percentile": 0.28018
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/requests@2.25.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/requests@2.25.1"
+      ],
+      "recommended_fix": "2.32.0",
+      "summary": "When using a `requests.Session`, if the first request to a given origin is made with `verify=False`, TLS certificate verification may remain disabled for all subsequent requests to that origin, even if `verify=True` is explicitly specified later.\n\nThis occurs because the underlying connection is reused from the session's connection pool, causing the initial TLS verification setting to persist for ",
+      "evidence_ids": [
+        "EV-osv-1d2b345ed0eb3340",
+        "EV-osv-90d6e56f2f5cf340",
+        "EV-pypi-952d4e813274bdfa",
+        "EV-ast-import-scan-4b3df68a2ed11f1f"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2026-27199::pkg:pypi/werkzeug@2.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-27199",
+      "aliases": [
+        "GHSA-29vq-49wr-vm6x",
+        "PYSEC-2026-2320"
+      ],
+      "component_purl": "pkg:pypi/werkzeug@2.0.1",
+      "score": 30.1,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 21.2,
+        "base_source": "cvss",
+        "exploit": 10.2,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00622,
+        "percentile": 0.50775
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/werkzeug@2.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/werkzeug@2.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/werkzeug@2.0.1"
+      ],
+      "recommended_fix": "3.1.6",
+      "summary": "Werkzeug's `safe_join` function allows Windows device names as filenames if when preceded by other path segments.\n\nThis was previously reported as https://github.com/pallets/werkzeug/security/advisories/GHSA-hgf8-39gv-g3f2, but the added filtering failed to account for the fact that `safe_join` accepts paths with multiple segments, such as `example/NUL`.\n\n`send_from_directory` uses `safe_join` to ",
+      "evidence_ids": [
+        "EV-osv-6db5e25819bc5f46",
+        "EV-osv-94bebde3fbea16f9",
+        "EV-pypi-7b21d6280d7e087d"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "INSTALL_SCRIPT::pkg:npm/lodahs@1.0.0",
+      "type": "install_script",
+      "canonical_id": "INSTALL_SCRIPT",
+      "aliases": [],
+      "component_purl": "pkg:npm/lodahs@1.0.0",
+      "score": 30.0,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 20.0,
+        "base_source": "calibrated detector base",
+        "exploit": 0.0,
+        "exploitation": "none",
+        "reachability": [
+          "executes at install time (import status: not_imported)",
+          1.0
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          2,
+          10.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "not_imported",
+      "kev": null,
+      "epss": null,
+      "sources": [
+        "guardian-detector"
+      ],
+      "source_conflicts": null,
+      "paths": [],
+      "introduced_by": null,
+      "recommended_fix": null,
+      "summary": "lodahs runs code at install time.",
+      "evidence_ids": [
+        "EV-anomaly-install_script-d0e6dd801839a75e",
+        "EV-input-eb1ad9bfc9fb5256"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2025-27516::pkg:pypi/jinja2@3.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2025-27516",
+      "aliases": [
+        "GHSA-cpwx-vrp4-4pq7",
+        "PYSEC-2026-1471"
+      ],
+      "component_purl": "pkg:pypi/jinja2@3.0.1",
+      "score": 29.3,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 21.6,
+        "base_source": "cvss",
+        "exploit": 8.8,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00507,
+        "percentile": 0.44125
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/jinja2@3.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/jinja2@3.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/jinja2@3.0.1"
+      ],
+      "recommended_fix": "3.1.6",
+      "summary": "An oversight in how the Jinja sandboxed environment interacts with the `|attr` filter allows an attacker that controls the content of a template to execute arbitrary Python code.\n\nTo exploit the vulnerability, an attacker needs to control the content of a template. Whether that is the case depends on the type of application using Jinja. This vulnerability impacts users of applications which execut",
+      "evidence_ids": [
+        "EV-osv-07442bd6243e4593",
+        "EV-osv-a86d9314fbe6f2b8",
+        "EV-pypi-7cd22c42a631f7e5"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2026-97687::pkg:pypi/urllib3@1.26.20",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-97687",
+      "aliases": [
+        "GHSA-8988-9cw3-xx77",
+        "PYSEC-2026-4175"
+      ],
+      "component_purl": "pkg:pypi/urllib3@1.26.20",
+      "score": 29.2,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 30.4,
+        "base_source": "cvss",
+        "exploit": 3.2,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00245,
+        "percentile": 0.15774
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/requests@2.25.1",
+          "pkg:pypi/urllib3@1.26.20"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/requests@2.25.1"
+      ],
+      "recommended_fix": "2.8.0",
+      "summary": "## Impact\n\nurllib3 supports configuring TLS independently for an HTTPS proxy and the target server.\n\n`proxy_ssl_context`, `proxy_assert_hostname`, and `proxy_assert_fingerprint` configure the TLS connection to the proxy. `ssl_context` and the other target-specific TLS parameters configure the connection to the target server.\n\nIn urllib3 versions 1.26.0 through 2.7.0, these configurations were not ",
+      "evidence_ids": [
+        "EV-osv-b0b0123f8b644c3a",
+        "EV-osv-bbe57e93305c873e",
+        "EV-pypi-7f3d20596739dd3f"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2026-25645::pkg:pypi/requests@2.25.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-25645",
+      "aliases": [
+        "GHSA-gc5v-m9x4-r6x2",
+        "PYSEC-2026-2275"
+      ],
+      "component_purl": "pkg:pypi/requests@2.25.1",
+      "score": 29.1,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 22.0,
+        "base_source": "cvss",
+        "exploit": 4.8,
+        "exploitation": "none",
+        "reachability": [
+          "imported",
+          0.9
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "imported",
+      "kev": false,
+      "epss": {
+        "epss": 0.00306,
+        "percentile": 0.23788
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/requests@2.25.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/requests@2.25.1"
+      ],
+      "recommended_fix": "2.33.0",
+      "summary": "### Impact\nThe `requests.utils.extract_zipped_paths()` utility function uses a predictable filename when extracting files from zip archives into the system temporary directory. If the target file already exists, it is reused without validation. A local attacker with write access to the temp directory could pre-create a malicious file that would be loaded in place of the legitimate one.\n\n### Affect",
+      "evidence_ids": [
+        "EV-osv-2d188f6a77311e23",
+        "EV-osv-8bdb5440bd8ce733",
+        "EV-pypi-952d4e813274bdfa",
+        "EV-ast-import-scan-4b3df68a2ed11f1f"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2026-21860::pkg:pypi/werkzeug@2.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-21860",
+      "aliases": [
+        "GHSA-87hc-h4r5-73f7",
+        "PYSEC-2026-2044"
+      ],
+      "component_purl": "pkg:pypi/werkzeug@2.0.1",
+      "score": 28.7,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 21.2,
+        "base_source": "cvss",
+        "exploit": 8.4,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00475,
+        "percentile": 0.4188
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/werkzeug@2.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/werkzeug@2.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/werkzeug@2.0.1"
+      ],
+      "recommended_fix": "3.1.5",
+      "summary": "Werkzeug's `safe_join` function allows path segments with Windows device names that have file extensions or trailing spaces. On Windows, there are special device names such as `CON`, `AUX`, etc that are implicitly present and readable in every directory. Windows still accepts them with any file extension, such as `CON.txt`, or trailing spaces such as `CON `.\n\nThis was previously reported as https:",
+      "evidence_ids": [
+        "EV-osv-7ff8d6df327e8577",
+        "EV-osv-dcce25e6dd1b0150",
+        "EV-pypi-7b21d6280d7e087d"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "UNPINNED_ACTION::/home/pranaav/bosch/codebase/Software-Supply-Chain-Guardian_Team-31/guardian_v2/demo-app/.github/workflows/ci.yml:10",
+      "type": "unpinned_action",
+      "canonical_id": "UNPINNED_ACTION",
+      "aliases": [],
+      "component_purl": "file:/home/pranaav/bosch/codebase/Software-Supply-Chain-Guardian_Team-31/guardian_v2/demo-app/.github/workflows/ci.yml",
+      "score": 28.0,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 28.0,
+        "base_source": "calibrated detector base",
+        "exploit": 0.0,
+        "exploitation": "none",
+        "reachability": [
+          "n/a: CI/container configuration",
+          1.0
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "n/a",
+      "kev": null,
+      "epss": null,
+      "sources": [
+        "guardian-detector"
+      ],
+      "source_conflicts": null,
+      "paths": [],
+      "introduced_by": null,
+      "recommended_fix": null,
+      "summary": "Action tj-actions/changed-files@v35 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066).",
+      "evidence_ids": [
+        "EV-cicd-5f7ad5b6c288a502"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": {
+        "file": "/home/pranaav/bosch/codebase/Software-Supply-Chain-Guardian_Team-31/guardian_v2/demo-app/.github/workflows/ci.yml",
+        "line": 10
+      }
+    },
+    {
+      "id": "VULN::CVE-2026-27205::pkg:pypi/flask@2.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-27205",
+      "aliases": [
+        "GHSA-68rp-wp8r-4726",
+        "PYSEC-2026-2151"
+      ],
+      "component_purl": "pkg:pypi/flask@2.0.1",
+      "score": 26.7,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 17.2,
+        "base_source": "cvss",
+        "exploit": 6.9,
+        "exploitation": "none",
+        "reachability": [
+          "imported",
+          0.9
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "imported",
+      "kev": false,
+      "epss": {
+        "epss": 0.00394,
+        "percentile": 0.34421
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1"
+      ],
+      "recommended_fix": "3.1.3",
+      "summary": "When the `session` object is accessed, Flask should set the `Vary: Cookie` header. This instructs caches not to cache the response, as it may contain information specific to a logged in user. This is handled in most cases, but some forms of access such as the Python `in` operator were overlooked.\n\nThe severity depends on the application's use of the session, and the cache's behavior regarding cook",
+      "evidence_ids": [
+        "EV-osv-3c34ece7f8fa69e9",
+        "EV-osv-99350c29c17e534d",
+        "EV-pypi-346341e476e20a46",
+        "EV-ast-import-scan-e9761d65cc446de6"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2025-50181::pkg:pypi/urllib3@1.26.20",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2025-50181",
+      "aliases": [
+        "GHSA-pq67-6m6q-mj2v",
+        "PYSEC-2026-1999"
+      ],
+      "component_purl": "pkg:pypi/urllib3@1.26.20",
+      "score": 26.5,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 21.2,
+        "base_source": "cvss",
+        "exploit": 8.7,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00494,
+        "percentile": 0.43296
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/requests@2.25.1",
+          "pkg:pypi/urllib3@1.26.20"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/requests@2.25.1"
+      ],
+      "recommended_fix": "2.5.0",
+      "summary": "urllib3 handles redirects and retries using the same mechanism, which is controlled by the `Retry` object. The most common way to disable redirects is at the request level, as follows:\n\n```python\nresp = urllib3.request(\"GET\", \"https://httpbin.org/redirect/1\", redirect=False)\nprint(resp.status)\n# 302\n```\n\nHowever, it is also possible to disable redirects, for all requests, by instantiating a `PoolM",
+      "evidence_ids": [
+        "EV-osv-0168958d6adcf1cc",
+        "EV-osv-706684a27ff4f11d",
+        "EV-pypi-7f3d20596739dd3f"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2026-45409::pkg:pypi/idna@2.10",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-45409",
+      "aliases": [
+        "GHSA-65pc-fj4g-8rjx",
+        "PYSEC-2026-215"
+      ],
+      "component_purl": "pkg:pypi/idna@2.10",
+      "score": 25.4,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 21.2,
+        "base_source": "cvss",
+        "exploit": 7.2,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00408,
+        "percentile": 0.35865
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/requests@2.25.1",
+          "pkg:pypi/idna@2.10"
+        ],
+        [
+          "app",
+          "pkg:pypi/requests@2.25.1",
+          "pkg:pypi/urllib3@1.26.20",
+          "pkg:pypi/idna@2.10"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/requests@2.25.1"
+      ],
+      "recommended_fix": "3.15",
+      "summary": "This is the same issue as CVE-2024-3651, however the original remediation in 2024 was not a complete fix. Payloads such as `\"\\u0660\" * N` or `\"\\u30fb\" * N + \"\\u6f22\"` utilize the `valid_contexto` function prior to length rejection, and for high values of `N` will take a long time to process.\n\n### Impact\nA specially crafted argument to the `idna.encode()` function could consume significant resource",
+      "evidence_ids": [
+        "EV-osv-9fc80ad066e308e3",
+        "EV-osv-fd1491f2d386ac6a",
+        "EV-pypi-a536114a85875375"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2026-44431::pkg:pypi/urllib3@1.26.20",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-44431",
+      "aliases": [
+        "GHSA-qccp-gfcp-xxvc",
+        "PYSEC-2026-141"
+      ],
+      "component_purl": "pkg:pypi/urllib3@1.26.20",
+      "score": 24.1,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 21.2,
+        "base_source": "cvss",
+        "exploit": 5.4,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00331,
+        "percentile": 0.26811
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/requests@2.25.1",
+          "pkg:pypi/urllib3@1.26.20"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/requests@2.25.1"
+      ],
+      "recommended_fix": "2.7.0",
+      "summary": "### Impact\n\nWhen following cross-origin redirects for requests made using urllib3\u2019s high-level APIs, such as `urllib3.request()`, `PoolManager.request()`, and `ProxyManager.request()`, sensitive headers \u2014 `Authorization`, `Cookie`, and `Proxy-Authorization` (defined in `Retry.DEFAULT_REMOVE_HEADERS_ON_REDIRECT`) \u2014 are stripped by default, as expected.\n\nHowever, cross-origin redirects followed from",
+      "evidence_ids": [
+        "EV-osv-6c3dced0b96e9be7",
+        "EV-osv-7baa28989b49400d",
+        "EV-pypi-7f3d20596739dd3f"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "EXCESSIVE_PERMISSIONS::/home/pranaav/bosch/codebase/Software-Supply-Chain-Guardian_Team-31/guardian_v2/demo-app/.github/workflows/ci.yml:3",
+      "type": "excessive_permissions",
+      "canonical_id": "EXCESSIVE_PERMISSIONS",
+      "aliases": [],
+      "component_purl": "file:/home/pranaav/bosch/codebase/Software-Supply-Chain-Guardian_Team-31/guardian_v2/demo-app/.github/workflows/ci.yml",
+      "score": 24.0,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 24.0,
+        "base_source": "calibrated detector base",
+        "exploit": 0.0,
+        "exploitation": "none",
+        "reachability": [
+          "n/a: CI/container configuration",
+          1.0
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "n/a",
+      "kev": null,
+      "epss": null,
+      "sources": [
+        "guardian-detector"
+      ],
+      "source_conflicts": null,
+      "paths": [],
+      "introduced_by": null,
+      "recommended_fix": null,
+      "summary": "Workflow token has write-all permissions.",
+      "evidence_ids": [
+        "EV-cicd-d26bc015b683ab0a"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": {
+        "file": "/home/pranaav/bosch/codebase/Software-Supply-Chain-Guardian_Team-31/guardian_v2/demo-app/.github/workflows/ci.yml",
+        "line": 3
+      }
+    },
+    {
+      "id": "SUSPICIOUS_UPDATE::pkg:pypi/certifi@2026.11.20",
+      "type": "suspicious_update",
+      "canonical_id": "SUSPICIOUS_UPDATE",
+      "aliases": [],
+      "component_purl": "pkg:pypi/certifi@2026.11.20",
+      "score": 24.0,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": true,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 24.0,
+        "base_source": "calibrated detector base",
+        "exploit": 0.0,
+        "exploitation": "none",
+        "reachability": [
+          "executes at install time (import status: used_transitively)",
+          1.0
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": null,
+      "epss": null,
+      "sources": [
+        "guardian-detector"
+      ],
+      "source_conflicts": null,
+      "paths": [],
+      "introduced_by": null,
+      "recommended_fix": null,
+      "summary": "certifi@2026.11.20 was published 2.5 days ago (< 14-day cooling-off window).",
+      "evidence_ids": [
+        "EV-anomaly-suspicious_update-55291f60a66bbfb7",
+        "EV-input-923396d446ea93b4"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "UNPINNED_BASE_IMAGE::/home/pranaav/bosch/codebase/Software-Supply-Chain-Guardian_Team-31/guardian_v2/demo-app/Dockerfile:1",
+      "type": "unpinned_base_image",
+      "canonical_id": "UNPINNED_BASE_IMAGE",
+      "aliases": [],
+      "component_purl": "file:/home/pranaav/bosch/codebase/Software-Supply-Chain-Guardian_Team-31/guardian_v2/demo-app/Dockerfile",
+      "score": 22.0,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 22.0,
+        "base_source": "calibrated detector base",
+        "exploit": 0.0,
+        "exploitation": "none",
+        "reachability": [
+          "n/a: CI/container configuration",
+          1.0
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "n/a",
+      "kev": null,
+      "epss": null,
+      "sources": [
+        "guardian-detector"
+      ],
+      "source_conflicts": null,
+      "paths": [],
+      "introduced_by": null,
+      "recommended_fix": null,
+      "summary": "Base image python:3.9 is referenced by tag, not digest; the tag can be re-pointed.",
+      "evidence_ids": [
+        "EV-cicd-42deab04757027e1"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": {
+        "file": "/home/pranaav/bosch/codebase/Software-Supply-Chain-Guardian_Team-31/guardian_v2/demo-app/Dockerfile",
+        "line": 1
+      }
+    },
+    {
+      "id": "VULN::CVE-2023-23934::pkg:pypi/werkzeug@2.0.1",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2023-23934",
+      "aliases": [
+        "GHSA-px8h-6qxv-m22q",
+        "PYSEC-2023-57"
+      ],
+      "component_purl": "pkg:pypi/werkzeug@2.0.1",
+      "score": 20.4,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 10.4,
+        "base_source": "cvss",
+        "exploit": 8.8,
+        "exploitation": "none",
+        "reachability": [
+          "used_transitively",
+          0.8
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "used_transitively",
+      "kev": false,
+      "epss": {
+        "epss": 0.00507,
+        "percentile": 0.44131
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:pypi/werkzeug@2.0.1"
+        ],
+        [
+          "app",
+          "pkg:pypi/flask@2.0.1",
+          "pkg:pypi/werkzeug@2.0.1"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/werkzeug@2.0.1"
+      ],
+      "recommended_fix": "2.2.3",
+      "summary": "Browsers may allow \"nameless\" cookies that look like `=value` instead of `key=value`. A vulnerable browser may allow a compromised application on an adjacent subdomain to exploit this to set a cookie like `=__Host-test=bad` for another subdomain.\n\nWerkzeug <= 2.2.2 will parse the cookie `=__Host-test=bad` as `__Host-test=bad`. If a Werkzeug application is running next to a vulnerable or malicious ",
+      "evidence_ids": [
+        "EV-osv-6a21f291f5dab093",
+        "EV-osv-9b256a00aac68715",
+        "EV-pypi-7b21d6280d7e087d"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "UNPINNED_ACTION::/home/pranaav/bosch/codebase/Software-Supply-Chain-Guardian_Team-31/guardian_v2/demo-app/.github/workflows/ci.yml:8",
+      "type": "unpinned_action",
+      "canonical_id": "UNPINNED_ACTION",
+      "aliases": [],
+      "component_purl": "file:/home/pranaav/bosch/codebase/Software-Supply-Chain-Guardian_Team-31/guardian_v2/demo-app/.github/workflows/ci.yml",
+      "score": 20.0,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 20.0,
+        "base_source": "calibrated detector base",
+        "exploit": 0.0,
+        "exploitation": "none",
+        "reachability": [
+          "n/a: CI/container configuration",
+          1.0
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "n/a",
+      "kev": null,
+      "epss": null,
+      "sources": [
+        "guardian-detector"
+      ],
+      "source_conflicts": null,
+      "paths": [],
+      "introduced_by": null,
+      "recommended_fix": null,
+      "summary": "Action actions/checkout@v4 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066).",
+      "evidence_ids": [
+        "EV-cicd-d3dde8acf434f8ac"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": {
+        "file": "/home/pranaav/bosch/codebase/Software-Supply-Chain-Guardian_Team-31/guardian_v2/demo-app/.github/workflows/ci.yml",
+        "line": 8
+      }
+    },
+    {
+      "id": "VULN::CVE-2019-19771::pkg:npm/lodahs@1.0.0",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2019-19771",
+      "aliases": [
+        "GHSA-hm6q-r2jc-cpqh"
+      ],
+      "component_purl": "pkg:npm/lodahs@1.0.0",
+      "score": 14.8,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 35.2,
+        "base_source": "cvss",
+        "exploit": 14.1,
+        "exploitation": "none",
+        "reachability": [
+          "not_imported",
+          0.3
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "not_imported",
+      "kev": false,
+      "epss": {
+        "epss": 0.01257,
+        "percentile": 0.70297
+      },
+      "sources": [
+        "npm-audit",
+        "osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:npm/lodahs@1.0.0"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:npm/lodahs@1.0.0"
+      ],
+      "recommended_fix": null,
+      "summary": "lodahs is malware",
+      "evidence_ids": [
+        "EV-npm-audit-ca383ecc0a1803bf",
+        "EV-osv-3c50df1b62368795"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2025-8869::pkg:pypi/pip@24.0",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2025-8869",
+      "aliases": [
+        "GHSA-4xh5-x5gv-qwph",
+        "PYSEC-2026-1795"
+      ],
+      "component_purl": "pkg:pypi/pip@24.0",
+      "score": 6.7,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 23.6,
+        "base_source": "cvss",
+        "exploit": 8.6,
+        "exploitation": "none",
+        "reachability": [
+          "not_in_runtime",
+          0.2
+        ],
+        "scope": [
+          "environment",
+          0.3
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "not_in_runtime",
+      "kev": false,
+      "epss": {
+        "epss": 0.00493,
+        "percentile": 0.43173
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [],
+      "introduced_by": [],
+      "recommended_fix": "25.3",
+      "summary": "When extracting a tar archive pip may not check symbolic links point into the extraction directory if the tarfile module doesn't implement PEP 706. Note that upgrading pip to a \"fixed\" version for this vulnerability doesn't fix all known vulnerabilities that are remediated by using a Python version that implements PEP 706. Note that this is a vulnerability in pip's fallback implementation of tar e",
+      "evidence_ids": [
+        "EV-osv-32a43edb1bdd82b8",
+        "EV-osv-652bdeb2ae4f2459",
+        "EV-pypi-cfa3b0e812f824ca"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2026-13346::pkg:pypi/pip@24.0",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-13346",
+      "aliases": [
+        "GHSA-qwm4-qh6w-59xr",
+        "PYSEC-2026-3721"
+      ],
+      "component_purl": "pkg:pypi/pip@24.0",
+      "score": 6.6,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 26.0,
+        "base_source": "cvss",
+        "exploit": 4.4,
+        "exploitation": "none",
+        "reachability": [
+          "not_in_runtime",
+          0.2
+        ],
+        "scope": [
+          "environment",
+          0.3
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "not_in_runtime",
+      "kev": false,
+      "epss": {
+        "epss": 0.00292,
+        "percentile": 0.22147
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [
+        {
+          "field": "fixed_version",
+          "by_source": {
+            "pypi-osv": "26.2.0",
+            "osv": "26.2"
+          }
+        }
+      ],
+      "paths": [],
+      "introduced_by": [],
+      "recommended_fix": "26.2",
+      "summary": "pip would incorrectly handle doubly-encoded package URLs from indexes allowing for files to be installed to arbitrary locations on disk even when installing wheels.\n\n\n\n\nThis vulnerability requires downloading or installing a package from a malicious package index to succeed, malicious packages alone are not able to exploit this vulnerability. Note that this vulnerability only materially impacts us",
+      "evidence_ids": [
+        "EV-osv-6c753633e85fa7b3",
+        "EV-osv-833f870136420889",
+        "EV-pypi-cfa3b0e812f824ca"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2026-8643::pkg:pypi/pip@24.0",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-8643",
+      "aliases": [
+        "GHSA-wf93-45jw-7689",
+        "PYSEC-2026-196"
+      ],
+      "component_purl": "pkg:pypi/pip@24.0",
+      "score": 6.5,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 22.0,
+        "base_source": "cvss",
+        "exploit": 5.1,
+        "exploitation": "none",
+        "reachability": [
+          "not_in_runtime",
+          0.2
+        ],
+        "scope": [
+          "environment",
+          0.3
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "not_in_runtime",
+      "kev": false,
+      "epss": {
+        "epss": 0.0032,
+        "percentile": 0.25445
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [],
+      "introduced_by": [],
+      "recommended_fix": "26.1.2",
+      "summary": "pip would treat console_scripts and gui_scripts as paths instead of file names without sanitizing the resolved absolute path to the installation directory, leading to entry points being installed outside the installation directory.",
+      "evidence_ids": [
+        "EV-osv-77646b2de8685ab9",
+        "EV-osv-7e17370d85f50f15",
+        "EV-pypi-cfa3b0e812f824ca"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2026-6357::pkg:pypi/pip@24.0",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-6357",
+      "aliases": [
+        "GHSA-jp4c-xjxw-mgf9",
+        "PYSEC-2026-2876"
+      ],
+      "component_purl": "pkg:pypi/pip@24.0",
+      "score": 6.2,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "total",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 21.2,
+        "base_source": "cvss",
+        "exploit": 0.6,
+        "exploitation": "none",
+        "reachability": [
+          "not_in_runtime",
+          0.2
+        ],
+        "scope": [
+          "environment",
+          0.3
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "not_in_runtime",
+      "kev": false,
+      "epss": {
+        "epss": 0.00138,
+        "percentile": 0.03198
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [],
+      "introduced_by": [],
+      "recommended_fix": "26.1",
+      "summary": "pip prior to version 26.1 would run self-update check functionality after installing wheel files which required importing well-known Python modules names. These module imports were intentionally deferred to increase startup time of the pip CLI. The patch changes self-update functionality to run before wheels are installed to prevent newly-installed modules from being imported shortly after the ins",
+      "evidence_ids": [
+        "EV-osv-6066dae17217d75b",
+        "EV-osv-917dbb7074cf2e72",
+        "EV-pypi-cfa3b0e812f824ca"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2026-3219::pkg:pypi/pip@24.0",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-3219",
+      "aliases": [
+        "GHSA-58qw-9mgm-455v",
+        "PYSEC-2026-2875"
+      ],
+      "component_purl": "pkg:pypi/pip@24.0",
+      "score": 6.0,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 18.4,
+        "base_source": "cvss",
+        "exploit": 0.6,
+        "exploitation": "none",
+        "reachability": [
+          "not_in_runtime",
+          0.2
+        ],
+        "scope": [
+          "environment",
+          0.3
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "not_in_runtime",
+      "kev": false,
+      "epss": {
+        "epss": 0.00137,
+        "percentile": 0.03092
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [],
+      "introduced_by": [],
+      "recommended_fix": "26.1",
+      "summary": "pip handles concatenated tar and ZIP files as ZIP files regardless of filename or whether a file is both a tar and ZIP file. This behavior could result in confusing installation behavior, such as installing \"incorrect\" files according to the filename of the archive. New behavior only proceeds with installation if the file identifies uniquely as a ZIP or tar archive, not as both.",
+      "evidence_ids": [
+        "EV-osv-56174867fb3d81ac",
+        "EV-osv-827db47ed6683756",
+        "EV-pypi-cfa3b0e812f824ca"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::MAL-2025-25502::pkg:npm/lodahs@1.0.0",
+      "type": "vulnerability",
+      "canonical_id": "MAL-2025-25502",
+      "aliases": [],
+      "component_purl": "pkg:npm/lodahs@1.0.0",
+      "score": 6.0,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 20.0,
+        "base_source": "default 5.0: no CVSS from reachable sources",
+        "exploit": 0.0,
+        "exploitation": "none",
+        "reachability": [
+          "not_imported",
+          0.3
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "not_imported",
+      "kev": false,
+      "epss": null,
+      "sources": [
+        "osv"
+      ],
+      "source_conflicts": [],
+      "paths": [
+        [
+          "app",
+          "pkg:npm/lodahs@1.0.0"
+        ]
+      ],
+      "introduced_by": [
+        "pkg:npm/lodahs@1.0.0"
+      ],
+      "recommended_fix": null,
+      "summary": "Malicious code in lodahs (npm)",
+      "evidence_ids": [
+        "EV-osv-09701dd6194dcc18"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "VULN::CVE-2026-1703::pkg:pypi/pip@24.0",
+      "type": "vulnerability",
+      "canonical_id": "CVE-2026-1703",
+      "aliases": [
+        "GHSA-6vgw-5pg2-w6jp",
+        "PYSEC-2026-1796"
+      ],
+      "component_purl": "pkg:pypi/pip@24.0",
+      "score": 5.9,
+      "confidence": "High",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 8.0,
+        "base_source": "cvss",
+        "exploit": 7.7,
+        "exploitation": "none",
+        "reachability": [
+          "not_in_runtime",
+          0.2
+        ],
+        "scope": [
+          "environment",
+          0.3
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 5.0
+      },
+      "reachability_state": "not_in_runtime",
+      "kev": false,
+      "epss": {
+        "epss": 0.00436,
+        "percentile": 0.38716
+      },
+      "sources": [
+        "osv",
+        "pypi-osv"
+      ],
+      "source_conflicts": [],
+      "paths": [],
+      "introduced_by": [],
+      "recommended_fix": "26.0",
+      "summary": "When pip is installing and extracting a maliciously crafted wheel archive, files may be extracted outside the installation directory. The path traversal is limited to prefixes of the installation directory, thus isn't able to inject or overwrite executable files in typical situations.",
+      "evidence_ids": [
+        "EV-osv-1271b7823b9cc9b3",
+        "EV-osv-c7ebc25f75167dc6",
+        "EV-pypi-cfa3b0e812f824ca"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "DEPENDENCY_ADDED::pkg:npm/lodahs@1.0.0",
+      "type": "dependency_added",
+      "canonical_id": "DEPENDENCY_ADDED",
+      "aliases": [],
+      "component_purl": "pkg:npm/lodahs@1.0.0",
+      "score": 2.4,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 8.0,
+        "base_source": "calibrated detector base",
+        "exploit": 0.0,
+        "exploitation": "none",
+        "reachability": [
+          "not_imported",
+          0.3
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "not_imported",
+      "kev": null,
+      "epss": null,
+      "sources": [
+        "guardian-detector"
+      ],
+      "source_conflicts": null,
+      "paths": [],
+      "introduced_by": null,
+      "recommended_fix": null,
+      "summary": "lodahs@1.0.0 is new in the lockfile.",
+      "evidence_ids": [
+        "EV-anomaly-dependency_added-9d2e3cdd9b6bed0a",
+        "EV-input-eb1ad9bfc9fb5256"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    },
+    {
+      "id": "ENVIRONMENT_ONLY::pkg:pypi/pip@24.0",
+      "type": "environment_only",
+      "canonical_id": "ENVIRONMENT_ONLY",
+      "aliases": [],
+      "component_purl": "pkg:pypi/pip@24.0",
+      "score": 0.2,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 4.0,
+        "base_source": "calibrated detector base",
+        "exploit": 0.0,
+        "exploitation": "none",
+        "reachability": [
+          "not_in_runtime",
+          0.2
+        ],
+        "scope": [
+          "environment",
+          0.3
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 0.9,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "not_in_runtime",
+      "kev": null,
+      "epss": null,
+      "sources": [
+        "guardian-detector"
+      ],
+      "source_conflicts": null,
+      "paths": [],
+      "introduced_by": null,
+      "recommended_fix": null,
+      "summary": "pip is installer tooling in the environment, not an application dependency.",
+      "evidence_ids": [
+        "EV-anomaly-environment_only-4df7f23448d382ef",
+        "EV-input-923396d446ea93b4"
+      ],
+      "ai_inferences": null,
+      "resolution": "open",
+      "location": null
+    }
+  ],
+  "remediation_plans": {},
+  "approvals": [],
+  "validation": {},
+  "coverage": {
+    "discovery": "SBOM CycloneDX 1.6: 12 components; pipdeptree: 12 packages; package-lock v3: 4 packages",
+    "reputation": "16 ok, 0 failed",
+    "source:pypi-osv": "ok",
+    "source:npm-audit": "ok",
+    "source:osv": "ok",
+    "source:ghsa": "skipped: set GITHUB_TOKEN (unauthenticated limit is 60 req/h)",
+    "source:cisa-kev": "ok (1790 entries)",
+    "source:epss": "ok (44/44)"
+  },
+  "agent_trace": [
+    {
+      "turn": 1,
+      "from": "supervisor",
+      "to": [
+        "discovery",
+        "cicd"
+      ],
+      "text": "policy: ready=['discovery', 'cicd'], handoffs=[]"
+    },
+    {
+      "turn": 1,
+      "from": "cicd",
+      "to": "supervisor",
+      "text": "5 container/CI findings in 2 files"
+    },
+    {
+      "turn": 1,
+      "from": "discovery",
+      "to": "supervisor",
+      "text": "16 components (7 direct), 12 edges; SBOM CycloneDX 1.6: 12 components; pipdeptree: 12 packages; package-lock v3: 4 packages"
+    },
+    {
+      "turn": 2,
+      "from": "supervisor",
+      "to": [
+        "vuln_intel",
+        "reputation",
+        "reachability"
+      ],
+      "text": "policy: ready=['vuln_intel', 'reputation', 'reachability'], handoffs=[]"
+    },
+    {
+      "turn": 2,
+      "from": "reachability",
+      "to": "supervisor",
+      "text": "reachability: {'imported': 4, 'used_transitively': 10, 'not_in_runtime': 1, 'not_imported': 1}"
+    },
+    {
+      "turn": 2,
+      "from": "reputation",
+      "to": "supervisor",
+      "text": "registry metadata for 16 packages; security-holding packages: ['pkg:npm/lodahs@1.0.0']"
+    },
+    {
+      "turn": 2,
+      "from": "vuln_intel",
+      "to": "supervisor",
+      "text": "164 raw advisory records from 3/3 sources -> 45 unique vulnerabilities on 10 packages (werkzeug@2.0.1=11, urllib3@1.26.20=7, pip@24.0=6, jinja2@3.0.1=5, lodash@4.17.15=5, requests@2.25.1=4)"
+    },
+    {
+      "turn": 3,
+      "from": "supervisor",
+      "to": [
+        "exploit_intel",
+        "anomaly"
+      ],
+      "text": "policy: ready=['exploit_intel', 'anomaly'], handoffs=[]"
+    },
+    {
+      "turn": 3,
+      "from": "anomaly",
+      "to": "supervisor",
+      "text": "9 non-CVE findings: {'environment_only': 1, 'untrusted_resolved_url': 1, 'integrity_mismatch': 1, 'malicious_package': 1, 'typosquat_suspect': 1, 'install_script': 1, 'suspicious_update': 1, 'lockfile_tampering': 1, 'dependency_added': 1}"
+    },
+    {
+      "turn": 3,
+      "from": "anomaly",
+      "to": "reachability",
+      "text": "handoff: suspicious packages found; check whether source code imports them"
+    },
+    {
+      "turn": 3,
+      "from": "exploit_intel",
+      "to": "supervisor",
+      "text": "44 CVEs checked: 0 in CISA KEV, EPSS for 44"
+    },
+    {
+      "turn": 4,
+      "from": "supervisor",
+      "to": [
+        "reachability"
+      ],
+      "text": "policy: ready=['scoring'], handoffs=['reachability']"
+    },
+    {
+      "turn": 4,
+      "from": "reachability",
+      "to": "supervisor",
+      "text": "reachability: {'imported': 4, 'used_transitively': 10, 'not_in_runtime': 1, 'not_imported': 1}; handoff check on 2 suspicious packages: imported by source = none"
+    },
+    {
+      "turn": 5,
+      "from": "supervisor",
+      "to": [
+        "scoring"
+      ],
+      "text": "policy: ready=['scoring'], handoffs=[]"
+    },
+    {
+      "turn": 5,
+      "from": "scoring",
+      "to": "supervisor",
+      "text": "scored 59 findings; top: MALICIOUS_PACKAGE on lodahs@1.0.0 = 78.0; INTEGRITY_MISMATCH on minimist@1.2.5 = 59.0; LOCKFILE_TAMPERING on minimist@1.2.5 = 59.0"
+    },
+    {
+      "turn": 6,
+      "from": "supervisor",
+      "to": "report",
+      "text": "finish: no agent has new inputs and no handoffs are open"
+    }
+  ]
+}

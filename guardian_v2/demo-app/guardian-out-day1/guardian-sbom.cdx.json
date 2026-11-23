@@ -1,0 +1,2740 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "supply-chain-guardian",
+          "version": "2.0"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "name": "analyzed-application",
+      "bom-ref": "guardian-app-root"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/lodahs@1.0.0",
+      "name": "lodahs",
+      "version": "1.0.0",
+      "purl": "pkg:npm/lodahs@1.0.0",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "true"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "lockfile"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "not_imported"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "registry.npmjs.org"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/lodash@4.17.15",
+      "name": "lodash",
+      "version": "4.17.15",
+      "purl": "pkg:npm/lodash@4.17.15",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "true"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "lockfile"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "imported"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "registry.npmjs.org"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/minimist@1.2.5",
+      "name": "minimist",
+      "version": "1.2.5",
+      "purl": "pkg:npm/minimist@1.2.5",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "false"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "lockfile"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "used_transitively"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "npm-mirror.example-cdn.net"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/mkdirp@0.5.5",
+      "name": "mkdirp",
+      "version": "0.5.5",
+      "purl": "pkg:npm/mkdirp@0.5.5",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "true"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "lockfile"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "imported"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "registry.npmjs.org"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/certifi@2026.11.20",
+      "name": "certifi",
+      "version": "2026.11.20",
+      "purl": "pkg:pypi/certifi@2026.11.20",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "false"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "graph,sbom"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "used_transitively"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "files.pythonhosted.org"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/certifi/python-certifi"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/chardet@4.0.0",
+      "name": "chardet",
+      "version": "4.0.0",
+      "purl": "pkg:pypi/chardet@4.0.0",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "false"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "graph,sbom"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "used_transitively"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "files.pythonhosted.org"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/click@8.5.1",
+      "name": "click",
+      "version": "8.5.1",
+      "purl": "pkg:pypi/click@8.5.1",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "false"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "graph,sbom"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "used_transitively"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "files.pythonhosted.org"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pallets/click/"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/flask@2.0.1",
+      "name": "flask",
+      "version": "2.0.1",
+      "purl": "pkg:pypi/flask@2.0.1",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "true"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "graph,sbom"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "imported"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "files.pythonhosted.org"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pallets/flask/"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/idna@2.10",
+      "name": "idna",
+      "version": "2.10",
+      "purl": "pkg:pypi/idna@2.10",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "false"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "graph,sbom"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "used_transitively"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "files.pythonhosted.org"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/kjd/idna"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/itsdangerous@2.2.0",
+      "name": "itsdangerous",
+      "version": "2.2.0",
+      "purl": "pkg:pypi/itsdangerous@2.2.0",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "false"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "graph,sbom"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "used_transitively"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "files.pythonhosted.org"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pallets/itsdangerous/"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/jinja2@3.0.1",
+      "name": "jinja2",
+      "version": "3.0.1",
+      "purl": "pkg:pypi/jinja2@3.0.1",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "true"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "graph,sbom"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "used_transitively"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "files.pythonhosted.org"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pallets/jinja/"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/markupsafe@3.0.4",
+      "name": "markupsafe",
+      "version": "3.0.4",
+      "purl": "pkg:pypi/markupsafe@3.0.4",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "false"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "graph,sbom"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "used_transitively"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "files.pythonhosted.org"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pallets/markupsafe/"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pip@24.0",
+      "name": "pip",
+      "version": "24.0",
+      "purl": "pkg:pypi/pip@24.0",
+      "scope": "optional",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "false"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "graph,sbom"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "not_in_runtime"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "files.pythonhosted.org"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pypa/pip"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.25.1",
+      "name": "requests",
+      "version": "2.25.1",
+      "purl": "pkg:pypi/requests@2.25.1",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "true"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "graph,sbom"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "imported"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "files.pythonhosted.org"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/psf/requests"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/urllib3@1.26.20",
+      "name": "urllib3",
+      "version": "1.26.20",
+      "purl": "pkg:pypi/urllib3@1.26.20",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "false"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "graph,sbom"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "used_transitively"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "files.pythonhosted.org"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/werkzeug@2.0.1",
+      "name": "werkzeug",
+      "version": "2.0.1",
+      "purl": "pkg:pypi/werkzeug@2.0.1",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "guardian:direct",
+          "value": "true"
+        },
+        {
+          "name": "guardian:discovered_in",
+          "value": "graph,sbom"
+        },
+        {
+          "name": "guardian:reachability",
+          "value": "used_transitively"
+        },
+        {
+          "name": "guardian:download_host",
+          "value": "files.pythonhosted.org"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pallets/werkzeug/"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "guardian-app-root",
+      "dependsOn": [
+        "pkg:npm/lodahs@1.0.0",
+        "pkg:npm/lodash@4.17.15",
+        "pkg:npm/mkdirp@0.5.5",
+        "pkg:pypi/flask@2.0.1",
+        "pkg:pypi/jinja2@3.0.1",
+        "pkg:pypi/requests@2.25.1",
+        "pkg:pypi/werkzeug@2.0.1"
+      ]
+    },
+    {
+      "ref": "pkg:npm/lodahs@1.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/lodash@4.17.15",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/minimist@1.2.5",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/mkdirp@0.5.5",
+      "dependsOn": [
+        "pkg:npm/minimist@1.2.5"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/certifi@2026.11.20",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/chardet@4.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/click@8.5.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/flask@2.0.1",
+      "dependsOn": [
+        "pkg:pypi/click@8.5.1",
+        "pkg:pypi/itsdangerous@2.2.0",
+        "pkg:pypi/jinja2@3.0.1",
+        "pkg:pypi/werkzeug@2.0.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/idna@2.10",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/itsdangerous@2.2.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/jinja2@3.0.1",
+      "dependsOn": [
+        "pkg:pypi/markupsafe@3.0.4"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/markupsafe@3.0.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pip@24.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/requests@2.25.1",
+      "dependsOn": [
+        "pkg:pypi/certifi@2026.11.20",
+        "pkg:pypi/chardet@4.0.0",
+        "pkg:pypi/idna@2.10",
+        "pkg:pypi/urllib3@1.26.20"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/urllib3@1.26.20",
+      "dependsOn": [
+        "pkg:pypi/certifi@2026.11.20",
+        "pkg:pypi/idna@2.10"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/werkzeug@2.0.1",
+      "dependsOn": []
+    }
+  ],
+  "vulnerabilities": [
+    {
+      "bom-ref": "VULN::CVE-2019-19771::pkg:npm/lodahs@1.0.0",
+      "id": "CVE-2019-19771",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-hm6q-r2jc-cpqh",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "npm-audit,osv"
+          },
+          "severity": "high",
+          "score": 8.8,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H"
+        }
+      ],
+      "description": "lodahs is malware",
+      "recommendation": "No fix published",
+      "affects": [
+        {
+          "ref": "pkg:npm/lodahs@1.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "14.8"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:npm/lodahs@1.0.0"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2020-28500::pkg:npm/lodash@4.17.15",
+      "id": "CVE-2020-28500",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-29mw-wpgm-hmr9",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "npm-audit,osv"
+          },
+          "severity": "medium",
+          "score": 5.3,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+        }
+      ],
+      "description": "Regular Expression Denial of Service (ReDoS) in lodash",
+      "recommendation": "Fixed in 4.17.21",
+      "affects": [
+        {
+          "ref": "pkg:npm/lodash@4.17.15"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "41.1"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:npm/lodash@4.17.15"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2020-8203::pkg:npm/lodash@4.17.15",
+      "id": "CVE-2020-8203",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-p6mc-m468-83gw",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "npm-audit,osv"
+          },
+          "severity": "high",
+          "score": 7.4,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H"
+        }
+      ],
+      "description": "Prototype Pollution in lodash",
+      "recommendation": "Fixed in 4.17.19",
+      "affects": [
+        {
+          "ref": "pkg:npm/lodash@4.17.15"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "48.3"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:npm/lodash@4.17.15"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2021-23337::pkg:npm/lodash@4.17.15",
+      "id": "CVE-2021-23337",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-35jh-r3h4-6jhm",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "npm-audit,osv"
+          },
+          "severity": "high",
+          "score": 7.2,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H"
+        }
+      ],
+      "description": "Command Injection in lodash",
+      "recommendation": "Fixed in 4.17.21",
+      "affects": [
+        {
+          "ref": "pkg:npm/lodash@4.17.15"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "48.5"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:npm/lodash@4.17.15"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2021-44906::pkg:npm/minimist@1.2.5",
+      "id": "CVE-2021-44906",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-xvch-5gv4-984h",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "npm-audit,osv"
+          },
+          "severity": "critical",
+          "score": 9.8,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+        }
+      ],
+      "description": "Prototype Pollution in minimist",
+      "recommendation": "Fixed in 1.2.6",
+      "affects": [
+        {
+          "ref": "pkg:npm/minimist@1.2.5"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "46.5"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:npm/mkdirp@0.5.5 > pkg:npm/minimist@1.2.5"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2022-29361::pkg:pypi/werkzeug@2.0.1",
+      "id": "CVE-2022-29361",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "PYSEC-2022-203",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "unknown"
+        }
+      ],
+      "description": "** DISPUTED ** Improper parsing of HTTP requests in Pallets Werkzeug v2.1.0 and below allows attackers to perform HTTP Request Smuggling using a crafted HTTP request with multiple requests included inside the body. NOTE: the vendor's position is that this behavior can only occur in unsupported configurations involving development mode and an HTTP server from outside the Werkzeug project.",
+      "recommendation": "Fixed in 2.1.1",
+      "affects": [
+        {
+          "ref": "pkg:pypi/werkzeug@2.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "36.2"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/werkzeug@2.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2023-23934::pkg:pypi/werkzeug@2.0.1",
+      "id": "CVE-2023-23934",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-px8h-6qxv-m22q",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2023-57",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "low",
+          "score": 2.6,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:A/AC:H/PR:N/UI:R/S:U/C:N/I:L/A:N"
+        }
+      ],
+      "description": "Browsers may allow \"nameless\" cookies that look like `=value` instead of `key=value`. A vulnerable browser may allow a compromised application on an adjacent subdomain to exploit this to set a cookie like `=__Host-test=bad` for another subdomain.\n\nWerkzeug <= 2.2.2 will parse the cookie `=__Host-test=bad` as `__Host-test=bad`. If a Werkzeug application is running next to a vulnerable or malicious ",
+      "recommendation": "Fixed in 2.2.3",
+      "affects": [
+        {
+          "ref": "pkg:pypi/werkzeug@2.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "20.4"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/werkzeug@2.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2023-25577::pkg:pypi/werkzeug@2.0.1",
+      "id": "CVE-2023-25577",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-xg9f-g7g7-2323",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2023-58",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "high",
+          "score": 7.5,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ],
+      "description": "Werkzeug's multipart form data parser will parse an unlimited number of parts, including file parts. Parts can be a small amount of bytes, but each requires CPU time to parse and may use more memory as Python data. If a request can be made to an endpoint that accesses `request.data`, `request.form`, `request.files`, or `request.get_data(parse_form_data=False)`, it can cause unexpectedly high resou",
+      "recommendation": "Fixed in 2.2.3",
+      "affects": [
+        {
+          "ref": "pkg:pypi/werkzeug@2.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "40.8"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/werkzeug@2.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2023-30861::pkg:pypi/flask@2.0.1",
+      "id": "CVE-2023-30861",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-m2qf-hxjv-5gpq",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2023-62",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "high",
+          "score": 7.5,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N"
+        }
+      ],
+      "description": "When all of the following conditions are met, a response containing data intended for one client may be cached and subsequently sent by a proxy to other clients. If the proxy also caches `Set-Cookie` headers, it may send one client's `session` cookie to other clients. The severity depends on the application's use of the session, and the proxy's behavior regarding cookies. The risk depends on _all_",
+      "recommendation": "Fixed in 2.2.5",
+      "affects": [
+        {
+          "ref": "pkg:pypi/flask@2.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "44.6"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/flask@2.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2023-32681::pkg:pypi/requests@2.25.1",
+      "id": "CVE-2023-32681",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-j8r2-6x86-q33q",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2023-74",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 6.1,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:H/I:N/A:N"
+        }
+      ],
+      "description": "### Impact\n\nSince Requests v2.3.0, Requests has been vulnerable to potentially leaking `Proxy-Authorization` headers to destination servers, specifically during redirects to an HTTPS origin. This is a product of how `rebuild_proxies` is used to recompute and [reattach the `Proxy-Authorization` header](https://github.com/psf/requests/blob/f2629e9e3c7ce3c3c8c025bcd8db551101cbc773/requests/sessions.p",
+      "recommendation": "Fixed in 2.31.0",
+      "affects": [
+        {
+          "ref": "pkg:pypi/requests@2.25.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "42.7"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/requests@2.25.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2023-46136::pkg:pypi/werkzeug@2.0.1",
+      "id": "CVE-2023-46136",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-hrfv-mqp8-q5rw",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2023-221",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "high",
+          "score": 7.5,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ],
+      "description": "Werkzeug multipart data parser needs to find a boundary that may be between consecutive chunks. That's why parsing is based on looking for newline characters. Unfortunately, code looking for partial boundary in the buffer is written inefficiently, so if we upload a file that starts with CR or LF and then is followed by megabytes of data without these characters: all of these bytes are appended chu",
+      "recommendation": "Fixed in 2.3.8",
+      "affects": [
+        {
+          "ref": "pkg:pypi/werkzeug@2.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "40.4"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/werkzeug@2.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2024-22195::pkg:pypi/jinja2@3.0.1",
+      "id": "CVE-2024-22195",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-h5c8-rqwp-cp95",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-1473",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 5.4,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N"
+        }
+      ],
+      "description": "The `xmlattr` filter in affected versions of Jinja accepts keys containing spaces. XML/HTML attributes cannot contain spaces, as each would then be interpreted as a separate attribute. If an application accepts keys (as opposed to only values) as user input, and renders these in pages that other users see as well, an attacker could use this to inject other attributes and perform XSS. Note that acc",
+      "recommendation": "Fixed in 3.1.3",
+      "affects": [
+        {
+          "ref": "pkg:pypi/jinja2@3.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "31.9"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/jinja2@3.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2024-34064::pkg:pypi/jinja2@3.0.1",
+      "id": "CVE-2024-34064",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-h75v-3vvj-5mfj",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-1474",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 5.4,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N"
+        }
+      ],
+      "description": "The `xmlattr` filter in affected versions of Jinja accepts keys containing non-attribute characters. XML/HTML attributes cannot contain spaces, `/`, `>`, or `=`, as each would then be interpreted as starting a separate attribute. If an application accepts keys (as opposed to only values) as user input, and renders these in pages that other users see as well, an attacker could use this to inject ot",
+      "recommendation": "Fixed in 3.1.4",
+      "affects": [
+        {
+          "ref": "pkg:pypi/jinja2@3.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "32.4"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/jinja2@3.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2024-34069::pkg:pypi/werkzeug@2.0.1",
+      "id": "CVE-2024-34069",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-2g68-c3qc-8985",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-2043",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "high",
+          "score": 7.5,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H"
+        }
+      ],
+      "description": "The debugger in affected versions of Werkzeug can allow an attacker to execute code on a developer's machine under some circumstances. This requires the attacker to get the developer to interact with a domain and subdomain they control, and enter the debugger PIN, but if they are successful it allows access to the debugger even if it is only running on localhost. This also requires the attacker to",
+      "recommendation": "Fixed in 3.0.3",
+      "affects": [
+        {
+          "ref": "pkg:pypi/werkzeug@2.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "43.3"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/werkzeug@2.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2024-35195::pkg:pypi/requests@2.25.1",
+      "id": "CVE-2024-35195",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-9wx4-h78v-vm56",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-1873",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 5.6,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:L/AC:H/PR:H/UI:R/S:U/C:H/I:H/A:N"
+        }
+      ],
+      "description": "When using a `requests.Session`, if the first request to a given origin is made with `verify=False`, TLS certificate verification may remain disabled for all subsequent requests to that origin, even if `verify=True` is explicitly specified later.\n\nThis occurs because the underlying connection is reused from the session's connection pool, causing the initial TLS verification setting to persist for ",
+      "recommendation": "Fixed in 2.32.0",
+      "affects": [
+        {
+          "ref": "pkg:pypi/requests@2.25.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "30.2"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/requests@2.25.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2024-3651::pkg:pypi/idna@2.10",
+      "id": "CVE-2024-3651",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-jjg7-2v4v-x38h",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2024-60",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "high",
+          "score": 7.5,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ],
+      "description": "### Impact\nA specially crafted argument to the `idna.encode()` function could consume significant resources. This may lead to a denial-of-service.\n\n### Patches\nThe function has been refined to reject such strings without the associated resource consumption in version 3.7.\n\n### Workarounds\nDomain names cannot exceed 253 characters in length, if this length limit is enforced prior to passing the dom",
+      "recommendation": "Fixed in 3.7",
+      "affects": [
+        {
+          "ref": "pkg:pypi/idna@2.10"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "37.1"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/requests@2.25.1 > pkg:pypi/idna@2.10"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2024-47081::pkg:pypi/requests@2.25.1",
+      "id": "CVE-2024-47081",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-9hjg-9r4m-mvj7",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-1872",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 5.3,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:N/A:N"
+        }
+      ],
+      "description": "### Impact\n\nDue to a URL parsing issue, Requests releases prior to 2.32.4 may leak .netrc credentials to third parties for specific maliciously-crafted URLs.\n\n### Workarounds\nFor older versions of Requests, use of the .netrc file can be disabled with `trust_env=False` on your Requests Session ([docs](https://requests.readthedocs.io/en/latest/api/#requests.Session.trust_env)).\n\n### References\nhttps",
+      "recommendation": "Fixed in 2.32.4",
+      "affects": [
+        {
+          "ref": "pkg:pypi/requests@2.25.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "35.7"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/requests@2.25.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2024-49766::pkg:pypi/werkzeug@2.0.1",
+      "id": "CVE-2024-49766",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-f9vj-2wh5-fj8j",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-2045",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 6.3,
+          "method": "other",
+          "vector": "CVSS:4.0/AV:N/AC:H/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N"
+        }
+      ],
+      "description": "On Python < 3.11 on Windows, `os.path.isabs()` does not catch UNC paths like `//server/share`. Werkzeug's `safe_join()` relies on this check, and so can produce a path that is not safe, potentially allowing unintended access to data. Applications using Python >= 3.11, or not using Windows, are not vulnerable.",
+      "recommendation": "Fixed in 3.0.6",
+      "affects": [
+        {
+          "ref": "pkg:pypi/werkzeug@2.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "34.2"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/werkzeug@2.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2024-49767::pkg:pypi/werkzeug@2.0.1",
+      "id": "CVE-2024-49767",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-q34m-jh98-gwm2",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-1860",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-3417",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "high",
+          "score": 7.5,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ],
+      "description": "Applications using Werkzeug to parse `multipart/form-data` requests are vulnerable to resource exhaustion. A specially crafted form body can bypass the `Request.max_form_memory_size` setting.\n\n\nThe `Request.max_content_length` setting, as well as resource limits provided by deployment software and platforms, are also available to limit the resources used during a request. This vulnerability does n",
+      "recommendation": "Fixed in 3.0.6",
+      "affects": [
+        {
+          "ref": "pkg:pypi/werkzeug@2.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "39.6"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/werkzeug@2.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2024-56201::pkg:pypi/jinja2@3.0.1",
+      "id": "CVE-2024-56201",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-gmj6-6f8f-6699",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-1472",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "high",
+          "score": 8.8,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+        }
+      ],
+      "description": "A bug in the Jinja compiler allows an attacker that controls both the content and filename of a template to execute arbitrary Python code, regardless of if Jinja's sandbox is used.\n\nTo exploit the vulnerability, an attacker needs to control both the filename and the contents of a template. Whether that is the case depends on the type of application using Jinja. This vulnerability impacts users of ",
+      "recommendation": "Fixed in 3.1.5",
+      "affects": [
+        {
+          "ref": "pkg:pypi/jinja2@3.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "37.0"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/jinja2@3.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2024-56326::pkg:pypi/jinja2@3.0.1",
+      "id": "CVE-2024-56326",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-q2x7-8rv6-6q7h",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-1475",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "high",
+          "score": 7.8,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+        }
+      ],
+      "description": "An oversight in how the Jinja sandboxed environment detects calls to `str.format` allows an attacker that controls the content of a template to execute arbitrary Python code.\n\nTo exploit the vulnerability, an attacker needs to control the content of a template. Whether that is the case depends on the type of application using Jinja. This vulnerability impacts users of applications which execute un",
+      "recommendation": "Fixed in 3.1.5",
+      "affects": [
+        {
+          "ref": "pkg:pypi/jinja2@3.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "37.2"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/jinja2@3.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2025-13465::pkg:npm/lodash@4.17.15",
+      "id": "CVE-2025-13465",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-xxjr-mmjv-4gpg",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "npm-audit,osv"
+          },
+          "severity": "medium",
+          "score": 6.5,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L"
+        }
+      ],
+      "description": "Lodash has Prototype Pollution Vulnerability in `_.unset`, `_.omit`, and `_.pullAt` functions",
+      "recommendation": "Fixed in 4.17.23",
+      "affects": [
+        {
+          "ref": "pkg:npm/lodash@4.17.15"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "42.7"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:npm/lodash@4.17.15"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2025-27516::pkg:pypi/jinja2@3.0.1",
+      "id": "CVE-2025-27516",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-cpwx-vrp4-4pq7",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-1471",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 5.4,
+          "method": "other",
+          "vector": "CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+        }
+      ],
+      "description": "An oversight in how the Jinja sandboxed environment interacts with the `|attr` filter allows an attacker that controls the content of a template to execute arbitrary Python code.\n\nTo exploit the vulnerability, an attacker needs to control the content of a template. Whether that is the case depends on the type of application using Jinja. This vulnerability impacts users of applications which execut",
+      "recommendation": "Fixed in 3.1.6",
+      "affects": [
+        {
+          "ref": "pkg:pypi/jinja2@3.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "29.3"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/jinja2@3.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2025-50181::pkg:pypi/urllib3@1.26.20",
+      "id": "CVE-2025-50181",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-pq67-6m6q-mj2v",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-1999",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 5.3,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N"
+        }
+      ],
+      "description": "urllib3 handles redirects and retries using the same mechanism, which is controlled by the `Retry` object. The most common way to disable redirects is at the request level, as follows:\n\n```python\nresp = urllib3.request(\"GET\", \"https://httpbin.org/redirect/1\", redirect=False)\nprint(resp.status)\n# 302\n```\n\nHowever, it is also possible to disable redirects, for all requests, by instantiating a `PoolM",
+      "recommendation": "Fixed in 2.5.0",
+      "affects": [
+        {
+          "ref": "pkg:pypi/urllib3@1.26.20"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "26.5"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/requests@2.25.1 > pkg:pypi/urllib3@1.26.20"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2025-66221::pkg:pypi/werkzeug@2.0.1",
+      "id": "CVE-2025-66221",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-hgf8-39gv-g3f2",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-2046",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 6.3,
+          "method": "other",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N"
+        }
+      ],
+      "description": "Werkzeug's `safe_join` function allows path segments with Windows device names. On Windows, there are special device names such as `CON`, `AUX`, etc that are implicitly present and readable in every directory. `send_from_directory` uses `safe_join` to safely serve files at user-specified paths under a directory. If the application is running on Windows, and the requested path ends with a special d",
+      "recommendation": "Fixed in 3.1.4",
+      "affects": [
+        {
+          "ref": "pkg:pypi/werkzeug@2.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "32.6"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/werkzeug@2.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2025-66418::pkg:pypi/urllib3@1.26.20",
+      "id": "CVE-2025-66418",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-gm62-xv2j-4w53",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-1998",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "high",
+          "score": 8.9,
+          "method": "other",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:H"
+        }
+      ],
+      "description": "## Impact\n\nurllib3 supports chained HTTP encoding algorithms for response content according to RFC 9110 (e.g., `Content-Encoding: gzip, zstd`).\n\nHowever, the number of links in the decompression chain was unbounded allowing a malicious server to insert a virtually unlimited number of compression steps leading to high CPU usage and massive memory allocation for the decompressed data.\n\n\n## Affected ",
+      "recommendation": "Fixed in 2.6.0",
+      "affects": [
+        {
+          "ref": "pkg:pypi/urllib3@1.26.20"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "38.6"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/requests@2.25.1 > pkg:pypi/urllib3@1.26.20"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2025-66471::pkg:pypi/urllib3@1.26.20",
+      "id": "CVE-2025-66471",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-2xpw-w6gg-jr37",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-1994",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "high",
+          "score": 8.9,
+          "method": "other",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:H"
+        }
+      ],
+      "description": "### Impact\n\nurllib3's [streaming API](https://urllib3.readthedocs.io/en/2.5.0/advanced-usage.html#streaming-and-i-o) is designed for the efficient handling of large HTTP responses by reading the content in chunks, rather than loading the entire response body into memory at once.\n\nWhen streaming a compressed response, urllib3 can perform decoding or decompression based on the HTTP `Content-Encoding",
+      "recommendation": "Fixed in 2.6.0",
+      "affects": [
+        {
+          "ref": "pkg:pypi/urllib3@1.26.20"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "38.6"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/requests@2.25.1 > pkg:pypi/urllib3@1.26.20"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2025-8869::pkg:pypi/pip@24.0",
+      "id": "CVE-2025-8869",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-4xh5-x5gv-qwph",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-1795",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 5.9,
+          "method": "other",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:A/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N"
+        }
+      ],
+      "description": "When extracting a tar archive pip may not check symbolic links point into the extraction directory if the tarfile module doesn't implement PEP 706. Note that upgrading pip to a \"fixed\" version for this vulnerability doesn't fix all known vulnerabilities that are remediated by using a Python version that implements PEP 706. Note that this is a vulnerability in pip's fallback implementation of tar e",
+      "recommendation": "Fixed in 25.3",
+      "affects": [
+        {
+          "ref": "pkg:pypi/pip@24.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "6.7"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-102598::pkg:pypi/werkzeug@2.0.1",
+      "id": "CVE-2026-102598",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-g6x2-hccm-hh4m",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-4312",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 6.3,
+          "method": "other",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N"
+        }
+      ],
+      "description": "Werkzeug's `safe_join` function allows Windows device names as filenames when they have an empty ADS marker on NTFS.\n\nThis was previously reported as https://github.com/pallets/werkzeug/security/advisories/GHSA-hgf8-39gv-g3f2, but the added filtering failed to account for the fact Windows allows special device names with an empty ADS marker, such as `NUL:`.\n\n`send_from_directory` uses `safe_join` ",
+      "recommendation": "Fixed in 3.1.9",
+      "affects": [
+        {
+          "ref": "pkg:pypi/werkzeug@2.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "30.2"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/werkzeug@2.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-13346::pkg:pypi/pip@24.0",
+      "id": "CVE-2026-13346",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-qwm4-qh6w-59xr",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-3721",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 6.5,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:H/A:N"
+        }
+      ],
+      "description": "pip would incorrectly handle doubly-encoded package URLs from indexes allowing for files to be installed to arbitrary locations on disk even when installing wheels.\n\n\n\n\nThis vulnerability requires downloading or installing a package from a malicious package index to succeed, malicious packages alone are not able to exploit this vulnerability. Note that this vulnerability only materially impacts us",
+      "recommendation": "Fixed in 26.2",
+      "affects": [
+        {
+          "ref": "pkg:pypi/pip@24.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "6.6"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-1703::pkg:pypi/pip@24.0",
+      "id": "CVE-2026-1703",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-6vgw-5pg2-w6jp",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-1796",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "low",
+          "score": 2.0,
+          "method": "other",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:A/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N"
+        }
+      ],
+      "description": "When pip is installing and extracting a maliciously crafted wheel archive, files may be extracted outside the installation directory. The path traversal is limited to prefixes of the installation directory, thus isn't able to inject or overwrite executable files in typical situations.",
+      "recommendation": "Fixed in 26.0",
+      "affects": [
+        {
+          "ref": "pkg:pypi/pip@24.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "5.9"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-21441::pkg:pypi/urllib3@1.26.20",
+      "id": "CVE-2026-21441",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-38jv-5279-wg99",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-1996",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "high",
+          "score": 7.5,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ],
+      "description": "### Impact\n\nurllib3's [streaming API](https://urllib3.readthedocs.io/en/2.6.2/advanced-usage.html#streaming-and-i-o) is designed for the efficient handling of large HTTP responses by reading the content in chunks, rather than loading the entire response body into memory at once.\n\nurllib3 can perform decoding or decompression based on the HTTP `Content-Encoding` header (e.g., `gzip`, `deflate`, `br",
+      "recommendation": "Fixed in 2.6.3",
+      "affects": [
+        {
+          "ref": "pkg:pypi/urllib3@1.26.20"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "39.2"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/requests@2.25.1 > pkg:pypi/urllib3@1.26.20"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-21860::pkg:pypi/werkzeug@2.0.1",
+      "id": "CVE-2026-21860",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-87hc-h4r5-73f7",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-2044",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 5.3,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+        }
+      ],
+      "description": "Werkzeug's `safe_join` function allows path segments with Windows device names that have file extensions or trailing spaces. On Windows, there are special device names such as `CON`, `AUX`, etc that are implicitly present and readable in every directory. Windows still accepts them with any file extension, such as `CON.txt`, or trailing spaces such as `CON `.\n\nThis was previously reported as https:",
+      "recommendation": "Fixed in 3.1.5",
+      "affects": [
+        {
+          "ref": "pkg:pypi/werkzeug@2.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "28.7"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/werkzeug@2.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-25645::pkg:pypi/requests@2.25.1",
+      "id": "CVE-2026-25645",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-gc5v-m9x4-r6x2",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-2275",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 5.5,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:N"
+        }
+      ],
+      "description": "### Impact\nThe `requests.utils.extract_zipped_paths()` utility function uses a predictable filename when extracting files from zip archives into the system temporary directory. If the target file already exists, it is reused without validation. A local attacker with write access to the temp directory could pre-create a malicious file that would be loaded in place of the legitimate one.\n\n### Affect",
+      "recommendation": "Fixed in 2.33.0",
+      "affects": [
+        {
+          "ref": "pkg:pypi/requests@2.25.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "29.1"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/requests@2.25.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-27199::pkg:pypi/werkzeug@2.0.1",
+      "id": "CVE-2026-27199",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-29vq-49wr-vm6x",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-2320",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 5.3,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+        }
+      ],
+      "description": "Werkzeug's `safe_join` function allows Windows device names as filenames if when preceded by other path segments.\n\nThis was previously reported as https://github.com/pallets/werkzeug/security/advisories/GHSA-hgf8-39gv-g3f2, but the added filtering failed to account for the fact that `safe_join` accepts paths with multiple segments, such as `example/NUL`.\n\n`send_from_directory` uses `safe_join` to ",
+      "recommendation": "Fixed in 3.1.6",
+      "affects": [
+        {
+          "ref": "pkg:pypi/werkzeug@2.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "30.1"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/werkzeug@2.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-27205::pkg:pypi/flask@2.0.1",
+      "id": "CVE-2026-27205",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-68rp-wp8r-4726",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-2151",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 4.3,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:N"
+        }
+      ],
+      "description": "When the `session` object is accessed, Flask should set the `Vary: Cookie` header. This instructs caches not to cache the response, as it may contain information specific to a logged in user. This is handled in most cases, but some forms of access such as the Python `in` operator were overlooked.\n\nThe severity depends on the application's use of the session, and the cache's behavior regarding cook",
+      "recommendation": "Fixed in 3.1.3",
+      "affects": [
+        {
+          "ref": "pkg:pypi/flask@2.0.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "26.7"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/flask@2.0.1"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-3219::pkg:pypi/pip@24.0",
+      "id": "CVE-2026-3219",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-58qw-9mgm-455v",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-2875",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 4.6,
+          "method": "other",
+          "vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:A/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N"
+        }
+      ],
+      "description": "pip handles concatenated tar and ZIP files as ZIP files regardless of filename or whether a file is both a tar and ZIP file. This behavior could result in confusing installation behavior, such as installing \"incorrect\" files according to the filename of the archive. New behavior only proceeds with installation if the file identifies uniquely as a ZIP or tar archive, not as both.",
+      "recommendation": "Fixed in 26.1",
+      "affects": [
+        {
+          "ref": "pkg:pypi/pip@24.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "6.0"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-44431::pkg:pypi/urllib3@1.26.20",
+      "id": "CVE-2026-44431",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-qccp-gfcp-xxvc",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-141",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 5.3,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N"
+        }
+      ],
+      "description": "### Impact\n\nWhen following cross-origin redirects for requests made using urllib3\u2019s high-level APIs, such as `urllib3.request()`, `PoolManager.request()`, and `ProxyManager.request()`, sensitive headers \u2014 `Authorization`, `Cookie`, and `Proxy-Authorization` (defined in `Retry.DEFAULT_REMOVE_HEADERS_ON_REDIRECT`) \u2014 are stripped by default, as expected.\n\nHowever, cross-origin redirects followed from",
+      "recommendation": "Fixed in 2.7.0",
+      "affects": [
+        {
+          "ref": "pkg:pypi/urllib3@1.26.20"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "24.1"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/requests@2.25.1 > pkg:pypi/urllib3@1.26.20"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-45409::pkg:pypi/idna@2.10",
+      "id": "CVE-2026-45409",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-65pc-fj4g-8rjx",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-215",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 5.3,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+        }
+      ],
+      "description": "This is the same issue as CVE-2024-3651, however the original remediation in 2024 was not a complete fix. Payloads such as `\"\\u0660\" * N` or `\"\\u30fb\" * N + \"\\u6f22\"` utilize the `valid_contexto` function prior to length rejection, and for high values of `N` will take a long time to process.\n\n### Impact\nA specially crafted argument to the `idna.encode()` function could consume significant resource",
+      "recommendation": "Fixed in 3.15",
+      "affects": [
+        {
+          "ref": "pkg:pypi/idna@2.10"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "25.4"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/requests@2.25.1 > pkg:pypi/idna@2.10"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-4800::pkg:npm/lodash@4.17.15",
+      "id": "CVE-2026-4800",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-r5fr-rjxr-66jc",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "npm-audit,osv"
+          },
+          "severity": "high",
+          "score": 8.1,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H"
+        }
+      ],
+      "description": "lodash vulnerable to Code Injection via `_.template` imports key names",
+      "recommendation": "Fixed in 4.18.0",
+      "affects": [
+        {
+          "ref": "pkg:npm/lodash@4.17.15"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "49.8"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:npm/lodash@4.17.15"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-6357::pkg:pypi/pip@24.0",
+      "id": "CVE-2026-6357",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-jp4c-xjxw-mgf9",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-2876",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 5.3,
+          "method": "other",
+          "vector": "CVSS:4.0/AV:L/AC:L/AT:P/PR:H/UI:A/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N"
+        }
+      ],
+      "description": "pip prior to version 26.1 would run self-update check functionality after installing wheel files which required importing well-known Python modules names. These module imports were intentionally deferred to increase startup time of the pip CLI. The patch changes self-update functionality to run before wheels are installed to prevent newly-installed modules from being imported shortly after the ins",
+      "recommendation": "Fixed in 26.1",
+      "affects": [
+        {
+          "ref": "pkg:pypi/pip@24.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "6.2"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-8643::pkg:pypi/pip@24.0",
+      "id": "CVE-2026-8643",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-wf93-45jw-7689",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-196",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "medium",
+          "score": 5.5,
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:N"
+        }
+      ],
+      "description": "pip would treat console_scripts and gui_scripts as paths instead of file names without sanitizing the resolved absolute path to the installation directory, leading to entry points being installed outside the installation directory.",
+      "recommendation": "Fixed in 26.1.2",
+      "affects": [
+        {
+          "ref": "pkg:pypi/pip@24.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "6.5"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-97687::pkg:pypi/urllib3@1.26.20",
+      "id": "CVE-2026-97687",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-8988-9cw3-xx77",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-4175",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "high",
+          "score": 7.6,
+          "method": "other",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N"
+        }
+      ],
+      "description": "## Impact\n\nurllib3 supports configuring TLS independently for an HTTPS proxy and the target server.\n\n`proxy_ssl_context`, `proxy_assert_hostname`, and `proxy_assert_fingerprint` configure the TLS connection to the proxy. `ssl_context` and the other target-specific TLS parameters configure the connection to the target server.\n\nIn urllib3 versions 1.26.0 through 2.7.0, these configurations were not ",
+      "recommendation": "Fixed in 2.8.0",
+      "affects": [
+        {
+          "ref": "pkg:pypi/urllib3@1.26.20"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "29.2"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/requests@2.25.1 > pkg:pypi/urllib3@1.26.20"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::CVE-2026-97689::pkg:pypi/urllib3@1.26.20",
+      "id": "CVE-2026-97689",
+      "source": {
+        "name": "NVD"
+      },
+      "references": [
+        {
+          "id": "GHSA-vxq7-64xx-v4gw",
+          "source": {
+            "name": "alias"
+          }
+        },
+        {
+          "id": "PYSEC-2026-4177",
+          "source": {
+            "name": "alias"
+          }
+        }
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv,pypi-osv"
+          },
+          "severity": "high",
+          "score": 8.9,
+          "method": "other",
+          "vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:H"
+        }
+      ],
+      "description": "## Impact\n\nurllib3's [streaming API](https://urllib3.readthedocs.io/en/2.7.0/advanced-usage.html#streaming-and-i-o) is designed for efficiently handling large HTTP responses by reading the content in chunks, rather than loading the entire response body into memory at once. When decoding a [chunked-transfer-encoded response](https://httpwg.org/specs/rfc9112.html#chunked.encoding), this API reads ea",
+      "recommendation": "Fixed in 2.8.0",
+      "affects": [
+        {
+          "ref": "pkg:pypi/urllib3@1.26.20"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "36.3"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:pypi/requests@2.25.1 > pkg:pypi/urllib3@1.26.20"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::MAL-2025-25502::pkg:npm/lodahs@1.0.0",
+      "id": "MAL-2025-25502",
+      "source": {
+        "name": "OSV"
+      },
+      "references": [],
+      "ratings": [
+        {
+          "source": {
+            "name": "osv"
+          },
+          "severity": "unknown"
+        }
+      ],
+      "description": "Malicious code in lodahs (npm)",
+      "recommendation": "No fix published",
+      "affects": [
+        {
+          "ref": "pkg:npm/lodahs@1.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "6.0"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:npm/lodahs@1.0.0"
+        }
+      ]
+    }
+  ]
+}
