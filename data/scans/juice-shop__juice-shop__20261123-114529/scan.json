@@ -1,0 +1,65 @@
+{
+  "scan_id": "juice-shop__juice-shop__20261123-114529",
+  "scan_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261123-114529",
+  "target": "https://github.com/juice-shop/juice-shop",
+  "kind": "github",
+  "repo_name": "juice-shop/juice-shop",
+  "started_at": "2026-11-23T11:45:29+00:00",
+  "finished_at": null,
+  "status": "running",
+  "commit": "c9f99228d9d56afb5f5ca7925376292f7fa44b13",
+  "tools": {
+    "git": "git version 2.44.0",
+    "npm": "10.9.8",
+    "cdxgen": "\u001b[1mCycloneDX Generator 12.9.3\u001b[0m",
+    "osv-scanner": "osv-scanner version: 2.7.1",
+    "grype": "0.122.1",
+    "grype_db": {
+      "schema": "v6.1.10",
+      "built": "2026-11-23T06:28:32Z",
+      "valid": true
+    }
+  },
+  "steps": {
+    "clone": {
+      "label": "Clone repository",
+      "status": "ok",
+      "detail": "commit c9f99228d9d5",
+      "seconds": 25.0
+    },
+    "lockfile": {
+      "label": "Resolve npm lockfile",
+      "status": "ok",
+      "detail": "generated \u2014 versions resolved today, not committed by the repo",
+      "seconds": 3.6
+    },
+    "sbom": {
+      "label": "Generate SBOM (cdxgen)",
+      "status": "ok",
+      "detail": "1133 components",
+      "seconds": 3.6
+    },
+    "grype": {
+      "label": "Scan SBOM (Grype)",
+      "status": "ok",
+      "detail": "53 matches",
+      "seconds": 3.6
+    },
+    "osv": {
+      "label": "Scan repository (OSV-Scanner)",
+      "status": "ok",
+      "detail": "54 vulnerabilities",
+      "seconds": 6.1
+    },
+    "graph": {
+      "label": "Build dependency graph",
+      "status": "pending",
+      "detail": "",
+      "seconds": null
+    }
+  },
+  "artifacts": {
+    "sbom": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261123-114529/sbom/bom.json"
+  },
+  "stats": null
+}

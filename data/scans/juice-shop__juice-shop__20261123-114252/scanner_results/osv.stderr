@@ -1,0 +1,4 @@
+Scanning dir /Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261123-114252/repo
+Starting filesystem walk for root: /
+End status: 1 dirs visited, 1 inodes visited, 0 Extract calls, 671.958µs elapsed, 672µs wall time
+No package sources found, --help for usage information.

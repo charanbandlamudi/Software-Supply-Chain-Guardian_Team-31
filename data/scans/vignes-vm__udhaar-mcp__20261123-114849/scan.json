@@ -1,0 +1,82 @@
+{
+  "scan_id": "vignes-vm__udhaar-mcp__20261123-114849",
+  "scan_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261123-114849",
+  "target": "https://github.com/vignes-vm/udhaar-mcp",
+  "kind": "github",
+  "repo_name": "vignes-vm/udhaar-mcp",
+  "started_at": "2026-11-23T11:48:49+00:00",
+  "finished_at": "2026-11-23T11:48:57+00:00",
+  "status": "complete",
+  "commit": "7c94a4a830f1c7ee1aaf9c2669d62f0701e3331a",
+  "tools": {
+    "git": "git version 2.44.0",
+    "npm": "10.9.8",
+    "cdxgen": "\u001b[1mCycloneDX Generator 12.9.3\u001b[0m",
+    "osv-scanner": "osv-scanner version: 2.7.1",
+    "grype": "0.122.1",
+    "grype_db": {
+      "schema": "v6.1.10",
+      "built": "2026-11-23T06:28:32Z",
+      "valid": true
+    }
+  },
+  "steps": {
+    "clone": {
+      "label": "Clone repository",
+      "status": "ok",
+      "detail": "commit 7c94a4a830f1",
+      "seconds": 1.6
+    },
+    "lockfile": {
+      "label": "Resolve npm lockfile",
+      "status": "skipped",
+      "detail": "repository already commits a lockfile",
+      "seconds": 0.0
+    },
+    "sbom": {
+      "label": "Generate SBOM (cdxgen)",
+      "status": "ok",
+      "detail": "181 components",
+      "seconds": 1.0
+    },
+    "grype": {
+      "label": "Scan SBOM (Grype)",
+      "status": "ok",
+      "detail": "12 matches",
+      "seconds": 2.8
+    },
+    "osv": {
+      "label": "Scan repository (OSV-Scanner)",
+      "status": "ok",
+      "detail": "12 vulnerabilities",
+      "seconds": 2.8
+    },
+    "graph": {
+      "label": "Build dependency graph",
+      "status": "ok",
+      "detail": "182 nodes, 12 findings",
+      "seconds": 0.4
+    }
+  },
+  "artifacts": {
+    "sbom": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261123-114849/sbom/bom.json",
+    "grype": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261123-114849/scanner_results/grype.json",
+    "osv": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261123-114849/scanner_results/osv.json",
+    "graph_html": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261123-114849/graphs/dependency_graph.html",
+    "graph_json": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261123-114849/graphs/graph.json"
+  },
+  "stats": {
+    "nodes": 182,
+    "edges": 367,
+    "direct": 8,
+    "transitive": 173,
+    "unresolved": 0,
+    "vulnerable_packages": 4,
+    "findings": 12,
+    "findings_by_severity": {
+      "HIGH": 1,
+      "MEDIUM": 8,
+      "LOW": 3
+    }
+  }
+}

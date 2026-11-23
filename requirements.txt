@@ -1,0 +1,4 @@
+# Python 3.12 (networkx fails to import on Python 3.14.1)
+networkx==3.7      # dependency graph + ForceAtlas2 layout
+pyvis==0.3.2       # interactive HTML graph (vis-network)
+streamlit==1.67.0  # web UI

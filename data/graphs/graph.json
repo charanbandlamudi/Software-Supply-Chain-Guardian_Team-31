@@ -1,6 +1,6 @@
 {
   "schema": "ssg-dependency-graph/1",
-  "generated_at": "2026-11-23T11:14:59+00:00",
+  "generated_at": "2026-11-23T11:41:53+00:00",
   "source": "cdxgen SBOM",
   "root": "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
   "inputs": {
@@ -15,6 +15,7 @@
       "OSV-Scanner"
     ]
   },
+  "scan": null,
   "stats": {
     "nodes": 1109,
     "edges": 2147,

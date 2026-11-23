@@ -1,4 +1,6 @@
 .venv/
 data/repos/
+data/scans/*/repo/
 __pycache__/
 .env
+.DS_Store

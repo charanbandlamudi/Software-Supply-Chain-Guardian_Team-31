@@ -188,7 +188,7 @@ def node_style(d: dict) -> dict:
     return {"color": color, "size": size, "font": font, "shape": shape}
 
 
-def export_json(g: nx.DiGraph, out: Path, inputs: dict) -> None:
+def export_json(g: nx.DiGraph, out: Path, inputs: dict, scan: dict | None = None) -> None:
     """Machine-readable graph + evidence for agents, reports and the dashboard.
     Same data the HTML embeds: nodes, directed edges, dependency paths, merged scanner findings."""
     node_keys = ("name", "version", "ecosystem", "purl", "scope", "dep_type", "path_ids",
@@ -201,6 +201,7 @@ def export_json(g: nx.DiGraph, out: Path, inputs: dict) -> None:
         "source": g.graph["source"],
         "root": g.graph["root"],
         "inputs": inputs,
+        "scan": scan,
         "stats": {
             "nodes": g.number_of_nodes(), "edges": g.number_of_edges(),
             "direct": sum(1 for n in nodes if n["dep_type"] == "direct"),
@@ -219,14 +220,25 @@ def export_json(g: nx.DiGraph, out: Path, inputs: dict) -> None:
     print(f"Wrote {out}")
 
 
-def render(g: nx.DiGraph, out: Path) -> None:
+def render(g: nx.DiGraph, out: Path, target: str = "") -> None:
     net = Network(height="100vh", width="100%", directed=True, bgcolor="#f8fafc",
                   font_color="#1e293b", cdn_resources="in_line")  # self-contained, works offline
     # Pre-compute the layout here so the page opens instantly and starts out still
     # (browser-side physics on 1k+ nodes takes ~25s and never fully stops moving).
     pos = nx.forceatlas2_layout(g.to_undirected(), max_iter=300, scaling_ratio=4,
                                 gravity=1, seed=7)
-    span = max(max(abs(x), abs(y)) for x, y in pos.values()) or 1
+    # Components with no link to the root (e.g. CI GitHub Actions) get flung to the edges by
+    # the force layout and shrink the whole view; lay them out in a tidy grid beside the tree.
+    loose = [n for n, d in g.nodes(data=True) if d["dep_type"] == "unresolved"]
+    linked = [n for n in g if n not in set(loose)] or list(g)
+    span = max(max(abs(pos[n][0]), abs(pos[n][1])) for n in linked) or 1
+    pos = {n: (x / span * 2500, y / span * 2500) for n, (x, y) in pos.items()}
+    if loose:
+        x0 = max(pos[n][0] for n in linked) + 400
+        y0 = min(pos[n][1] for n in linked)
+        cols = max(1, int(len(loose) ** 0.5))
+        for i, n in enumerate(sorted(loose, key=lambda n: g.nodes[n]["name"])):
+            pos[n] = (x0 + (i % cols) * 260, y0 + (i // cols) * 90)
     details = {}
     for n, d in g.nodes(data=True):
         tip = f"{d['name']}@{d['version']} · {d['dep_type']}"
@@ -235,8 +247,8 @@ def render(g: nx.DiGraph, out: Path) -> None:
         x, y = pos[n]
         style = node_style(d)
         font = style.pop("font")
-        net.add_node(n, label=d["label"], title=tip, x=float(x / span * 2500),
-                     y=float(y / span * 2500), **style)
+        net.add_node(n, label=d["label"], title=tip, x=float(x),
+                     y=float(y), **style)
         net.nodes[-1]["font"] = font  # pyvis overwrites a `font` kwarg with font_color only
         details[n] = {k: d[k] for k in ("name", "label", "version", "ecosystem", "purl", "scope",
                                          "dep_type", "path_ids", "vulns", "max_sev",
@@ -258,7 +270,7 @@ def render(g: nx.DiGraph, out: Path) -> None:
                         "hideEdgesOnZoom": True, "navigationButtons": False},
     }))
     html = net.generate_html()
-    stats = {"source": g.graph["source"], "nodes": g.number_of_nodes(),
+    stats = {"source": g.graph["source"], "target": target, "nodes": g.number_of_nodes(),
              "edges": g.number_of_edges(),
              "direct": sum(1 for _, d in g.nodes(data=True) if d["dep_type"] == "direct"),
              "transitive": sum(1 for _, d in g.nodes(data=True) if d["dep_type"] == "transitive"),
@@ -357,12 +369,11 @@ UI_HTML = r"""
    <div><span class="sw" style="background:#0f172a"></span>Root application (★)</div>
    <div><span class="sw" style="background:#2563eb"></span>Direct dependency</div>
    <div><span class="sw" style="background:#94a3b8"></span>Transitive dependency</div>
+   <div><span class="sw" style="background:#9333ea"></span>Not linked in SBOM (e.g. CI GitHub Actions)</div>
    <div><span class="sw dia" style="background:#dc2626"></span>Critical · <span class="sw dia" style="background:#ea580c"></span>High · <span class="sw dia" style="background:#d97706"></span>Medium · <span class="sw dia" style="background:#65a30d"></span>Low</div>
    <div><span class="sw line" style="background:var(--path)"></span>Focused path to root</div>
    <div><span class="sw line" style="background:var(--child)"></span>Focused node's dependencies</div>
   </div>
-  <div class="note">Click a node to focus its path &amp; dependencies. <span class="kbd">Esc</span> clears, <span class="kbd">/</span> searches.
-   Labels appear as you zoom in. Vulnerability data is scanner output (Grype, OSV-Scanner); absence of a finding is not proof of safety.</div>
  </div>
 </div>
 
@@ -389,7 +400,7 @@ const EDGE_ID = {}; const ALL_EDGES = edges.get().map(e => { EDGE_ID[e.from + "\
 let focused = null, frozen = false, active = -1, results = [];
 
 // ---- header stats
-$("ssg-source").textContent = STATS.source;
+$("ssg-source").textContent = (STATS.target ? STATS.target + " · " : "") + STATS.source;
 const st = [["nodes","Packages"],["direct","Direct"],["transitive","Transitive"],["vulnerable","Vulnerable"],["findings","Findings"],["edges","Edges"]];
 $("ssg-stats").innerHTML = st.map(([k,l]) => `<div class="stat"><b>${STATS[k]}</b><span>${l}</span></div>`).join("");
 
@@ -423,7 +434,10 @@ function fitTo(ids, maxScale=1.6){
                   scale, offset:{x:(left-right)/2, y:0}, animation:{duration:600, easingFunction:"easeInOutQuad"}});
 }
 $("btn-fit").onclick = () => fitTo(nodes.getIds({filter: n => !n.hidden}), 1);
-setTimeout(() => fitTo(nodes.getIds(), 1), 50);
+// Fit once the canvas has real dimensions (embedded iframes size late), and on resize.
+network.once("afterDrawing", () => fitTo(nodes.getIds(), 1));
+let rz; window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => {
+  if(!focused) fitTo(nodes.getIds({filter: n => !n.hidden}), 1); }, 150); });
 
 // ---- focus: path to root + direct dependencies, everything else dimmed
 function focusNode(id){
@@ -558,25 +572,34 @@ def main() -> None:
     ap.add_argument("--json", type=Path, default=Path("data/graphs/graph.json"))
     a = ap.parse_args()
 
-    g = load_bom(a.bom) if a.bom.exists() else None
+    build(a.repo, a.bom, a.grype, a.osv, a.out, a.json)
+
+
+def build(repo: Path, bom: Path, grype: Path | None, osv: Path | None, out_html: Path,
+          out_json: Path, target: str = "", scan: dict | None = None) -> dict:
+    """Build graph.json + interactive HTML from an SBOM and optional scanner reports.
+    Returns graph statistics. Missing scanner files are skipped and reported, never faked."""
+    g = load_bom(bom) if bom.exists() else None
     if g is None:
-        print(f"[warn] {a.bom} missing or has 0 components — falling back to package.json "
-              "(direct dependencies only). Generate a lockfile + rerun cdxgen for the full tree.")
-        g = load_package_json(a.repo)
-    sources = []
-    for name, path, loader in (("Grype", a.grype, load_grype), ("OSV-Scanner", a.osv, load_osv)):
-        if path.exists():
+        if not (repo / "package.json").exists():
+            raise ValueError(f"SBOM {bom} has no components and there is no package.json "
+                             "fallback — cannot build a dependency graph.")
+        print(f"[warn] {bom} missing or has 0 components — falling back to package.json "
+              "(direct dependencies only).")
+        g = load_package_json(repo)
+    sources, scanners_used = [], []
+    for name, path, loader in (("Grype", grype, load_grype), ("OSV-Scanner", osv, load_osv)):
+        if path and path.exists():
             sources.append(loader(path))
-            print(f"[info] Loaded {name} results from {path}")
+            scanners_used.append(name)
         else:
-            print(f"[warn] {name} results not found at {path} — not included in overlay.")
-    scanners_used = [n for n, p in (("Grype", a.grype), ("OSV-Scanner", a.osv)) if p.exists()]
-    vulns = merge_findings(*sources)
-    annotate(g, vulns)
-    export_json(g, a.json, {"sbom": str(a.bom), "repo": str(a.repo),
-                            "scanner_results": {"Grype": str(a.grype), "OSV-Scanner": str(a.osv)},
-                            "scanners_used": scanners_used})
-    render(g, a.out)
+            print(f"[warn] {name} results not available — not included in overlay.")
+    annotate(g, merge_findings(*sources))
+    export_json(g, out_json, {"sbom": str(bom), "repo": str(repo),
+                              "scanner_results": {"Grype": str(grype), "OSV-Scanner": str(osv)},
+                              "scanners_used": scanners_used}, scan)
+    render(g, out_html, target)
+    return json.loads(out_json.read_text())["stats"]
 
 
 if __name__ == "__main__":

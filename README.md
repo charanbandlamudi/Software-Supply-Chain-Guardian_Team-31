@@ -1,1 +1,397 @@
-# Software-Supply-Chain-Guardian_Team-31
+# 🛡️ Software Supply Chain Guardian — Team 31
+
+Software supply chain security analysis for open-source repositories. Paste a GitHub URL and the
+Guardian clones the repository, builds a **CycloneDX SBOM**, scans it with **two independent
+vulnerability scanners**, and renders an **interactive dependency graph** that traces every
+vulnerable package back to the application through its real dependency path.
+
+Built for the Amrita BD Hackathon. Primary test target: [OWASP Juice Shop](https://github.com/juice-shop/juice-shop).
+
+> **Design principle — evidence first.** The scanners discover security information; the graph
+> only shows what the SBOM and the raw scanner output support. Package versions come from the
+> SBOM, dependency paths from the graph, vulnerabilities from scanner output. Missing data is
+> shown as *"Evidence unavailable"*, scanner disagreements are shown, not resolved, and the
+> absence of a finding is never presented as proof of safety.
+
+---
+
+## Contents
+
+- [Features](#features)
+- [How it works](#how-it-works)
+- [Quick start](#quick-start)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Outputs](#outputs)
+- [The interactive graph](#the-interactive-graph)
+- [Project structure](#project-structure)
+- [Technology choices](#technology-choices)
+- [Security model](#security-model)
+- [Understanding the results](#understanding-the-results)
+- [Example results](#example-results)
+- [Troubleshooting](#troubleshooting)
+- [Roadmap](#roadmap)
+
+---
+
+## Features
+
+- **One-click scans from a web UI.** Paste a GitHub URL, press *Run scan*, and watch each step's progress.
+- **Background execution.** Scans run on the server, so refreshing or closing the tab doesn't stop them. Scan history is kept in the sidebar.
+- **CycloneDX SBOM** generated with OWASP cdxgen, including the full direct and transitive dependency tree.
+- **Two vulnerability scanners in parallel:** Grype, which scans the SBOM, and OSV-Scanner, which scans the repo's lockfiles. Their findings are merged by shared CVE/GHSA IDs.
+- **Interactive dependency graph** built with NetworkX and PyVis:
+  - Click a package to see its path to the root, its dependencies and its vulnerability evidence.
+  - Search tells apart packages with the same name in different versions.
+  - Filter by severity, with each vulnerable package's path kept visible.
+  - The layout is still by default, with a toggle to start or stop motion.
+- **Machine-readable output:** `graph.json` holds every node, edge, dependency path and merged finding.
+- **Reproducible records:** every scan stores its raw scanner output, tool versions, the Grype database build date, the commit scanned, and each step's status and timing.
+- **Honest status reporting:** a scan is marked *complete* only when every required step succeeded.
+
+## How it works
+
+```
+                ┌───────────────────────── pipeline/scan.py ──────────────────────────┐
+GitHub URL ───▶ │ 1. clone        git clone --depth 1 (hooks disabled)                │
+                │ 2. lockfile     npm install --package-lock-only --ignore-scripts    │
+                │                 (only for npm repos that don't commit a lockfile)   │
+                │ 3. SBOM         cdxgen -r --no-install-deps  ──▶ bom.json           │
+                │ 4. scan  ┌──▶  grype sbom:bom.json            ──▶ grype.json       │
+                │          └──▶  osv-scanner scan -r --no-ignore ──▶ osv.json        │
+                │ 5. graph        graph/build_graph.py                                │
+                │                   ├─ NetworkX DiGraph from SBOM dependencies        │
+                │                   ├─ merge findings across scanners (by CVE/GHSA)   │
+                │                   ├─ direct/transitive, paths to root               │
+                │                   └─▶ graph.json + dependency_graph.html (PyVis)    │
+                └─────────────────────────────────────────────────────────────────────┘
+                                         │
+                                         ▼
+                        app.py (Streamlit) shows progress, results and graph
+```
+
+| Step | Tool | Why it's needed |
+|---|---|---|
+| Clone | `git` | Shallow, read-only checkout of the target |
+| Lockfile | `npm` | Many npm repos (Juice Shop included) don't commit a lockfile. Without one, only direct dependencies with version ranges are known. This step resolves exact versions from the registry without installing packages or running scripts. |
+| SBOM | **cdxgen** | Produces a standard CycloneDX inventory: exact versions, package URLs (purls) and dependency relationships |
+| Scan | **Grype** | Matches the SBOM against Anchore's local database (NVD, GitHub advisories, Linux distribution feeds) |
+| Scan | **OSV-Scanner** | Looks lockfiles up live on osv.dev: an independent second opinion |
+| Graph | **NetworkX + PyVis** | Graph analysis (paths, parents, layout) and interactive HTML rendering |
+
+## Quick start
+
+```bash
+# 1. Python environment (use Python 3.12; see Troubleshooting)
+python3.12 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+
+# 2. Security tools on PATH (see Installation)
+cdxgen --version && grype version && osv-scanner --version
+
+# 3. Download the Grype vulnerability database (~3.6 GB on disk, one-time)
+grype db update
+
+# 4. Start the UI
+.venv/bin/streamlit run app.py
+```
+
+Open **http://localhost:8501**, keep the default `https://github.com/juice-shop/juice-shop`, and press **Run scan**.
+
+## Installation
+
+### Requirements
+
+| Component | Version tested | Notes |
+|---|---|---|
+| macOS (Apple Silicon) | Darwin 27 | Linux should work; Windows not tested |
+| Python | 3.12.11 | **Not 3.14.1**: networkx fails to import there |
+| Node.js / npm | 22.22.3 / 10.9.8 | Needed for cdxgen and lockfile resolution |
+| git | 2.44 | |
+| OWASP cdxgen | 12.9.3 | `npm install -g @cyclonedx/cdxgen` |
+| Grype | 0.122.1 | Vulnerability database schema v6 |
+| OSV-Scanner | 2.7.1 | |
+| Trivy | 0.76.2 | Installed, but not used by the pipeline yet |
+
+### Installing the scanners
+
+**cdxgen** (via npm):
+
+```bash
+npm install -g @cyclonedx/cdxgen
+```
+
+**Grype and OSV-Scanner.** Use Homebrew where it has prebuilt packages:
+
+```bash
+brew install grype osv-scanner trivy
+```
+
+On macOS versions without Homebrew bottles (such as macOS 27), download the official release binaries into `~/.local/bin` instead:
+
+```bash
+mkdir -p ~/.local/bin && cd "$(mktemp -d)"
+G=$(curl -s https://api.github.com/repos/anchore/grype/releases/latest | python3 -c "import sys,json;print(json.load(sys.stdin)['tag_name'])")
+O=$(curl -s https://api.github.com/repos/google/osv-scanner/releases/latest | python3 -c "import sys,json;print(json.load(sys.stdin)['tag_name'])")
+curl -sLo grype.tgz "https://github.com/anchore/grype/releases/download/$G/grype_${G#v}_darwin_arm64.tar.gz" && tar xzf grype.tgz grype
+curl -sLo osv-scanner "https://github.com/google/osv-scanner/releases/download/$O/osv-scanner_darwin_arm64"
+chmod +x grype osv-scanner && mv grype osv-scanner ~/.local/bin/
+```
+
+The pipeline looks for tools in `~/.local/bin`, `/opt/homebrew/bin`, `/usr/local/bin` and your `PATH`.
+
+### Python dependencies
+
+```bash
+python3.12 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+```
+
+### Grype vulnerability database
+
+```bash
+grype db update   # download or refresh
+grype db status   # show build date and validity
+```
+
+Stored in `~/Library/Caches/grype/db/6/vulnerability.db` on macOS. Scans run with auto-update **disabled**, so a slow download can never stall a scan. Refresh it yourself regularly.
+
+## Usage
+
+### Web UI
+
+```bash
+.venv/bin/streamlit run app.py
+```
+
+1. Enter a repository URL (`https://github.com/<owner>/<repo>`) or the path to a local folder.
+2. Press **Run scan**. A table shows each step's status, result and duration as it runs.
+3. When it finishes you get:
+   - the status badge (Complete, Incomplete, Failed or Interrupted), the commit scanned, and severity counts;
+   - a **Dependency graph** tab with the interactive graph;
+   - a **Scan steps & tools** tab with the step results, tool versions and Grype database build date;
+   - an **Artifacts** tab with downloads of the SBOM, raw scanner output, `graph.json`, the graph HTML and `scan.json`.
+4. Earlier scans are listed in the sidebar; click one to reopen it.
+
+### Command line
+
+The same pipeline without the UI:
+
+```bash
+.venv/bin/python -m pipeline.scan https://github.com/juice-shop/juice-shop
+```
+
+Rebuild only the graph from an existing SBOM and scanner results:
+
+```bash
+.venv/bin/python graph/build_graph.py --repo <repo-dir> \
+    --bom <bom.json> --grype <grype.json> --osv <osv.json> \
+    --out dependency_graph.html --json graph.json
+```
+
+### From Python
+
+```python
+from pipeline.scan import run_scan, start_scan, load_scan
+
+meta = run_scan("https://github.com/juice-shop/juice-shop")   # blocking
+scan_id = start_scan("https://github.com/owner/repo")         # background thread
+print(load_scan(scan_id)["status"])
+```
+
+## Outputs
+
+Each scan creates its own folder:
+
+```
+data/scans/<owner>__<repo>__<YYYYmmdd-HHMMSS>/
+├── scan.json                  # scan record: status, steps, timings, tool versions, DB date, commit
+├── repo/                      # the cloned repository (git-ignored)
+├── sbom/
+│   └── bom.json               # CycloneDX SBOM from cdxgen
+├── scanner_results/
+│   ├── grype.json             # raw Grype output, unmodified
+│   ├── osv.json               # raw OSV-Scanner output, unmodified
+│   └── *.stderr / *.stdout    # each tool's log output, kept for debugging
+└── graphs/
+    ├── graph.json             # machine-readable graph + merged evidence
+    └── dependency_graph.html  # interactive graph, self-contained, works offline
+```
+
+### `scan.json`
+
+| Field | Meaning |
+|---|---|
+| `status` | `complete`: every required step succeeded. `incomplete`: the graph was built but a scanner failed or found nothing. `failed`: a fatal step failed. `interrupted`: the server stopped mid-scan. |
+| `steps.<name>` | `status` (`ok`, `warn`, `failed`, `skipped`), `detail` and `seconds` for clone, lockfile, sbom, grype, osv and graph |
+| `tools` | Versions of git, npm, cdxgen, grype and osv-scanner, plus the Grype database schema and build date |
+| `commit` | Git commit that was scanned |
+| `stats` | Package, edge and finding counts, with findings by severity |
+| `artifacts` | Paths to every file the scan produced |
+
+### `graph.json` (schema `ssg-dependency-graph/1`)
+
+```jsonc
+{
+  "schema": "ssg-dependency-graph/1",
+  "generated_at": "…", "source": "cdxgen SBOM", "root": "pkg:npm/juice-shop@…",
+  "scan":   { "scan_id": "…", "commit": "…", "tools": { … }, "scanner_status": { … } },
+  "inputs": { "sbom": "…", "scanner_results": { … }, "scanners_used": ["Grype", "OSV-Scanner"] },
+  "stats":  { "nodes": 1134, "edges": 2147, "direct": 98, "transitive": 1010,
+              "vulnerable_packages": 20, "findings": 54, "findings_by_severity": { … } },
+  "nodes": [{
+    "id": "pkg:npm/jsonwebtoken@0.1.0", "name": "jsonwebtoken", "version": "0.1.0",
+    "dep_type": "transitive",
+    "path_ids": ["pkg:npm/juice-shop@…", "pkg:npm/express-jwt@0.1.3", "pkg:npm/jsonwebtoken@0.1.0"],
+    "parent_ids": [ … ], "child_ids": [ … ], "max_sev": "CRITICAL",
+    "vulns": [{
+      "id": "CVE-2015-9235", "ids": ["CVE-2015-9235", "GHSA-c7hr-j4mj-j2w6"],
+      "severity": "CRITICAL", "severity_disagreement": false,
+      "source_tools": ["Grype", "OSV-Scanner"],
+      "by_tool": {
+        "Grype":       { "severity": "CRITICAL", "fixed_versions": ["4.2.2"] },
+        "OSV-Scanner": { "severity": "CRITICAL", "fixed_versions": ["4.2.2"] }
+      }
+    }]
+  }],
+  "edges": [{ "from": "…", "to": "…" }],
+  "unresolved": [ … ]   // components in the SBOM with no dependency link (e.g. CI GitHub Actions)
+}
+```
+
+## The interactive graph
+
+| Element | Meaning |
+|---|---|
+| ★ dark star | Root application |
+| ● blue | Direct dependency |
+| ● grey | Transitive dependency |
+| ● purple | In the SBOM but not linked to the tree (for example GitHub Actions from CI workflows) |
+| ◆ red, orange, amber, green | Vulnerable package, coloured by worst severity (critical, high, medium, low) |
+| amber edges | Path from the root to the focused package |
+| teal edges | The focused package's direct dependencies |
+
+**Interactions**
+- **Click a package** to highlight its path to the root and its direct dependencies; everything else fades. A detail panel shows:
+  - version, ecosystem, purl, and whether the dependency is direct or transitive;
+  - the path to the root as clickable steps;
+  - every vulnerability with its CVE/GHSA IDs and each scanner's severity and fixed version, flagging single-scanner findings and disagreements;
+  - clickable *Depends on* and *Required by* lists.
+- **Search** (`/`): ranked results that show name, version, dependency type and severity, so same-named packages in different versions are easy to tell apart. Arrow keys move through results and `Enter` focuses one. A *Vulnerable only* checkbox narrows the list.
+- **Severity filter:** shows only critical, high-and-above, and so on, keeping each vulnerable package's path to the root visible.
+- **Resume motion / Freeze layout:** the layout is pre-computed and still by default.
+- **Fit** resets the view; **`Esc`** clears the focus.
+
+## Project structure
+
+```
+.
+├── app.py                    # Streamlit UI: start scans, live progress, results, graph, downloads
+├── pipeline/
+│   └── scan.py               # pipeline: clone → lockfile → SBOM → scanners → graph; scan.json; background runner
+├── graph/
+│   └── build_graph.py        # SBOM + scanner output → NetworkX graph → graph.json + PyVis HTML (+ graph UI)
+├── data/scans/               # one folder per scan (cloned repos are git-ignored)
+├── .streamlit/config.toml    # light theme
+├── .claude/launch.json       # dev-server launch config
+├── requirements.txt
+└── README.md
+```
+
+### Key functions
+
+| Function | File | Purpose |
+|---|---|---|
+| `run_scan(target)` | `pipeline/scan.py` | Runs the whole pipeline and returns the scan record |
+| `start_scan(target)` | `pipeline/scan.py` | Same, but in a background thread; returns the `scan_id` |
+| `load_scan` / `list_scans` | `pipeline/scan.py` | Read scan records; flag interrupted scans |
+| `load_bom` | `graph/build_graph.py` | CycloneDX → `nx.DiGraph`. Never invents nodes or edges. |
+| `load_grype` / `load_osv` | `graph/build_graph.py` | Convert raw scanner output into common records |
+| `merge_findings` | `graph/build_graph.py` | Match findings across scanners by shared IDs; keep each tool's facts; flag disagreements |
+| `annotate` | `graph/build_graph.py` | Direct vs transitive, shortest path to root, parents and children, labels |
+| `build` | `graph/build_graph.py` | Writes `graph.json` and the HTML graph |
+
+## Technology choices
+
+| Tool | Why |
+|---|---|
+| **OWASP cdxgen** | Standard CycloneDX output; covers many ecosystems; lists dependency relationships, not just packages |
+| **Grype** | Scans the SBOM itself; offline, versioned database; fast |
+| **OSV-Scanner** | Independent data source (osv.dev, live). A second scanner makes it possible to see agreement and disagreement. |
+| **NetworkX** | Standard Python graph library: shortest paths, parents and children, ForceAtlas2 layout |
+| **PyVis** | Python graph → interactive vis-network HTML with no frontend build step |
+| **Streamlit** | Python-only web UI; quick to build, easy to extend into a multi-page dashboard |
+
+Why the layout is computed in Python: laying out about 1,100 nodes in the browser took around 25 seconds on every load and never stopped moving. Python's ForceAtlas2 takes about 10 seconds once, at build time. The vis-network JavaScript is bundled into the HTML so the graph works offline and from `file://`.
+
+## Security model
+
+The target repository is treated as **untrusted input**:
+
+| Risk | Mitigation |
+|---|---|
+| Malicious install or lifecycle scripts | Nothing from the repo is executed. Lockfiles use `npm --package-lock-only --ignore-scripts`, and cdxgen runs with `--no-install-deps`. |
+| Git hooks | Cloned with `-c core.hooksPath=/dev/null`, shallow, no tags, no credential prompts |
+| Dockerfiles and CI workflows | Never built or run, only read by cdxgen as data |
+| Leaking secrets to tools | Tools run with a minimal environment (`HOME`, `PATH`, `LANG`), so API keys and tokens never reach them |
+| Shell injection | All commands use argument lists (`subprocess.run([...])`), never a shell. Only `https://github.com/<owner>/<repo>` URLs or existing folders are accepted. |
+| Hung tools | Every step has a timeout (clone 600 s, npm 900 s, cdxgen 900 s, grype 900 s, osv 600 s) |
+| Local repos | Copied first, so the generated lockfile never touches your own checkout |
+| Unsafe data in the graph page | All package data is HTML-escaped, and embedded JSON is escaped so it can't break out of its script tag |
+| Misleading "all clear" | A failed or empty scanner step marks the scan *incomplete*; it is never reported as successful |
+
+## Understanding the results
+
+- **Findings are version-specific.** Each advisory lists the versions it affects. A finding means the exact installed version falls in that range, and "fixed in" is where the range ends. Example: `tar` 6.2.1 has 12 findings, while `tar` 7.5.23 in the same tree has none.
+- **Results are a snapshot.** They depend on:
+  1. the package versions in the repo (and, for repos without a committed lockfile, on the day the lockfile was resolved);
+  2. the vulnerability databases at scan time;
+  3. the scanner versions.
+
+  `scan.json` records all three so scans can be compared.
+- **Scanner disagreement is information.** Example: `messageformat@2.3.0` is flagged only by OSV-Scanner. The upstream GitHub advisory gives the affected range as `< 2.3.0` but the first patched version as `3.0.0-beta.0`; Grype follows the range, while OSV-Scanner follows the patched version. The graph shows the finding as *reported only by OSV-Scanner* instead of choosing a side.
+- **A finding is not proof of exploitability.** It means the version contains a known flaw. Whether the application actually uses the vulnerable code is not determined.
+- **No finding is not proof of safety.** It means no known advisory matched in these databases.
+
+## Example results
+
+OWASP Juice Shop, commit `c9f99228d9d5`, scanned 23 Nov 2026 (Grype database built the same day):
+
+| Metric | Value |
+|---|---|
+| Packages in graph | 1,134 (98 direct, 1,010 transitive, 25 GitHub Actions not linked to the tree) |
+| Dependency edges | 2,147 |
+| Vulnerable packages | 20 (8 direct, 12 transitive) |
+| Findings | **54**: 7 critical, 20 high, 25 medium, 2 low |
+| Scanner agreement | 53 found by both · 1 OSV-only (`messageformat`) · 0 severity disagreements |
+| Scan time | about 100 s (mostly clone and lockfile resolution) |
+
+Many of these packages are deliberately outdated, since Juice Shop is an intentionally vulnerable training application.
+
+## Troubleshooting
+
+| Problem | Cause and fix |
+|---|---|
+| `AttributeError: 'wrapper_descriptor' object has no attribute '__annotate__'` when importing networkx | Python 3.14.1 incompatibility. Use Python 3.12 for the venv. |
+| `brew install grype` → *no bottle available* | No prebuilt Homebrew packages for your macOS version. Use the release binaries ([Installation](#installing-the-scanners)). |
+| SBOM has **0 components** | cdxgen needs a lockfile. The pipeline generates one for npm repos; other ecosystems need their lockfile (`poetry.lock`, `go.sum`, …) committed. |
+| OSV step says *no lockfiles/packages found* | The repo has no lockfile OSV-Scanner recognises. (Lockfiles excluded by `.gitignore` are already handled with `--no-ignore`.) |
+| Grype step fails | The vulnerability database is missing or too old. Run `grype db update`, then check with `grype db status`. |
+| `grype db update` or `npm` stalls | Slow or dropped connection. Re-run it; npm caches what it already downloaded, so a retry is faster. |
+| cdxgen prints a *SECURE MODE: Environment audit* table | It's warning about secrets in the shell environment. The pipeline already runs cdxgen with a clean environment. |
+| Scan shows **Interrupted** | The server restarted mid-scan. Run it again. |
+
+## Roadmap
+
+Done in this version: discovery and cloning, SBOM generation, Grype and OSV-Scanner scanning, dependency graph analysis, the interactive graph, and the web UI.
+
+Planned, following the hackathon problem statement:
+
+- [ ] **Trivy** integration (vulnerabilities, misconfigurations, secrets)
+- [ ] **LangGraph multi-agent system**: a head agent (Guardian Coordinator) plus discovery, SBOM, vulnerability, dependency-risk, anomaly and risk-analyst agents, with conditional routing and an investigation history
+- [ ] **Supply chain anomaly checks**: typosquatting, lifecycle scripts, unpinned GitHub Actions (for example `@main`), Dockerfile and CI/CD risks
+- [ ] **Evidence validator** (Pydantic models) that rejects unsupported CVEs, versions or paths before reporting
+- [ ] **Risk engine** and LLM-written summaries that only use validated evidence
+- [ ] **Reports** in JSON, HTML and PDF
+- [ ] **Multi-page dashboard**: overview, SBOM explorer, vulnerabilities, anomalies, agent activity, report
+- [ ] **SQLite** storage for scan history

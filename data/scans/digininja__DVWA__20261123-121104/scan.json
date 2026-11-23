@@ -1,0 +1,78 @@
+{
+  "scan_id": "digininja__DVWA__20261123-121104",
+  "scan_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/digininja__DVWA__20261123-121104",
+  "target": "https://github.com/digininja/DVWA",
+  "kind": "github",
+  "repo_name": "digininja/DVWA",
+  "started_at": "2026-11-23T12:11:04+00:00",
+  "finished_at": "2026-11-23T12:11:12+00:00",
+  "status": "complete",
+  "commit": "502ac150ce37c20ca6e04cab7c5ca959f315f2d0",
+  "tools": {
+    "git": "git version 2.44.0",
+    "npm": "10.9.8",
+    "cdxgen": "\u001b[1mCycloneDX Generator 12.9.3\u001b[0m",
+    "osv-scanner": "osv-scanner version: 2.7.1",
+    "grype": "0.122.1",
+    "grype_db": {
+      "schema": "v6.1.10",
+      "built": "2026-11-23T06:28:32Z",
+      "valid": true
+    }
+  },
+  "steps": {
+    "clone": {
+      "label": "Clone repository",
+      "status": "ok",
+      "detail": "commit 502ac150ce37",
+      "seconds": 2.8
+    },
+    "lockfile": {
+      "label": "Resolve npm lockfile",
+      "status": "skipped",
+      "detail": "not an npm project at the repo root",
+      "seconds": 0.0
+    },
+    "sbom": {
+      "label": "Generate SBOM (cdxgen)",
+      "status": "ok",
+      "detail": "15 components",
+      "seconds": 1.0
+    },
+    "grype": {
+      "label": "Scan SBOM (Grype)",
+      "status": "ok",
+      "detail": "0 matches",
+      "seconds": 1.9
+    },
+    "osv": {
+      "label": "Scan repository (OSV-Scanner)",
+      "status": "ok",
+      "detail": "0 vulnerabilities",
+      "seconds": 1.9
+    },
+    "graph": {
+      "label": "Build dependency graph",
+      "status": "ok",
+      "detail": "16 nodes, 0 findings",
+      "seconds": 0.2
+    }
+  },
+  "artifacts": {
+    "sbom": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/digininja__DVWA__20261123-121104/sbom/bom.json",
+    "grype": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/digininja__DVWA__20261123-121104/scanner_results/grype.json",
+    "osv": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/digininja__DVWA__20261123-121104/scanner_results/osv.json",
+    "graph_html": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/digininja__DVWA__20261123-121104/graphs/dependency_graph.html",
+    "graph_json": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/digininja__DVWA__20261123-121104/graphs/graph.json"
+  },
+  "stats": {
+    "nodes": 16,
+    "edges": 5,
+    "direct": 0,
+    "transitive": 0,
+    "unresolved": 10,
+    "vulnerable_packages": 0,
+    "findings": 0,
+    "findings_by_severity": {}
+  }
+}

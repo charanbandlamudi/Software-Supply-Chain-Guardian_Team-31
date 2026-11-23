@@ -1,0 +1,5 @@
+Scanning dir /Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/digininja__DVWA__20261123-121104/repo
+Starting filesystem walk for root: /
+Scanned /Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/digininja__DVWA__20261123-121104/repo/external/recaptcha file and found 0 packages
+Scanned /Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/digininja__DVWA__20261123-121104/repo/vulnerabilities/api/composer.lock file and found 6 packages
+End status: 98 dirs visited, 379 inodes visited, 2 Extract calls, 807.412541ms elapsed, 807.413ms wall time

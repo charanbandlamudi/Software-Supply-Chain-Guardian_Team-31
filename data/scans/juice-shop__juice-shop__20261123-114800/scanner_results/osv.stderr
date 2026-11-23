@@ -1,0 +1,4 @@
+Scanning dir /Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261123-114800/repo
+Starting filesystem walk for root: /
+Scanned /Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261123-114800/repo/package-lock.json file and found 1108 packages
+End status: 200 dirs visited, 1728 inodes visited, 1 Extract calls, 263.415084ms elapsed, 263.415ms wall time
