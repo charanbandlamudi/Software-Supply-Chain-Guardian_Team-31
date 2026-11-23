@@ -1,8 +1,8 @@
 # 🛡️ Software Supply Chain Guardian — Team 31
 
 Software supply chain security analysis for open-source repositories. Paste a GitHub URL and the
-Guardian clones the repository, builds a **CycloneDX SBOM**, scans it with **two independent
-vulnerability scanners**, and renders an **interactive dependency graph** that traces every
+Guardian clones the repository, builds a **CycloneDX SBOM**, scans it with **three
+security scanners** (vulnerabilities, misconfigurations and secrets), and renders an **interactive dependency graph** that traces every
 vulnerable package back to the application through its real dependency path.
 
 Built for the Amrita BD Hackathon. Primary test target: [OWASP Juice Shop](https://github.com/juice-shop/juice-shop).
@@ -39,7 +39,8 @@ Built for the Amrita BD Hackathon. Primary test target: [OWASP Juice Shop](https
 - **One-click scans from a web UI.** Paste a GitHub URL, press *Run scan*, and watch each step's progress.
 - **Background execution.** Scans run on the server, so refreshing or closing the tab doesn't stop them. Scan history is kept in the sidebar.
 - **CycloneDX SBOM** generated with OWASP cdxgen, including the full direct and transitive dependency tree.
-- **Two vulnerability scanners in parallel:** Grype, which scans the SBOM, and OSV-Scanner, which scans the repo's lockfiles. Their findings are merged by shared CVE/GHSA IDs.
+- **Three scanners in parallel:** Grype, which scans the SBOM, plus OSV-Scanner and Trivy, which scan the repository. Vulnerability findings are merged by shared CVE/GHSA IDs, so each one shows which scanners reported it.
+- **Misconfiguration and secret detection** with Trivy: Dockerfiles, CI workflows and Terraform/Kubernetes files are checked as data, never built or run. Secret values are never shown or stored.
 - **Interactive dependency graph** built with NetworkX and PyVis:
   - Click a package to see its path to the root, its dependencies and its vulnerability evidence.
   - Search tells apart packages with the same name in different versions.
@@ -58,7 +59,8 @@ GitHub URL ───▶ │ 1. clone        git clone --depth 1 (hooks disabled)
                 │                 (only for npm repos that don't commit a lockfile)   │
                 │ 3. SBOM         cdxgen -r --no-install-deps  ──▶ bom.json           │
                 │ 4. scan  ┌──▶  grype sbom:bom.json            ──▶ grype.json       │
-                │          └──▶  osv-scanner scan -r --no-ignore ──▶ osv.json        │
+                │          ├──▶  osv-scanner scan -r --no-ignore ──▶ osv.json        │
+                │          └──▶  trivy fs --scanners vuln,misconfig,secret ──▶ trivy.json
                 │ 5. graph        graph/build_graph.py                                │
                 │                   ├─ NetworkX DiGraph from SBOM dependencies        │
                 │                   ├─ merge findings across scanners (by CVE/GHSA)   │
@@ -77,6 +79,7 @@ GitHub URL ───▶ │ 1. clone        git clone --depth 1 (hooks disabled)
 | SBOM | **cdxgen** | Produces a standard CycloneDX inventory: exact versions, package URLs (purls) and dependency relationships |
 | Scan | **Grype** | Matches the SBOM against Anchore's local database (NVD, GitHub advisories, Linux distribution feeds) |
 | Scan | **OSV-Scanner** | Looks lockfiles up live on osv.dev: an independent second opinion |
+| Scan | **Trivy** | Aqua Security's database for vulnerabilities, plus misconfiguration checks (Dockerfile, Terraform, Kubernetes, CI) and secret detection |
 | Graph | **NetworkX + PyVis** | Graph analysis (paths, parents, layout) and interactive HTML rendering |
 
 ## Quick start
@@ -89,8 +92,9 @@ python3.12 -m venv .venv
 # 2. Security tools on PATH (see Installation)
 cdxgen --version && grype version && osv-scanner --version
 
-# 3. Download the Grype vulnerability database (~3.6 GB on disk, one-time)
+# 3. Download the vulnerability databases (one-time; Grype ~3.6 GB, Trivy ~1.8 GB on disk)
 grype db update
+trivy fs --download-db-only --timeout 60m
 
 # 4. Start the UI
 .venv/bin/streamlit run app.py
@@ -111,7 +115,7 @@ Open **http://localhost:8501**, keep the default `https://github.com/juice-shop/
 | OWASP cdxgen | 12.9.3 | `npm install -g @cyclonedx/cdxgen` |
 | Grype | 0.122.1 | Vulnerability database schema v6 |
 | OSV-Scanner | 2.7.1 | |
-| Trivy | 0.76.2 | Installed, but not used by the pipeline yet |
+| Trivy | 0.76.2 | Vulnerability database schema v2 |
 
 ### Installing the scanners
 
@@ -127,7 +131,7 @@ npm install -g @cyclonedx/cdxgen
 brew install grype osv-scanner trivy
 ```
 
-On macOS versions without Homebrew bottles (such as macOS 27), download the official release binaries into `~/.local/bin` instead:
+On macOS versions without Homebrew bottles (such as macOS 27), download the official release binaries into `~/.local/bin` instead (Trivy: `trivy_<version>_macOS-ARM64.tar.gz` from [aquasecurity/trivy releases](https://github.com/aquasecurity/trivy/releases)):
 
 ```bash
 mkdir -p ~/.local/bin && cd "$(mktemp -d)"
@@ -147,14 +151,19 @@ python3.12 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 ```
 
-### Grype vulnerability database
+### Vulnerability databases
 
 ```bash
 grype db update   # download or refresh
 grype db status   # show build date and validity
+
+trivy fs --download-db-only --timeout 60m   # download or refresh Trivy's DB
+trivy version                               # shows the DB's UpdatedAt
 ```
 
-Stored in `~/Library/Caches/grype/db/6/vulnerability.db` on macOS. Scans run with auto-update **disabled**, so a slow download can never stall a scan. Refresh it yourself regularly.
+Trivy's database lives in `~/Library/Caches/trivy/db/` (about 1.8 GB). On slow connections give it a long `--timeout`; the default 5 minutes can expire mid-download.
+
+Grype's is stored in `~/Library/Caches/grype/db/6/vulnerability.db` on macOS. Scans run with auto-update **disabled** for both (`GRYPE_DB_AUTO_UPDATE=false`, `trivy --skip-db-update --skip-check-update`), so a slow download can never stall a scan. Refresh them yourself regularly.
 
 ## Usage
 
@@ -212,6 +221,7 @@ data/scans/<owner>__<repo>__<YYYYmmdd-HHMMSS>/
 ├── scanner_results/
 │   ├── grype.json             # raw Grype output, unmodified
 │   ├── osv.json               # raw OSV-Scanner output, unmodified
+│   ├── trivy.json             # raw Trivy output (Trivy masks secret values itself)
 │   └── *.stderr / *.stdout    # each tool's log output, kept for debugging
 └── graphs/
     ├── graph.json             # machine-readable graph + merged evidence
@@ -223,8 +233,8 @@ data/scans/<owner>__<repo>__<YYYYmmdd-HHMMSS>/
 | Field | Meaning |
 |---|---|
 | `status` | `complete`: every required step succeeded. `incomplete`: the graph was built but a scanner failed or found nothing. `failed`: a fatal step failed. `interrupted`: the server stopped mid-scan. |
-| `steps.<name>` | `status` (`ok`, `warn`, `failed`, `skipped`), `detail` and `seconds` for clone, lockfile, sbom, grype, osv and graph |
-| `tools` | Versions of git, npm, cdxgen, grype and osv-scanner, plus the Grype database schema and build date |
+| `steps.<name>` | `status` (`ok`, `warn`, `failed`, `skipped`), `detail` and `seconds` for clone, lockfile, sbom, grype, osv, trivy and graph |
+| `tools` | Versions of git, npm, cdxgen, grype, osv-scanner and trivy, plus the Grype and Trivy database dates |
 | `commit` | Git commit that was scanned |
 | `stats` | Package, edge and finding counts, with findings by severity |
 | `artifacts` | Paths to every file the scan produced |
@@ -236,9 +246,10 @@ data/scans/<owner>__<repo>__<YYYYmmdd-HHMMSS>/
   "schema": "ssg-dependency-graph/1",
   "generated_at": "…", "source": "cdxgen SBOM", "root": "pkg:npm/juice-shop@…",
   "scan":   { "scan_id": "…", "commit": "…", "tools": { … }, "scanner_status": { … } },
-  "inputs": { "sbom": "…", "scanner_results": { … }, "scanners_used": ["Grype", "OSV-Scanner"] },
+  "inputs": { "sbom": "…", "scanner_results": { … }, "scanners_used": ["Grype", "OSV-Scanner", "Trivy"] },
   "stats":  { "nodes": 1134, "edges": 2147, "direct": 98, "transitive": 1010,
-              "vulnerable_packages": 20, "findings": 54, "findings_by_severity": { … } },
+              "vulnerable_packages": 20, "findings": 58, "findings_by_severity": { … },
+              "misconfigurations": 89, "secrets": 5 },
   "nodes": [{
     "id": "pkg:npm/jsonwebtoken@0.1.0", "name": "jsonwebtoken", "version": "0.1.0",
     "dep_type": "transitive",
@@ -255,7 +266,13 @@ data/scans/<owner>__<repo>__<YYYYmmdd-HHMMSS>/
     }]
   }],
   "edges": [{ "from": "…", "to": "…" }],
-  "unresolved": [ … ]   // components in the SBOM with no dependency link (e.g. CI GitHub Actions)
+  "unresolved": [ … ],  // components in the SBOM with no dependency link (e.g. CI GitHub Actions)
+  "repo_findings": {     // Trivy findings not tied to a package
+    "misconfigurations": [{ "id": "DS-0001", "title": "':latest' tag used", "severity": "MEDIUM",
+                            "file": "Dockerfile", "start_line": …, "message": "…", "resolution": "…" }],
+    "secrets": [{ "rule_id": "private-key", "severity": "HIGH", "file": "lib/insecurity.ts",
+                  "start_line": 21, "value": "REDACTED" }]
+  }
 }
 ```
 
@@ -335,9 +352,10 @@ The target repository is treated as **untrusted input**:
 | Dockerfiles and CI workflows | Never built or run, only read by cdxgen as data |
 | Leaking secrets to tools | Tools run with a minimal environment (`HOME`, `PATH`, `LANG`), so API keys and tokens never reach them |
 | Shell injection | All commands use argument lists (`subprocess.run([...])`), never a shell. Only `https://github.com/<owner>/<repo>` URLs or existing folders are accepted. |
-| Hung tools | Every step has a timeout (clone 600 s, npm 900 s, cdxgen 900 s, grype 900 s, osv 600 s) |
+| Hung tools | Every step has a timeout (clone 600 s, npm 900 s, cdxgen 900 s, grype 900 s, osv 600 s, trivy 1200 s) |
 | Local repos | Copied first, so the generated lockfile never touches your own checkout |
 | Unsafe data in the graph page | All package data is HTML-escaped, and embedded JSON is escaped so it can't break out of its script tag |
+| Exposing discovered secrets | Secret values are never copied into `graph.json` or shown in the UI (only rule, file and line). Trivy's raw output masks them as well. |
 | Misleading "all clear" | A failed or empty scanner step marks the scan *incomplete*; it is never reported as successful |
 
 ## Understanding the results
@@ -349,7 +367,12 @@ The target repository is treated as **untrusted input**:
   3. the scanner versions.
 
   `scan.json` records all three so scans can be compared.
-- **Scanner disagreement is information.** Example: `messageformat@2.3.0` is flagged only by OSV-Scanner. The upstream GitHub advisory gives the affected range as `< 2.3.0` but the first patched version as `3.0.0-beta.0`; Grype follows the range, while OSV-Scanner follows the patched version. The graph shows the finding as *reported only by OSV-Scanner* instead of choosing a side.
+- **Scanner disagreement is information.** Examples from Juice Shop:
+  - `messageformat@2.3.0` is flagged by OSV-Scanner and Trivy but not Grype. The upstream GitHub advisory gives the affected range as `< 2.3.0` but the first patched version as `3.0.0-beta.0`; Grype follows the range, the other two follow the patched version.
+  - `lodash@2.4.2` CVE-2018-3721 is MEDIUM in Grype and OSV-Scanner but LOW in Trivy. The graph shows the worst severity and flags the disagreement.
+  - Four findings are Trivy-only `NSWG-ECO-*` IDs (legacy Node Security Working Group advisories). Some likely describe the same flaw as an existing CVE, but no alias links them in the data, so they are kept as separate findings rather than merged on a guess.
+  
+  The graph never chooses a side: each scanner's verdict is shown.
 - **A finding is not proof of exploitability.** It means the version contains a known flaw. Whether the application actually uses the vulnerable code is not determined.
 - **No finding is not proof of safety.** It means no known advisory matched in these databases.
 
@@ -359,12 +382,14 @@ OWASP Juice Shop, commit `c9f99228d9d5`, scanned 23 Nov 2026 (Grype database bui
 
 | Metric | Value |
 |---|---|
-| Packages in graph | 1,134 (98 direct, 1,010 transitive, 25 GitHub Actions not linked to the tree) |
+| Packages in graph | 1,135 (98 direct, 1,011 transitive, 25 GitHub Actions not linked to the tree) |
 | Dependency edges | 2,147 |
 | Vulnerable packages | 20 (8 direct, 12 transitive) |
-| Findings | **54**: 7 critical, 20 high, 25 medium, 2 low |
-| Scanner agreement | 53 found by both · 1 OSV-only (`messageformat`) · 0 severity disagreements |
-| Scan time | about 100 s (mostly clone and lockfile resolution) |
+| Vulnerability findings | **58**: 7 critical, 23 high, 26 medium, 2 low |
+| Scanner agreement | 53 found by all three · 1 by OSV-Scanner + Trivy (`messageformat`) · 4 Trivy-only (legacy `NSWG-ECO-*` advisories) · 1 severity disagreement (`lodash` CVE-2018-3721: Trivy LOW, others MEDIUM) |
+| Misconfigurations | **89** failed checks (20 critical, 22 high), mostly the deliberately insecure Terraform in Juice Shop's challenges, plus the Dockerfile |
+| Secrets | **5** (3 private keys, 2 JWTs), values redacted |
+| Scan time | about 2 min (mostly clone and lockfile resolution; the three scanners together take about 7 s) |
 
 Many of these packages are deliberately outdated, since Juice Shop is an intentionally vulnerable training application.
 
@@ -377,17 +402,18 @@ Many of these packages are deliberately outdated, since Juice Shop is an intenti
 | SBOM has **0 components** | cdxgen needs a lockfile. The pipeline generates one for npm repos; other ecosystems need their lockfile (`poetry.lock`, `go.sum`, …) committed. |
 | OSV step says *no lockfiles/packages found* | The repo has no lockfile OSV-Scanner recognises. (Lockfiles excluded by `.gitignore` are already handled with `--no-ignore`.) |
 | Grype step fails | The vulnerability database is missing or too old. Run `grype db update`, then check with `grype db status`. |
+| Trivy step fails | Its database isn't downloaded (scans skip updates). Run `trivy fs --download-db-only --timeout 60m`. |
+| Trivy download fails with *context deadline exceeded* | The default 5-minute timeout expired on a slow connection. Re-run with `--timeout 60m`. |
 | `grype db update` or `npm` stalls | Slow or dropped connection. Re-run it; npm caches what it already downloaded, so a retry is faster. |
 | cdxgen prints a *SECURE MODE: Environment audit* table | It's warning about secrets in the shell environment. The pipeline already runs cdxgen with a clean environment. |
 | Scan shows **Interrupted** | The server restarted mid-scan. Run it again. |
 
 ## Roadmap
 
-Done in this version: discovery and cloning, SBOM generation, Grype and OSV-Scanner scanning, dependency graph analysis, the interactive graph, and the web UI.
+Done in this version: discovery and cloning, SBOM generation, Grype, OSV-Scanner and Trivy scanning (vulnerabilities, misconfigurations, secrets), dependency graph analysis, the interactive graph, and the web UI.
 
 Planned, following the hackathon problem statement:
 
-- [ ] **Trivy** integration (vulnerabilities, misconfigurations, secrets)
 - [ ] **LangGraph multi-agent system**: a head agent (Guardian Coordinator) plus discovery, SBOM, vulnerability, dependency-risk, anomaly and risk-analyst agents, with conditional routing and an investigation history
 - [ ] **Supply chain anomaly checks**: typosquatting, lifecycle scripts, unpinned GitHub Actions (for example `@main`), Dockerfile and CI/CD risks
 - [ ] **Evidence validator** (Pydantic models) that rejects unsupported CVEs, versions or paths before reporting

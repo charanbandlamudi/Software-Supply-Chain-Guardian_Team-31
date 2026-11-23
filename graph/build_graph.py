@@ -116,6 +116,44 @@ def load_osv(path: Path) -> dict[str, list[dict]]:
     return out
 
 
+def load_trivy(path: Path) -> dict[str, list[dict]]:
+    """Map name@version -> vulnerability records from `trivy fs --format json`."""
+    out: dict[str, list[dict]] = {}
+    for res in json.loads(path.read_text()).get("Results") or []:
+        for v in res.get("Vulnerabilities") or []:
+            fixed = [f.strip() for f in (v.get("FixedVersion") or "").split(",") if f.strip()]
+            out.setdefault(f"{v.get('PkgName')}@{v.get('InstalledVersion')}", []).append({
+                "id": v.get("VulnerabilityID"), "aliases": v.get("VendorIDs") or [],
+                "severity": (v.get("Severity") or "UNKNOWN").upper(), "fixed_versions": fixed,
+                "source_tool": "Trivy"})
+    return out
+
+
+def load_trivy_repo_findings(path: Path) -> dict:
+    """Non-package findings from Trivy: misconfigurations and secrets.
+    Secret values are never copied: only rule, file and line numbers are kept."""
+    mis, sec = [], []
+    for res in json.loads(path.read_text()).get("Results") or []:
+        target = res.get("Target")
+        for m in res.get("Misconfigurations") or []:
+            if m.get("Status", "FAIL") != "FAIL":
+                continue
+            cm = m.get("CauseMetadata") or {}
+            mis.append({"id": m.get("ID"), "avd_id": m.get("AVDID"), "title": m.get("Title"),
+                        "severity": (m.get("Severity") or "UNKNOWN").upper(),
+                        "type": res.get("Type"), "file": target,
+                        "start_line": cm.get("StartLine"), "end_line": cm.get("EndLine"),
+                        "message": m.get("Message"), "resolution": m.get("Resolution"),
+                        "reference": m.get("PrimaryURL"), "source_tool": "Trivy"})
+        for s in res.get("Secrets") or []:
+            sec.append({"rule_id": s.get("RuleID"), "category": s.get("Category"),
+                        "title": s.get("Title"), "severity": (s.get("Severity") or "UNKNOWN").upper(),
+                        "file": target, "start_line": s.get("StartLine"), "end_line": s.get("EndLine"),
+                        "value": "REDACTED", "source_tool": "Trivy"})
+    key = lambda f: (SEV_ORDER.index(f["severity"]) if f["severity"] in SEV_ORDER else 99, f["file"] or "")
+    return {"misconfigurations": sorted(mis, key=key), "secrets": sorted(sec, key=key)}
+
+
 def merge_findings(*sources: dict[str, list[dict]]) -> dict[str, list[dict]]:
     """Correlate the same vulnerability across scanners via shared IDs/aliases.
     Disagreements (severity, fixed versions) are kept side by side, not resolved."""
@@ -188,7 +226,8 @@ def node_style(d: dict) -> dict:
     return {"color": color, "size": size, "font": font, "shape": shape}
 
 
-def export_json(g: nx.DiGraph, out: Path, inputs: dict, scan: dict | None = None) -> None:
+def export_json(g: nx.DiGraph, out: Path, inputs: dict, scan: dict | None = None,
+                repo_findings: dict | None = None) -> None:
     """Machine-readable graph + evidence for agents, reports and the dashboard.
     Same data the HTML embeds: nodes, directed edges, dependency paths, merged scanner findings."""
     node_keys = ("name", "version", "ecosystem", "purl", "scope", "dep_type", "path_ids",
@@ -210,17 +249,21 @@ def export_json(g: nx.DiGraph, out: Path, inputs: dict, scan: dict | None = None
             "vulnerable_packages": sum(1 for n in nodes if n["vulns"]),
             "findings": sum(len(n["vulns"]) for n in nodes),
             "findings_by_severity": {s: sev[s] for s in SEV_ORDER if sev[s]},
+            "misconfigurations": len((repo_findings or {}).get("misconfigurations", [])),
+            "secrets": len((repo_findings or {}).get("secrets", [])),
         },
         "nodes": nodes,
         "edges": [{"from": a, "to": b} for a, b in g.edges()],
         "unresolved": g.graph.get("unresolved", []),
+        # Not tied to packages: Trivy misconfigurations + secrets (secret values redacted)
+        "repo_findings": repo_findings or {"misconfigurations": [], "secrets": []},
     }
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(doc, indent=2))
     print(f"Wrote {out}")
 
 
-def render(g: nx.DiGraph, out: Path, target: str = "") -> None:
+def render(g: nx.DiGraph, out: Path, target: str = "", scanners_used: list | None = None) -> None:
     net = Network(height="100vh", width="100%", directed=True, bgcolor="#f8fafc",
                   font_color="#1e293b", cdn_resources="in_line")  # self-contained, works offline
     # Pre-compute the layout here so the page opens instantly and starts out still
@@ -276,7 +319,8 @@ def render(g: nx.DiGraph, out: Path, target: str = "") -> None:
              "transitive": sum(1 for _, d in g.nodes(data=True) if d["dep_type"] == "transitive"),
              "vulnerable": sum(1 for _, d in g.nodes(data=True) if d["vulns"]),
              "findings": sum(len(d["vulns"]) for _, d in g.nodes(data=True)),
-             "unresolved": len(g.graph.get("unresolved", [])), "root": g.graph["root"]}
+             "unresolved": len(g.graph.get("unresolved", [])), "root": g.graph["root"],
+             "scanners": scanners_used or []}
     # json in a <script> block: escape "</" so package data can never close the tag
     to_js = lambda o: json.dumps(o).replace("</", "<\\/")
     ui = UI_HTML.replace("__DETAILS__", to_js(details)).replace("__STATS__", to_js(stats))
@@ -400,7 +444,8 @@ const EDGE_ID = {}; const ALL_EDGES = edges.get().map(e => { EDGE_ID[e.from + "\
 let focused = null, frozen = false, active = -1, results = [];
 
 // ---- header stats
-$("ssg-source").textContent = (STATS.target ? STATS.target + " · " : "") + STATS.source;
+$("ssg-source").textContent = (STATS.target ? STATS.target + " · " : "") + STATS.source +
+  (STATS.scanners && STATS.scanners.length ? " · scanned by " + STATS.scanners.join(", ") : "");
 const st = [["nodes","Packages"],["direct","Direct"],["transitive","Transitive"],["vulnerable","Vulnerable"],["findings","Findings"],["edges","Edges"]];
 $("ssg-stats").innerHTML = st.map(([k,l]) => `<div class="stat"><b>${STATS[k]}</b><span>${l}</span></div>`).join("");
 
@@ -568,15 +613,17 @@ def main() -> None:
     ap.add_argument("--bom", type=Path, default=Path("data/sbom/bom.json"))
     ap.add_argument("--grype", type=Path, default=Path("data/scanner_results/grype.json"))
     ap.add_argument("--osv", type=Path, default=Path("data/scanner_results/osv.json"))
+    ap.add_argument("--trivy", type=Path, default=Path("data/scanner_results/trivy.json"))
     ap.add_argument("--out", type=Path, default=Path("data/graphs/dependency_graph.html"))
     ap.add_argument("--json", type=Path, default=Path("data/graphs/graph.json"))
     a = ap.parse_args()
 
-    build(a.repo, a.bom, a.grype, a.osv, a.out, a.json)
+    build(a.repo, a.bom, a.grype, a.osv, a.out, a.json, trivy=a.trivy)
 
 
 def build(repo: Path, bom: Path, grype: Path | None, osv: Path | None, out_html: Path,
-          out_json: Path, target: str = "", scan: dict | None = None) -> dict:
+          out_json: Path, target: str = "", scan: dict | None = None,
+          trivy: Path | None = None) -> dict:
     """Build graph.json + interactive HTML from an SBOM and optional scanner reports.
     Returns graph statistics. Missing scanner files are skipped and reported, never faked."""
     g = load_bom(bom) if bom.exists() else None
@@ -587,18 +634,21 @@ def build(repo: Path, bom: Path, grype: Path | None, osv: Path | None, out_html:
         print(f"[warn] {bom} missing or has 0 components — falling back to package.json "
               "(direct dependencies only).")
         g = load_package_json(repo)
+    scanners = (("Grype", grype, load_grype), ("OSV-Scanner", osv, load_osv), ("Trivy", trivy, load_trivy))
     sources, scanners_used = [], []
-    for name, path, loader in (("Grype", grype, load_grype), ("OSV-Scanner", osv, load_osv)):
+    for name, path, loader in scanners:
         if path and path.exists():
             sources.append(loader(path))
             scanners_used.append(name)
         else:
             print(f"[warn] {name} results not available — not included in overlay.")
     annotate(g, merge_findings(*sources))
+    repo_findings = (load_trivy_repo_findings(trivy) if trivy and trivy.exists()
+                     else {"misconfigurations": [], "secrets": [], "note": "Trivy results not available"})
     export_json(g, out_json, {"sbom": str(bom), "repo": str(repo),
-                              "scanner_results": {"Grype": str(grype), "OSV-Scanner": str(osv)},
-                              "scanners_used": scanners_used}, scan)
-    render(g, out_html, target)
+                              "scanner_results": {n: str(p) for n, p, _ in scanners},
+                              "scanners_used": scanners_used}, scan, repo_findings)
+    render(g, out_html, target, scanners_used)
     return json.loads(out_json.read_text())["stats"]
 
 

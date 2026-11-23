@@ -45,7 +45,7 @@ with st.sidebar:
 
 # ---------------------------------------------------------------- header + input
 st.markdown("## 🛡️ SOFTWARE SUPPLY CHAIN GUARDIAN")
-st.caption("Clone → SBOM (cdxgen) → vulnerability scan (Grype + OSV-Scanner) → interactive dependency graph. "
+st.caption("Clone → SBOM (cdxgen) → scan (Grype + OSV-Scanner + Trivy) → interactive dependency graph. "
            "The target repository is treated as untrusted: none of its code or scripts are executed.")
 
 with st.form("scan"):
@@ -112,7 +112,8 @@ if stats:
                                       ("Medium", sev.get("MEDIUM", 0)), ("Low", sev.get("LOW", 0))]):
         col.metric(lbl, val)
 
-tab_graph, tab_steps, tab_files = st.tabs(["Dependency graph", "Scan steps & tools", "Artifacts"])
+tab_graph, tab_repo, tab_steps, tab_files = st.tabs(
+    ["Dependency graph", "Misconfigurations & secrets", "Scan steps & tools", "Artifacts"])
 
 with tab_graph:
     html = current["artifacts"].get("graph_html")
@@ -122,6 +123,36 @@ with tab_graph:
     else:
         st.error("No graph was produced for this scan.")
 
+with tab_repo:
+    gj = current["artifacts"].get("graph_json")
+    rf = json.loads(Path(gj).read_text()).get("repo_findings") if gj and Path(gj).exists() else None
+    if current["steps"].get("trivy", {}).get("status") != "ok" or rf is None:
+        st.info("Trivy did not run successfully for this scan, so there are no misconfiguration or "
+                "secret results. This is not evidence that there are none.")
+    else:
+        mis, sec = rf.get("misconfigurations", []), rf.get("secrets", [])
+        c1, c2 = st.columns(2)
+        c1.metric("Misconfigurations (failed checks)", len(mis))
+        c2.metric("Secrets detected", len(sec))
+        st.markdown("#### Misconfigurations")
+        st.caption("Trivy checks on Dockerfiles, CI workflows, Kubernetes/Terraform and other config files. "
+                   "Files are read as data, never built or run.")
+        if mis:
+            st.dataframe([{"Severity": m["severity"], "Check": m["id"], "Title": m["title"],
+                           "File": m["file"], "Line": m["start_line"], "Message": m["message"],
+                           "Fix": m["resolution"]} for m in mis], use_container_width=True, hide_index=True)
+        else:
+            st.caption("No failed checks reported.")
+        st.markdown("#### Secrets")
+        st.caption("Secret values are never shown or stored by the Guardian — only the rule, file and line. "
+                   "A match is a candidate: verify before treating it as a real credential.")
+        if sec:
+            st.dataframe([{"Severity": x["severity"], "Rule": x["rule_id"], "Title": x["title"],
+                           "File": x["file"], "Line": x["start_line"], "Value": "•••• redacted"}
+                          for x in sec], use_container_width=True, hide_index=True)
+        else:
+            st.caption("No secrets reported.")
+
 with tab_steps:
     st.markdown(steps_md(current))
     st.markdown("**Tool versions & vulnerability database**")
@@ -130,7 +161,7 @@ with tab_steps:
 with tab_files:
     st.caption(f"Folder: `{current['scan_dir']}`")
     names = {"sbom": "CycloneDX SBOM (bom.json)", "grype": "Grype raw results (grype.json)",
-             "osv": "OSV-Scanner raw results (osv.json)", "graph_json": "Graph + evidence (graph.json)",
+             "osv": "OSV-Scanner raw results (osv.json)", "trivy": "Trivy raw results (trivy.json)", "graph_json": "Graph + evidence (graph.json)",
              "graph_html": "Interactive graph (dependency_graph.html)"}
     for key, title in names.items():
         p = current["artifacts"].get(key)

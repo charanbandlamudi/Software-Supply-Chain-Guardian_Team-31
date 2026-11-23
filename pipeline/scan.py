@@ -4,7 +4,7 @@
     -> clone (read-only, no hooks)
     -> lockfile (npm --package-lock-only --ignore-scripts, only if the repo has none)
     -> CycloneDX SBOM (cdxgen, --no-install-deps)
-    -> Grype (on the SBOM) + OSV-Scanner (on the repo), in parallel
+    -> Grype (on the SBOM) + OSV-Scanner + Trivy (on the repo), in parallel
     -> dependency graph (graph.json + interactive HTML)
 
 Every scan gets its own folder under data/scans/ with a scan.json that records
@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SCANS_DIR = ROOT / "data" / "scans"
 GITHUB_RE = re.compile(r"^https://github\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+?)(?:\.git)?/?$")
 LOCKFILES = ("package-lock.json", "npm-shrinkwrap.json", "yarn.lock", "pnpm-lock.yaml")
-REQUIRED = ("clone", "sbom", "grype", "osv", "graph")  # any failure here => scan not complete
+REQUIRED = ("clone", "sbom", "grype", "osv", "trivy", "graph")  # any failure here => scan not complete
 
 STEPS = [
     ("clone", "Clone repository"),
@@ -40,6 +40,7 @@ STEPS = [
     ("sbom", "Generate SBOM (cdxgen)"),
     ("grype", "Scan SBOM (Grype)"),
     ("osv", "Scan repository (OSV-Scanner)"),
+    ("trivy", "Scan repository (Trivy)"),
     ("graph", "Build dependency graph"),
 ]
 
@@ -83,6 +84,15 @@ def tool_versions() -> dict:
                          "valid": db.get("valid", db.get("status") == "valid")}
     except Exception as e:
         v["grype"] = f"unavailable ({type(e).__name__})"
+    try:
+        t = json.loads(subprocess.run(["trivy", "version", "--format", "json"], capture_output=True,
+                                      text=True, timeout=30, env=safe_env()).stdout)
+        v["trivy"] = t.get("Version")
+        db = t.get("VulnerabilityDB") or {}
+        v["trivy_db"] = {"version": db.get("Version"), "updated": db.get("UpdatedAt"),
+                         "downloaded": db.get("DownloadedAt")} if db else "not downloaded"
+    except Exception as e:
+        v["trivy"] = f"unavailable ({type(e).__name__})"
     return v
 
 
@@ -248,7 +258,7 @@ def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) ->
          f"{n_comp} components" if n_comp else "0 components — falling back to package.json", t0)
 
     # 4. scanners in parallel (status updates stay on this thread for the UI) -----------
-    grype_out, osv_out = res / "grype.json", res / "osv.json"
+    grype_out, osv_out, trivy_out = res / "grype.json", res / "osv.json", res / "trivy.json"
 
     def do_grype() -> tuple[str, str]:
         if not n_comp:
@@ -277,11 +287,28 @@ def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) ->
         n = sum(len(p.get("vulnerabilities", [])) for r in d.get("results", []) for p in r.get("packages", []))
         return "ok", f"{n} vulnerabilities"
 
-    for k in ("grype", "osv"):
+    def do_trivy() -> tuple[str, str]:
+        # vuln + misconfig + secret scanning of the checkout. DB/check updates are skipped so a
+        # slow download can never stall a scan (refresh with `trivy fs --download-db-only`).
+        rc = run(["trivy", "fs", "--scanners", "vuln,misconfig,secret", "--include-dev-deps",
+                  "--skip-db-update", "--skip-check-update", "--no-progress", "--timeout", "15m",
+                  "--format", "json", "--output", str(trivy_out), str(repo)],
+                 timeout=1200, stderr=res / "trivy.stderr")
+        if rc != 0 or not trivy_out.exists():
+            trivy_out.unlink(missing_ok=True)
+            return "failed", f"trivy exited {rc} (see trivy.stderr; DB may not be downloaded)"
+        results = json.loads(trivy_out.read_text()).get("Results") or []
+        nv = sum(len(r.get("Vulnerabilities") or []) for r in results)
+        nm = sum(1 for r in results for m in (r.get("Misconfigurations") or []) if m.get("Status", "FAIL") == "FAIL")
+        ns = sum(len(r.get("Secrets") or []) for r in results)
+        return "ok", f"{nv} vulnerabilities, {nm} misconfigurations, {ns} secrets"
+
+    for k in ("grype", "osv", "trivy"):
         step(k, "running")
-    with ThreadPoolExecutor(max_workers=2) as pool:
+    with ThreadPoolExecutor(max_workers=3) as pool:
         t0 = time.monotonic()
-        futures = {"grype": pool.submit(do_grype), "osv": pool.submit(do_osv)}
+        futures = {"grype": pool.submit(do_grype), "osv": pool.submit(do_osv),
+                   "trivy": pool.submit(do_trivy)}
         for k, f in futures.items():
             try:
                 status, detail = f.result()
@@ -290,7 +317,7 @@ def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) ->
             except Exception as e:
                 status, detail = "failed", f"{type(e).__name__}: {e}"
             step(k, status, detail, t0)
-    for k, path in (("grype", grype_out), ("osv", osv_out)):
+    for k, path in (("grype", grype_out), ("osv", osv_out), ("trivy", trivy_out)):
         if path.exists():
             meta["artifacts"][k] = str(path)
 
@@ -298,11 +325,12 @@ def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) ->
     t0 = time.monotonic(); step("graph", "running")
     try:
         scan_info = {k: meta[k] for k in ("scan_id", "target", "commit", "started_at", "tools")}
-        scan_info["scanner_status"] = {k: meta["steps"][k]["status"] for k in ("grype", "osv")}
+        scan_info["scanner_status"] = {k: meta["steps"][k]["status"] for k in ("grype", "osv", "trivy")}
         meta["stats"] = build(repo, bom, grype_out if grype_out.exists() else None,
                               osv_out if osv_out.exists() else None,
                               graphs / "dependency_graph.html", graphs / "graph.json",
-                              target=meta["repo_name"], scan=scan_info)
+                              target=meta["repo_name"], scan=scan_info,
+                              trivy=trivy_out if trivy_out.exists() else None)
         meta["artifacts"].update(graph_html=str(graphs / "dependency_graph.html"),
                                  graph_json=str(graphs / "graph.json"))
         step("graph", "ok", f"{meta['stats']['nodes']} nodes, {meta['stats']['findings']} findings", t0)
