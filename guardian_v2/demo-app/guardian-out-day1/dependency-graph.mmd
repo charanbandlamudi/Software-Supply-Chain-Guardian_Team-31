@@ -1,0 +1,52 @@
+flowchart LR
+  app(["application"])
+  pkg_npm_lodahs_1_0_0["lodahs@1.0.0<br/>2 vulns"]
+  pkg_npm_lodash_4_17_15["lodash@4.17.15<br/>5 vulns"]
+  pkg_npm_minimist_1_2_5["minimist@1.2.5<br/>1 vulns"]
+  pkg_npm_mkdirp_0_5_5["mkdirp@0.5.5"]
+  pkg_pypi_certifi_2026_11_20["certifi@2026.11.20"]
+  pkg_pypi_chardet_4_0_0["chardet@4.0.0"]
+  pkg_pypi_click_8_5_1["click@8.5.1"]
+  pkg_pypi_flask_2_0_1["flask@2.0.1<br/>2 vulns"]
+  pkg_pypi_idna_2_10["idna@2.10<br/>2 vulns"]
+  pkg_pypi_itsdangerous_2_2_0["itsdangerous@2.2.0"]
+  pkg_pypi_jinja2_3_0_1["jinja2@3.0.1<br/>5 vulns"]
+  pkg_pypi_markupsafe_3_0_4["markupsafe@3.0.4"]
+  pkg_pypi_pip_24_0["pip@24.0<br/>6 vulns"]
+  pkg_pypi_requests_2_25_1["requests@2.25.1<br/>4 vulns"]
+  pkg_pypi_urllib3_1_26_20["urllib3@1.26.20<br/>7 vulns"]
+  pkg_pypi_werkzeug_2_0_1["werkzeug@2.0.1<br/>11 vulns"]
+  app --> pkg_npm_lodahs_1_0_0
+  app --> pkg_npm_lodash_4_17_15
+  app --> pkg_npm_mkdirp_0_5_5
+  app --> pkg_pypi_flask_2_0_1
+  app --> pkg_pypi_jinja2_3_0_1
+  app --> pkg_pypi_requests_2_25_1
+  app --> pkg_pypi_werkzeug_2_0_1
+  pkg_pypi_flask_2_0_1 --> pkg_pypi_jinja2_3_0_1
+  pkg_pypi_flask_2_0_1 --> pkg_pypi_werkzeug_2_0_1
+  pkg_pypi_flask_2_0_1 --> pkg_pypi_click_8_5_1
+  pkg_pypi_flask_2_0_1 --> pkg_pypi_itsdangerous_2_2_0
+  pkg_pypi_jinja2_3_0_1 --> pkg_pypi_markupsafe_3_0_4
+  pkg_pypi_requests_2_25_1 --> pkg_pypi_certifi_2026_11_20
+  pkg_pypi_requests_2_25_1 --> pkg_pypi_chardet_4_0_0
+  pkg_pypi_requests_2_25_1 --> pkg_pypi_idna_2_10
+  pkg_pypi_requests_2_25_1 --> pkg_pypi_urllib3_1_26_20
+  pkg_pypi_urllib3_1_26_20 --> pkg_pypi_certifi_2026_11_20
+  pkg_pypi_urllib3_1_26_20 --> pkg_pypi_idna_2_10
+  pkg_npm_mkdirp_0_5_5 --> pkg_npm_minimist_1_2_5
+  classDef vuln fill:#fde2e2,stroke:#c0392b
+  classDef anomaly fill:#fdebd0,stroke:#d35400
+  class pkg_npm_lodash_4_17_15 vuln
+  class pkg_pypi_flask_2_0_1 vuln
+  class pkg_pypi_idna_2_10 vuln
+  class pkg_pypi_jinja2_3_0_1 vuln
+  class pkg_pypi_pip_24_0 vuln
+  class pkg_pypi_requests_2_25_1 vuln
+  class pkg_pypi_urllib3_1_26_20 vuln
+  class pkg_pypi_werkzeug_2_0_1 vuln
+  class file__home_pranaav_bosch_codebase_Software_Supply_Chain_Guardian_Team_31_guardian_v2_demo_app__github_workflows_ci_yml anomaly
+  class file__home_pranaav_bosch_codebase_Software_Supply_Chain_Guardian_Team_31_guardian_v2_demo_app_Dockerfile anomaly
+  class pkg_npm_lodahs_1_0_0 anomaly
+  class pkg_npm_minimist_1_2_5 anomaly
+  class pkg_pypi_certifi_2026_11_20 anomaly

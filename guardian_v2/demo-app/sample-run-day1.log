@@ -1,0 +1,21 @@
+agents: ['discovery', 'cicd', 'vuln_intel', 'reputation', 'reachability', 'exploit_intel', 'anomaly', 'scoring']
+LLM providers: none (deterministic templates)
+[turn  1]    supervisor -> discovery,cicd                           policy: ready=['discovery', 'cicd'], handoffs=[]
+[turn  1]          cicd -> supervisor                               5 container/CI findings in 2 files
+[turn  1]     discovery -> supervisor                               16 components (7 direct), 12 edges; SBOM CycloneDX 1.6: 12 components; pipdeptree: 12 packages; package-lock v3: 4 packages
+[turn  2]    supervisor -> vuln_intel,reputation,reachability       policy: ready=['vuln_intel', 'reputation', 'reachability'], handoffs=[]
+[turn  2]  reachability -> supervisor                               reachability: {'imported': 4, 'used_transitively': 10, 'not_in_runtime': 1, 'not_imported': 1}
+[turn  2]    vuln_intel -> supervisor                               80 raw advisory records from 2/3 sources -> 44 unique vulnerabilities on 10 packages (werkzeug@2.0.1=11, urllib3@1.26.20=7, pip@24.0=6, jinja2@3.0.1=5, lodash@4.17.15=5, 
+[turn  2]    reputation -> supervisor                               registry metadata for 16 packages; security-holding packages: ['pkg:npm/lodahs@1.0.0']
+[turn  3]    supervisor -> exploit_intel,anomaly                    policy: ready=['exploit_intel', 'anomaly'], handoffs=[]
+[turn  3]       anomaly -> supervisor                               9 non-CVE findings: {'environment_only': 1, 'untrusted_resolved_url': 1, 'integrity_mismatch': 1, 'malicious_package': 1, 'typosquat_suspect': 1, 'install_script': 1, 'su
+[turn  3]       anomaly -> reachability                             handoff: suspicious packages found; check whether source code imports them
+[turn  3] exploit_intel -> supervisor                               37 CVEs checked: 0 in CISA KEV, EPSS for 0
+[turn  4]    supervisor -> reachability                             policy: ready=['scoring'], handoffs=['reachability']
+[turn  4]  reachability -> supervisor                               reachability: {'imported': 4, 'used_transitively': 10, 'not_in_runtime': 1, 'not_imported': 1}; handoff check on 2 suspicious packages: imported by source = none
+[turn  5]    supervisor -> scoring                                  policy: ready=['scoring'], handoffs=[]
+[turn  5]       scoring -> supervisor                               scored 58 findings; top: MALICIOUS_PACKAGE on lodahs@1.0.0 = 78.0; INTEGRITY_MISMATCH on minimist@1.2.5 = 59.0; LOCKFILE_TAMPERING on minimist@1.2.5 = 59.0
+[turn  6]    supervisor -> report                                   finish: no agent has new inputs and no handoffs are open
+[turn  6]        report -> supervisor                               wrote guardian-report.json/.md, guardian.sarif, guardian-sbom.cdx.json, dependency-graph.mmd to demo-app/guardian-out-day1
+
+reports written to demo-app/guardian-out-day1

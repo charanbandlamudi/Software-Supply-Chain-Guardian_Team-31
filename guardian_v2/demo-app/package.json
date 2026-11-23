@@ -1,0 +1,5 @@
+{
+  "name": "guardian-demo-frontend",
+  "version": "1.0.0",
+  "dependencies": { "lodash": "4.17.15", "mkdirp": "0.5.5", "lodahs": "1.0.0" }
+}
