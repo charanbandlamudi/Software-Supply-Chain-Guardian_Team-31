@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1420 1500" width="1420" height="1500" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5260"/></marker>
+<style>.h1{font-size:24px;font-weight:700;fill:#1c2430} .sub{font-size:13px;fill:#5b6573}
+.t{font-size:16px;font-weight:700;text-anchor:middle} .s{font-size:12.5px;fill:#2b3340;text-anchor:middle}
+.tag{font-size:10px;font-weight:700;text-anchor:end;letter-spacing:.06em} .lab{font-size:11.5px;fill:#4a5260;font-style:italic}
+.turn{font-size:12px;font-weight:700;fill:#9aa3ae} .st{font-size:14px;font-weight:700;fill:#1c2430} .sl{font-size:12px;fill:#3d4652}</style></defs>
+<rect width="1420" height="1500" fill="#ffffff"/>
+<text x="40" y="44" class="h1">Software Supply Chain Guardian: agent flow (guardian_v2)</text>
+<text x="40" y="68" class="sub">A LangGraph supervisor runs each agent once its inputs are ready; independent agents run in parallel. Agents never call each other: they share one state blackboard.</text>
+<rect x="60" y="90" width="1000" height="72" rx="10" fill="#f6f7f9" stroke="#8a93a0" stroke-width="2"/>
+<text x="560.0" y="114" class="t" fill="#8a93a0">Inputs from the scan pipeline</text>
+<text x="560.0" y="134" class="s">Git clone · npm lockfile (--package-lock-only, no scripts) · cdxgen CycloneDX SBOM · Grype · OSV-Scanner · Trivy (vulns, misconfig, secrets)</text>
+<text x="560.0" y="151" class="s">Source dirs · Dockerfiles · GitHub workflows · previous lockfile (what changed)</text>
+<text x="22" y="225" class="turn">T1</text>
+<rect x="340" y="190" width="220" height="82" rx="10" fill="#e8f0fe" stroke="#3b6fd8" stroke-width="2"/>
+<text x="450.0" y="214" class="t" fill="#3b6fd8">discovery</text>
+<text x="450.0" y="234" class="s">SBOM components, lock edges</text>
+<text x="450.0" y="251" class="s">direct vs transitive deps</text>
+<rect x="860" y="190" width="200" height="82" rx="10" fill="#e8f0fe" stroke="#3b6fd8" stroke-width="2"/>
+<text x="960.0" y="214" class="t" fill="#3b6fd8">cicd</text>
+<text x="960.0" y="234" class="s">Dockerfiles, workflows</text>
+<text x="960.0" y="251" class="s">Trivy misconfig + secrets</text>
+<text x="22" y="335" class="turn">T2</text>
+<rect x="80" y="300" width="220" height="82" rx="10" fill="#e8f0fe" stroke="#3b6fd8" stroke-width="2"/>
+<text x="190.0" y="324" class="t" fill="#3b6fd8">vuln_intel</text>
+<text x="190.0" y="344" class="s">Grype · OSV · Trivy · npm audit</text>
+<text x="190.0" y="361" class="s">OSV.dev · GHSA advisories</text>
+<rect x="340" y="300" width="220" height="82" rx="10" fill="#e8f0fe" stroke="#3b6fd8" stroke-width="2"/>
+<text x="450.0" y="324" class="t" fill="#3b6fd8">reputation</text>
+<text x="450.0" y="344" class="s">registry metadata: yanked,</text>
+<text x="450.0" y="361" class="s">install scripts, integrity</text>
+<rect x="600" y="300" width="220" height="82" rx="10" fill="#e8f0fe" stroke="#3b6fd8" stroke-width="2"/>
+<text x="710.0" y="324" class="t" fill="#3b6fd8">reachability</text>
+<text x="710.0" y="344" class="s">JS/TS + Python import scan</text>
+<text x="710.0" y="361" class="s">reachable / imported / not</text>
+<text x="22" y="445" class="turn">T3</text>
+<rect x="80" y="410" width="220" height="82" rx="10" fill="#e8f0fe" stroke="#3b6fd8" stroke-width="2"/>
+<text x="190.0" y="434" class="t" fill="#3b6fd8">exploit_intel</text>
+<text x="190.0" y="454" class="s">CISA KEV catalog</text>
+<text x="190.0" y="471" class="s">FIRST EPSS score</text>
+<rect x="340" y="410" width="220" height="82" rx="10" fill="#e8f0fe" stroke="#3b6fd8" stroke-width="2"/>
+<text x="450.0" y="434" class="t" fill="#3b6fd8">anomaly</text>
+<text x="450.0" y="454" class="s">typosquats, install scripts,</text>
+<text x="450.0" y="471" class="s">integrity / source changes</text>
+<text x="22" y="570" class="turn">T4</text>
+<rect x="300" y="530" width="520" height="82" rx="10" fill="#e8f0fe" stroke="#3b6fd8" stroke-width="2"/>
+<text x="560.0" y="554" class="t" fill="#3b6fd8">alias de-dup  →  scoring</text>
+<text x="560.0" y="574" class="s">one finding per (CVE/GHSA alias group, package) · risk 0-100 from CVSS,</text>
+<text x="560.0" y="591" class="s">KEV/EPSS, reachability, scope, depth · SSVC Track / Attend / Act</text>
+<text x="22" y="690" class="turn">T5</text>
+<rect x="360" y="650" width="400" height="82" rx="10" fill="#e8f0fe" stroke="#3b6fd8" stroke-width="2"/>
+<text x="560.0" y="674" class="t" fill="#3b6fd8">remediation</text>
+<text x="560.0" y="694" class="s">upgrade / override / remove / pin / fix config / rotate</text>
+<text x="560.0" y="711" class="s">minimal verified-clean target version (re-scanned)</text>
+<text x="22" y="810" class="turn">T6</text>
+<rect x="150" y="770" width="360" height="100" rx="10" fill="#f1e8fd" stroke="#8a4fd8" stroke-width="2"/>
+<text x="330.0" y="794" class="t" fill="#8a4fd8">explainer</text>
+<text x="330.0" y="814" class="s">plain-English explanation per finding</text>
+<text x="330.0" y="831" class="s">Gemini ⇄ Groq round-robin + failover</text>
+<text x="330.0" y="848" class="s">batches of 6 · evidence IDs only</text>
+<text x="500" y="788" class="tag" fill="#8a4fd8">LLM</text>
+<rect x="610" y="770" width="360" height="100" rx="10" fill="#e8f0fe" stroke="#3b6fd8" stroke-width="2"/>
+<text x="790.0" y="794" class="t" fill="#3b6fd8">critic</text>
+<text x="790.0" y="814" class="s">rejects invented IDs, wrong CVSS/KEV,</text>
+<text x="790.0" y="831" class="s">wrong target version, over-claims</text>
+<text x="790.0" y="848" class="s">→ deterministic template fallback</text>
+<text x="22" y="950" class="turn">T7</text>
+<rect x="310" y="915" width="500" height="90" rx="10" fill="#fff4dc" stroke="#d08a00" stroke-width="2"/>
+<text x="560.0" y="939" class="t" fill="#d08a00">Gate 1: human decision per plan</text>
+<text x="560.0" y="959" class="s">approve · reject · accept risk (with a note)</text>
+<text x="560.0" y="976" class="s">manual items go to the change-set checklist</text>
+<text x="800" y="933" class="tag" fill="#d08a00">HUMAN</text>
+<text x="22" y="1095" class="turn">T8</text>
+<rect x="210" y="1060" width="700" height="118" rx="10" fill="#e5f6ea" stroke="#2e9a50" stroke-width="2"/>
+<text x="560.0" y="1084" class="t" fill="#2e9a50">validation (Docker sandbox, node:22-slim)</text>
+<text x="560.0" y="1104" class="s">policy firewall check → apply to a copy of package.json → resolve lockfile, no package code runs</text>
+<text x="560.0" y="1121" class="s">install with scripts off · test with no network, read-only, all caps dropped, non-root</text>
+<text x="560.0" y="1138" class="s">OSV re-scan of the new lockfile · lockfile diff (versions added / removed / changed)</text>
+<text x="560.0" y="1155" class="s">→ final confidence + rollback plan</text>
+<text x="900" y="1078" class="tag" fill="#2e9a50">SANDBOX</text>
+<text x="22" y="1250" class="turn">T9</text>
+<rect x="310" y="1215" width="500" height="90" rx="10" fill="#fff4dc" stroke="#d08a00" stroke-width="2"/>
+<text x="560.0" y="1239" class="t" fill="#d08a00">Gate 2: build gate + human approval</text>
+<text x="560.0" y="1259" class="s">blocks unresolved SSVC Act, unpinned actions/images,</text>
+<text x="560.0" y="1276" class="s">license violations, merge/publish requests</text>
+<text x="800" y="1233" class="tag" fill="#d08a00">HUMAN</text>
+<rect x="130" y="1355" width="400" height="100" rx="10" fill="#eef0f3" stroke="#5b6573" stroke-width="2"/>
+<text x="330.0" y="1379" class="t" fill="#5b6573">report</text>
+<text x="330.0" y="1399" class="s">Guardian report JSON / HTML / PDF · SARIF</text>
+<text x="330.0" y="1416" class="s">OpenVEX · in-toto · CHANGESET.md · patch</text>
+<text x="330.0" y="1433" class="s">post-remediation report</text>
+<rect x="620" y="1355" width="380" height="100" rx="10" fill="#fff4dc" stroke="#d08a00" stroke-width="2"/>
+<text x="810.0" y="1379" class="t" fill="#d08a00">draft PR (optional)</text>
+<text x="810.0" y="1399" class="s">opened by a human click</text>
+<text x="810.0" y="1416" class="s">to your repo or your fork, never upstream</text>
+<text x="810.0" y="1433" class="s">body = CHANGESET.md · never merged</text>
+<path d="M450,162 L450,190" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<path d="M960,162 L960,190" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<path d="M400,272 L400,286 L190,286 L190,300" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<path d="M450,272 L450,300" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<path d="M500,272 L500,286 L710,286 L710,300" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<path d="M190,382 L190,410" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<path d="M450,382 L450,410" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<path d="M190,492 L190,512 L380,512 L380,530" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<path d="M450,492 L450,530" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<path d="M710,382 L710,530" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<path d="M960,272 L960,571 L820,571" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<path d="M560,612 L560,650" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<path d="M560,732 L560,752 L330,752 L330,770" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<path d="M510,805 L610,805" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<path d="M610,845 L510,845" fill="none" stroke="#b04a4a" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#a)"/>
+<text x="560" y="834" class="lab" text-anchor="middle">retry ≤ 2</text>
+<path d="M790,870 L790,892 L560,892 L560,915" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<text x="600" y="888" class="lab" text-anchor="start">claims verified</text>
+<path d="M560,1005 L560,1060" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<text x="572" y="1037" class="lab" text-anchor="start">any approved</text>
+<path d="M310,960 L100,960 L100,1340 L200,1340 L200,1355" fill="none" stroke="#4a5260" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#a)"/>
+<text x="108" y="1100" class="lab" text-anchor="start">none approved /</text>
+<text x="108" y="1116" class="lab">analysis only</text>
+<path d="M560,1178 L560,1215" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<path d="M430,1305 L430,1330 L330,1330 L330,1355" fill="none" stroke="#4a5260" stroke-width="2"  marker-end="url(#a)"/>
+<text x="350" y="1324" class="lab" text-anchor="start">approved</text>
+<path d="M690,1305 L690,1330 L810,1330 L810,1355" fill="none" stroke="#4a5260" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#a)"/>
+<text x="700" y="1324" class="lab" text-anchor="start">human clicks Open draft PR</text>
+<rect x="1100" y="90" width="290" height="1365" rx="12" fill="#fafbfc" stroke="#cfd5dd" stroke-width="1.5"/>
+<text x="1118" y="128" class="st">Supervisor (LangGraph)</text>
+<text x="1118" y="150" class="sl">runs agents when all their inputs</text>
+<text x="1118" y="168" class="sl">are ready; parallel supersteps</text>
+<text x="1118" y="186" class="sl">(T1, T2, T3 run side by side)</text>
+<text x="1118" y="204" class="sl">re-runs an agent if an input changes</text>
+<text x="1118" y="262" class="st">Shared state blackboard</text>
+<text x="1118" y="284" class="sl">components · edges · findings</text>
+<text x="1118" y="302" class="sl">evidence · plans · audit</text>
+<text x="1118" y="320" class="sl">keyed deep-merge reducers keep</text>
+<text x="1118" y="338" class="sl">parallel writes from clobbering</text>
+<text x="1118" y="396" class="st">Policy firewall</text>
+<text x="1118" y="418" class="sl">every tool action checked by</text>
+<text x="1118" y="436" class="sl">policy.py + OPA rego</text>
+<text x="1118" y="454" class="sl">merge / publish / deploy = human only</text>
+<text x="1118" y="512" class="st">Audit trail</text>
+<text x="1118" y="534" class="sl">hash-chained events, sealed</text>
+<text x="1118" y="552" class="sl">by the supervisor; head hash</text>
+<text x="1118" y="570" class="sl">shown in every report</text>
+<text x="1118" y="628" class="st">LLM boundary</text>
+<text x="1118" y="650" class="sl">LLM sees structured evidence only</text>
+<text x="1118" y="668" class="sl">(no code, no secrets); it never</text>
+<text x="1118" y="686" class="sl">decides severity, versions,</text>
+<text x="1118" y="704" class="sl">fixes or approvals</text>
+<text x="1118" y="762" class="st">Checkpoints</text>
+<text x="1118" y="784" class="sl">SQLite snapshots per run</text>
+<text x="1118" y="802" class="sl">resume after interruption</text>
+<text x="1118" y="860" class="st">Legend</text>
+<rect x="1118" y="876" width="26" height="18" rx="4" fill="#e8f0fe" stroke="#3b6fd8" stroke-width="2"/>
+<text x="1154" y="890" class="sl">deterministic agent</text>
+<rect x="1118" y="904" width="26" height="18" rx="4" fill="#f1e8fd" stroke="#8a4fd8" stroke-width="2"/>
+<text x="1154" y="918" class="sl">LLM agent (checked)</text>
+<rect x="1118" y="932" width="26" height="18" rx="4" fill="#fff4dc" stroke="#d08a00" stroke-width="2"/>
+<text x="1154" y="946" class="sl">human decision</text>
+<rect x="1118" y="960" width="26" height="18" rx="4" fill="#e5f6ea" stroke="#2e9a50" stroke-width="2"/>
+<text x="1154" y="974" class="sl">isolated sandbox</text>
+<rect x="1118" y="988" width="26" height="18" rx="4" fill="#eef0f3" stroke="#5b6573" stroke-width="2"/>
+<text x="1154" y="1002" class="sl">outputs</text>
+</svg>

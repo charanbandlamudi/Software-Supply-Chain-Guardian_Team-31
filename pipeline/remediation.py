@@ -40,6 +40,8 @@ SANDBOX_IMAGE = "node:22-slim"
 CACHE_VOLUME = "guardian-npm-cache"          # shared npm download cache for sandbox installs
 # Native modules whose install script may run (in the sandbox) to fetch their prebuilt binary.
 # Every other package — including every upgraded one — installs with scripts disabled.
+# Whole-app build/test + image scan + SBOM diff are slow (~6 min on Juice Shop), so they are off by default.
+FULL_APP_VALIDATION = __import__("os").environ.get("GUARDIAN_FULL_APP_VALIDATION", "").lower() in ("1", "true", "yes")
 NATIVE_ALLOWLIST = [n.strip() for n in __import__("os").environ.get("GUARDIAN_SANDBOX_NATIVE_ALLOWLIST", "sqlite3").split(",") if n.strip()]
 AUTOMATABLE = {"upgrade", "remove"}
 _ACTIVE: dict[str, threading.Thread] = _sys.__dict__.setdefault("_ssg_active_validations", {})
@@ -545,7 +547,10 @@ def _validate(scan_dir: Path) -> None:
              f"{len(residual)} remain on them, {len(introduced)} newly introduced", seconds=round(time.monotonic() - t0, 1))
 
         # 8. the whole application, before vs after: install, build, tests, container image, image scan, SBOM
-        if not ok_docker:
+        #    (opt-in: GUARDIAN_FULL_APP_VALIDATION=1)
+        if not FULL_APP_VALIDATION:
+            pass
+        elif not ok_docker:
             step("app", "skipped", "No container runtime: whole-application build/test/image steps need Docker.")
         elif not (repo / "package.json").exists():
             step("app", "skipped", "Whole-application validation is implemented for npm projects only.")
@@ -825,7 +830,8 @@ def _final_confidence(v: dict, status: str) -> dict:
         level, _ = "low", reasons.append(f"{len(rs['newly_introduced'])} newly introduced vulnerabilities in the lockfile")
     if not app or not app.get("variants"):
         level = "medium" if level == "high" else level
-        reasons.append("whole application not built/tested (no Docker or not an npm project)")
+        reasons.append("whole application not built/tested" + ("" if FULL_APP_VALIDATION else
+                       " (turned off for speed; set GUARDIAN_FULL_APP_VALIDATION=1 to enable)"))
     else:
         tests = [s for s in (app.get("scripts", {}).get("tests") or [])]
         after = app["variants"].get("after", {})

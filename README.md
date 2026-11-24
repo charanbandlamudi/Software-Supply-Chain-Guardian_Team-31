@@ -667,8 +667,8 @@ rotating secrets, fixing config, transitive removals) become a checklist in the 
 | Verify | The target versions are in the new lockfile and the vulnerable versions are gone |
 | Package sandbox | Install with scripts off, then **load each upgraded package** with no network, a read-only filesystem, all capabilities dropped and a non-root user |
 | Re-scan | OSV-Scanner on the new lockfile: cleared, remaining and newly introduced vulnerabilities |
-| **Whole app, before and after** | Full `npm ci` (install scripts off, except the explicit native-module allow-list `GUARDIAN_SANDBOX_NATIVE_ALLOWLIST`, default `sqlite3`, which needs its prebuilt binary); then **build** (`build:server`/`build`) and **unit and integration tests** (`test:server`/`test:unit`, `test:api`/`test:integration`) with **no network**. Before and after are compared, so failures that already existed aren't blamed on the fix. |
-| **Image** | Each variant is built from a generated Dockerfile with **no RUN steps** (nothing executes at build time), scanned with **Trivy**, and its **CycloneDX SBOM** is compared exactly by name@version |
+| **Whole app, before and after** *(off by default; `GUARDIAN_FULL_APP_VALIDATION=1`)* | Full `npm ci` (install scripts off, except the explicit native-module allow-list `GUARDIAN_SANDBOX_NATIVE_ALLOWLIST`, default `sqlite3`, which needs its prebuilt binary); then **build** (`build:server`/`build`) and **unit and integration tests** (`test:server`/`test:unit`, `test:api`/`test:integration`) with **no network**. Before and after are compared, so failures that already existed aren't blamed on the fix. |
+| **Image** *(with the whole-app step)* | Each variant is built from a generated Dockerfile with **no RUN steps** (nothing executes at build time), scanned with **Trivy**, and its **CycloneDX SBOM** is compared exactly by name@version |
 | Confidence | **high**, **medium** or **low**, with reasons derived from what actually ran |
 
 **Rollback** (shown in the UI, the draft PR and the report) is the plan for undoing the change if it causes
@@ -709,6 +709,10 @@ SHA-256 hash chain whose integrity the tab checks.
 |---|---|---|
 | 1 | `jsonwebtoken` 0.4.0 → 9.0.0, `lodash` → 4.18.1, `moment` → 2.31.0 | ❌ **Failed, correctly.** `test:server` went from 441 passed / 0 failed to **20 failed**, because jsonwebtoken 9 enforces ≥2048-bit RSA keys and Juice Shop deliberately uses a weak one. The sandbox caught a breaking change that version metadata alone couldn't. |
 | 2 | `lodash`, `moment` (jsonwebtoken rejected, citing run 1) | ✅ **Passed, confidence medium.** Lockfile 54 → **47** known vulnerabilities (7 cleared, 0 new); `build:server` passes before and after; `test:server` has 0 failures before and after; image (Trivy) 323 → **316**; image SBOM: `lodash@2.4.2` and `moment@2.0.0` removed, nothing added. `test:api` fails before and after alike: those integration tests need a running server and network. |
+
+The whole-app build, tests, image scan and image SBOM diff take about 6 minutes on Juice Shop, so they are **off
+by default**: the sandbox run takes well under a minute, and confidence is capped at *medium* with the reason shown.
+Set `GUARDIAN_FULL_APP_VALIDATION=1` before starting the UI to turn them back on.
 
 **Requires** Docker Desktop (or another Docker engine) running. Without it, the sandbox and whole-app steps are
 reported as skipped and the other steps still run. Only npm projects are executed in the sandbox; other
