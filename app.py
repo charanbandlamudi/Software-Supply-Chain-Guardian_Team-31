@@ -245,7 +245,7 @@ with tab_fix:
         st.markdown("#### 1 · Gate 1 — review the agents' remediation plans")
         st.caption("Tick the plans you approve; unticked plans are recorded as rejected. *Sandbox* rows are package "
                    "changes the system will apply and test; *Manual* rows (pins, secret rotation, config fixes) become "
-                   "a checklist in the draft PR.")
+                   "a local change-set checklist.")
         import pandas as pd
         df = pd.DataFrame([{
             "Approve": g1.get(p["plan_id"], {}).get("decision") == "approve",
@@ -254,7 +254,17 @@ with tab_fix:
             "Action": p["action"], "Target": p.get("target_version") or "",
             "Clears": ", ".join(p["clears"][:4]) + (f" +{len(p['clears']) - 4}" if len(p["clears"]) > 4 else ""),
             "Signals": ", ".join(p["signals"]), "Risk": p["max_score"],
-            "Blocker": p.get("blocker") or "", "Why": p.get("rationale") or p.get("manual_reason") or "",
+            "Severity": ", ".join(p.get("severities", [])) or "—",
+            "CVSS": p.get("cvss") if p.get("cvss") is not None else "—",
+            "EPSS": (f"{p['epss']:.4f}" if p.get("epss") is not None else "—"),
+            "KEV": "yes" if p.get("kev") else "no",
+            "Reachability": ", ".join(p.get("reachability", [])) or "unknown",
+            "Sources": ", ".join(p.get("sources", [])) or "—",
+            "Conflicts": len(p.get("source_conflicts", [])),
+            "Blocker": p.get("blocker") or "",
+            "Blocker status": p.get("blocker_status", "none"),
+            "Evidence": ", ".join(p.get("evidence_ids", [])[:6]) or "—",
+            "Why": p.get("rationale") or p.get("manual_reason") or "",
             "Last decision": (lambda d: f"{d['decision']} by {d['reviewer']}" if d else "—")(g1.get(p["plan_id"])),
             "plan_id": p["plan_id"]} for p in plans])
         edited = st.data_editor(
@@ -262,6 +272,22 @@ with tab_fix:
             column_config={"Approve": st.column_config.CheckboxColumn("Approve", help="Approve this plan"),
                            "plan_id": None, "Risk": st.column_config.NumberColumn(format="%.1f")},
             disabled=[c for c in df.columns if c != "Approve"])
+        for p in plans:
+            with st.expander(f"Evidence and conflicts — {p['name']} {p.get('target_version') or ''}", expanded=False):
+                st.json({
+                    "plan_id": p["plan_id"],
+                    "risk_score": p["risk_score"],
+                    "cvss": p["cvss"],
+                    "epss": p["epss"],
+                    "kev": p["kev"],
+                    "reachability": p["reachability"],
+                    "sources": p["sources"],
+                    "source_conflicts": p["source_conflicts"],
+                    "evidence_ids": p["evidence_ids"],
+                    "blocker": p["blocker"],
+                    "blocker_status": p["blocker_status"],
+                    "blocker_details": p["blocker_details"],
+                })
         c1, c2, c3 = st.columns([2, 3, 2])
         reviewer = c1.text_input("Reviewer name", key="rev-name", placeholder="e.g. Asha (security lead)")
         note = c2.text_input("Comment (optional)", key="rev-note")
@@ -360,19 +386,18 @@ with tab_fix:
         if g2:
             pol = g2.get("policy", {})
             st.markdown(f"**Gate 2: {g2['decision'].upper()}** by {g2['reviewer']} at {g2['ts']} · policy firewall "
-                        f"{'allowed a draft PR' if pol.get('allow') else 'denied: ' + '; '.join(pol.get('deny_reason', []))}")
+                        f"{'allowed the change set' if pol.get('allow') else 'denied: ' + '; '.join(pol.get('deny_reason', []))}")
             art = g2.get("artifacts") or {}
             if art:
                 d = st.columns(3)
                 for col, (k, label) in zip(d, (("patch", "⬇️ package.json patch"), ("lockfile", "⬇️ remediated lockfile"),
-                                               ("pr_draft", "⬇️ draft PR (Markdown)"))):
+                                               ("changeset", "⬇️ change-set report"))):
                     if art.get(k) and Path(art[k]).exists():
                         col.download_button(label, Path(art[k]).read_bytes(), file_name=Path(art[k]).name,
                                             key=f"art-{k}", width="stretch")
-                if art.get("pr_draft") and Path(art["pr_draft"]).exists():
-                    with st.expander("Draft PR description", expanded=True):
-                        st.markdown(Path(art["pr_draft"]).read_text(encoding="utf-8"))
-                st.caption("Not pushed or merged: the policy firewall keeps merge/publish/deploy human-only.")
+                if art.get("changeset") and Path(art["changeset"]).exists():
+                    with st.expander("Change-set report", expanded=True):
+                        st.markdown(Path(art["changeset"]).read_text(encoding="utf-8"))
 
         # ---------------- audit trail
         entries = RM.audit_entries(sdir)

@@ -22,21 +22,15 @@ def evaluate_tool_call(request: dict) -> dict:
     if tool in DENIED_TOOLS:
         reasons.append("merge/deploy/publish is human-only")
     elif tool not in READ_ONLY_TOOLS and tool not in {
-        "git.branch", "pkg.apply", "docker.build", "test.run", "git.open_pr",
+        "pkg.apply", "docker.build", "test.run",
     }:
         reasons.append(f"tool {tool} is not allow-listed")
 
-    if tool in {"git.branch", "pkg.apply", "docker.build", "test.run"}:
+    if tool in {"pkg.apply", "docker.build", "test.run"}:
         if not str(args.get("branch", "")).startswith("guardian/"):
             reasons.append("mutation requires a guardian/* branch")
         if not request.get("approval", {}).get("gate1"):
             reasons.append("mutation requires remediation Gate 1")
-
-    if tool == "git.open_pr":
-        if args.get("draft") is not True:
-            reasons.append("PR must be a draft")
-        if not request.get("approval", {}).get("gate2"):
-            reasons.append("PR requires publishing Gate 2")
 
     if request.get("egress_hosts"):
         allowed = {"api.osv.dev", "api.first.org", "www.cisa.gov", "api.deps.dev",

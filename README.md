@@ -579,7 +579,7 @@ proposed fixes into verified changes. Nothing touches your code, gets pushed or 
    blockers, risk) and ticks the ones to approve. Unticked plans are recorded as rejected, under the reviewer's name.
    - *Sandbox* rows are npm package changes the system applies and tests.
    - *Manual* rows (pinning actions or images, rotating secrets, fixing config, transitive removals) become a
-     checklist in the draft PR.
+     local change-set checklist.
 2. **Sandbox validation** (runs in the background; the page shows live progress):
    1. **Policy firewall:** `pkg.apply`, `docker.build` and `test.run` must be allowed on a
       `guardian/remediation-*` branch with Gate 1.
@@ -594,7 +594,7 @@ proposed fixes into verified changes. Nothing touches your code, gets pushed or 
    7. **Re-scan** the new lockfile with OSV-Scanner: vulnerabilities before and after, cleared, remaining and
       newly introduced.
 3. **Gate 2, human approval of the validated change.** The firewall must allow a **draft** PR. The system then
-   writes `remediation/guardian-remediation.patch`, `package-lock.remediated.json` and `PR_DRAFT.md`, which holds
+   writes `remediation/guardian-remediation.patch`, `package-lock.remediated.json` and `CHANGESET.md`, which holds
    the changes, the validation evidence, the manual-task checklist and the audit-chain head. Merging stays
    human-only.
 

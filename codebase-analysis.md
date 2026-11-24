@@ -173,7 +173,6 @@ Parallel agents emit **unsealed events**; the supervisor seals them in a fixed o
 Deterministic allow/deny for every tool call:
 - **Denied always:** `git.merge`, `git.push_default`, `npm.publish`, `deploy`, etc.
 - **Mutations** (`pkg.apply`, `docker.build`, `test.run`) require a `guardian/*` branch **and** Gate 1 approval.
-- **PR open** (`git.open_pr`) must be a **draft** and require Gate 2 approval.
 - Checks args for secret-like values (via regex).
 
 ### `guardian_v2/providers.py` — LLM Provider Chain
@@ -193,7 +192,7 @@ Gate 1 (human review)
   → Docker sandbox: test (network OFF, read-only rootfs, non-root, capability-dropped)
   → OSV re-scan of new lockfile
 Gate 2 (human review of validated changeset)
-  → write patch + package-lock.remediated.json + PR_DRAFT.md
+  → write patch + package-lock.remediated.json + CHANGESET.md
   → audit chain appended
   (never pushed or merged — stays human-only)
 ```
@@ -344,5 +343,5 @@ data/scans/<scan_id>/
     ├── audit.jsonl             ← remediation audit chain
     ├── guardian-remediation.patch
     ├── package-lock.remediated.json
-    └── PR_DRAFT.md
+    └── CHANGESET.md
 ```

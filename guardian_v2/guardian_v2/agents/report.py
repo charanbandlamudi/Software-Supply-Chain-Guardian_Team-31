@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from ..audit import verify_chain, write_audit
+from ..signing import make_in_toto_statement, sha256_file, sign_statement
 
 from .base import AgentResult
 from .day1_outputs import cyclonedx, mermaid_graph, origin
@@ -51,6 +52,8 @@ def run(state: dict, task: dict) -> AgentResult:
                                             "epss", "sources", "source_conflicts", "paths", "introduced_by",
                                             "recommended_fix", "summary", "evidence_ids", "ai_inferences",
                                             "tool_severity", "recommended_action", "reference", "facts",
+                                            "cvss", "severity_by_source", "affected_by_source", "fix_by_source",
+                                            "advisory_reachability",
                                             "resolution", "location")} for f in fs],
         "remediation_plans": plans, "approvals": state.get("approvals", []),
         "validation": state.get("validation", {}), "coverage": state.get("coverage", {}),
@@ -102,16 +105,20 @@ def run(state: dict, task: dict) -> AgentResult:
     (out_dir / "guardian.openvex.json").write_text(json.dumps(vex, indent=2))
 
     report_bytes = (out_dir / "guardian-report.json").read_bytes()
-    statement = {
-        "_type": "https://in-toto.io/Statement/v1",
-        "subject": [{"name": "guardian-report.json", "digest": {"sha256": hashlib.sha256(report_bytes).hexdigest()}},
-                    {"name": "guardian-sbom.cdx.json",
-                     "digest": {"sha256": hashlib.sha256((out_dir / "guardian-sbom.cdx.json").read_bytes()).hexdigest()}}],
-        "predicateType": "https://bgsw.example/guardian-report/v1",
-        "predicate": {"run_id": state.get("run_id"), "audit_head_hash": head_hash,
-                      "validated_by": "Software Supply Chain Guardian"},
-    }
-    (out_dir / "guardian.in-toto.json").write_text(json.dumps(statement, indent=2))
+    statement = make_in_toto_statement(
+        [{"name": "guardian-report.json", "digest": {"sha256": sha256_file(out_dir / "guardian-report.json")}},
+         {"name": "guardian-sbom.cdx.json",
+          "digest": {"sha256": sha256_file(out_dir / "guardian-sbom.cdx.json")}}],
+        {"run_id": state.get("run_id"), "audit_head_hash": head_hash,
+         "validated_by": "Software Supply Chain Guardian"},
+    )
+    statement_path = out_dir / "guardian.in-toto.json"
+    statement_path.write_text(json.dumps(statement, indent=2), encoding="utf-8")
+    signing = sign_statement(statement_path)
+    report["signing"] = signing
+    (out_dir / "guardian-report.json").write_text(
+        json.dumps(report, indent=2, default=str), encoding="utf-8"
+    )
 
     md = [f"# Guardian Report: run {state.get('run_id')}", ""]
     vulns = [f for f in fs if f["type"] == "vulnerability"]

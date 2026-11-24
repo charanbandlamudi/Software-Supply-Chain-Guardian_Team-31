@@ -23,6 +23,32 @@ def _npm_purl(name: str, version: str) -> str:
     return f"pkg:npm/{name.replace('@', '%40')}@{version}"
 
 
+def _lock_package_name(path: str) -> str:
+    """Return the package name represented by an npm lockfile package path."""
+    return path.rsplit("node_modules/", 1)[-1]
+
+
+def _resolve_lock_dependency(package_path: str, dependency: str, packages: dict) -> str | None:
+    """Resolve a dependency using npm's node_modules lookup rules.
+
+    A lockfile can contain several versions of the same package. Looking up by
+    name alone silently merged those versions and produced incorrect agent
+    edges. Prefer the nearest ancestor's nested node_modules entry, then walk
+    toward the root, exactly as Node resolution does for a lockfile path.
+    """
+    parent = package_path
+    while True:
+        candidate = f"{parent}/node_modules/{dependency}" if parent else f"node_modules/{dependency}"
+        if candidate in packages:
+            return candidate
+        if not parent:
+            return None
+        if "/node_modules/" in parent:
+            parent = parent.rsplit("/node_modules/", 1)[0]
+        else:
+            parent = ""
+
+
 def _read(path: str):
     text = Path(path).read_text(encoding="utf-8-sig")
     return json.loads(text), make_evidence("input_file", "input", path, text)
@@ -111,15 +137,18 @@ def run(state: dict, task: dict) -> AgentResult:
         root = pk.get("", {})
         direct = set(root.get("dependencies", {})) | set(root.get("devDependencies", {}))
         dev_roots = set(root.get("devDependencies", {}))
-        by_name = {}
+        path_to_purl = {}
         for path, meta in pk.items():
             if not path:
                 continue
-            name = path.split("node_modules/")[-1]
+            if not meta.get("version"):
+                continue
+            name = _lock_package_name(path)
             purl = _npm_purl(name, meta["version"])
-            by_name[name] = purl
+            path_to_purl[path] = purl
             add(purl, name=name, version=meta["version"], ecosystem="npm", sources=["lockfile"],
-                direct=name in direct, scope="dev" if (meta.get("dev") or name in dev_roots) else "prod",
+                direct=path == f"node_modules/{name}" and name in direct,
+                scope="dev" if (meta.get("dev") or (path == f"node_modules/{name}" and name in dev_roots)) else "prod",
                 lock={"resolved": meta.get("resolved"), "integrity": meta.get("integrity"),
                       "hasInstallScript": bool(meta.get("hasInstallScript")),
                       "spec": root.get("dependencies", {}).get(name)},
@@ -127,10 +156,14 @@ def run(state: dict, task: dict) -> AgentResult:
         for path, meta in pk.items():
             if not path:
                 continue
-            src = by_name[path.split("node_modules/")[-1]]
+            src = path_to_purl.get(path)
+            if not src:
+                continue
             for dep, spec in (meta.get("dependencies") or {}).items():
-                if dep in by_name:
-                    edges.append({"from": src, "to": by_name[dep], "constraint": spec, "source": "npm-lock"})
+                resolved_path = _resolve_lock_dependency(path, dep, pk)
+                dst = path_to_purl.get(resolved_path)
+                if dst:
+                    edges.append({"from": src, "to": dst, "constraint": spec, "source": "npm-lock"})
         notes.append(f"package-lock v{lock.get('lockfileVersion')}: {len(pk) - 1} packages")
 
     for c in comps.values():

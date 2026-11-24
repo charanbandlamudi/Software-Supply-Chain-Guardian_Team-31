@@ -7,7 +7,7 @@ from guardian_v2.policy import evaluate_tool_call
 def test_audit_chain_round_trip_and_tamper_detection():
     entries = []
     append_entry(entries, "agent:test", "scan", "osv.scan", {}, {"allow": True})
-    append_entry(entries, "human:alice", "approve", "git.open_pr", {"draft": True},
+    append_entry(entries, "human:alice", "approve", "remediation.approval", {"approved": True},
                  {"allow": True})
     assert verify_chain(entries) == (True, None)
     entries[1]["actor"] = "human:bob"

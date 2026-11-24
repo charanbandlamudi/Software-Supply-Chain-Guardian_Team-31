@@ -15,6 +15,7 @@ from langgraph.types import Command
 
 from guardian_v2.orchestrator import build_orchestrator
 from guardian_v2.providers import default_chain
+from guardian_v2.checkpoints import SQLiteCheckpointStore
 
 
 def ask_human(payload: dict) -> dict:
@@ -37,6 +38,8 @@ def main():
     ap.add_argument("--config", required=True)
     ap.add_argument("--llm-planner", action="store_true", help="let the LLM choose agents each turn")
     ap.add_argument("--day1", action="store_true", help="Day 1 checkpoint: discover + detect + evidence only")
+    ap.add_argument("--checkpoint-db", default=None, help="SQLite path for durable agent snapshots")
+    ap.add_argument("--resume-run", default=None, help="Existing run ID to restore from SQLite")
     args = ap.parse_args()
 
     inputs = json.load(open(args.config))
@@ -53,10 +56,24 @@ def main():
         stage="day1" if args.day1 else "full")
     print(f"agents: {[a.name for a in catalog]}\nLLM providers: {providers or 'none (deterministic templates)'}")
 
-    cfg = {"configurable": {"thread_id": str(uuid.uuid4())}, "recursion_limit": 200}
+    thread_id = args.resume_run or str(uuid.uuid4())
+    cfg = {"configurable": {"thread_id": thread_id}, "recursion_limit": 200}
+    checkpoint_store = SQLiteCheckpointStore(args.checkpoint_db) if args.checkpoint_db else None
+    if checkpoint_store and args.resume_run:
+        restored = checkpoint_store.load(args.resume_run)
+        if restored:
+            print(f"restored checkpoint: {args.resume_run}")
     if args.day1:
         inputs["stage"] = "day1"
     payload = {"run_id": cfg["configurable"]["thread_id"][:8], "inputs": inputs}
+    if checkpoint_store and args.resume_run:
+        restored = checkpoint_store.load(args.resume_run)
+        if restored and isinstance(restored["state"], dict):
+            payload = restored["state"]
+            payload.setdefault("run_id", cfg["configurable"]["thread_id"][:8])
+            payload.setdefault("inputs", inputs)
+        else:
+            print(f"checkpoint not found: {args.resume_run}")
     while True:
         for chunk in app.stream(payload, cfg, stream_mode="updates"):
             for node, delta in chunk.items():
@@ -64,11 +81,15 @@ def main():
                     to = ",".join(m["to"]) if isinstance(m["to"], list) else m["to"]
                     print(f"[turn {m['turn']:>2}] {m['from']:>13} -> {to:<40.40} {m['text'][:170]}")
         snap = app.get_state(cfg)
+        if checkpoint_store:
+            checkpoint_store.save(thread_id, snap.values)
         if not snap.next:
             break
         intr = snap.tasks[0].interrupts[0].value if snap.tasks and snap.tasks[0].interrupts else None
         if intr is None:
             break
+        if checkpoint_store:
+            checkpoint_store.save_interrupt(thread_id, intr)
         payload = Command(resume=ask_human(intr))
     out = app.get_state(cfg).values.get("report", {})
     print(f"\nreports written to {out.get('dir')}")

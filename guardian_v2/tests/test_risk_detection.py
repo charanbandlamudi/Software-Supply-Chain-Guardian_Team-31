@@ -4,6 +4,30 @@ import json
 from datetime import datetime, timedelta, timezone
 
 from guardian_v2.agents import anomaly
+
+
+def test_discovery_preserves_nested_duplicate_npm_versions(tmp_path):
+    from guardian_v2.agents.discovery import run
+
+    lock = tmp_path / "package-lock.json"
+    lock.write_text(__import__("json").dumps({
+        "lockfileVersion": 3,
+        "packages": {
+            "": {"dependencies": {"app": "1.0.0"}},
+            "node_modules/app": {"version": "1.0.0", "dependencies": {"shared": "^1.0.0"}},
+            "node_modules/shared": {"version": "1.2.0"},
+            "node_modules/app/node_modules/shared": {"version": "2.3.0"},
+        },
+    }), encoding="utf-8")
+
+    result = run({"inputs": {"npm_lock": str(lock)}}, {})
+    components = result.delta["components"]
+    edges = result.delta["edges"]
+
+    assert set(components) >= {"pkg:npm/shared@1.2.0", "pkg:npm/shared@2.3.0"}
+    assert {e["to"] for e in edges if e["from"] == "pkg:npm/app@1.0.0"} == {
+        "pkg:npm/shared@2.3.0"
+    }
 from guardian_v2.scoring import score
 
 GOOD = "sha512-GOOD"

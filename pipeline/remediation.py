@@ -12,7 +12,7 @@ Works on a finished scan folder. Nothing is ever applied to the user's checkout,
            test (network OFF, read-only rootfs, all capabilities dropped, non-root, pid/memory/cpu
            limits) which actually loads every upgraded package
   re-scan  OSV-Scanner on the new lockfile: cleared / residual / newly introduced vulnerabilities
-  Gate 2   a reviewer approves the validated change set -> patch + draft PR text (not pushed or merged)
+  Gate 2   a reviewer approves the validated change set -> local patch and report
 Every human decision and policy verdict is appended to a SHA-256 hash-chained audit trail
 (guardian_v2.audit), stored as remediation/audit.jsonl next to the scan.
 """
@@ -34,6 +34,7 @@ if str(ROOT / "guardian_v2") not in _sys.path:
     _sys.path.insert(0, str(ROOT / "guardian_v2"))
 from guardian_v2.audit import append_entry, verify_chain, write_audit  # noqa: E402
 from guardian_v2.policy import evaluate_tool_call  # noqa: E402
+from guardian_v2.build_gate import evaluate as evaluate_build_gate  # noqa: E402
 
 SANDBOX_IMAGE = "node:22-slim"
 AUTOMATABLE = {"upgrade", "remove"}
@@ -108,6 +109,30 @@ def load_plans(scan_dir: Path) -> list[dict]:
             name = name.split("/repo/", 1)[1]
         fids = p.get("finding_ids", [])
         auto, why = False, ""
+        related = [findings[f] for f in fids if f in findings]
+        source_conflicts = sorted({
+            json.dumps(c, sort_keys=True, default=str)
+            for f in related
+            for c in (f.get("source_conflicts") or [])
+        })
+        sources = sorted({s for f in related for s in (f.get("sources") or [])})
+        evidence_ids = sorted({e for f in related for e in (f.get("evidence_ids") or [])})
+        severities = sorted({str(f.get("severity") or f.get("tool_severity") or "UNKNOWN")
+                             for f in related if f})
+        cvss_values = [f.get("cvss") for f in related if isinstance(f.get("cvss"), dict)]
+        cvss_scores = [v.get("score") for v in cvss_values if v.get("score") is not None]
+        epss_values = [f.get("epss") for f in related if isinstance(f.get("epss"), dict)]
+        epss_scores = [v.get("epss") for v in epss_values if v.get("epss") is not None]
+        kev = any(bool(f.get("kev")) for f in related)
+        reachability = sorted({str(f.get("reachability_state") or "unknown") for f in related})
+        compatibility = p.get("compatibility") or {}
+        blocker_raw = p.get("compatibility_blocker")
+        blocker_verified = bool(blocker_raw) and bool(
+            compatibility.get("parent_constraint_blockers")
+            or compatibility.get("co_upgrade_required")
+        )
+        blocker_status = ("verified" if blocker_verified else
+                          "reported" if blocker_raw else "none")
         if eco != "npm":
             why = "manual: only npm changes are validated in the web sandbox" if eco in ("pypi",) else "manual task"
         elif p["action"] == "upgrade" and p.get("target_version"):
@@ -121,7 +146,14 @@ def load_plans(scan_dir: Path) -> list[dict]:
             "plan_id": pid, "component": comp, "name": name, "version": ver, "ecosystem": eco,
             "direct": name in direct, "action": p["action"], "target_version": p.get("target_version"),
             "rationale": p.get("rationale"), "blocker": p.get("compatibility_blocker"),
+            "blocker_status": blocker_status,
+            "blocker_details": compatibility,
             "agent_status": p.get("status"), "automatable": auto, "manual_reason": why,
+            "sources": sources, "source_conflicts": [json.loads(c) for c in source_conflicts],
+            "evidence_ids": evidence_ids, "severities": severities,
+            "risk_score": max((f.get("score") or 0 for f in related), default=0),
+            "cvss": max(cvss_scores, default=None), "epss": max(epss_scores, default=None),
+            "kev": kev, "reachability": reachability,
             "clears": sorted({findings[f]["canonical_id"] for f in fids if f in findings
                               and findings[f].get("type") == "vulnerability"}),
             "signals": sorted({findings[f]["type"] for f in fids if f in findings and findings[f].get("type") != "vulnerability"}),
@@ -157,19 +189,26 @@ def record_gate2(scan_dir: Path, decision: str, reviewer: str, note: str = "") -
     val = load_validation(scan_dir)
     if decision == "approve" and (not val or val.get("status") != "passed"):
         raise ValueError("Gate 2 approval needs a passed sandbox validation.")
-    branch = f"guardian/remediation-{Path(scan_dir).name[-15:]}"
-    policy = evaluate_tool_call({"tool": "git.open_pr", "args": {"draft": True, "branch": branch},
-                                 "approval": {"gate2": decision == "approve"}})
+    report_path = Path(scan_dir) / "agents" / "guardian-report.json"
+    report = _read(report_path, {})
+    build_gate = evaluate_build_gate({
+        "findings": report.get("findings", []),
+        "cicd_findings": report.get("cicd_findings", []),
+        "container_images": report.get("container_images", []),
+        "license_violations": report.get("license_violations", []),
+        "requested_actions": [],
+    })
+    policy = build_gate if decision == "approve" else {"allow": True, "deny_reason": []}
     review = load_review(scan_dir)
     review["gate2"] = {"decision": decision, "reviewer": reviewer.strip(), "ts": _now(), "note": note,
                        "policy": policy, "validation_id": (val or {}).get("id")}
     out = {}
     if decision == "approve" and policy["allow"]:
-        out = _write_change_set(scan_dir, val, review, branch)
+        out = _write_change_set(scan_dir, val, review)
         review["gate2"]["artifacts"] = out
     _write(_rdir(scan_dir) / "review.json", review)
-    _audit(scan_dir, f"human:{reviewer.strip()}", f"gate2.{decision}", "git.open_pr",
-           {"draft": True, "branch": branch, "note": note[:200]}, policy,
+    _audit(scan_dir, f"human:{reviewer.strip()}", f"gate2.{decision}", "remediation.approval",
+           {"note": note[:200]}, policy,
            result=json.dumps(out) if out else None)
     return review
 
@@ -431,7 +470,7 @@ def _validate(scan_dir: Path) -> None:
 
 
 # ------------------------------------------------------------------ Gate 2 output
-def _write_change_set(scan_dir: Path, val: dict, review: dict, branch: str) -> dict:
+def _write_change_set(scan_dir: Path, val: dict, review: dict) -> dict:
     rd = _rdir(scan_dir)
     plans = {p["plan_id"]: p for p in load_plans(scan_dir)}
     out = {}
@@ -441,8 +480,7 @@ def _write_change_set(scan_dir: Path, val: dict, review: dict, branch: str) -> d
         shutil.copy2(rd / "work" / "package-lock.json", rd / "package-lock.remediated.json")
         out.update(patch=str(rd / "guardian-remediation.patch"), lockfile=str(rd / "package-lock.remediated.json"))
     rs = val["results"].get("rescan", {})
-    lines = [f"# [Guardian] Supply-chain remediation (draft)", "",
-             f"Branch: `{branch}` · Draft PR — **not pushed or merged** (merge is human-only by policy).", "",
+    lines = ["# [Guardian] Supply-chain remediation change set", "",
              f"Gate 1 approved by: {val.get('approved_by')} · Gate 2 approved by: {review['gate2']['reviewer']} "
              f"({review['gate2']['ts']})", "", "## Package changes (sandbox-validated)", ""]
     for pid in val.get("plans", []):
@@ -464,6 +502,6 @@ def _write_change_set(scan_dir: Path, val: dict, review: dict, branch: str) -> d
     entries = audit_entries(scan_dir)
     lines += ["", f"Audit trail: {len(entries)} entries, integrity {'valid' if ok else 'INVALID: ' + str(err)}, "
                   f"head `{entries[-1]['hash'][:16] if entries else 'n/a'}`."]
-    (rd / "PR_DRAFT.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    out["pr_draft"] = str(rd / "PR_DRAFT.md")
+    (rd / "CHANGESET.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    out["changeset"] = str(rd / "CHANGESET.md")
     return out

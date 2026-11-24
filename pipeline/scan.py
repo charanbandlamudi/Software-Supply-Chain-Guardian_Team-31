@@ -130,6 +130,8 @@ def tool_versions() -> dict:
 def parse_target(target: str) -> tuple[str, str, str]:
     """Return (kind, owner, name). Only https GitHub URLs or existing local dirs are accepted."""
     target = target.strip()
+    if not target:
+        raise ValueError("Enter an https://github.com/<owner>/<repo> URL or an existing local folder.")
     m = GITHUB_RE.match(target)
     if m:
         return "github", m.group(1), m.group(2)
@@ -184,8 +186,30 @@ def load_scan(scan_id: str) -> dict | None:
         m = json.loads(f.read_text(encoding="utf-8"))
     except json.JSONDecodeError:  # being written right now
         return None
+
+    # Historical metadata may contain absolute paths from the machine that ran
+    # the scan. Rebase every path to this checkout while preserving old artifacts.
+    local_dir = SCANS_DIR / scan_id
+    m["scan_dir"] = str(local_dir)
+    rebased = {}
+    for key, old in (m.get("artifacts") or {}).items():
+        if not old:
+            continue
+        old_path = Path(old)
+        if scan_id in old_path.parts:
+            suffix = Path(*old_path.parts[old_path.parts.index(scan_id) + 1:])
+            rebased[key] = str(local_dir / suffix)
+        elif old_path.is_absolute():
+            rebased[key] = str(old_path)
+        else:
+            rebased[key] = str(ROOT / old)
+    m["artifacts"] = rebased
+
     if m.get("status") == "running" and not is_active(scan_id):
         m["status"] = "interrupted"  # server restarted / process died mid-scan
+        tmp = f.with_suffix(".json.tmp")
+        tmp.write_text(json.dumps(m, indent=2), encoding="utf-8")
+        tmp.replace(f)
     return m
 
 
@@ -197,7 +221,7 @@ def list_scans() -> list[dict]:
 def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) -> dict:
     kind, owner, name = parse_target(target)
     started = datetime.now(timezone.utc)
-    scan_dir = SCANS_DIR / f"{owner}__{name}__{started:%Y%m%d-%H%M%S}"
+    scan_dir = SCANS_DIR / f"{owner}__{name}__{started:%Y%m%d-%H%M%S-%f}"
     repo, sbom, res, graphs = (scan_dir / d for d in ("repo", "sbom", "scanner_results", "graphs"))
     for d in (sbom, res, graphs):
         d.mkdir(parents=True, exist_ok=True)
