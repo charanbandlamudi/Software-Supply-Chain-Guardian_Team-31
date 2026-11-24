@@ -108,13 +108,15 @@ Open **http://localhost:8501**, keep the default `https://github.com/juice-shop/
 
 | Component | Version tested | Notes |
 |---|---|---|
-| macOS (Apple Silicon) | Darwin 27 | Linux should work; Windows not tested |
-| Python | 3.12.11 | **Not 3.14.1**: networkx fails to import there |
+| macOS (Apple Silicon) | Darwin 27 | Homebrew / standalone binaries |
+| Windows 10 / 11 | Windows 11 AMD64 | **Fully tested & supported** (WinGet + npm) |
+| Linux | Ubuntu 22.04+ | Supported |
+| Python | 3.11 / 3.12 | **Not 3.14.1**: networkx fails to import there |
 | Node.js / npm | 22.22.3 / 10.9.8 | Needed for cdxgen and lockfile resolution |
-| git | 2.44 | |
+| git | 2.44+ | |
 | OWASP cdxgen | 12.9.3 | `npm install -g @cyclonedx/cdxgen` |
 | Grype | 0.122.1 | Vulnerability database schema v6 |
-| OSV-Scanner | 2.7.1 | |
+| OSV-Scanner | 2.7.0 / 2.7.1 | |
 | Trivy | 0.76.2 | Vulnerability database schema v2 |
 
 ### Installing the scanners
@@ -125,7 +127,15 @@ Open **http://localhost:8501**, keep the default `https://github.com/juice-shop/
 npm install -g @cyclonedx/cdxgen
 ```
 
-**Grype and OSV-Scanner.** Use Homebrew where it has prebuilt packages:
+**On Windows (via WinGet):**
+
+```powershell
+winget install --id Anchore.Grype --accept-source-agreements --accept-package-agreements --silent
+winget install --id Google.OSVScanner --accept-source-agreements --accept-package-agreements --silent
+winget install --id AquaSecurity.Trivy --accept-source-agreements --accept-package-agreements --silent
+```
+
+**On macOS (via Homebrew or binaries):**
 
 ```bash
 brew install grype osv-scanner trivy
@@ -392,6 +402,18 @@ OWASP Juice Shop, commit `c9f99228d9d5`, scanned 23 Nov 2026 (Grype database bui
 | Scan time | about 2 min (mostly clone and lockfile resolution; the three scanners together take about 7 s) |
 
 Many of these packages are deliberately outdated, since Juice Shop is an intentionally vulnerable training application.
+
+### Multi-Ecosystem Benchmark Results
+
+The pipeline has been verified across multiple language ecosystems:
+
+| Target Repository | Ecosystem / Manifest | Status | Components | Graph Nodes | Edges | Vulnerabilities Found | Misconfigurations | Secrets |
+|---|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **[adeyosemanputra/pygoat](https://github.com/adeyosemanputra/pygoat)** | **Python** (`requirements.txt`, Dockerfile) | `complete` | 62 | 63 | 0 | **369** (29 Crit, 160 High, 144 Med, 32 Low) | 53 | 4 |
+| **[praetorian-inc/gokart](https://github.com/praetorian-inc/gokart)** | **Go** (`go.mod`, `go.sum`) | `complete` | 35 | 36 | 9 | **77** (11 Crit, 39 High, 23 Med, 3 Low) | 2 | 0 |
+| **[OWASP/wrongsecrets](https://github.com/OWASP/wrongsecrets)** | **Java / Spring Boot** (`pom.xml`) | `complete` | 1,271 | 1,272 | 1,841 | **14** (2 High, 10 Med, 2 Low) | 146 | 12 |
+| **[digininja/DVWA](https://github.com/digininja/DVWA)** | **PHP** (`composer.json`) | `complete` | 15 | 16 | 5 | 0 | 4 | 0 |
+| **[juice-shop/juice-shop](https://github.com/juice-shop/juice-shop)** | **Node.js / npm** (`package.json`) | `complete` | 1,134 | 1,135 | 2,147 | **58** (7 Crit, 23 High, 26 Med, 2 Low) | 89 | 5 |
 
 ## Troubleshooting
 
