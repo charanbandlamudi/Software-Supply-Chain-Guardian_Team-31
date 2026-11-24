@@ -1,0 +1,6 @@
+Scanning dir C:\Users\jayan\OneDrive\Desktop\Software-Supply-Chain-Guardian_Team-31-main\Software-Supply-Chain-Guardian_Team-31-main\data\scans\praetorian-inc__gokart__20261124-054821\repo
+Starting filesystem walk for root: C:\
+Scanned C:\Users\jayan\OneDrive\Desktop\Software-Supply-Chain-Guardian_Team-31-main\Software-Supply-Chain-Guardian_Team-31-main\data\scans\praetorian-inc__gokart__20261124-054821\repo\go.mod file and found 33 packages
+Scanned C:\Users\jayan\OneDrive\Desktop\Software-Supply-Chain-Guardian_Team-31-main\Software-Supply-Chain-Guardian_Team-31-main\data\scans\praetorian-inc__gokart__20261124-054821\repo\test\testdata\vulnerablemodule\go.mod file and found 1 package
+End status: 36 dirs visited, 147 inodes visited, 2 Extract calls, 39.3865ms elapsed, 39.3865ms wall time
+Skipping call analysis on Go code since Go is not installed.

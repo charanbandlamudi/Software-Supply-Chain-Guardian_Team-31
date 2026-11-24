@@ -1,0 +1,401 @@
+{
+  "schema": "ssg-dependency-graph/1",
+  "generated_at": "2026-11-24T05:52:39+00:00",
+  "source": "cdxgen SBOM",
+  "root": "ROOT",
+  "inputs": {
+    "sbom": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\digininja__DVWA__20261124-055213\\sbom\\bom.json",
+    "repo": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\digininja__DVWA__20261124-055213\\repo",
+    "scanner_results": {
+      "Grype": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\digininja__DVWA__20261124-055213\\scanner_results\\grype.json",
+      "OSV-Scanner": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\digininja__DVWA__20261124-055213\\scanner_results\\osv.json",
+      "Trivy": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\digininja__DVWA__20261124-055213\\scanner_results\\trivy.json"
+    },
+    "scanners_used": [
+      "Grype",
+      "OSV-Scanner",
+      "Trivy"
+    ]
+  },
+  "scan": {
+    "scan_id": "digininja__DVWA__20261124-055213",
+    "target": "https://github.com/digininja/DVWA",
+    "commit": "502ac150ce37c20ca6e04cab7c5ca959f315f2d0",
+    "started_at": "2026-11-24T05:52:13+00:00",
+    "tools": {
+      "git": "git version 2.54.0.windows.1",
+      "npm": "11.13.0",
+      "cdxgen": "\u001b[1mCycloneDX Generator 12.9.3\u001b[0m",
+      "osv-scanner": "osv-scanner version: 2.7.0",
+      "grype": "0.122.1",
+      "grype_db": {
+        "schema": "v6.1.10",
+        "built": "2026-11-23T06:28:32Z",
+        "valid": true
+      },
+      "trivy": "0.76.2",
+      "trivy_db": {
+        "version": 2,
+        "updated": "2026-11-23T07:04:04.632673631Z",
+        "downloaded": "2026-11-23T10:28:38.1695664Z"
+      }
+    },
+    "scanner_status": {
+      "grype": "ok",
+      "osv": "ok",
+      "trivy": "ok"
+    }
+  },
+  "stats": {
+    "nodes": 16,
+    "edges": 5,
+    "direct": 0,
+    "transitive": 0,
+    "unresolved": 10,
+    "vulnerable_packages": 0,
+    "findings": 0,
+    "findings_by_severity": {},
+    "misconfigurations": 4,
+    "secrets": 0
+  },
+  "nodes": [
+    {
+      "id": "ROOT",
+      "name": "application",
+      "version": "",
+      "ecosystem": "unknown",
+      "purl": null,
+      "scope": "",
+      "dep_type": "root",
+      "path_ids": [
+        "ROOT"
+      ],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:composer/psr/log@3.0.2",
+      "name": "psr/log",
+      "version": "3.0.2",
+      "ecosystem": "composer",
+      "purl": "pkg:composer/psr/log@3.0.2",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [
+        "pkg:composer/zircote/swagger-php@4.11.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:composer/symfony/deprecation-contracts@v3.8.1",
+      "name": "symfony/deprecation-contracts",
+      "version": "v3.8.1",
+      "ecosystem": "composer",
+      "purl": "pkg:composer/symfony/deprecation-contracts@v3.8.1",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [
+        "pkg:composer/zircote/swagger-php@4.11.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:composer/symfony/finder@v7.2.2",
+      "name": "symfony/finder",
+      "version": "v7.2.2",
+      "ecosystem": "composer",
+      "purl": "pkg:composer/symfony/finder@v7.2.2",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [
+        "pkg:composer/zircote/swagger-php@4.11.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:composer/symfony/polyfill-ctype@v1.37.0",
+      "name": "symfony/polyfill-ctype",
+      "version": "v1.37.0",
+      "ecosystem": "composer",
+      "purl": "pkg:composer/symfony/polyfill-ctype@v1.37.0",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [
+        "pkg:composer/symfony/yaml@v8.1.11"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:composer/symfony/yaml@v8.1.11",
+      "name": "symfony/yaml",
+      "version": "v8.1.11",
+      "ecosystem": "composer",
+      "purl": "pkg:composer/symfony/yaml@v8.1.11",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [
+        "pkg:composer/zircote/swagger-php@4.11.1"
+      ],
+      "child_ids": [
+        "pkg:composer/symfony/polyfill-ctype@v1.37.0"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:composer/zircote/swagger-php@4.11.1",
+      "name": "zircote/swagger-php",
+      "version": "4.11.1",
+      "ecosystem": "composer",
+      "purl": "pkg:composer/zircote/swagger-php@4.11.1",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [
+        "pkg:composer/psr/log@3.0.2",
+        "pkg:composer/symfony/deprecation-contracts@v3.8.1",
+        "pkg:composer/symfony/finder@v7.2.2",
+        "pkg:composer/symfony/yaml@v8.1.11"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:github/actions/checkout@v6.0.2",
+      "name": "actions/checkout",
+      "version": "v6.0.2",
+      "ecosystem": "github",
+      "purl": "pkg:github/actions/checkout@v6.0.2",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:github/ShiftLeftSecurity/scan-action@v1.3.0",
+      "name": "ShiftLeftSecurity/scan-action",
+      "version": "v1.3.0",
+      "ecosystem": "github",
+      "purl": "pkg:github/ShiftLeftSecurity/scan-action@v1.3.0",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:github/github/codeql-action/upload-sarif@v4.33.0",
+      "name": "github/codeql-action/upload-sarif",
+      "version": "v4.33.0",
+      "ecosystem": "github",
+      "purl": "pkg:github/github/codeql-action/upload-sarif@v4.33.0",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:github/docker/setup-qemu-action@v3",
+      "name": "docker/setup-qemu-action",
+      "version": "v3",
+      "ecosystem": "github",
+      "purl": "pkg:github/docker/setup-qemu-action@v3",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:github/docker/setup-buildx-action@v3",
+      "name": "docker/setup-buildx-action",
+      "version": "v3",
+      "ecosystem": "github",
+      "purl": "pkg:github/docker/setup-buildx-action@v3",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:github/docker/login-action@v3",
+      "name": "docker/login-action",
+      "version": "v3",
+      "ecosystem": "github",
+      "purl": "pkg:github/docker/login-action@v3",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:github/github/codeql-action/init@v4.33.0",
+      "name": "github/codeql-action/init",
+      "version": "v4.33.0",
+      "ecosystem": "github",
+      "purl": "pkg:github/github/codeql-action/init@v4.33.0",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:github/github/codeql-action/autobuild@v4.33.0",
+      "name": "github/codeql-action/autobuild",
+      "version": "v4.33.0",
+      "ecosystem": "github",
+      "purl": "pkg:github/github/codeql-action/autobuild@v4.33.0",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:github/github/codeql-action/analyze@v4.33.0",
+      "name": "github/codeql-action/analyze",
+      "version": "v4.33.0",
+      "ecosystem": "github",
+      "purl": "pkg:github/github/codeql-action/analyze@v4.33.0",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "pkg:composer/symfony/yaml@v8.1.11",
+      "to": "pkg:composer/symfony/polyfill-ctype@v1.37.0"
+    },
+    {
+      "from": "pkg:composer/zircote/swagger-php@4.11.1",
+      "to": "pkg:composer/psr/log@3.0.2"
+    },
+    {
+      "from": "pkg:composer/zircote/swagger-php@4.11.1",
+      "to": "pkg:composer/symfony/deprecation-contracts@v3.8.1"
+    },
+    {
+      "from": "pkg:composer/zircote/swagger-php@4.11.1",
+      "to": "pkg:composer/symfony/finder@v7.2.2"
+    },
+    {
+      "from": "pkg:composer/zircote/swagger-php@4.11.1",
+      "to": "pkg:composer/symfony/yaml@v8.1.11"
+    }
+  ],
+  "unresolved": [
+    "pkg:composer/zircote/swagger-php@4.11.1",
+    "pkg:github/actions/checkout@v6.0.2",
+    "pkg:github/ShiftLeftSecurity/scan-action@v1.3.0",
+    "pkg:github/github/codeql-action/upload-sarif@v4.33.0",
+    "pkg:github/docker/setup-qemu-action@v3",
+    "pkg:github/docker/setup-buildx-action@v3",
+    "pkg:github/docker/login-action@v3",
+    "pkg:github/github/codeql-action/init@v4.33.0",
+    "pkg:github/github/codeql-action/autobuild@v4.33.0",
+    "pkg:github/github/codeql-action/analyze@v4.33.0"
+  ],
+  "repo_findings": {
+    "misconfigurations": [
+      {
+        "id": "DS-0002",
+        "avd_id": null,
+        "title": "Image user should not be 'root'",
+        "severity": "HIGH",
+        "type": "dockerfile",
+        "file": "Dockerfile",
+        "start_line": null,
+        "end_line": null,
+        "message": "Specify at least 1 USER command in Dockerfile with non-root user as argument",
+        "resolution": "Add 'USER <non root user name>' line to the Dockerfile",
+        "reference": "https://avd.aquasec.com/misconfig/ds-0002",
+        "source_tool": "Trivy"
+      },
+      {
+        "id": "DS-0029",
+        "avd_id": null,
+        "title": "'apt-get' missing '--no-install-recommends'",
+        "severity": "HIGH",
+        "type": "dockerfile",
+        "file": "Dockerfile",
+        "start_line": 10,
+        "end_line": 17,
+        "message": "'--no-install-recommends' flag is missed: 'apt-get update  && export DEBIAN_FRONTEND=noninteractive  && apt-get install -y zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev iputils-ping git zip unzip 7zip   && apt-get clean -y && rm -rf /var/lib/apt/lists/*  && docker-php-ext-configure gd --with-jpeg --with-freetype  && a2enmod rewrite  && docker-php-ext-install gd mysqli pdo pdo_mysql'",
+        "resolution": "Add '--no-install-recommends' flag to 'apt-get'",
+        "reference": "https://avd.aquasec.com/misconfig/ds-0029",
+        "source_tool": "Trivy"
+      },
+      {
+        "id": "DS-0013",
+        "avd_id": null,
+        "title": "'RUN cd ...' to change directory",
+        "severity": "MEDIUM",
+        "type": "dockerfile",
+        "file": "Dockerfile",
+        "start_line": 24,
+        "end_line": 25,
+        "message": "RUN should not be used to change directory: 'cd /var/www/html/vulnerabilities/api  && composer install'. Use 'WORKDIR' statement instead.",
+        "resolution": "Use WORKDIR to change directory",
+        "reference": "https://avd.aquasec.com/misconfig/ds-0013",
+        "source_tool": "Trivy"
+      },
+      {
+        "id": "DS-0026",
+        "avd_id": null,
+        "title": "No HEALTHCHECK defined",
+        "severity": "LOW",
+        "type": "dockerfile",
+        "file": "Dockerfile",
+        "start_line": null,
+        "end_line": null,
+        "message": "Add HEALTHCHECK instruction in your Dockerfile",
+        "resolution": "Add HEALTHCHECK instruction in Dockerfile",
+        "reference": "https://avd.aquasec.com/misconfig/ds-0026",
+        "source_tool": "Trivy"
+      }
+    ],
+    "secrets": []
+  }
+}

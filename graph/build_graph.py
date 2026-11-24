@@ -37,7 +37,7 @@ def ecosystem_from_purl(purl: str | None) -> str:
 # ---------------------------------------------------------------- loaders
 def load_bom(path: Path) -> nx.DiGraph | None:
     """Graph from CycloneDX components + dependencies. None if SBOM is empty."""
-    bom = json.loads(path.read_text())
+    bom = json.loads(path.read_text(encoding="utf-8"))
     comps = bom.get("components") or []
     if not comps:
         return None
@@ -65,7 +65,7 @@ def load_bom(path: Path) -> nx.DiGraph | None:
 
 
 def load_package_json(repo: Path) -> nx.DiGraph:
-    pkg = json.loads((repo / "package.json").read_text())
+    pkg = json.loads((repo / "package.json").read_text(encoding="utf-8"))
     g = nx.DiGraph(source="package.json (manifest only — no lockfile, direct deps only)")
     root = f"pkg:npm/{pkg.get('name', 'app')}@{pkg.get('version', '')}"
     g.add_node(root, name=pkg.get("name", "app"), version=pkg.get("version", ""),
@@ -85,7 +85,7 @@ def load_package_json(repo: Path) -> nx.DiGraph:
 def load_grype(path: Path) -> dict[str, list[dict]]:
     """Map purl and name@version -> list of vulnerability records (scanner facts only)."""
     out: dict[str, list[dict]] = {}
-    for m in json.loads(path.read_text()).get("matches", []):
+    for m in json.loads(path.read_text(encoding="utf-8")).get("matches", []):
         v, a = m.get("vulnerability", {}), m.get("artifact", {})
         aliases = [r.get("id") for r in m.get("relatedVulnerabilities") or [] if r.get("id")]
         rec = {"id": v.get("id"), "aliases": aliases,
@@ -100,7 +100,7 @@ def load_osv(path: Path) -> dict[str, list[dict]]:
     """Map name@version -> vulnerability records from osv-scanner JSON."""
     sev_map = {"MODERATE": "MEDIUM"}
     out: dict[str, list[dict]] = {}
-    for res in json.loads(path.read_text()).get("results", []):
+    for res in json.loads(path.read_text(encoding="utf-8")).get("results", []):
         for p in res.get("packages", []):
             pkg = p["package"]
             for v in p.get("vulnerabilities", []):
@@ -119,7 +119,7 @@ def load_osv(path: Path) -> dict[str, list[dict]]:
 def load_trivy(path: Path) -> dict[str, list[dict]]:
     """Map name@version -> vulnerability records from `trivy fs --format json`."""
     out: dict[str, list[dict]] = {}
-    for res in json.loads(path.read_text()).get("Results") or []:
+    for res in json.loads(path.read_text(encoding="utf-8")).get("Results") or []:
         for v in res.get("Vulnerabilities") or []:
             fixed = [f.strip() for f in (v.get("FixedVersion") or "").split(",") if f.strip()]
             out.setdefault(f"{v.get('PkgName')}@{v.get('InstalledVersion')}", []).append({
@@ -133,7 +133,7 @@ def load_trivy_repo_findings(path: Path) -> dict:
     """Non-package findings from Trivy: misconfigurations and secrets.
     Secret values are never copied: only rule, file and line numbers are kept."""
     mis, sec = [], []
-    for res in json.loads(path.read_text()).get("Results") or []:
+    for res in json.loads(path.read_text(encoding="utf-8")).get("Results") or []:
         target = res.get("Target")
         for m in res.get("Misconfigurations") or []:
             if m.get("Status", "FAIL") != "FAIL":
@@ -259,7 +259,7 @@ def export_json(g: nx.DiGraph, out: Path, inputs: dict, scan: dict | None = None
         "repo_findings": repo_findings or {"misconfigurations": [], "secrets": []},
     }
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(doc, indent=2))
+    out.write_text(json.dumps(doc, indent=2), encoding="utf-8")
     print(f"Wrote {out}")
 
 
@@ -325,7 +325,7 @@ def render(g: nx.DiGraph, out: Path, target: str = "", scanners_used: list | Non
     to_js = lambda o: json.dumps(o).replace("</", "<\\/")
     ui = UI_HTML.replace("__DETAILS__", to_js(details)).replace("__STATS__", to_js(stats))
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(html.replace("</body>", ui + "\n</body>"))
+    out.write_text(html.replace("</body>", ui + "\n</body>"), encoding="utf-8")
     print(json.dumps({k: v for k, v in stats.items() if k != "root"}, indent=2))
     print(f"Wrote {out}")
 
@@ -649,7 +649,7 @@ def build(repo: Path, bom: Path, grype: Path | None, osv: Path | None, out_html:
                               "scanner_results": {n: str(p) for n, p, _ in scanners},
                               "scanners_used": scanners_used}, scan, repo_findings)
     render(g, out_html, target, scanners_used)
-    return json.loads(out_json.read_text())["stats"]
+    return json.loads(out_json.read_text(encoding="utf-8"))["stats"]
 
 
 if __name__ == "__main__":

@@ -1,0 +1,23 @@
+2026-11-24T11:20:48+05:30	INFO	[vuln] Vulnerability scanning is enabled
+2026-11-24T11:20:48+05:30	INFO	[misconfig] Misconfiguration scanning is enabled
+2026-11-24T11:20:48+05:30	INFO	[checks-client] No downloadable checks were loaded as --skip-check-update is enabled, loading from existing cache...
+2026-11-24T11:20:49+05:30	INFO	[secret] Secret scanning is enabled
+2026-11-24T11:20:49+05:30	INFO	[secret] If your scanning is slow, please try '--scanners vuln,misconfig' to disable secret scanning
+2026-11-24T11:20:49+05:30	INFO	[secret] Please see https://trivy.dev/docs/v0.76/guide/scanner/secret#recommendation for faster secret detection
+2026-11-24T11:21:08+05:30	WARN	[pom] Dependency version cannot be determined. Child dependencies will not be found.	details="https://trivy.dev/docs/v0.76/guide/coverage/language/java#empty-dependency-version"
+2026-11-24T11:21:25+05:30	INFO	[terraform scanner] Scanning root module	file_path="aws"
+2026-11-24T11:21:42+05:30	INFO	[terraform scanner] Scanning root module	file_path="aws/shared-state"
+2026-11-24T11:21:42+05:30	INFO	[terraform scanner] Scanning root module	file_path="azure"
+2026-11-24T11:21:42+05:30	INFO	[terraform scanner] Scanning root module	file_path="azure/shared-state"
+2026-11-24T11:21:42+05:30	INFO	[terraform scanner] Scanning root module	file_path="gcp"
+2026-11-24T11:21:42+05:30	WARN	[terraform parser] Variable values were not found in the environment or variable files. Evaluating may not work correctly.	module="root" variables="project_id"
+2026-11-24T11:21:42+05:30	INFO	[terraform scanner] Scanning root module	file_path="gcp/shared-state"
+2026-11-24T11:21:43+05:30	INFO	[npm] Run "npm install" to collect the license information of packages	dir="js/node_modules"
+2026-11-24T11:21:43+05:30	INFO	[npm] Run "npm install" to collect the license information of packages	dir="node_modules"
+2026-11-24T11:21:43+05:30	INFO	[npm] Run "npm install" to collect the license information of packages	dir="src/test/K8s-tests/node_modules"
+2026-11-24T11:21:43+05:30	INFO	[npm] Run "npm install" to collect the license information of packages	dir="src/test/e2e/node_modules"
+2026-11-24T11:21:43+05:30	INFO	Number of language-specific files	num=10
+2026-11-24T11:21:43+05:30	INFO	[gomod] Detecting vulnerabilities...
+2026-11-24T11:21:43+05:30	INFO	[npm] Detecting vulnerabilities...
+2026-11-24T11:21:43+05:30	INFO	[pom] Detecting vulnerabilities...
+2026-11-24T11:21:43+05:30	INFO	Detected config files	num=54

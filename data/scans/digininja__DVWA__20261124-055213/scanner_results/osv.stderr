@@ -1,0 +1,5 @@
+Scanning dir C:\Users\jayan\OneDrive\Desktop\Software-Supply-Chain-Guardian_Team-31-main\Software-Supply-Chain-Guardian_Team-31-main\data\scans\digininja__DVWA__20261124-055213\repo
+Starting filesystem walk for root: C:\
+Scanned C:\Users\jayan\OneDrive\Desktop\Software-Supply-Chain-Guardian_Team-31-main\Software-Supply-Chain-Guardian_Team-31-main\data\scans\digininja__DVWA__20261124-055213\repo\external\recaptcha file and found 0 packages
+Scanned C:\Users\jayan\OneDrive\Desktop\Software-Supply-Chain-Guardian_Team-31-main\Software-Supply-Chain-Guardian_Team-31-main\data\scans\digininja__DVWA__20261124-055213\repo\vulnerabilities\api\composer.lock file and found 6 packages
+End status: 98 dirs visited, 379 inodes visited, 2 Extract calls, 698.2564ms elapsed, 698.2564ms wall time

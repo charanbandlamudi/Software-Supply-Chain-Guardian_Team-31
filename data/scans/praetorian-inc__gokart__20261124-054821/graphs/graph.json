@@ -1,0 +1,2839 @@
+{
+  "schema": "ssg-dependency-graph/1",
+  "generated_at": "2026-11-24T05:48:44+00:00",
+  "source": "cdxgen SBOM",
+  "root": "pkg:golang/github.com/praetorian-inc/gokart",
+  "inputs": {
+    "sbom": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\praetorian-inc__gokart__20261124-054821\\sbom\\bom.json",
+    "repo": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\praetorian-inc__gokart__20261124-054821\\repo",
+    "scanner_results": {
+      "Grype": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\praetorian-inc__gokart__20261124-054821\\scanner_results\\grype.json",
+      "OSV-Scanner": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\praetorian-inc__gokart__20261124-054821\\scanner_results\\osv.json",
+      "Trivy": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\praetorian-inc__gokart__20261124-054821\\scanner_results\\trivy.json"
+    },
+    "scanners_used": [
+      "Grype",
+      "OSV-Scanner",
+      "Trivy"
+    ]
+  },
+  "scan": {
+    "scan_id": "praetorian-inc__gokart__20261124-054821",
+    "target": "https://github.com/praetorian-inc/gokart",
+    "commit": "3d38a9ae72f7d67d5c13f83ec5669630868e409e",
+    "started_at": "2026-11-24T05:48:21+00:00",
+    "tools": {
+      "git": "git version 2.54.0.windows.1",
+      "npm": "11.13.0",
+      "cdxgen": "\u001b[1mCycloneDX Generator 12.9.3\u001b[0m",
+      "osv-scanner": "osv-scanner version: 2.7.0",
+      "grype": "0.122.1",
+      "grype_db": {
+        "schema": "v6.1.10",
+        "built": "2026-11-23T06:28:32Z",
+        "valid": true
+      },
+      "trivy": "0.76.2",
+      "trivy_db": {
+        "version": 2,
+        "updated": "2026-11-23T07:04:04.632673631Z",
+        "downloaded": "2026-11-23T10:28:38.1695664Z"
+      }
+    },
+    "scanner_status": {
+      "grype": "ok",
+      "osv": "ok",
+      "trivy": "ok"
+    }
+  },
+  "stats": {
+    "nodes": 36,
+    "edges": 9,
+    "direct": 9,
+    "transitive": 0,
+    "unresolved": 26,
+    "vulnerable_packages": 8,
+    "findings": 77,
+    "findings_by_severity": {
+      "CRITICAL": 11,
+      "HIGH": 39,
+      "MEDIUM": 23,
+      "LOW": 3,
+      "UNKNOWN": 1
+    },
+    "misconfigurations": 2,
+    "secrets": 0
+  },
+  "nodes": [
+    {
+      "id": "pkg:golang/github.com/praetorian-inc/gokart",
+      "name": "github.com/praetorian-inc/gokart",
+      "version": "",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/praetorian-inc/gokart",
+      "scope": "",
+      "dep_type": "root",
+      "path_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart"
+      ],
+      "parent_ids": [],
+      "child_ids": [
+        "pkg:golang/github.com/fatih/color@v1.12.0",
+        "pkg:golang/github.com/go-git/go-git/v5@v5.4.2",
+        "pkg:golang/github.com/google/go-cmp@v0.5.5",
+        "pkg:golang/github.com/lithammer/dedent@v1.1.0",
+        "pkg:golang/github.com/owenrumney/go-sarif@v1.0.11",
+        "pkg:golang/github.com/segmentio/fasthash@v1.0.3",
+        "pkg:golang/github.com/spf13/cobra@v1.2.1",
+        "pkg:golang/golang.org/x/tools@v0.1.12",
+        "pkg:golang/gopkg.in/yaml.v3@v3.0.0-20210107192922-496545a6307b"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/acomagu/bufpipe@v1.0.3",
+      "name": "github.com/acomagu/bufpipe",
+      "version": "v1.0.3",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/acomagu/bufpipe@v1.0.3",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/emirpasic/gods@v1.12.0",
+      "name": "github.com/emirpasic/gods",
+      "version": "v1.12.0",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/emirpasic/gods@v1.12.0",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/fatih/color@v1.12.0",
+      "name": "github.com/fatih/color",
+      "version": "v1.12.0",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/fatih/color@v1.12.0",
+      "scope": "required",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart",
+        "pkg:golang/github.com/fatih/color@v1.12.0"
+      ],
+      "parent_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/go-git/gcfg@v1.5.0",
+      "name": "github.com/go-git/gcfg",
+      "version": "v1.5.0",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/go-git/gcfg@v1.5.0",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/go-git/go-billy/v5@v5.3.1",
+      "name": "github.com/go-git/go-billy/v5",
+      "version": "v5.3.1",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/go-git/go-billy/v5@v5.3.1",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": "HIGH",
+      "vulns": [
+        {
+          "id": "CVE-2026-44973",
+          "ids": [
+            "CVE-2026-44973",
+            "GHSA-qw64-3x98-g7q2"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "5.9.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "5.9.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-44740",
+          "ids": [
+            "CVE-2026-44740",
+            "GHSA-m3xc-h892-ggx6"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "5.9.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "5.9.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pkg:golang/github.com/go-git/go-git/v5@v5.4.2",
+      "name": "github.com/go-git/go-git/v5",
+      "version": "v5.4.2",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/go-git/go-git/v5@v5.4.2",
+      "scope": "required",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart",
+        "pkg:golang/github.com/go-git/go-git/v5@v5.4.2"
+      ],
+      "parent_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart"
+      ],
+      "child_ids": [],
+      "max_sev": "CRITICAL",
+      "vulns": [
+        {
+          "id": "CVE-2023-49569",
+          "ids": [
+            "CVE-2023-49569",
+            "GHSA-449p-3h89-pw88"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "CRITICAL",
+              "fixed_versions": [
+                "5.11.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "CRITICAL",
+              "fixed_versions": [
+                "5.11.0"
+              ]
+            }
+          },
+          "severity": "CRITICAL",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2025-21613",
+          "ids": [
+            "CVE-2025-21613",
+            "GHSA-v725-9546-7q7m"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "CRITICAL",
+              "fixed_versions": [
+                "5.13.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "CRITICAL",
+              "fixed_versions": [
+                "5.13.0"
+              ]
+            }
+          },
+          "severity": "CRITICAL",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2025-21614",
+          "ids": [
+            "CVE-2025-21614",
+            "GHSA-r9px-m959-cxf4"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "5.13.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "5.13.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2023-49568",
+          "ids": [
+            "CVE-2023-49568",
+            "GHSA-mw99-9chc-xw7r"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "5.11.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "5.11.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-71556",
+          "ids": [
+            "CVE-2026-71556",
+            "GHSA-hc8v-wwc9-vgxm"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "5.19.2"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "5.19.2"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-71557",
+          "ids": [
+            "CVE-2026-71557",
+            "GHSA-qgq7-7hm3-q39j"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "5.19.2"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "5.19.2"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-45571",
+          "ids": [
+            "CVE-2026-45571",
+            "GHSA-crhj-59gh-8x96"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "5.19.1"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "5.19.1"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-41506",
+          "ids": [
+            "CVE-2026-41506",
+            "GHSA-3xc5-wrhm-f963"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "5.18.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "5.18.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-45022",
+          "ids": [
+            "CVE-2026-45022",
+            "GHSA-389r-gv7p-r3rp"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "5.19.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "5.19.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-45570",
+          "ids": [
+            "CVE-2026-45570",
+            "GHSA-m7cr-m3pv-hgrp"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "LOW",
+              "fixed_versions": [
+                "5.19.1"
+              ]
+            },
+            "Trivy": {
+              "severity": "LOW",
+              "fixed_versions": [
+                "5.19.1"
+              ]
+            }
+          },
+          "severity": "LOW",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-34165",
+          "ids": [
+            "CVE-2026-34165",
+            "GHSA-jhf3-xxhw-2wpp"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "5.17.1"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "5.17.1"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-25934",
+          "ids": [
+            "CVE-2026-25934",
+            "GHSA-37cx-329c-33x3"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "5.16.5"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "5.16.5"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-33762",
+          "ids": [
+            "CVE-2026-33762",
+            "GHSA-gm2x-2g9h-ccm8"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "LOW",
+              "fixed_versions": [
+                "5.17.1"
+              ]
+            },
+            "Trivy": {
+              "severity": "LOW",
+              "fixed_versions": [
+                "5.17.1"
+              ]
+            }
+          },
+          "severity": "LOW",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "GHSA-w5pp-99ch-qj29",
+          "ids": [
+            "GHSA-w5pp-99ch-qj29"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "5.19.1"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "5.19.1"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pkg:golang/github.com/google/go-cmp@v0.5.5",
+      "name": "github.com/google/go-cmp",
+      "version": "v0.5.5",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/google/go-cmp@v0.5.5",
+      "scope": "required",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart",
+        "pkg:golang/github.com/google/go-cmp@v0.5.5"
+      ],
+      "parent_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/imdario/mergo@v0.3.12",
+      "name": "github.com/imdario/mergo",
+      "version": "v0.3.12",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/imdario/mergo@v0.3.12",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/inconshreveable/mousetrap@v1.0.0",
+      "name": "github.com/inconshreveable/mousetrap",
+      "version": "v1.0.0",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/inconshreveable/mousetrap@v1.0.0",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/jbenet/go-context@v0.0.0-20150711004518-d14ea06fba99",
+      "name": "github.com/jbenet/go-context",
+      "version": "v0.0.0-20150711004518-d14ea06fba99",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/jbenet/go-context@v0.0.0-20150711004518-d14ea06fba99",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/kevinburke/ssh_config@v0.0.0-20201106050909-4977a11b4351",
+      "name": "github.com/kevinburke/ssh_config",
+      "version": "v0.0.0-20201106050909-4977a11b4351",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/kevinburke/ssh_config@v0.0.0-20201106050909-4977a11b4351",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/lithammer/dedent@v1.1.0",
+      "name": "github.com/lithammer/dedent",
+      "version": "v1.1.0",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/lithammer/dedent@v1.1.0",
+      "scope": "required",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart",
+        "pkg:golang/github.com/lithammer/dedent@v1.1.0"
+      ],
+      "parent_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/mattn/go-colorable@v0.1.8",
+      "name": "github.com/mattn/go-colorable",
+      "version": "v0.1.8",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/mattn/go-colorable@v0.1.8",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/mattn/go-isatty@v0.0.12",
+      "name": "github.com/mattn/go-isatty",
+      "version": "v0.0.12",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/mattn/go-isatty@v0.0.12",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/Microsoft/go-winio@v0.4.16",
+      "name": "github.com/Microsoft/go-winio",
+      "version": "v0.4.16",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/Microsoft/go-winio@v0.4.16",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/mitchellh/go-homedir@v1.1.0",
+      "name": "github.com/mitchellh/go-homedir",
+      "version": "v1.1.0",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/mitchellh/go-homedir@v1.1.0",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/owenrumney/go-sarif@v1.0.11",
+      "name": "github.com/owenrumney/go-sarif",
+      "version": "v1.0.11",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/owenrumney/go-sarif@v1.0.11",
+      "scope": "required",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart",
+        "pkg:golang/github.com/owenrumney/go-sarif@v1.0.11"
+      ],
+      "parent_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/ProtonMail/go-crypto@v0.0.0-20210428141323-04723f9f07d7",
+      "name": "github.com/ProtonMail/go-crypto",
+      "version": "v0.0.0-20210428141323-04723f9f07d7",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/ProtonMail/go-crypto@v0.0.0-20210428141323-04723f9f07d7",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/segmentio/fasthash@v1.0.3",
+      "name": "github.com/segmentio/fasthash",
+      "version": "v1.0.3",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/segmentio/fasthash@v1.0.3",
+      "scope": "required",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart",
+        "pkg:golang/github.com/segmentio/fasthash@v1.0.3"
+      ],
+      "parent_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/sergi/go-diff@v1.1.0",
+      "name": "github.com/sergi/go-diff",
+      "version": "v1.1.0",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/sergi/go-diff@v1.1.0",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/spf13/cobra@v1.2.1",
+      "name": "github.com/spf13/cobra",
+      "version": "v1.2.1",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/spf13/cobra@v1.2.1",
+      "scope": "required",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart",
+        "pkg:golang/github.com/spf13/cobra@v1.2.1"
+      ],
+      "parent_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/spf13/pflag@v1.0.5",
+      "name": "github.com/spf13/pflag",
+      "version": "v1.0.5",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/spf13/pflag@v1.0.5",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/xanzy/ssh-agent@v0.3.0",
+      "name": "github.com/xanzy/ssh-agent",
+      "version": "v0.3.0",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/xanzy/ssh-agent@v0.3.0",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/github.com/zclconf/go-cty@v1.8.4",
+      "name": "github.com/zclconf/go-cty",
+      "version": "v1.8.4",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/github.com/zclconf/go-cty@v1.8.4",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/golang.org/x/crypto@v0.0.0-20210921155107-089bfa567519",
+      "name": "golang.org/x/crypto",
+      "version": "v0.0.0-20210921155107-089bfa567519",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/golang.org/x/crypto@v0.0.0-20210921155107-089bfa567519",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": "CRITICAL",
+      "vulns": [
+        {
+          "id": "CVE-2023-48795",
+          "ids": [
+            "CVE-2023-48795",
+            "GHSA-45x7-px36-x8w8",
+            "GO-2023-2402"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.0.0-20231218163308-9d2ee975ef9f"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.17.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-42508",
+          "ids": [
+            "CVE-2026-42508",
+            "GHSA-5cgq-3rg8-m6cv",
+            "GO-2026-5021"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "CRITICAL",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            }
+          },
+          "severity": "CRITICAL",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2024-45337",
+          "ids": [
+            "CVE-2024-45337",
+            "GHSA-v778-237x-gjrc",
+            "GO-2024-3321"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "CRITICAL",
+              "fixed_versions": [
+                "0.31.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.31.0"
+              ]
+            }
+          },
+          "severity": "CRITICAL",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2022-27191",
+          "ids": [
+            "CVE-2022-27191",
+            "GHSA-8c26-wmh5-6g9v",
+            "GO-2021-0356"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.0.0-20220314234659-1baeb1ce4c0b"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.0.0-20220314234659-1baeb1ce4c0b"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2021-43565",
+          "ids": [
+            "CVE-2021-43565",
+            "GHSA-gwc9-m7rh-j2ww",
+            "GO-2022-0968"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.0.0-20211202192323-5770296d904e"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.0.0-20211202192323-5770296d904e"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2025-22869",
+          "ids": [
+            "CVE-2025-22869",
+            "GHSA-hcg3-q754-cr77",
+            "GO-2025-3487"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.35.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.35.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-39832",
+          "ids": [
+            "CVE-2026-39832",
+            "GHSA-f5wc-c3c7-36mc",
+            "GO-2026-5006"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "CRITICAL",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            }
+          },
+          "severity": "CRITICAL",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-39830",
+          "ids": [
+            "CVE-2026-39830",
+            "GHSA-vgwf-h737-ff37",
+            "GO-2026-5017"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "CRITICAL",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            }
+          },
+          "severity": "CRITICAL",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-39834",
+          "ids": [
+            "CVE-2026-39834",
+            "GHSA-rm3j-f69w-wqmq",
+            "GO-2026-5020"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "CRITICAL",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            }
+          },
+          "severity": "CRITICAL",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-46595",
+          "ids": [
+            "CVE-2026-46595",
+            "GHSA-x527-x647-q7gg",
+            "GO-2026-5023"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "CRITICAL",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            }
+          },
+          "severity": "CRITICAL",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2025-47913",
+          "ids": [
+            "CVE-2025-47913",
+            "GO-2025-4116"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.43.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.43.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2022-30636",
+          "ids": [
+            "CVE-2022-30636",
+            "GO-2024-2961"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.0.0-20220525230936-793ad666bf5e"
+              ]
+            },
+            "Trivy": {
+              "severity": "UNKNOWN",
+              "fixed_versions": [
+                "0.0.0-20220525230936-793ad666bf5e"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-39831",
+          "ids": [
+            "CVE-2026-39831",
+            "GHSA-89gr-r52h-f8rx",
+            "GO-2026-5019"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "CRITICAL",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            }
+          },
+          "severity": "CRITICAL",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-39833",
+          "ids": [
+            "CVE-2026-39833",
+            "GHSA-jppx-rxg9-jmrx",
+            "GO-2026-5005"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "CRITICAL",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            }
+          },
+          "severity": "CRITICAL",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-56855",
+          "ids": [
+            "CVE-2026-56855",
+            "GO-2026-6355"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.56.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.56.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-46597",
+          "ids": [
+            "CVE-2026-46597",
+            "GHSA-q4h4-gmj2-qvw2",
+            "GO-2026-5013"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-39829",
+          "ids": [
+            "CVE-2026-39829",
+            "GHSA-w879-237q-wc7r",
+            "GO-2026-5018"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-56854",
+          "ids": [
+            "CVE-2026-56854",
+            "GO-2026-6303"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.55.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.55.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-78662",
+          "ids": [
+            "CVE-2026-78662",
+            "GO-2026-6354"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.56.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.56.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2025-58181",
+          "ids": [
+            "CVE-2025-58181",
+            "GHSA-j5w8-q4qc-rx2x",
+            "GO-2025-4134"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.45.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.45.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2025-47914",
+          "ids": [
+            "CVE-2025-47914",
+            "GHSA-f6x5-jh6r-wrfv",
+            "GO-2025-4135"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.45.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.45.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-39835",
+          "ids": [
+            "CVE-2026-39835",
+            "GHSA-78mq-xcr3-xm33",
+            "GO-2026-5015"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-46598",
+          "ids": [
+            "CVE-2026-46598",
+            "GHSA-9m57-25v3-79x9",
+            "GO-2026-5033"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-39828",
+          "ids": [
+            "CVE-2026-39828",
+            "GHSA-45gg-vh54-h5m9",
+            "GO-2026-5014"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-39827",
+          "ids": [
+            "CVE-2026-39827",
+            "GHSA-qpw4-5x99-6vjp",
+            "GO-2026-5016"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.52.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "GO-2026-5932",
+          "ids": [
+            "GO-2026-5932"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "UNKNOWN",
+              "fixed_versions": [
+                "0.58.1-0.20261009181718-2f1f834330b2"
+              ]
+            },
+            "Trivy": {
+              "severity": "UNKNOWN",
+              "fixed_versions": [
+                "0.58.1-0.20261009181718-2f1f834330b2"
+              ]
+            }
+          },
+          "severity": "UNKNOWN",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pkg:golang/golang.org/x/mod@v0.6.0-dev.0.20220419223038-86c51ed26bb4",
+      "name": "golang.org/x/mod",
+      "version": "v0.6.0-dev.0.20220419223038-86c51ed26bb4",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/golang.org/x/mod@v0.6.0-dev.0.20220419223038-86c51ed26bb4",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": "HIGH",
+      "vulns": [
+        {
+          "id": "CVE-2026-56864",
+          "ids": [
+            "CVE-2026-56864",
+            "GO-2026-6180"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.40.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.40.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-56865",
+          "ids": [
+            "CVE-2026-56865",
+            "GO-2026-6179"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.40.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.40.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pkg:golang/golang.org/x/net@v0.0.0-20220722155237-a158d28d115b",
+      "name": "golang.org/x/net",
+      "version": "v0.0.0-20220722155237-a158d28d115b",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/golang.org/x/net@v0.0.0-20220722155237-a158d28d115b",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": "CRITICAL",
+      "vulns": [
+        {
+          "id": "CVE-2023-44487",
+          "ids": [
+            "CVE-2023-44487",
+            "GHSA-qppj-fm5r-hxr3"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.17.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype"
+          ]
+        },
+        {
+          "id": "CVE-2023-45288",
+          "ids": [
+            "CVE-2023-45288",
+            "GHSA-4v7x-pqxf-cx7m",
+            "GO-2024-2687"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.23.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.23.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2022-41723",
+          "ids": [
+            "CVE-2022-41723",
+            "GHSA-vvpx-j8f3-3w6h",
+            "GO-2023-1571"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.7.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.7.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2022-41717",
+          "ids": [
+            "CVE-2022-41717",
+            "GHSA-xrjj-mj9h-534m",
+            "GO-2022-1144"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.4.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.4.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2023-39325",
+          "ids": [
+            "CVE-2023-39325",
+            "GHSA-4374-p667-p6c8",
+            "GO-2023-2102"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.17.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.17.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2022-27664",
+          "ids": [
+            "CVE-2022-27664",
+            "GHSA-69cg-p879-7622",
+            "GO-2022-0969"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.0.0-20220906165146-f3363e06e74c"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.0.0-20220906165146-f3363e06e74c"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-39821",
+          "ids": [
+            "CVE-2026-39821",
+            "GO-2026-5026"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.55.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.55.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2022-41721",
+          "ids": [
+            "CVE-2022-41721",
+            "GHSA-fxg5-wq6x-vr4w",
+            "GO-2023-1495"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.1.1-0.20221104162952-702349b0e862"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.1.1-0.20221104162952-702349b0e862"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-78663",
+          "ids": [
+            "CVE-2026-78663",
+            "GO-2026-6612"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "CRITICAL",
+              "fixed_versions": [
+                "0.60.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.60.0"
+              ]
+            }
+          },
+          "severity": "CRITICAL",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-78659",
+          "ids": [
+            "CVE-2026-78659",
+            "GO-2026-6603"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.60.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.60.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-33814",
+          "ids": [
+            "CVE-2026-33814",
+            "GO-2026-4918"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.53.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.53.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-78669",
+          "ids": [
+            "CVE-2026-78669",
+            "GO-2026-6611"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.60.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.60.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2024-45338",
+          "ids": [
+            "CVE-2024-45338",
+            "GHSA-w32m-9786-jp63",
+            "GO-2024-3333"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.33.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.33.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-97032",
+          "ids": [
+            "CVE-2026-97032",
+            "GO-2026-6617"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.60.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.60.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2023-3978",
+          "ids": [
+            "CVE-2023-3978",
+            "GHSA-2wrh-6pvc-2jm9",
+            "GO-2023-1988"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.13.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.13.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-46600",
+          "ids": [
+            "CVE-2026-46600",
+            "GO-2026-5942"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.56.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.56.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-78660",
+          "ids": [
+            "CVE-2026-78660",
+            "GO-2026-6610"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.60.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.60.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-78661",
+          "ids": [
+            "CVE-2026-78661",
+            "GO-2026-6860"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.62.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.62.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2025-47911",
+          "ids": [
+            "CVE-2025-47911",
+            "GO-2026-4440"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.45.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.45.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2025-22872",
+          "ids": [
+            "CVE-2025-22872",
+            "GHSA-vvgc-356p-c3xw",
+            "GO-2025-3595"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.38.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.38.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2025-58190",
+          "ids": [
+            "CVE-2025-58190",
+            "GO-2026-4441"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.45.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.45.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2025-22870",
+          "ids": [
+            "CVE-2025-22870",
+            "GHSA-qxp5-gwg8-xv66",
+            "GO-2025-3503"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.36.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.36.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-25680",
+          "ids": [
+            "CVE-2026-25680",
+            "GHSA-5cv4-jp36-h3mw",
+            "GO-2026-5028"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.55.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.55.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-97045",
+          "ids": [
+            "CVE-2026-97045",
+            "GO-2026-6866"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.62.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.62.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-25681",
+          "ids": [
+            "CVE-2026-25681",
+            "GO-2026-5029"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.55.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.55.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-27136",
+          "ids": [
+            "CVE-2026-27136",
+            "GO-2026-5030"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.55.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.55.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-42506",
+          "ids": [
+            "CVE-2026-42506",
+            "GO-2026-5025"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.55.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.55.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-42502",
+          "ids": [
+            "CVE-2026-42502",
+            "GO-2026-5027"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.55.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "0.55.0"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pkg:golang/golang.org/x/sys@v0.0.0-20220722155257-8c9f86f7a55f",
+      "name": "golang.org/x/sys",
+      "version": "v0.0.0-20220722155257-8c9f86f7a55f",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/golang.org/x/sys@v0.0.0-20220722155257-8c9f86f7a55f",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": "LOW",
+      "vulns": [
+        {
+          "id": "CVE-2026-39824",
+          "ids": [
+            "CVE-2026-39824",
+            "GO-2026-5024"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "LOW",
+              "fixed_versions": [
+                "0.44.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "UNKNOWN",
+              "fixed_versions": [
+                "0.44.0"
+              ]
+            }
+          },
+          "severity": "LOW",
+          "severity_disagreement": true,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pkg:golang/golang.org/x/text@v0.3.7",
+      "name": "golang.org/x/text",
+      "version": "v0.3.7",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/golang.org/x/text@v0.3.7",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": "HIGH",
+      "vulns": [
+        {
+          "id": "CVE-2022-32149",
+          "ids": [
+            "CVE-2022-32149",
+            "GHSA-69ch-w2m2-3vjp",
+            "GO-2022-1059"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.3.8"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.3.8"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-56852",
+          "ids": [
+            "CVE-2026-56852",
+            "GO-2026-5970"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.39.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.39.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-56851",
+          "ids": [
+            "CVE-2026-56851",
+            "GO-2026-6629"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.41.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "0.41.0"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pkg:golang/golang.org/x/tools@v0.1.12",
+      "name": "golang.org/x/tools",
+      "version": "v0.1.12",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/golang.org/x/tools@v0.1.12",
+      "scope": "required",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart",
+        "pkg:golang/golang.org/x/tools@v0.1.12"
+      ],
+      "parent_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/gopkg.in/warnings.v0@v0.1.2",
+      "name": "gopkg.in/warnings.v0",
+      "version": "v0.1.2",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/gopkg.in/warnings.v0@v0.1.2",
+      "scope": "optional",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:golang/gopkg.in/yaml.v3@v3.0.0-20210107192922-496545a6307b",
+      "name": "gopkg.in/yaml.v3",
+      "version": "v3.0.0-20210107192922-496545a6307b",
+      "ecosystem": "golang",
+      "purl": "pkg:golang/gopkg.in/yaml.v3@v3.0.0-20210107192922-496545a6307b",
+      "scope": "required",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart",
+        "pkg:golang/gopkg.in/yaml.v3@v3.0.0-20210107192922-496545a6307b"
+      ],
+      "parent_ids": [
+        "pkg:golang/github.com/praetorian-inc/gokart"
+      ],
+      "child_ids": [],
+      "max_sev": "HIGH",
+      "vulns": [
+        {
+          "id": "CVE-2022-28948",
+          "ids": [
+            "CVE-2022-28948",
+            "GHSA-hp87-p4gw-j4gq"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "3.0.1"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "3.0.1"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "Trivy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pkg:github/actions/checkout@v2",
+      "name": "actions/checkout",
+      "version": "v2",
+      "ecosystem": "github",
+      "purl": "pkg:github/actions/checkout@v2",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:github/actions/setup-go@v2",
+      "name": "actions/setup-go",
+      "version": "v2",
+      "ecosystem": "github",
+      "purl": "pkg:github/actions/setup-go@v2",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:github/goreleaser/goreleaser-action@v2",
+      "name": "goreleaser/goreleaser-action",
+      "version": "v2",
+      "ecosystem": "github",
+      "purl": "pkg:github/goreleaser/goreleaser-action@v2",
+      "scope": "required",
+      "dep_type": "unresolved",
+      "path_ids": [],
+      "parent_ids": [],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "pkg:golang/github.com/praetorian-inc/gokart",
+      "to": "pkg:golang/github.com/fatih/color@v1.12.0"
+    },
+    {
+      "from": "pkg:golang/github.com/praetorian-inc/gokart",
+      "to": "pkg:golang/github.com/go-git/go-git/v5@v5.4.2"
+    },
+    {
+      "from": "pkg:golang/github.com/praetorian-inc/gokart",
+      "to": "pkg:golang/github.com/google/go-cmp@v0.5.5"
+    },
+    {
+      "from": "pkg:golang/github.com/praetorian-inc/gokart",
+      "to": "pkg:golang/github.com/lithammer/dedent@v1.1.0"
+    },
+    {
+      "from": "pkg:golang/github.com/praetorian-inc/gokart",
+      "to": "pkg:golang/github.com/owenrumney/go-sarif@v1.0.11"
+    },
+    {
+      "from": "pkg:golang/github.com/praetorian-inc/gokart",
+      "to": "pkg:golang/github.com/segmentio/fasthash@v1.0.3"
+    },
+    {
+      "from": "pkg:golang/github.com/praetorian-inc/gokart",
+      "to": "pkg:golang/github.com/spf13/cobra@v1.2.1"
+    },
+    {
+      "from": "pkg:golang/github.com/praetorian-inc/gokart",
+      "to": "pkg:golang/golang.org/x/tools@v0.1.12"
+    },
+    {
+      "from": "pkg:golang/github.com/praetorian-inc/gokart",
+      "to": "pkg:golang/gopkg.in/yaml.v3@v3.0.0-20210107192922-496545a6307b"
+    }
+  ],
+  "unresolved": [
+    "pkg:golang/github.com/acomagu/bufpipe@v1.0.3",
+    "pkg:golang/github.com/emirpasic/gods@v1.12.0",
+    "pkg:golang/github.com/go-git/gcfg@v1.5.0",
+    "pkg:golang/github.com/go-git/go-billy/v5@v5.3.1",
+    "pkg:golang/github.com/imdario/mergo@v0.3.12",
+    "pkg:golang/github.com/inconshreveable/mousetrap@v1.0.0",
+    "pkg:golang/github.com/jbenet/go-context@v0.0.0-20150711004518-d14ea06fba99",
+    "pkg:golang/github.com/kevinburke/ssh_config@v0.0.0-20201106050909-4977a11b4351",
+    "pkg:golang/github.com/mattn/go-colorable@v0.1.8",
+    "pkg:golang/github.com/mattn/go-isatty@v0.0.12",
+    "pkg:golang/github.com/Microsoft/go-winio@v0.4.16",
+    "pkg:golang/github.com/mitchellh/go-homedir@v1.1.0",
+    "pkg:golang/github.com/ProtonMail/go-crypto@v0.0.0-20210428141323-04723f9f07d7",
+    "pkg:golang/github.com/sergi/go-diff@v1.1.0",
+    "pkg:golang/github.com/spf13/pflag@v1.0.5",
+    "pkg:golang/github.com/xanzy/ssh-agent@v0.3.0",
+    "pkg:golang/github.com/zclconf/go-cty@v1.8.4",
+    "pkg:golang/golang.org/x/crypto@v0.0.0-20210921155107-089bfa567519",
+    "pkg:golang/golang.org/x/mod@v0.6.0-dev.0.20220419223038-86c51ed26bb4",
+    "pkg:golang/golang.org/x/net@v0.0.0-20220722155237-a158d28d115b",
+    "pkg:golang/golang.org/x/sys@v0.0.0-20220722155257-8c9f86f7a55f",
+    "pkg:golang/golang.org/x/text@v0.3.7",
+    "pkg:golang/gopkg.in/warnings.v0@v0.1.2",
+    "pkg:github/actions/checkout@v2",
+    "pkg:github/actions/setup-go@v2",
+    "pkg:github/goreleaser/goreleaser-action@v2"
+  ],
+  "repo_findings": {
+    "misconfigurations": [
+      {
+        "id": "DS-0002",
+        "avd_id": null,
+        "title": "Image user should not be 'root'",
+        "severity": "HIGH",
+        "type": "dockerfile",
+        "file": "Dockerfile",
+        "start_line": null,
+        "end_line": null,
+        "message": "Specify at least 1 USER command in Dockerfile with non-root user as argument",
+        "resolution": "Add 'USER <non root user name>' line to the Dockerfile",
+        "reference": "https://avd.aquasec.com/misconfig/ds-0002",
+        "source_tool": "Trivy"
+      },
+      {
+        "id": "DS-0026",
+        "avd_id": null,
+        "title": "No HEALTHCHECK defined",
+        "severity": "LOW",
+        "type": "dockerfile",
+        "file": "Dockerfile",
+        "start_line": null,
+        "end_line": null,
+        "message": "Add HEALTHCHECK instruction in your Dockerfile",
+        "resolution": "Add HEALTHCHECK instruction in Dockerfile",
+        "reference": "https://avd.aquasec.com/misconfig/ds-0026",
+        "source_tool": "Trivy"
+      }
+    ],
+    "secrets": []
+  }
+}

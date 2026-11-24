@@ -1,0 +1,11 @@
+go list -deps command has failed for C:\Users\jayan\OneDrive\Desktop\Software-Supply-Chain-Guardian_Team-31-main\Software-Supply-Chain-Guardian_Team-31-main\data\scans\praetorian-inc__gokart__20261124-054821\repo
+1. Check if the correct version of golang is installed. Try building the application using go build or make command to troubleshoot.
+2. If the application uses private go modules, ensure the environment variable GOPRIVATE is set with the comma-separated repo names.
+Ensure $HOME/.netrc file contains a valid username and password for the private repos.
+3. Alternatively, consider generating a post-build SBOM from the built binary using blint. Use the official container image and invoke cdxgen with the arguments `-t binary --lifecycle post-build`.
+go list -deps command has failed for C:\Users\jayan\OneDrive\Desktop\Software-Supply-Chain-Guardian_Team-31-main\Software-Supply-Chain-Guardian_Team-31-main\data\scans\praetorian-inc__gokart__20261124-054821\repo\test\testdata\vulnerablemodule
+1. Check if the correct version of golang is installed. Try building the application using go build or make command to troubleshoot.
+2. If the application uses private go modules, ensure the environment variable GOPRIVATE is set with the comma-separated repo names.
+Ensure $HOME/.netrc file contains a valid username and password for the private repos.
+3. Alternatively, consider generating a post-build SBOM from the built binary using blint. Use the official container image and invoke cdxgen with the arguments `-t binary --lifecycle post-build`.
+Manually parsing go.mod files. The resultant BOM would be incomplete.

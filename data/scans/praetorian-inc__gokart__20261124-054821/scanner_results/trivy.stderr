@@ -1,0 +1,10 @@
+2026-11-24T11:18:35+05:30	INFO	[vuln] Vulnerability scanning is enabled
+2026-11-24T11:18:35+05:30	INFO	[misconfig] Misconfiguration scanning is enabled
+2026-11-24T11:18:35+05:30	INFO	[checks-client] No downloadable checks were loaded as --skip-check-update is enabled, loading from existing cache...
+2026-11-24T11:18:35+05:30	INFO	[secret] Secret scanning is enabled
+2026-11-24T11:18:35+05:30	INFO	[secret] If your scanning is slow, please try '--scanners vuln,misconfig' to disable secret scanning
+2026-11-24T11:18:35+05:30	INFO	[secret] Please see https://trivy.dev/docs/v0.76/guide/scanner/secret#recommendation for faster secret detection
+2026-11-24T11:18:36+05:30	INFO	Number of language-specific files	num=2
+2026-11-24T11:18:36+05:30	INFO	[gomod] Detecting vulnerabilities...
+2026-11-24T11:18:36+05:30	INFO	Detected config files	num=1
+2026-11-24T11:18:36+05:30	WARN	Using severities from other vendors for some vulnerabilities. Read https://trivy.dev/docs/v0.76/guide/scanner/vulnerability#severity-selection for details.

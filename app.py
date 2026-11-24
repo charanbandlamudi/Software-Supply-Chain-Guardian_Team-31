@@ -118,14 +118,14 @@ tab_graph, tab_repo, tab_steps, tab_files = st.tabs(
 with tab_graph:
     html = current["artifacts"].get("graph_html")
     if html and Path(html).exists():
-        components.html(Path(html).read_text(), height=860, scrolling=False)
+        components.html(Path(html).read_text(encoding="utf-8"), height=860, scrolling=False)
         st.caption("Click a node to focus its path and dependencies · `/` to search · `Esc` to clear.")
     else:
         st.error("No graph was produced for this scan.")
 
 with tab_repo:
     gj = current["artifacts"].get("graph_json")
-    rf = json.loads(Path(gj).read_text()).get("repo_findings") if gj and Path(gj).exists() else None
+    rf = json.loads(Path(gj).read_text(encoding="utf-8")).get("repo_findings") if gj and Path(gj).exists() else None
     if current["steps"].get("trivy", {}).get("status") != "ok" or rf is None:
         st.info("Trivy did not run successfully for this scan, so there are no misconfiguration or "
                 "secret results. This is not evidence that there are none.")

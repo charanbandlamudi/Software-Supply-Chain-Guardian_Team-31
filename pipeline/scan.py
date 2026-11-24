@@ -47,24 +47,48 @@ STEPS = [
 
 def safe_env(**extra: str) -> dict:
     """Minimal environment for tools that read untrusted input: no API keys or tokens."""
-    path = os.pathsep.join([str(Path.home() / ".local/bin"), "/opt/homebrew/bin",
-                            "/usr/local/bin", os.environ.get("PATH", "")])
+    extra_paths = [
+        str(Path.home() / ".local/bin"), "/opt/homebrew/bin", "/usr/local/bin",
+        str(Path(os.environ.get("APPDATA", "")) / "npm"),
+        str(Path(os.environ.get("LOCALAPPDATA", "")) / "Microsoft" / "WinGet" / "Packages" / "Anchore.Grype_Microsoft.Winget.Source_8wekyb3d8bbwe"),
+        str(Path(os.environ.get("LOCALAPPDATA", "")) / "Microsoft" / "WinGet" / "Packages" / "Google.OSVScanner_Microsoft.Winget.Source_8wekyb3d8bbwe"),
+        str(Path(os.environ.get("LOCALAPPDATA", "")) / "Microsoft" / "WinGet" / "Packages" / "AquaSecurity.Trivy_Microsoft.Winget.Source_8wekyb3d8bbwe"),
+        str(Path(os.environ.get("LOCALAPPDATA", "")) / "Microsoft" / "WinGet" / "Links"),
+    ]
+    path = os.pathsep.join(extra_paths + [os.environ.get("PATH", "")])
     env = {"HOME": str(Path.home()), "PATH": path, "LANG": "en_US.UTF-8"}
+    for k in ("SYSTEMROOT", "SYSTEMDRIVE", "USERPROFILE", "LOCALAPPDATA", "APPDATA", "TEMP", "TMP", "PATHEXT", "COMSPEC"):
+        if k in os.environ:
+            env[k] = os.environ[k]
     env.update(extra)
     return env
+
+
+def resolve_cmd(cmd: list[str], env: dict) -> list[str]:
+    if not cmd:
+        return cmd
+    prog = cmd[0]
+    resolved = shutil.which(prog, path=env.get("PATH"))
+    if resolved:
+        return [resolved] + cmd[1:]
+    return cmd
 
 
 def run(cmd: list[str], *, cwd: Path | None = None, timeout: int = 600, env: dict | None = None,
         stdout: Path | None = None, stderr: Path | None = None) -> int:
     """Run a command (argument list, never a shell). Output goes to files, not logs."""
+    actual_env = env or safe_env()
+    actual_cmd = resolve_cmd(cmd, actual_env)
     with open(stdout or os.devnull, "wb") as out, open(stderr or os.devnull, "wb") as err:
-        return subprocess.run(cmd, cwd=cwd, env=env or safe_env(), stdout=out, stderr=err,
+        return subprocess.run(actual_cmd, cwd=cwd, env=actual_env, stdout=out, stderr=err,
                               timeout=timeout, stdin=subprocess.DEVNULL).returncode
 
 
 def first_line(cmd: list[str]) -> str:
     try:
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=30, env=safe_env())
+        actual_env = safe_env()
+        actual_cmd = resolve_cmd(cmd, actual_env)
+        r = subprocess.run(actual_cmd, capture_output=True, text=True, timeout=30, env=actual_env)
         return (r.stdout or r.stderr).strip().splitlines()[0]
     except Exception as e:  # tool missing or broken: record it, don't crash
         return f"unavailable ({type(e).__name__})"
@@ -74,19 +98,22 @@ def tool_versions() -> dict:
     v = {"git": first_line(["git", "--version"]), "npm": first_line(["npm", "--version"]),
          "cdxgen": first_line(["cdxgen", "--version"]),
          "osv-scanner": first_line(["osv-scanner", "--version"])}
+    actual_env = safe_env()
     try:
-        g = json.loads(subprocess.run(["grype", "version", "-o", "json"], capture_output=True,
-                                      text=True, timeout=30, env=safe_env()).stdout)
+        grype_bin = resolve_cmd(["grype"], actual_env)[0]
+        g = json.loads(subprocess.run([grype_bin, "version", "-o", "json"], capture_output=True,
+                                      text=True, timeout=30, env=actual_env).stdout)
         v["grype"] = g.get("version") or g.get("gitDescription")
-        db = json.loads(subprocess.run(["grype", "db", "status", "-o", "json"], capture_output=True,
-                                       text=True, timeout=30, env=safe_env()).stdout)
+        db = json.loads(subprocess.run([grype_bin, "db", "status", "-o", "json"], capture_output=True,
+                                       text=True, timeout=30, env=actual_env).stdout)
         v["grype_db"] = {"schema": db.get("schemaVersion"), "built": db.get("built"),
                          "valid": db.get("valid", db.get("status") == "valid")}
     except Exception as e:
         v["grype"] = f"unavailable ({type(e).__name__})"
     try:
-        t = json.loads(subprocess.run(["trivy", "version", "--format", "json"], capture_output=True,
-                                      text=True, timeout=30, env=safe_env()).stdout)
+        trivy_bin = resolve_cmd(["trivy"], actual_env)[0]
+        t = json.loads(subprocess.run([trivy_bin, "version", "--format", "json"], capture_output=True,
+                                      text=True, timeout=30, env=actual_env).stdout)
         v["trivy"] = t.get("Version")
         db = t.get("VulnerabilityDB") or {}
         v["trivy_db"] = {"version": db.get("Version"), "updated": db.get("UpdatedAt"),
@@ -150,7 +177,7 @@ def load_scan(scan_id: str) -> dict | None:
     if not f.exists():
         return None
     try:
-        m = json.loads(f.read_text())
+        m = json.loads(f.read_text(encoding="utf-8"))
     except json.JSONDecodeError:  # being written right now
         return None
     if m.get("status") == "running" and not is_active(scan_id):
@@ -181,7 +208,7 @@ def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) ->
 
     def save() -> None:
         tmp = scan_dir / "scan.json.tmp"  # atomic write: readers never see half a file
-        tmp.write_text(json.dumps(meta, indent=2))
+        tmp.write_text(json.dumps(meta, indent=2), encoding="utf-8")
         tmp.replace(scan_dir / "scan.json")
         on_update(meta)
 
@@ -207,7 +234,7 @@ def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) ->
     t0 = time.monotonic(); step("clone", "running")
     try:
         if kind == "github":
-            rc = run(["git", "-c", "core.hooksPath=/dev/null", "clone", "--depth", "1", "--no-tags",
+            rc = run(["git", "-c", "core.hooksPath=/dev/null", "-c", "credential.helper=", "-c", "core.longpaths=true", "clone", "--depth", "1", "--no-tags",
                       f"https://github.com/{owner}/{name}.git", str(repo)],
                      timeout=600, env=safe_env(GIT_TERMINAL_PROMPT="0"), stderr=res / "git.stderr")
             if rc != 0:
@@ -248,7 +275,7 @@ def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) ->
                  stderr=res / "cdxgen.stderr")
     except subprocess.TimeoutExpired:
         return fail("sbom", "cdxgen timed out after 900s", t0)
-    n_comp = len(json.loads(bom.read_text()).get("components") or []) if bom.exists() else 0
+    n_comp = len(json.loads(bom.read_text(encoding="utf-8")).get("components") or []) if bom.exists() else 0
     if rc != 0 or not bom.exists():
         return fail("sbom", f"cdxgen exited {rc}, no SBOM written", t0)
     if n_comp == 0 and not (repo / "package.json").exists():
@@ -269,7 +296,7 @@ def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) ->
         if rc != 0 or not grype_out.exists():
             grype_out.unlink(missing_ok=True)
             return "failed", f"grype exited {rc} (see grype.stderr; DB may be missing or too old)"
-        return "ok", f"{len(json.loads(grype_out.read_text()).get('matches', []))} matches"
+        return "ok", f"{len(json.loads(grype_out.read_text(encoding='utf-8')).get('matches', []))} matches"
 
     def do_osv() -> tuple[str, str]:
         # --no-ignore: repos often .gitignore their lockfile (Juice Shop does), which would
@@ -283,7 +310,7 @@ def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) ->
         if rc not in (0, 1):
             osv_out.unlink(missing_ok=True)
             return "failed", f"osv-scanner exited {rc} (see osv.stderr)"
-        d = json.loads(osv_out.read_text())
+        d = json.loads(osv_out.read_text(encoding="utf-8"))
         n = sum(len(p.get("vulnerabilities", [])) for r in d.get("results", []) for p in r.get("packages", []))
         return "ok", f"{n} vulnerabilities"
 
@@ -297,7 +324,7 @@ def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) ->
         if rc != 0 or not trivy_out.exists():
             trivy_out.unlink(missing_ok=True)
             return "failed", f"trivy exited {rc} (see trivy.stderr; DB may not be downloaded)"
-        results = json.loads(trivy_out.read_text()).get("Results") or []
+        results = json.loads(trivy_out.read_text(encoding="utf-8")).get("Results") or []
         nv = sum(len(r.get("Vulnerabilities") or []) for r in results)
         nm = sum(1 for r in results for m in (r.get("Misconfigurations") or []) if m.get("Status", "FAIL") == "FAIL")
         ns = sum(len(r.get("Secrets") or []) for r in results)

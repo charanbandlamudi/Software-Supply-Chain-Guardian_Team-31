@@ -1,0 +1,369 @@
+{
+  "SchemaVersion": 2,
+  "Trivy": {
+    "Version": "0.76.2"
+  },
+  "ReportID": "01a20c1c-fc48-7a20-91dc-5135ca0fe10c",
+  "CreatedAt": "2026-11-24T11:22:35.9126638+05:30",
+  "ArtifactID": "sha256:7289614ca45d426521edd462eccfb53033d365e8fa19e8211d1af9b4b327e4d3",
+  "ArtifactName": "C:/Users/jayan/OneDrive/Desktop/Software-Supply-Chain-Guardian_Team-31-main/Software-Supply-Chain-Guardian_Team-31-main/data/scans/digininja__DVWA__20261124-055213/repo",
+  "ArtifactType": "repository",
+  "Metadata": {
+    "RepoURL": "https://github.com/digininja/DVWA.git",
+    "Branch": "master",
+    "Commit": "502ac150ce37c20ca6e04cab7c5ca959f315f2d0",
+    "CommitMsg": "Merge pull request #782 from digininja/dependabot/composer/vulnerabilities/api/symfony/yaml-8.1.11\n\nBump symfony/yaml from 8.1.2 to 8.1.11 in /vulnerabilities/api",
+    "Author": "Robin Wood \u003crobin@digi.ninja\u003e",
+    "Committer": "GitHub \u003cnoreply@github.com\u003e"
+  },
+  "Results": [
+    {
+      "Target": "vulnerabilities/api/composer.lock",
+      "Class": "lang-pkgs",
+      "Type": "composer",
+      "Packages": [
+        {
+          "ID": "zircote/swagger-php@4.11.1",
+          "Name": "zircote/swagger-php",
+          "Identifier": {
+            "PURL": "pkg:composer/zircote/swagger-php@4.11.1",
+            "UID": "1deb7ba36f870891"
+          },
+          "Version": "4.11.1",
+          "Licenses": [
+            "Apache-2.0"
+          ],
+          "Relationship": "direct",
+          "DependsOn": [
+            "psr/log@3.0.2",
+            "symfony/deprecation-contracts@v3.8.1",
+            "symfony/finder@v7.2.2",
+            "symfony/yaml@v8.1.11"
+          ],
+          "Locations": [
+            {
+              "StartLine": 353,
+              "EndLine": 433
+            }
+          ],
+          "AnalyzedBy": "composer"
+        },
+        {
+          "ID": "psr/log@3.0.2",
+          "Name": "psr/log",
+          "Identifier": {
+            "PURL": "pkg:composer/psr/log@3.0.2",
+            "UID": "16646a3679e907b6"
+          },
+          "Version": "3.0.2",
+          "Licenses": [
+            "MIT"
+          ],
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 9,
+              "EndLine": 58
+            }
+          ],
+          "AnalyzedBy": "composer"
+        },
+        {
+          "ID": "symfony/deprecation-contracts@v3.8.1",
+          "Name": "symfony/deprecation-contracts",
+          "Identifier": {
+            "PURL": "pkg:composer/symfony/deprecation-contracts@v3.8.1",
+            "UID": "42635584f31dc463"
+          },
+          "Version": "v3.8.1",
+          "Licenses": [
+            "MIT"
+          ],
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 59,
+              "EndLine": 129
+            }
+          ],
+          "AnalyzedBy": "composer"
+        },
+        {
+          "ID": "symfony/finder@v7.2.2",
+          "Name": "symfony/finder",
+          "Identifier": {
+            "PURL": "pkg:composer/symfony/finder@v7.2.2",
+            "UID": "a2f47b638135e1d4"
+          },
+          "Version": "v7.2.2",
+          "Licenses": [
+            "MIT"
+          ],
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 130,
+              "EndLine": 193
+            }
+          ],
+          "AnalyzedBy": "composer"
+        },
+        {
+          "ID": "symfony/polyfill-ctype@v1.37.0",
+          "Name": "symfony/polyfill-ctype",
+          "Identifier": {
+            "PURL": "pkg:composer/symfony/polyfill-ctype@v1.37.0",
+            "UID": "72107b0371da12c8"
+          },
+          "Version": "v1.37.0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Indirect": true,
+          "Relationship": "indirect",
+          "Locations": [
+            {
+              "StartLine": 194,
+              "EndLine": 276
+            }
+          ],
+          "AnalyzedBy": "composer"
+        },
+        {
+          "ID": "symfony/yaml@v8.1.11",
+          "Name": "symfony/yaml",
+          "Identifier": {
+            "PURL": "pkg:composer/symfony/yaml@v8.1.11",
+            "UID": "bbc3aa3b0887883"
+          },
+          "Version": "v8.1.11",
+          "Licenses": [
+            "MIT"
+          ],
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "symfony/polyfill-ctype@v1.37.0"
+          ],
+          "Locations": [
+            {
+              "StartLine": 277,
+              "EndLine": 352
+            }
+          ],
+          "AnalyzedBy": "composer"
+        }
+      ]
+    },
+    {
+      "Target": "Dockerfile",
+      "Class": "config",
+      "Type": "dockerfile",
+      "MisconfSummary": {
+        "Successes": 23,
+        "Failures": 4
+      },
+      "Misconfigurations": [
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS-0002",
+          "Title": "Image user should not be 'root'",
+          "Description": "Running containers with 'root' user can lead to a container escape situation. It is a best practice to run containers as non-root users, which can be done by adding a 'USER' statement to the Dockerfile.",
+          "Message": "Specify at least 1 USER command in Dockerfile with non-root user as argument",
+          "Namespace": "builtin.dockerfile.DS002",
+          "Query": "data.builtin.dockerfile.DS002.deny",
+          "Resolution": "Add 'USER \u003cnon root user name\u003e' line to the Dockerfile",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds-0002",
+          "References": [
+            "https://docs.docker.com/develop/develop-images/dockerfile_best-practices/",
+            "https://avd.aquasec.com/misconfig/ds-0002"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general"
+          }
+        },
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS-0013",
+          "Title": "'RUN cd ...' to change directory",
+          "Description": "Use WORKDIR instead of proliferating instructions like 'RUN cd … \u0026\u0026 do-something', which are hard to read, troubleshoot, and maintain.",
+          "Message": "RUN should not be used to change directory: 'cd /var/www/html/vulnerabilities/api  \u0026\u0026 composer install'. Use 'WORKDIR' statement instead.",
+          "Namespace": "builtin.dockerfile.DS013",
+          "Query": "data.builtin.dockerfile.DS013.deny",
+          "Resolution": "Use WORKDIR to change directory",
+          "Severity": "MEDIUM",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds-0013",
+          "References": [
+            "https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#workdir",
+            "https://avd.aquasec.com/misconfig/ds-0013"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general",
+            "StartLine": 24,
+            "EndLine": 25,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 24,
+                  "Content": "RUN cd /var/www/html/vulnerabilities/api \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[38;5;64mRUN\u001b[0m \u001b[38;5;33mcd\u001b[0m /var/www/html/vulnerabilities/api \u001b[38;5;124m\\",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 25,
+                  "Content": " \u0026\u0026 composer install \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[0m \u001b[38;5;245m\u0026\u0026\u001b[0m composer install \\",
+                  "FirstCause": false,
+                  "LastCause": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS-0026",
+          "Title": "No HEALTHCHECK defined",
+          "Description": "You should add HEALTHCHECK instruction in your docker container images to perform the health check on running containers.",
+          "Message": "Add HEALTHCHECK instruction in your Dockerfile",
+          "Namespace": "builtin.dockerfile.DS026",
+          "Query": "data.builtin.dockerfile.DS026.deny",
+          "Resolution": "Add HEALTHCHECK instruction in Dockerfile",
+          "Severity": "LOW",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds-0026",
+          "References": [
+            "https://blog.aquasec.com/docker-security-best-practices",
+            "https://avd.aquasec.com/misconfig/ds-0026"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general"
+          }
+        },
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS-0029",
+          "Title": "'apt-get' missing '--no-install-recommends'",
+          "Description": "'apt-get' install should use '--no-install-recommends' to minimize image size.",
+          "Message": "'--no-install-recommends' flag is missed: 'apt-get update  \u0026\u0026 export DEBIAN_FRONTEND=noninteractive  \u0026\u0026 apt-get install -y zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev iputils-ping git zip unzip 7zip   \u0026\u0026 apt-get clean -y \u0026\u0026 rm -rf /var/lib/apt/lists/*  \u0026\u0026 docker-php-ext-configure gd --with-jpeg --with-freetype  \u0026\u0026 a2enmod rewrite  \u0026\u0026 docker-php-ext-install gd mysqli pdo pdo_mysql'",
+          "Namespace": "builtin.dockerfile.DS029",
+          "Query": "data.builtin.dockerfile.DS029.deny",
+          "Resolution": "Add '--no-install-recommends' flag to 'apt-get'",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds-0029",
+          "References": [
+            "https://docs.docker.com/develop/develop-images/dockerfile_best-practices/",
+            "https://avd.aquasec.com/misconfig/ds-0029"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general",
+            "StartLine": 10,
+            "EndLine": 17,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 10,
+                  "Content": "RUN apt-get update \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[38;5;64mRUN\u001b[0m apt-get update \u001b[38;5;124m\\",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 11,
+                  "Content": " \u0026\u0026 export DEBIAN_FRONTEND=noninteractive \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[0m \u001b[38;5;245m\u0026\u0026\u001b[0m \u001b[38;5;33mexport\u001b[0m \u001b[38;5;33mDEBIAN_FRONTEND\u001b[0m\u001b[38;5;245m=\u001b[0mnoninteractive \u001b[38;5;124m\\",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 12,
+                  "Content": " \u0026\u0026 apt-get install -y zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev iputils-ping git zip unzip 7zip  \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[0m \u001b[38;5;245m\u0026\u0026\u001b[0m apt-get install -y zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev iputils-ping git zip unzip 7zip  \u001b[38;5;124m\\",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 13,
+                  "Content": " \u0026\u0026 apt-get clean -y \u0026\u0026 rm -rf /var/lib/apt/lists/* \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[0m \u001b[38;5;245m\u0026\u0026\u001b[0m apt-get clean -y \u001b[38;5;245m\u0026\u0026\u001b[0m rm -rf /var/lib/apt/lists/* \u001b[38;5;124m\\",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 14,
+                  "Content": " \u0026\u0026 docker-php-ext-configure gd --with-jpeg --with-freetype \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[0m \u001b[38;5;245m\u0026\u0026\u001b[0m docker-php-ext-configure gd --with-jpeg --with-freetype \u001b[38;5;124m\\",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 15,
+                  "Content": " \u0026\u0026 a2enmod rewrite \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[0m \u001b[38;5;245m\u0026\u0026\u001b[0m a2enmod rewrite \u001b[38;5;124m\\",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 16,
+                  "Content": " # Use pdo_sqlite instead of pdo_mysql if you want to use sqlite",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[0m \u001b[38;5;239m# Use pdo_sqlite instead of pdo_mysql if you want to use sqlite",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 17,
+                  "Content": " \u0026\u0026 docker-php-ext-install gd mysqli pdo pdo_mysql",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[0m \u001b[38;5;245m\u0026\u0026\u001b[0m docker-php-ext-install gd mysqli pdo pdo_mysql",
+                  "FirstCause": false,
+                  "LastCause": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

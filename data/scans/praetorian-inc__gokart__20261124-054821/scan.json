@@ -1,0 +1,99 @@
+{
+  "scan_id": "praetorian-inc__gokart__20261124-054821",
+  "scan_dir": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\praetorian-inc__gokart__20261124-054821",
+  "target": "https://github.com/praetorian-inc/gokart",
+  "kind": "github",
+  "repo_name": "praetorian-inc/gokart",
+  "started_at": "2026-11-24T05:48:21+00:00",
+  "finished_at": "2026-11-24T05:48:45+00:00",
+  "status": "complete",
+  "commit": "3d38a9ae72f7d67d5c13f83ec5669630868e409e",
+  "tools": {
+    "git": "git version 2.54.0.windows.1",
+    "npm": "11.13.0",
+    "cdxgen": "\u001b[1mCycloneDX Generator 12.9.3\u001b[0m",
+    "osv-scanner": "osv-scanner version: 2.7.0",
+    "grype": "0.122.1",
+    "grype_db": {
+      "schema": "v6.1.10",
+      "built": "2026-11-23T06:28:32Z",
+      "valid": true
+    },
+    "trivy": "0.76.2",
+    "trivy_db": {
+      "version": 2,
+      "updated": "2026-11-23T07:04:04.632673631Z",
+      "downloaded": "2026-11-23T10:28:38.1695664Z"
+    }
+  },
+  "steps": {
+    "clone": {
+      "label": "Clone repository",
+      "status": "ok",
+      "detail": "commit 3d38a9ae72f7",
+      "seconds": 1.8
+    },
+    "lockfile": {
+      "label": "Resolve npm lockfile",
+      "status": "skipped",
+      "detail": "not an npm project at the repo root",
+      "seconds": 0.0
+    },
+    "sbom": {
+      "label": "Generate SBOM (cdxgen)",
+      "status": "ok",
+      "detail": "35 components",
+      "seconds": 2.6
+    },
+    "grype": {
+      "label": "Scan SBOM (Grype)",
+      "status": "ok",
+      "detail": "77 matches",
+      "seconds": 10.0
+    },
+    "osv": {
+      "label": "Scan repository (OSV-Scanner)",
+      "status": "ok",
+      "detail": "124 vulnerabilities",
+      "seconds": 10.0
+    },
+    "trivy": {
+      "label": "Scan repository (Trivy)",
+      "status": "ok",
+      "detail": "76 vulnerabilities, 2 misconfigurations, 0 secrets",
+      "seconds": 10.1
+    },
+    "graph": {
+      "label": "Build dependency graph",
+      "status": "ok",
+      "detail": "36 nodes, 77 findings",
+      "seconds": 0.3
+    }
+  },
+  "artifacts": {
+    "sbom": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\praetorian-inc__gokart__20261124-054821\\sbom\\bom.json",
+    "grype": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\praetorian-inc__gokart__20261124-054821\\scanner_results\\grype.json",
+    "osv": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\praetorian-inc__gokart__20261124-054821\\scanner_results\\osv.json",
+    "trivy": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\praetorian-inc__gokart__20261124-054821\\scanner_results\\trivy.json",
+    "graph_html": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\praetorian-inc__gokart__20261124-054821\\graphs\\dependency_graph.html",
+    "graph_json": "C:\\Users\\jayan\\OneDrive\\Desktop\\Software-Supply-Chain-Guardian_Team-31-main\\Software-Supply-Chain-Guardian_Team-31-main\\data\\scans\\praetorian-inc__gokart__20261124-054821\\graphs\\graph.json"
+  },
+  "stats": {
+    "nodes": 36,
+    "edges": 9,
+    "direct": 9,
+    "transitive": 0,
+    "unresolved": 26,
+    "vulnerable_packages": 8,
+    "findings": 77,
+    "findings_by_severity": {
+      "CRITICAL": 11,
+      "HIGH": 39,
+      "MEDIUM": 23,
+      "LOW": 3,
+      "UNKNOWN": 1
+    },
+    "misconfigurations": 2,
+    "secrets": 0
+  }
+}
