@@ -131,7 +131,7 @@ with tab_report:
         st.info("No Final Guardian Report for this scan "
                 f"({current['steps'].get('report', {}).get('detail') or 'scan predates the report step'}).")
     else:
-        rep = json.loads(rj.read_text())
+        rep = json.loads(rj.read_text(encoding="utf-8"))
         ex = rep["executive_summary"]
         c = st.columns(5)
         c[0].metric("Validated findings", ex["total_findings"])
@@ -145,7 +145,7 @@ with tab_report:
                            disabled=not rpdf.exists(), key="rep-pdf", width="stretch")
         d2.download_button("⬇️ Report (HTML)", rh.read_bytes(), file_name="guardian-report.html", key="rep-html", width="stretch")
         d3.download_button("⬇️ Report (JSON)", rj.read_bytes(), file_name="guardian-report.json", key="rep-json", width="stretch")
-        components.html(rh.read_text(), height=1100, scrolling=True)
+        components.html(rh.read_text(encoding="utf-8"), height=1100, scrolling=True)
 
 with tab_agents:
     adir = Path(current["artifacts"].get("agents_dir") or Path(current["scan_dir"]) / "agents")
@@ -154,8 +154,8 @@ with tab_agents:
         st.info("The multi-agent investigation has not run for this scan "
                 f"({current['steps'].get('agents', {}).get('detail') or 'scan predates the agent step'}).")
     else:
-        inv = json.loads(inv_p.read_text())
-        rep = json.loads(rep_p.read_text()) if rep_p.exists() else {}
+        inv = json.loads(inv_p.read_text(encoding="utf-8"))
+        rep = json.loads(rep_p.read_text(encoding="utf-8")) if rep_p.exists() else {}
         sm = inv["summary"]
         cols = st.columns(6)
         for col, (lbl, val) in zip(cols, [("Agents", len(sm["agents"])), ("Supervisor turns", sm["turns"]),

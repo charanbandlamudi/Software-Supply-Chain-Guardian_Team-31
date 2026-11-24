@@ -19,7 +19,7 @@ def _purl(p: str | None) -> str | None:
 
 
 def collect_osv_scanner(report_path: str) -> dict:
-    report = json.loads(Path(report_path).read_text())
+    report = json.loads(Path(report_path).read_text(encoding="utf-8"))
     raw, evidence = [], {}
     for res in report.get("results", []):
         for p in res.get("packages", []):
@@ -44,7 +44,7 @@ def collect_osv_scanner(report_path: str) -> dict:
 
 
 def collect_trivy(report_path: str) -> dict:
-    report = json.loads(Path(report_path).read_text())
+    report = json.loads(Path(report_path).read_text(encoding="utf-8"))
     raw, evidence = [], {}
     for res in report.get("Results") or []:
         for v in res.get("Vulnerabilities") or []:
@@ -77,7 +77,7 @@ TRIVY_BASE = {"CRITICAL": 9.0, "HIGH": 7.5, "MEDIUM": 5.0, "LOW": 3.0, "UNKNOWN"
 
 def trivy_repo_findings(report_path: str) -> tuple[dict, dict]:
     """Trivy misconfigurations + secrets as Guardian findings. Secret values are never copied."""
-    report = json.loads(Path(report_path).read_text())
+    report = json.loads(Path(report_path).read_text(encoding="utf-8"))
     findings, evidence = {}, {}
     for res in report.get("Results") or []:
         target = res.get("Target")

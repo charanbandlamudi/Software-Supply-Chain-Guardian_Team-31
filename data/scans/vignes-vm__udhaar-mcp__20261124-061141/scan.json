@@ -1,0 +1,176 @@
+{
+  "scan_id": "vignes-vm__udhaar-mcp__20261124-061141",
+  "scan_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141",
+  "target": "https://github.com/vignes-vm/udhaar-mcp",
+  "kind": "github",
+  "repo_name": "vignes-vm/udhaar-mcp",
+  "started_at": "2026-11-24T06:11:41+00:00",
+  "finished_at": "2026-11-24T06:12:27+00:00",
+  "status": "complete",
+  "commit": "7c94a4a830f1c7ee1aaf9c2669d62f0701e3331a",
+  "tools": {
+    "git": "git version 2.44.0",
+    "npm": "10.9.8",
+    "cdxgen": "CycloneDX Generator 12.9.3",
+    "osv-scanner": "osv-scanner version: 2.7.1",
+    "grype": "0.122.1",
+    "grype_db": {
+      "schema": "v6.1.10",
+      "built": "2026-11-23T06:28:32Z",
+      "valid": true
+    },
+    "trivy": "0.76.2",
+    "trivy_db": {
+      "version": 2,
+      "updated": "2026-11-23T07:04:04.632673631Z",
+      "downloaded": "2026-11-23T12:43:24.627303Z"
+    }
+  },
+  "steps": {
+    "clone": {
+      "label": "Clone repository",
+      "status": "ok",
+      "detail": "commit 7c94a4a830f1",
+      "seconds": 1.2
+    },
+    "lockfile": {
+      "label": "Resolve npm lockfile",
+      "status": "skipped",
+      "detail": "repository already commits a lockfile",
+      "seconds": 0.0
+    },
+    "sbom": {
+      "label": "Generate SBOM (cdxgen)",
+      "status": "ok",
+      "detail": "181 components",
+      "seconds": 0.9
+    },
+    "grype": {
+      "label": "Scan SBOM (Grype)",
+      "status": "ok",
+      "detail": "12 matches",
+      "seconds": 2.8
+    },
+    "osv": {
+      "label": "Scan repository (OSV-Scanner)",
+      "status": "ok",
+      "detail": "12 vulnerabilities",
+      "seconds": 3.2
+    },
+    "trivy": {
+      "label": "Scan repository (Trivy)",
+      "status": "ok",
+      "detail": "12 vulnerabilities, 1 misconfigurations, 0 secrets",
+      "seconds": 3.2
+    },
+    "graph": {
+      "label": "Build dependency graph",
+      "status": "ok",
+      "detail": "182 nodes, 12 findings",
+      "seconds": 0.4
+    },
+    "agents": {
+      "label": "Agent investigation (guardian_v2)",
+      "status": "ok",
+      "detail": "9 turns, 18 findings, 1 handoffs, LLM: groq",
+      "seconds": 34.9
+    },
+    "report": {
+      "label": "Final Guardian Report (JSON / HTML / PDF)",
+      "status": "ok",
+      "detail": "18 validated findings in 5 categories, 0 rejected; PDF: ok",
+      "seconds": 2.3
+    }
+  },
+  "artifacts": {
+    "sbom": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/sbom/bom.json",
+    "grype": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/scanner_results/grype.json",
+    "osv": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/scanner_results/osv.json",
+    "trivy": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/scanner_results/trivy.json",
+    "graph_html": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/graphs/dependency_graph.html",
+    "graph_json": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/graphs/graph.json",
+    "agents_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/agents",
+    "report_json": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/report/guardian-report.json",
+    "report_html": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/report/guardian-report.html",
+    "report_pdf": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/report/guardian-report.pdf"
+  },
+  "stats": {
+    "nodes": 182,
+    "edges": 367,
+    "direct": 8,
+    "transitive": 173,
+    "unresolved": 0,
+    "vulnerable_packages": 4,
+    "findings": 12,
+    "findings_by_severity": {
+      "HIGH": 1,
+      "MEDIUM": 8,
+      "LOW": 3
+    },
+    "misconfigurations": 1,
+    "secrets": 0
+  },
+  "agents": {
+    "agents": [
+      "discovery",
+      "cicd",
+      "vuln_intel",
+      "reputation",
+      "reachability",
+      "exploit_intel",
+      "anomaly",
+      "scoring",
+      "remediation",
+      "explainer",
+      "critic"
+    ],
+    "llm": [
+      "groq"
+    ],
+    "turns": 9,
+    "seconds": 34.1,
+    "findings": 18,
+    "by_type": {
+      "vulnerability": 12,
+      "unpinned_base_image": 2,
+      "install_script": 2,
+      "misconfiguration": 1,
+      "typosquat_suspect": 1
+    },
+    "handoffs": 1,
+    "critic": {
+      "accepted": 13,
+      "rejected": 0
+    },
+    "remediation_plans": 7,
+    "coverage": {
+      "discovery": "SBOM CycloneDX 1.7: 181 components; package-lock v3: 184 packages",
+      "reputation": "12 ok, 0 failed",
+      "source:pypi-osv": "ok",
+      "source:npm-audit": "ok",
+      "source:osv": "ok",
+      "source:osv-scanner": "ok",
+      "source:trivy": "ok",
+      "source:grype": "ok",
+      "source:ghsa": "skipped: set GITHUB_TOKEN (unauthenticated limit is 60 req/h)",
+      "source:cisa-kev": "ok (1792 entries)",
+      "source:epss": "ok (12/12)",
+      "llm": "ok via ['groq']"
+    },
+    "reputation_focus": 12,
+    "report_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/agents"
+  },
+  "report": {
+    "dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/report",
+    "findings": 18,
+    "rejected": 0,
+    "pdf": "ok",
+    "by_category": {
+      "Known vulnerabilities (CVE / GHSA)": 12,
+      "Typosquat candidates": 1,
+      "Install-time scripts": 2,
+      "Container image risks": 2,
+      "Infrastructure & configuration misconfigurations": 1
+    }
+  }
+}

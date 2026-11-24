@@ -213,8 +213,8 @@ def annotate(g: nx.DiGraph, vulns: dict[str, list[dict]]) -> None:
 def attach_agents(g: nx.DiGraph, report_path: Path, bom_path: Path) -> None:
     """Attach the guardian_v2 agents' assessment to graph nodes (agent analysis, not scanner fact).
     Agent findings are keyed by SBOM purl; nodes by bom-ref, so map through the SBOM."""
-    rep = json.loads(report_path.read_text())
-    bom = json.loads(bom_path.read_text()) if bom_path.exists() else {}
+    rep = json.loads(report_path.read_text(encoding="utf-8"))
+    bom = json.loads(bom_path.read_text(encoding="utf-8")) if bom_path.exists() else {}
     to_node = {c["purl"]: c.get("bom-ref", c["purl"]) for c in bom.get("components", []) if c.get("purl")}
     plans = rep.get("remediation_plans", {})
     per_node: dict[str, list[dict]] = {}

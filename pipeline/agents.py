@@ -39,7 +39,7 @@ def _find(repo: Path, patterns: list[str], max_depth: int = 4) -> list[str]:
 def _reputation_focus(bom_path: Path, graph_json: Path | None) -> list[str]:
     """Direct dependencies + every package a scanner flagged, as SBOM purls.
     Registry metadata for all 1000+ packages is too heavy on slow connections."""
-    bom = json.loads(bom_path.read_text())
+    bom = json.loads(bom_path.read_text(encoding="utf-8"))
     ref_to_purl = {c.get("bom-ref", c.get("purl")): c["purl"] for c in bom.get("components", []) if c.get("purl")}
     root = ((bom.get("metadata") or {}).get("component") or {}).get("bom-ref")
     focus = set()
@@ -47,7 +47,7 @@ def _reputation_focus(bom_path: Path, graph_json: Path | None) -> list[str]:
         if d.get("ref") == root:
             focus |= {ref_to_purl[r] for r in d.get("dependsOn", []) if r in ref_to_purl}
     if graph_json and graph_json.exists():
-        for n in json.loads(graph_json.read_text()).get("nodes", []):
+        for n in json.loads(graph_json.read_text(encoding="utf-8")).get("nodes", []):
             if n.get("vulns") and n["id"] in ref_to_purl:
                 focus.add(ref_to_purl[n["id"]])
     return sorted(focus)
@@ -123,5 +123,5 @@ def run_agents(scan_dir: Path, repo: Path, on_message: Callable[[dict], None] = 
     out.mkdir(exist_ok=True)
     (out / "investigation.json").write_text(json.dumps({
         "summary": summary, "inputs": inputs, "messages": messages,
-        "plan_log": values.get("plan_log", []), "critic": critic}, indent=2, default=str))
+        "plan_log": values.get("plan_log", []), "critic": critic}, indent=2, default=str), encoding="utf-8")
     return summary

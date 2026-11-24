@@ -1,0 +1,1447 @@
+{
+  "schema": "ssg-guardian-report/1",
+  "generated_at": "2026-11-24T06:12:25+00:00",
+  "target": {
+    "repository": "https://github.com/vignes-vm/udhaar-mcp",
+    "name": "vignes-vm/udhaar-mcp",
+    "commit": "7c94a4a830f1c7ee1aaf9c2669d62f0701e3331a",
+    "scanned_at": "2026-11-24T06:11:41+00:00",
+    "scan_id": "vignes-vm__udhaar-mcp__20261124-061141",
+    "scan_status": "complete"
+  },
+  "executive_summary": {
+    "total_findings": 18,
+    "by_severity": {
+      "HIGH": 1,
+      "MEDIUM": 11,
+      "LOW": 6
+    },
+    "by_category": {
+      "Known vulnerabilities (CVE / GHSA)": 12,
+      "Typosquat candidates": 1,
+      "Install-time scripts": 2,
+      "Container image risks": 2,
+      "Infrastructure & configuration misconfigurations": 1
+    },
+    "packages": 182,
+    "vulnerable_packages": 4,
+    "anomalous_packages": 3,
+    "top_risks": [
+      "F-001",
+      "F-013",
+      "F-002",
+      "F-003",
+      "F-004",
+      "F-005",
+      "F-006",
+      "F-007"
+    ],
+    "ai": {
+      "provider": [
+        "groq"
+      ],
+      "llm_explanations": 13,
+      "template_explanations": 1,
+      "critic_accepted": 13,
+      "critic_rejected": 0
+    }
+  },
+  "methodology": {
+    "pipeline_steps": {
+      "clone": {
+        "label": "Clone repository",
+        "status": "ok",
+        "detail": "commit 7c94a4a830f1"
+      },
+      "lockfile": {
+        "label": "Resolve npm lockfile",
+        "status": "skipped",
+        "detail": "repository already commits a lockfile"
+      },
+      "sbom": {
+        "label": "Generate SBOM (cdxgen)",
+        "status": "ok",
+        "detail": "181 components"
+      },
+      "grype": {
+        "label": "Scan SBOM (Grype)",
+        "status": "ok",
+        "detail": "12 matches"
+      },
+      "osv": {
+        "label": "Scan repository (OSV-Scanner)",
+        "status": "ok",
+        "detail": "12 vulnerabilities"
+      },
+      "trivy": {
+        "label": "Scan repository (Trivy)",
+        "status": "ok",
+        "detail": "12 vulnerabilities, 1 misconfigurations, 0 secrets"
+      },
+      "graph": {
+        "label": "Build dependency graph",
+        "status": "ok",
+        "detail": "182 nodes, 12 findings"
+      },
+      "agents": {
+        "label": "Agent investigation (guardian_v2)",
+        "status": "ok",
+        "detail": "9 turns, 18 findings, 1 handoffs, LLM: groq"
+      }
+    },
+    "tools": {
+      "git": "git version 2.44.0",
+      "npm": "10.9.8",
+      "cdxgen": "CycloneDX Generator 12.9.3",
+      "osv-scanner": "osv-scanner version: 2.7.1",
+      "grype": "0.122.1",
+      "grype_db": {
+        "schema": "v6.1.10",
+        "built": "2026-11-23T06:28:32Z",
+        "valid": true
+      },
+      "trivy": "0.76.2",
+      "trivy_db": {
+        "version": 2,
+        "updated": "2026-11-23T07:04:04.632673631Z",
+        "downloaded": "2026-11-23T12:43:24.627303Z"
+      }
+    },
+    "agents": [
+      "discovery",
+      "cicd",
+      "vuln_intel",
+      "reputation",
+      "reachability",
+      "exploit_intel",
+      "anomaly",
+      "scoring",
+      "remediation",
+      "explainer",
+      "critic"
+    ],
+    "agent_turns": 9,
+    "agent_coverage": {
+      "discovery": "SBOM CycloneDX 1.7: 181 components; package-lock v3: 184 packages",
+      "reputation": "12 ok, 0 failed",
+      "source:pypi-osv": "ok",
+      "source:npm-audit": "ok",
+      "source:osv": "ok",
+      "source:osv-scanner": "ok",
+      "source:trivy": "ok",
+      "source:grype": "ok",
+      "source:ghsa": "skipped: set GITHUB_TOKEN (unauthenticated limit is 60 req/h)",
+      "source:cisa-kev": "ok (1792 entries)",
+      "source:epss": "ok (12/12)",
+      "llm": "ok via ['groq']"
+    }
+  },
+  "sbom": {
+    "components": 182,
+    "direct": 8,
+    "transitive": 173,
+    "not_linked": 0,
+    "edges": 367,
+    "ecosystems": {
+      "npm": 182
+    }
+  },
+  "dependency_analysis": {
+    "depth_distribution": {
+      "0": 1,
+      "1": 8,
+      "2": 81,
+      "3": 70,
+      "4": 11,
+      "5": 2,
+      "6": 8,
+      "7": 1
+    },
+    "vulnerable_via_direct_dependency": {
+      "@modelcontextprotocol/sdk@1.32.1": 11,
+      "express@5.3.0": 1
+    },
+    "shared_vulnerable_packages": [
+      {
+        "package": "hono@4.13.13",
+        "parents": 2,
+        "vulnerabilities": 5
+      },
+      {
+        "package": "@hono/node-server@2.1.5",
+        "parents": 1,
+        "vulnerabilities": 2
+      },
+      {
+        "package": "fast-uri@3.1.8",
+        "parents": 1,
+        "vulnerabilities": 4
+      },
+      {
+        "package": "body-parser@2.3.0",
+        "parents": 1,
+        "vulnerabilities": 1
+      }
+    ]
+  },
+  "scanner_agreement": {
+    "by_scanner_combination": {
+      "Grype + OSV-Scanner + Trivy": 12
+    },
+    "disagreements": []
+  },
+  "findings": [
+    {
+      "finding_id": "F-001",
+      "category": "Known vulnerabilities (CVE / GHSA)",
+      "segment": "vulnerability",
+      "finding_type": "vulnerability",
+      "component": "body-parser",
+      "installed_version": "2.3.0",
+      "identifier": "CVE-2026-111181",
+      "aliases": [
+        "GHSA-27r3-jxmh-p828"
+      ],
+      "severity": "HIGH",
+      "severity_basis": "worst severity reported by the scanners",
+      "source_tool": [
+        "Grype",
+        "OSV-Scanner",
+        "Trivy",
+        "OSV.dev API",
+        "npm audit API"
+      ],
+      "dependency_type": "transitive",
+      "dependency_path": [
+        "udhaar-mcp@0.1.0",
+        "express@5.3.0",
+        "body-parser@2.3.0"
+      ],
+      "location": null,
+      "evidence_reference": [
+        "EV-grype-bd710e5bb5629766",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-a08d3b50e7ef069a",
+        "EV-osv-scanner-6e98c1f5fc382853",
+        "EV-trivy-78c0f208f6c4e93e",
+        "scanner_results/grype.json",
+        "scanner_results/osv.json",
+        "scanner_results/trivy.json"
+      ],
+      "fixed_version": "2.4.0",
+      "problem": "body-parser vulnerable to Denial of Service via trailing bytes after a compressed request body in body-parser@2.3.0. Reached via udhaar-mcp@0.1.0 \u2192 express@5.3.0 \u2192 body-parser@2.3.0.",
+      "ai_assessment": "The body-parser\u202f2.3.0 package can be forced into a denial\u2011of\u2011service by sending a compressed request body that contains trailing bytes. It is pulled in transitively through express (and through the @modelcontextprotocol/sdk and express\u2011rate\u2011limit packages), so the vulnerable code can execute in the application. With a CVSS of 7.5 and a severity score of 31.4, this is a high\u2011impact issue; upgrade to body-parser\u202f2.4.0 to remediate it.",
+      "ai_assessment_kind": "llm_inference_critic_verified",
+      "remediation": {
+        "action": "upgrade",
+        "target_version": "2.4.0",
+        "rationale": "minimal: body-parser 2.4.0 re-scanned clean on the registry (0 known advisories)",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 31.4,
+      "ssvc": "Track",
+      "reachability": "used_transitively",
+      "kev": false,
+      "epss": 0.00388,
+      "confidence": "medium",
+      "verification_status": "multi_scanner_confirmed",
+      "scanner_views": {
+        "Grype": {
+          "severity": "HIGH",
+          "fixed_versions": [
+            "2.4.0"
+          ]
+        },
+        "OSV-Scanner": {
+          "severity": "HIGH",
+          "fixed_versions": [
+            "1.20.9",
+            "2.4.0"
+          ]
+        },
+        "Trivy": {
+          "severity": "HIGH",
+          "fixed_versions": [
+            "2.4.0",
+            "1.20.9"
+          ]
+        }
+      },
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-002",
+      "category": "Known vulnerabilities (CVE / GHSA)",
+      "segment": "vulnerability",
+      "finding_type": "vulnerability",
+      "component": "@hono/node-server",
+      "installed_version": "2.1.5",
+      "identifier": "CVE-2026-126343",
+      "aliases": [
+        "GHSA-qv5m-9pm6-hqp3"
+      ],
+      "severity": "MEDIUM",
+      "severity_basis": "worst severity reported by the scanners",
+      "source_tool": [
+        "Grype",
+        "OSV-Scanner",
+        "Trivy",
+        "npm audit API"
+      ],
+      "dependency_type": "transitive",
+      "dependency_path": [
+        "udhaar-mcp@0.1.0",
+        "@modelcontextprotocol/sdk@1.32.1",
+        "@hono/node-server@2.1.5"
+      ],
+      "location": null,
+      "evidence_reference": [
+        "EV-grype-6b0d82b98485d451",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-scanner-39bd3d030e5a2ccf",
+        "EV-trivy-810cb4aac5a9af40",
+        "scanner_results/grype.json",
+        "scanner_results/osv.json",
+        "scanner_results/trivy.json"
+      ],
+      "fixed_version": "2.1.6",
+      "problem": "@hono/node-server: Unhandled `ECONNRESET` on the socket during an asynchronous WebSocket upgrade crashes the process in @hono/node-server@2.1.5. Reached via udhaar-mcp@0.1.0 \u2192 @modelcontextprotocol/sdk@1.32.1 \u2192 @hono/node-server@2.1.5.",
+      "ai_assessment": "The @hono/node-server\u202f2.1.5 module can crash the process when an asynchronous WebSocket upgrade encounters an ECONNRESET error on the socket. It is included transitively via the @modelcontextprotocol/sdk, so the crash can affect the running application. With a CVSS of 5.3 and a score of 26.0, the issue is moderate severity; upgrade to @hono/node-server\u202f2.1.6 to apply the fix.",
+      "ai_assessment_kind": "llm_inference_critic_verified",
+      "remediation": {
+        "action": "upgrade",
+        "target_version": "2.1.6",
+        "rationale": "minimal: @hono/node-server 2.1.6 re-scanned clean on the registry (0 known advisories)",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 26.0,
+      "ssvc": "Track",
+      "reachability": "used_transitively",
+      "kev": false,
+      "epss": 0.00453,
+      "confidence": "medium",
+      "verification_status": "multi_scanner_confirmed",
+      "scanner_views": {
+        "Grype": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "2.1.6"
+          ]
+        },
+        "OSV-Scanner": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "2.1.6"
+          ]
+        },
+        "Trivy": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "2.1.6"
+          ]
+        }
+      },
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-003",
+      "category": "Known vulnerabilities (CVE / GHSA)",
+      "segment": "vulnerability",
+      "finding_type": "vulnerability",
+      "component": "hono",
+      "installed_version": "4.13.13",
+      "identifier": "CVE-2026-126357",
+      "aliases": [
+        "GHSA-4m76-xfj5-7975"
+      ],
+      "severity": "MEDIUM",
+      "severity_basis": "worst severity reported by the scanners",
+      "source_tool": [
+        "Grype",
+        "OSV-Scanner",
+        "Trivy",
+        "OSV.dev API",
+        "npm audit API"
+      ],
+      "dependency_type": "transitive",
+      "dependency_path": [
+        "udhaar-mcp@0.1.0",
+        "@modelcontextprotocol/sdk@1.32.1",
+        "hono@4.13.13"
+      ],
+      "location": null,
+      "evidence_reference": [
+        "EV-grype-ffc43ba3de02f15c",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-bb4abb0c67d4ce43",
+        "EV-osv-scanner-e519487bbf0454ed",
+        "EV-trivy-b587364513133307",
+        "scanner_results/grype.json",
+        "scanner_results/osv.json",
+        "scanner_results/trivy.json"
+      ],
+      "fixed_version": "4.13.16",
+      "problem": "Hono: `mount()` and `app.mount()` can forward a path that bypasses middleware scoped inside the mount prefix in hono@4.13.13. Reached via udhaar-mcp@0.1.0 \u2192 @modelcontextprotocol/sdk@1.32.1 \u2192 hono@4.13.13.",
+      "ai_assessment": "The hono\u202f4.13.13 package allows mount() and app.mount() to forward a path that can bypass middleware scoped inside the mount prefix. This vulnerability is reachable transitively through the @modelcontextprotocol/sdk (and also via @hono/node-server), so an attacker could reach protected routes. With a CVSS of 5.3 and a severity score of 25.3, upgrade to hono\u202f4.13.16 to close the bypass.",
+      "ai_assessment_kind": "llm_inference_critic_verified",
+      "remediation": {
+        "action": "upgrade",
+        "target_version": "4.13.16",
+        "rationale": "minimal: hono 4.13.16 re-scanned clean on the registry (0 known advisories)",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 25.3,
+      "ssvc": "Track",
+      "reachability": "used_transitively",
+      "kev": false,
+      "epss": 0.004,
+      "confidence": "medium",
+      "verification_status": "multi_scanner_confirmed",
+      "scanner_views": {
+        "Grype": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "4.13.16"
+          ]
+        },
+        "OSV-Scanner": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "4.13.16"
+          ]
+        },
+        "Trivy": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "4.13.16"
+          ]
+        }
+      },
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-004",
+      "category": "Known vulnerabilities (CVE / GHSA)",
+      "segment": "vulnerability",
+      "finding_type": "vulnerability",
+      "component": "hono",
+      "installed_version": "4.13.13",
+      "identifier": "CVE-2026-126356",
+      "aliases": [
+        "GHSA-4h7h-rv7c-7m2v"
+      ],
+      "severity": "MEDIUM",
+      "severity_basis": "worst severity reported by the scanners",
+      "source_tool": [
+        "Grype",
+        "OSV-Scanner",
+        "Trivy",
+        "OSV.dev API",
+        "npm audit API"
+      ],
+      "dependency_type": "transitive",
+      "dependency_path": [
+        "udhaar-mcp@0.1.0",
+        "@modelcontextprotocol/sdk@1.32.1",
+        "hono@4.13.13"
+      ],
+      "location": null,
+      "evidence_reference": [
+        "EV-grype-39b47d470d72e417",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-3f18e9d7bee6ca5e",
+        "EV-osv-scanner-1cdf242be1311c86",
+        "EV-trivy-5e89e82770a8793e",
+        "scanner_results/grype.json",
+        "scanner_results/osv.json",
+        "scanner_results/trivy.json"
+      ],
+      "fixed_version": "4.13.16",
+      "problem": "Hono: `validator('form')` skips validation for `multipart/form-data` requests with extra parameters in hono@4.13.13. Reached via udhaar-mcp@0.1.0 \u2192 @modelcontextprotocol/sdk@1.32.1 \u2192 hono@4.13.13.",
+      "ai_assessment": "The hono\u202f4.13.13 package\u2019s validator('form') skips validation for multipart/form-data requests that contain extra parameters. This flaw is reachable transitively via the @modelcontextprotocol/sdk (and also via @hono/node-server), potentially allowing malformed data to bypass input checks. With a CVSS of 5.3 and a score of 25.2, the issue is moderate; upgrade to hono\u202f4.13.16 to obtain the corrected validator logic.",
+      "ai_assessment_kind": "llm_inference_critic_verified",
+      "remediation": {
+        "action": "upgrade",
+        "target_version": "4.13.16",
+        "rationale": "minimal: hono 4.13.16 re-scanned clean on the registry (0 known advisories)",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 25.2,
+      "ssvc": "Track",
+      "reachability": "used_transitively",
+      "kev": false,
+      "epss": 0.00392,
+      "confidence": "medium",
+      "verification_status": "multi_scanner_confirmed",
+      "scanner_views": {
+        "Grype": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "4.13.16"
+          ]
+        },
+        "OSV-Scanner": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "4.13.16"
+          ]
+        },
+        "Trivy": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "4.13.16"
+          ]
+        }
+      },
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-005",
+      "category": "Known vulnerabilities (CVE / GHSA)",
+      "segment": "vulnerability",
+      "finding_type": "vulnerability",
+      "component": "@hono/node-server",
+      "installed_version": "2.1.5",
+      "identifier": "CVE-2026-126210",
+      "aliases": [
+        "GHSA-jpvv-r467-5p4w"
+      ],
+      "severity": "MEDIUM",
+      "severity_basis": "worst severity reported by the scanners",
+      "source_tool": [
+        "Grype",
+        "OSV-Scanner",
+        "Trivy",
+        "npm audit API"
+      ],
+      "dependency_type": "transitive",
+      "dependency_path": [
+        "udhaar-mcp@0.1.0",
+        "@modelcontextprotocol/sdk@1.32.1",
+        "@hono/node-server@2.1.5"
+      ],
+      "location": null,
+      "evidence_reference": [
+        "EV-grype-4d37095190716287",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-scanner-41d4dddd5be0b895",
+        "EV-trivy-a959d2342c994863",
+        "scanner_results/grype.json",
+        "scanner_results/osv.json",
+        "scanner_results/trivy.json"
+      ],
+      "fixed_version": "2.1.6",
+      "problem": "@hono/node-server: Backslash in the request path is parsed as a path separator, bypassing path-based access control at a reverse proxy in @hono/node-server@2.1.5. Reached via udhaar-mcp@0.1.0 \u2192 @modelcontextprotocol/sdk@1.32.1 \u2192 @hono/node-server@2.1.5.",
+      "ai_assessment": "The @hono/node-server\u202f2.1.5 module parses a backslash in the request path as a path separator, allowing an attacker to bypass path\u2011based access controls at a reverse proxy. It is pulled in transitively through the @modelcontextprotocol/sdk, so the bypass can be exploited in the application. With a CVSS of 5.3 and a severity score of 24.9, the vulnerability is moderate; upgrade to @hono/node-server\u202f2.1.6 to fix the parsing issue.",
+      "ai_assessment_kind": "llm_inference_critic_verified",
+      "remediation": {
+        "action": "upgrade",
+        "target_version": "2.1.6",
+        "rationale": "minimal: @hono/node-server 2.1.6 re-scanned clean on the registry (0 known advisories)",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 24.9,
+      "ssvc": "Track",
+      "reachability": "used_transitively",
+      "kev": false,
+      "epss": 0.00375,
+      "confidence": "medium",
+      "verification_status": "multi_scanner_confirmed",
+      "scanner_views": {
+        "Grype": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "2.1.6"
+          ]
+        },
+        "OSV-Scanner": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "1.19.18",
+            "2.1.6"
+          ]
+        },
+        "Trivy": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "2.1.6",
+            "1.19.18"
+          ]
+        }
+      },
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-006",
+      "category": "Known vulnerabilities (CVE / GHSA)",
+      "segment": "vulnerability",
+      "finding_type": "vulnerability",
+      "component": "fast-uri",
+      "installed_version": "3.1.8",
+      "identifier": "CVE-2026-110306",
+      "aliases": [
+        "GHSA-w74x-v6f9-j3xg"
+      ],
+      "severity": "MEDIUM",
+      "severity_basis": "worst severity reported by the scanners",
+      "source_tool": [
+        "Grype",
+        "OSV-Scanner",
+        "Trivy",
+        "OSV.dev API",
+        "npm audit API"
+      ],
+      "dependency_type": "transitive",
+      "dependency_path": [
+        "udhaar-mcp@0.1.0",
+        "@modelcontextprotocol/sdk@1.32.1",
+        "ajv@8.20.0",
+        "fast-uri@3.1.8"
+      ],
+      "location": null,
+      "evidence_reference": [
+        "EV-grype-ad593ea48493204b",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-95e3df3382524b8a",
+        "EV-osv-scanner-526d3de3a986aeb9",
+        "EV-trivy-a1e8f9028f5857cf",
+        "scanner_results/grype.json",
+        "scanner_results/osv.json",
+        "scanner_results/trivy.json"
+      ],
+      "fixed_version": "4.2.3",
+      "problem": "fast-uri vulnerable to URI scheme spoofing via percent-encoded scheme decoding in fast-uri@3.1.8. Reached via udhaar-mcp@0.1.0 \u2192 @modelcontextprotocol/sdk@1.32.1 \u2192 ajv@8.20.0 \u2192 fast-uri@3.1.8.",
+      "ai_assessment": "fast-uri 3.1.8 can be tricked into interpreting a percent\u2011encoded URI scheme as a different scheme, leading to possible scheme spoofing. The vulnerable package is pulled in transitively through @modelcontextprotocol/sdk \u2192 ajv \u2192 fast-uri (see the two paths). With a CVSS of 6.1 and a Track SSVC score of 24.9, this moderate\u2011severity issue is reachable in the app. Upgrade fast-uri to at least 3.1.9 (and co\u2011upgrade ajv 8.20.0) to fix.",
+      "ai_assessment_kind": "llm_inference_critic_verified",
+      "remediation": {
+        "action": "upgrade",
+        "target_version": "3.1.9",
+        "rationale": "co-upgrade: ajv 8.20.0 requires fast-uri ^3.0.1",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 24.9,
+      "ssvc": "Track",
+      "reachability": "used_transitively",
+      "kev": false,
+      "epss": 0.0025,
+      "confidence": "medium",
+      "verification_status": "multi_scanner_confirmed",
+      "scanner_views": {
+        "Grype": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "3.1.9"
+          ]
+        },
+        "OSV-Scanner": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "2.4.8",
+            "3.1.9",
+            "4.2.3"
+          ]
+        },
+        "Trivy": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "2.4.8",
+            "3.1.9",
+            "4.2.3"
+          ]
+        }
+      },
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-007",
+      "category": "Known vulnerabilities (CVE / GHSA)",
+      "segment": "vulnerability",
+      "finding_type": "vulnerability",
+      "component": "hono",
+      "installed_version": "4.13.13",
+      "identifier": "CVE-2026-126358",
+      "aliases": [
+        "GHSA-h7mg-cq63-vhpq"
+      ],
+      "severity": "MEDIUM",
+      "severity_basis": "worst severity reported by the scanners",
+      "source_tool": [
+        "Grype",
+        "OSV-Scanner",
+        "Trivy",
+        "OSV.dev API",
+        "npm audit API"
+      ],
+      "dependency_type": "transitive",
+      "dependency_path": [
+        "udhaar-mcp@0.1.0",
+        "@modelcontextprotocol/sdk@1.32.1",
+        "hono@4.13.13"
+      ],
+      "location": null,
+      "evidence_reference": [
+        "EV-grype-b59b083eb78d4380",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-a7b9955e3844a87b",
+        "EV-osv-scanner-4db104c2061d6c3c",
+        "EV-trivy-e51f5fdb1f67dc49",
+        "scanner_results/grype.json",
+        "scanner_results/osv.json",
+        "scanner_results/trivy.json"
+      ],
+      "fixed_version": "4.13.16",
+      "problem": "Hono: RegExpRouter skips wildcard middleware for some route sets and for paths with an encoded line terminator in hono@4.13.13. Reached via udhaar-mcp@0.1.0 \u2192 @modelcontextprotocol/sdk@1.32.1 \u2192 hono@4.13.13.",
+      "ai_assessment": "hono 4.13.13 has a routing bug where RegExpRouter may skip wildcard middleware for certain routes and encoded line terminators, potentially bypassing security checks. The package is included transitively via @modelcontextprotocol/sdk directly and via @hono/node-server, as shown in the paths. With a CVSS of 5.3 and a Track SSVC score of 24.8, the issue is reachable in the app. Upgrade hono to 4.13.16 to resolve the problem.",
+      "ai_assessment_kind": "llm_inference_critic_verified",
+      "remediation": {
+        "action": "upgrade",
+        "target_version": "4.13.16",
+        "rationale": "minimal: hono 4.13.16 re-scanned clean on the registry (0 known advisories)",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 24.8,
+      "ssvc": "Track",
+      "reachability": "used_transitively",
+      "kev": false,
+      "epss": 0.00367,
+      "confidence": "medium",
+      "verification_status": "multi_scanner_confirmed",
+      "scanner_views": {
+        "Grype": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "4.13.16"
+          ]
+        },
+        "OSV-Scanner": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "4.13.16"
+          ]
+        },
+        "Trivy": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "4.13.16"
+          ]
+        }
+      },
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-008",
+      "category": "Known vulnerabilities (CVE / GHSA)",
+      "segment": "vulnerability",
+      "finding_type": "vulnerability",
+      "component": "fast-uri",
+      "installed_version": "3.1.8",
+      "identifier": "CVE-2026-110180",
+      "aliases": [
+        "GHSA-wjr9-j795-jxcr"
+      ],
+      "severity": "MEDIUM",
+      "severity_basis": "worst severity reported by the scanners",
+      "source_tool": [
+        "Grype",
+        "OSV-Scanner",
+        "Trivy",
+        "OSV.dev API",
+        "npm audit API"
+      ],
+      "dependency_type": "transitive",
+      "dependency_path": [
+        "udhaar-mcp@0.1.0",
+        "@modelcontextprotocol/sdk@1.32.1",
+        "ajv@8.20.0",
+        "fast-uri@3.1.8"
+      ],
+      "location": null,
+      "evidence_reference": [
+        "EV-grype-bd1fc180f2ff5bfc",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-ebcb09e36afe9901",
+        "EV-osv-scanner-1af48ddd0e128d4b",
+        "EV-trivy-0395b5cc888cba48",
+        "scanner_results/grype.json",
+        "scanner_results/osv.json",
+        "scanner_results/trivy.json"
+      ],
+      "fixed_version": "4.2.3",
+      "problem": "fast-uri vulnerable to host confusion via unchecked WHATWG host canonicalization in fast-uri@3.1.8. Reached via udhaar-mcp@0.1.0 \u2192 @modelcontextprotocol/sdk@1.32.1 \u2192 ajv@8.20.0 \u2192 fast-uri@3.1.8.",
+      "ai_assessment": "CVE-2026-110180 (fast-uri vulnerable to host confusion via unchecked WHATWG host canonicalization) affects fast-uri@3.1.8; reached via app -> @modelcontextprotocol/sdk@1.32.1 -> ajv@8.20.0 -> fast-uri@3.1.8; upgrade to 3.1.9.",
+      "ai_assessment_kind": "deterministic_template",
+      "remediation": {
+        "action": "upgrade",
+        "target_version": "3.1.9",
+        "rationale": "co-upgrade: ajv 8.20.0 requires fast-uri ^3.0.1",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 21.3,
+      "ssvc": "Track",
+      "reachability": "used_transitively",
+      "kev": false,
+      "epss": 0.00255,
+      "confidence": "medium",
+      "verification_status": "multi_scanner_confirmed",
+      "scanner_views": {
+        "Grype": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "3.1.9"
+          ]
+        },
+        "OSV-Scanner": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "2.4.8",
+            "3.1.9",
+            "4.2.3"
+          ]
+        },
+        "Trivy": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "2.4.8",
+            "3.1.9",
+            "4.2.3"
+          ]
+        }
+      },
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-009",
+      "category": "Known vulnerabilities (CVE / GHSA)",
+      "segment": "vulnerability",
+      "finding_type": "vulnerability",
+      "component": "hono",
+      "installed_version": "4.13.13",
+      "identifier": "CVE-2026-126355",
+      "aliases": [
+        "GHSA-46wx-v44x-9hh2"
+      ],
+      "severity": "MEDIUM",
+      "severity_basis": "worst severity reported by the scanners",
+      "source_tool": [
+        "Grype",
+        "OSV-Scanner",
+        "Trivy",
+        "OSV.dev API",
+        "npm audit API"
+      ],
+      "dependency_type": "transitive",
+      "dependency_path": [
+        "udhaar-mcp@0.1.0",
+        "@modelcontextprotocol/sdk@1.32.1",
+        "hono@4.13.13"
+      ],
+      "location": null,
+      "evidence_reference": [
+        "EV-grype-a2bfefcefaf5219c",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-26bd276f50f6862f",
+        "EV-osv-scanner-2436f1e0033326a1",
+        "EV-trivy-260263f8caff596c",
+        "scanner_results/grype.json",
+        "scanner_results/osv.json",
+        "scanner_results/trivy.json"
+      ],
+      "fixed_version": "4.13.16",
+      "problem": "Hono: `csrf()` does not check requests sent by hyperlink auditing (`text/ping`) in hono@4.13.13. Reached via udhaar-mcp@0.1.0 \u2192 @modelcontextprotocol/sdk@1.32.1 \u2192 hono@4.13.13.",
+      "ai_assessment": "hono 4.13.13\u2019s csrf() middleware fails to validate requests made with the text/ping content type used for hyperlink auditing, allowing CSRF bypass. The vulnerable version is pulled in transitively via @modelcontextprotocol/sdk (directly and via @hono/node-server). With a CVSS of 5.3 and a Track SSVC score of 21.3, the flaw is reachable in the app. Upgrade hono to 4.13.16 to obtain the fix.",
+      "ai_assessment_kind": "llm_inference_critic_verified",
+      "remediation": {
+        "action": "upgrade",
+        "target_version": "4.13.16",
+        "rationale": "minimal: hono 4.13.16 re-scanned clean on the registry (0 known advisories)",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 21.3,
+      "ssvc": "Track",
+      "reachability": "used_transitively",
+      "kev": false,
+      "epss": 0.00176,
+      "confidence": "medium",
+      "verification_status": "multi_scanner_confirmed",
+      "scanner_views": {
+        "Grype": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "4.13.16"
+          ]
+        },
+        "OSV-Scanner": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "4.13.16"
+          ]
+        },
+        "Trivy": {
+          "severity": "MEDIUM",
+          "fixed_versions": [
+            "4.13.16"
+          ]
+        }
+      },
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-010",
+      "category": "Known vulnerabilities (CVE / GHSA)",
+      "segment": "vulnerability",
+      "finding_type": "vulnerability",
+      "component": "fast-uri",
+      "installed_version": "3.1.8",
+      "identifier": "CVE-2026-110725",
+      "aliases": [
+        "GHSA-333x-w4r6-6crp"
+      ],
+      "severity": "LOW",
+      "severity_basis": "worst severity reported by the scanners",
+      "source_tool": [
+        "Grype",
+        "OSV-Scanner",
+        "Trivy",
+        "OSV.dev API",
+        "npm audit API"
+      ],
+      "dependency_type": "transitive",
+      "dependency_path": [
+        "udhaar-mcp@0.1.0",
+        "@modelcontextprotocol/sdk@1.32.1",
+        "ajv@8.20.0",
+        "fast-uri@3.1.8"
+      ],
+      "location": null,
+      "evidence_reference": [
+        "EV-grype-ccfe4cc26c4ec6fb",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-b89b8158c3bcc713",
+        "EV-osv-scanner-a013c8cbb86dfe30",
+        "EV-trivy-13d5e6fad7b4ff6a",
+        "scanner_results/grype.json",
+        "scanner_results/osv.json",
+        "scanner_results/trivy.json"
+      ],
+      "fixed_version": "4.2.3",
+      "problem": "fast-uri vulnerable to scheme injection via an unescaped first-segment colon in suffix references in fast-uri@3.1.8. Reached via udhaar-mcp@0.1.0 \u2192 @modelcontextprotocol/sdk@1.32.1 \u2192 ajv@8.20.0 \u2192 fast-uri@3.1.8.",
+      "ai_assessment": null,
+      "ai_assessment_kind": "none",
+      "remediation": {
+        "action": "upgrade",
+        "target_version": "3.1.9",
+        "rationale": "co-upgrade: ajv 8.20.0 requires fast-uri ^3.0.1",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 19.0,
+      "ssvc": "Track",
+      "reachability": "used_transitively",
+      "kev": false,
+      "epss": 0.00302,
+      "confidence": "medium",
+      "verification_status": "multi_scanner_confirmed",
+      "scanner_views": {
+        "Grype": {
+          "severity": "LOW",
+          "fixed_versions": [
+            "3.1.9"
+          ]
+        },
+        "OSV-Scanner": {
+          "severity": "LOW",
+          "fixed_versions": [
+            "2.4.8",
+            "3.1.9",
+            "4.2.3"
+          ]
+        },
+        "Trivy": {
+          "severity": "LOW",
+          "fixed_versions": [
+            "2.4.8",
+            "3.1.9",
+            "4.2.3"
+          ]
+        }
+      },
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-011",
+      "category": "Known vulnerabilities (CVE / GHSA)",
+      "segment": "vulnerability",
+      "finding_type": "vulnerability",
+      "component": "fast-uri",
+      "installed_version": "3.1.8",
+      "identifier": "CVE-2026-110095",
+      "aliases": [
+        "GHSA-xhq7-xmqj-769h"
+      ],
+      "severity": "LOW",
+      "severity_basis": "worst severity reported by the scanners",
+      "source_tool": [
+        "Grype",
+        "OSV-Scanner",
+        "Trivy",
+        "OSV.dev API",
+        "npm audit API"
+      ],
+      "dependency_type": "transitive",
+      "dependency_path": [
+        "udhaar-mcp@0.1.0",
+        "@modelcontextprotocol/sdk@1.32.1",
+        "ajv@8.20.0",
+        "fast-uri@3.1.8"
+      ],
+      "location": null,
+      "evidence_reference": [
+        "EV-grype-2e3e148fc5479eae",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-f97730c0fee43bb6",
+        "EV-osv-scanner-a3be07b40a9914ed",
+        "EV-trivy-81f2d5c39a948262",
+        "scanner_results/grype.json",
+        "scanner_results/osv.json",
+        "scanner_results/trivy.json"
+      ],
+      "fixed_version": "4.2.3",
+      "problem": "fast-uri vulnerable to improper path equivalence in relative reference normalization in fast-uri@3.1.8. Reached via udhaar-mcp@0.1.0 \u2192 @modelcontextprotocol/sdk@1.32.1 \u2192 ajv@8.20.0 \u2192 fast-uri@3.1.8.",
+      "ai_assessment": null,
+      "ai_assessment_kind": "none",
+      "remediation": {
+        "action": "upgrade",
+        "target_version": "3.1.9",
+        "rationale": "co-upgrade: ajv 8.20.0 requires fast-uri ^3.0.1",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 18.8,
+      "ssvc": "Track",
+      "reachability": "used_transitively",
+      "kev": false,
+      "epss": 0.00289,
+      "confidence": "medium",
+      "verification_status": "multi_scanner_confirmed",
+      "scanner_views": {
+        "Grype": {
+          "severity": "LOW",
+          "fixed_versions": [
+            "3.1.9"
+          ]
+        },
+        "OSV-Scanner": {
+          "severity": "LOW",
+          "fixed_versions": [
+            "2.4.8",
+            "3.1.9",
+            "4.2.3"
+          ]
+        },
+        "Trivy": {
+          "severity": "LOW",
+          "fixed_versions": [
+            "2.4.8",
+            "3.1.9",
+            "4.2.3"
+          ]
+        }
+      },
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-012",
+      "category": "Known vulnerabilities (CVE / GHSA)",
+      "segment": "vulnerability",
+      "finding_type": "vulnerability",
+      "component": "hono",
+      "installed_version": "4.13.13",
+      "identifier": "CVE-2026-126359",
+      "aliases": [
+        "GHSA-3gg2-335m-rxc6"
+      ],
+      "severity": "LOW",
+      "severity_basis": "worst severity reported by the scanners",
+      "source_tool": [
+        "Grype",
+        "OSV-Scanner",
+        "Trivy",
+        "OSV.dev API",
+        "npm audit API"
+      ],
+      "dependency_type": "transitive",
+      "dependency_path": [
+        "udhaar-mcp@0.1.0",
+        "@modelcontextprotocol/sdk@1.32.1",
+        "hono@4.13.13"
+      ],
+      "location": null,
+      "evidence_reference": [
+        "EV-grype-ca0d8c6da311a527",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-eff89da8b5b57d8a",
+        "EV-osv-scanner-91e8dd7685868461",
+        "EV-trivy-ca08e6f4c7294f28",
+        "scanner_results/grype.json",
+        "scanner_results/osv.json",
+        "scanner_results/trivy.json"
+      ],
+      "fixed_version": "4.13.16",
+      "problem": "Hono: `css` helper does not escape a closing tag split between the template and an interpolated value, allowing HTML injection in hono@4.13.13. Reached via udhaar-mcp@0.1.0 \u2192 @modelcontextprotocol/sdk@1.32.1 \u2192 hono@4.13.13.",
+      "ai_assessment": null,
+      "ai_assessment_kind": "none",
+      "remediation": {
+        "action": "upgrade",
+        "target_version": "4.13.16",
+        "rationale": "minimal: hono 4.13.16 re-scanned clean on the registry (0 known advisories)",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 17.4,
+      "ssvc": "Track",
+      "reachability": "used_transitively",
+      "kev": false,
+      "epss": 0.00262,
+      "confidence": "medium",
+      "verification_status": "multi_scanner_confirmed",
+      "scanner_views": {
+        "Grype": {
+          "severity": "LOW",
+          "fixed_versions": [
+            "4.13.16"
+          ]
+        },
+        "OSV-Scanner": {
+          "severity": "LOW",
+          "fixed_versions": [
+            "4.13.16"
+          ]
+        },
+        "Trivy": {
+          "severity": "LOW",
+          "fixed_versions": [
+            "4.13.16"
+          ]
+        }
+      },
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-013",
+      "category": "Typosquat candidates",
+      "segment": "typosquat",
+      "finding_type": "typosquat_suspect",
+      "component": "cors",
+      "installed_version": "2.8.6",
+      "identifier": "TYPOSQUAT_SUSPECT",
+      "aliases": [],
+      "severity": "MEDIUM",
+      "severity_basis": "Guardian heuristic for this risk type (no CVSS exists)",
+      "source_tool": [
+        "Guardian anomaly agent"
+      ],
+      "dependency_type": "transitive",
+      "dependency_path": [
+        "udhaar-mcp@0.1.0",
+        "@modelcontextprotocol/sdk@1.32.1",
+        "cors@2.8.6"
+      ],
+      "location": null,
+      "evidence_reference": [
+        "EV-anomaly-typosquat_suspect-716386d0c473826a",
+        "EV-input-d4ec34fa11e01a5d"
+      ],
+      "fixed_version": null,
+      "problem": "'cors' is within edit distance 2 of popular package 'colors' (no registry history checked); unverified: name similarity alone does not prove malicious intent.",
+      "ai_assessment": "The cors\u202f2.8.6 package is flagged as a possible typosquat of the popular colors package because its name is within an edit distance of two. No vulnerability score is assigned, but the similarity could indicate a malicious substitution and the package is used transitively in the dependency graph. Review the intent and remove or replace the package to eliminate any risk.",
+      "ai_assessment_kind": "llm_inference_critic_verified",
+      "remediation": {
+        "action": "remove",
+        "target_version": null,
+        "rationale": "Remove or replace with the intended package after review. Signals: typosquat_suspect.",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 28.0,
+      "ssvc": "Track",
+      "reachability": "used_transitively",
+      "kev": null,
+      "epss": null,
+      "confidence": "medium",
+      "verification_status": "unverified_hypothesis",
+      "scanner_views": {},
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-014",
+      "category": "Install-time scripts",
+      "segment": "install_script",
+      "finding_type": "install_script",
+      "component": "esbuild",
+      "installed_version": "0.28.2",
+      "identifier": "INSTALL_SCRIPT",
+      "aliases": [],
+      "severity": "MEDIUM",
+      "severity_basis": "Guardian heuristic for this risk type (no CVSS exists)",
+      "source_tool": [
+        "Guardian anomaly agent",
+        "npm registry metadata"
+      ],
+      "dependency_type": "transitive",
+      "dependency_path": [
+        "udhaar-mcp@0.1.0",
+        "tsx@4.23.15",
+        "esbuild@0.28.2"
+      ],
+      "location": null,
+      "evidence_reference": [
+        "EV-anomaly-install_script-eed4342306653489",
+        "EV-input-d4ec34fa11e01a5d"
+      ],
+      "fixed_version": null,
+      "problem": "esbuild runs code at install time.",
+      "ai_assessment": "The esbuild package (version 0.28.2) includes an install\u2011script that executes code during npm install. Although the package is not imported at runtime (reachability\u202f=\u202fnot_imported), the script can run on any system that installs the dependency, posing a supply\u2011chain risk. With a score of 20 and an Ssvc of\u202fTrack, it should be monitored for malicious behavior.",
+      "ai_assessment_kind": "llm_inference_critic_verified",
+      "remediation": null,
+      "risk_score": 20.0,
+      "ssvc": "Track",
+      "reachability": "not_imported",
+      "kev": null,
+      "epss": null,
+      "confidence": "medium",
+      "verification_status": "potential_risk",
+      "scanner_views": {},
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-015",
+      "category": "Install-time scripts",
+      "segment": "install_script",
+      "finding_type": "install_script",
+      "component": "fsevents",
+      "installed_version": "2.3.3",
+      "identifier": "INSTALL_SCRIPT",
+      "aliases": [],
+      "severity": "MEDIUM",
+      "severity_basis": "Guardian heuristic for this risk type (no CVSS exists)",
+      "source_tool": [
+        "Guardian anomaly agent",
+        "npm registry metadata"
+      ],
+      "dependency_type": "transitive",
+      "dependency_path": [
+        "udhaar-mcp@0.1.0",
+        "tsx@4.23.15",
+        "fsevents@2.3.3"
+      ],
+      "location": null,
+      "evidence_reference": [
+        "EV-anomaly-install_script-eed4342306653489",
+        "EV-input-d4ec34fa11e01a5d"
+      ],
+      "fixed_version": null,
+      "problem": "fsevents runs code at install time.",
+      "ai_assessment": null,
+      "ai_assessment_kind": "none",
+      "remediation": null,
+      "risk_score": 20.0,
+      "ssvc": "Track",
+      "reachability": "not_imported",
+      "kev": null,
+      "epss": null,
+      "confidence": "medium",
+      "verification_status": "potential_risk",
+      "scanner_views": {},
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-016",
+      "category": "Container image risks",
+      "segment": "container",
+      "finding_type": "unpinned_base_image",
+      "component": "Dockerfile",
+      "installed_version": null,
+      "identifier": "UNPINNED_BASE_IMAGE",
+      "aliases": [],
+      "severity": "LOW",
+      "severity_basis": "Guardian heuristic for this risk type (no CVSS exists)",
+      "source_tool": [
+        "Guardian CI/CD agent"
+      ],
+      "dependency_type": "n/a",
+      "dependency_path": [],
+      "location": "Dockerfile:1",
+      "evidence_reference": [
+        "EV-cicd-5ece4b89f921d637"
+      ],
+      "fixed_version": null,
+      "problem": "Base image node:22-slim is referenced by tag, not digest; the tag can be re-pointed. (Dockerfile:1)",
+      "ai_assessment": "The Dockerfile uses the base image node:22-slim by tag, which is unpinned and could be redirected to a newer, potentially vulnerable version. This occurs at line\u202f1 of the Dockerfile, affecting the entire container build. With a Track SSVC score of 22.0, the lack of a digest makes the image supply chain mutable. Pin the base image to a specific sha256 digest (and avoid end\u2011of\u2011life tags).",
+      "ai_assessment_kind": "llm_inference_critic_verified",
+      "remediation": {
+        "action": "pin",
+        "target_version": null,
+        "rationale": "Pin the base image by @sha256 digest (and move off EOL tags).",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 22.0,
+      "ssvc": "Track",
+      "reachability": "n/a",
+      "kev": null,
+      "epss": null,
+      "confidence": "medium",
+      "verification_status": "static_check",
+      "scanner_views": {},
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-017",
+      "category": "Container image risks",
+      "segment": "container",
+      "finding_type": "unpinned_base_image",
+      "component": "Dockerfile",
+      "installed_version": null,
+      "identifier": "UNPINNED_BASE_IMAGE",
+      "aliases": [],
+      "severity": "LOW",
+      "severity_basis": "Guardian heuristic for this risk type (no CVSS exists)",
+      "source_tool": [
+        "Guardian CI/CD agent"
+      ],
+      "dependency_type": "n/a",
+      "dependency_path": [],
+      "location": "Dockerfile:9",
+      "evidence_reference": [
+        "EV-cicd-253857e741c30cb0"
+      ],
+      "fixed_version": null,
+      "problem": "Base image node:22-slim is referenced by tag, not digest; the tag can be re-pointed. (Dockerfile:9)",
+      "ai_assessment": "The Dockerfile uses the base image node:22-slim by tag, which is unpinned and could be redirected to a newer, potentially vulnerable version. This occurs at line\u202f9 of the Dockerfile, affecting the entire container build. With a Track SSVC score of 22.0, the lack of a digest makes the image supply chain mutable. Pin the base image to a specific sha256 digest (and avoid end\u2011of\u2011life tags).",
+      "ai_assessment_kind": "llm_inference_critic_verified",
+      "remediation": {
+        "action": "pin",
+        "target_version": null,
+        "rationale": "Pin the base image by @sha256 digest (and move off EOL tags).",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 22.0,
+      "ssvc": "Track",
+      "reachability": "n/a",
+      "kev": null,
+      "epss": null,
+      "confidence": "medium",
+      "verification_status": "static_check",
+      "scanner_views": {},
+      "severity_disagreement": false
+    },
+    {
+      "finding_id": "F-018",
+      "category": "Infrastructure & configuration misconfigurations",
+      "segment": "misconfiguration",
+      "finding_type": "misconfiguration",
+      "component": "Dockerfile",
+      "installed_version": null,
+      "identifier": "DS-0026",
+      "aliases": [],
+      "severity": "LOW",
+      "severity_basis": "severity reported by Trivy",
+      "source_tool": [
+        "Trivy"
+      ],
+      "dependency_type": "n/a",
+      "dependency_path": [],
+      "location": "Dockerfile:None",
+      "evidence_reference": [
+        "EV-trivy-misconfig-c2ae0c7ad18e68b8",
+        "scanner_results/trivy.json"
+      ],
+      "fixed_version": null,
+      "problem": "No HEALTHCHECK defined: Add HEALTHCHECK instruction in your Dockerfile",
+      "ai_assessment": "The Dockerfile lacks a HEALTHCHECK instruction, meaning the container has no built\u2011in liveness probe and failures may go undetected. Trivy flagged this as misconfiguration DS\u20110026 with a score of 12 and an Ssvc of\u202fTrack, indicating it should be addressed. Apply the recommended fix by adding a HEALTHCHECK command to the Dockerfile as described in the Trivy report.",
+      "ai_assessment_kind": "llm_inference_critic_verified",
+      "remediation": {
+        "action": "fix_config",
+        "target_version": null,
+        "rationale": "Apply the fix described by the failed Trivy check. Add HEALTHCHECK instruction in Dockerfile",
+        "blocker": null,
+        "status": "proposed",
+        "source": "agent_plan",
+        "requires_human_approval": true
+      },
+      "risk_score": 12.0,
+      "ssvc": "Track",
+      "reachability": "n/a",
+      "kev": null,
+      "epss": null,
+      "confidence": "medium",
+      "verification_status": "scanner_confirmed",
+      "scanner_views": {},
+      "severity_disagreement": false
+    }
+  ],
+  "remediation_summary": {
+    "upgrade": 12,
+    "remove": 1,
+    "pin": 2,
+    "fix_config": 1
+  },
+  "validation": {
+    "accepted": 18,
+    "rejected": [],
+    "rules": [
+      "vulnerability identifiers must exist in raw scanner output or an authoritative advisory source",
+      "component versions must exist in the SBOM or lockfile",
+      "dependency paths must be graph edges",
+      "fixed versions must be reported by a scanner or advisory",
+      "secret values are never included"
+    ]
+  },
+  "limitations": [
+    "Findings show that a version contains a known flaw or risk signal; exploitability and runtime reachability are not proven (reachability is import-based).",
+    "Repositories without a committed lockfile are resolved at scan time; versions can differ from deployments.",
+    "Registry metadata (install scripts, deprecation, release age) is fetched for direct dependencies and scanner-flagged packages only.",
+    "AI explanations are generated from structured evidence and checked by the critic agent; they are summaries, not new evidence.",
+    "Secret matches are pattern-based candidates and must be confirmed before rotation."
+  ]
+}

@@ -156,7 +156,7 @@ class Finding(BaseModel):
 # ------------------------------------------------------------------ validation
 class EvidenceValidator:
     def __init__(self, scan_dir: Path, graph: dict, agent_report: dict):
-        bom = json.loads((scan_dir / "sbom" / "bom.json").read_text())
+        bom = json.loads((scan_dir / "sbom" / "bom.json").read_text(encoding="utf-8"))
         self.sbom_versions = {(f"{c['group']}/{c['name']}" if c.get("group") else c["name"], c.get("version"))
                               for c in bom.get("components", [])}
         self.lock_purls = {c["purl"] for c in agent_report.get("inventory", {}).get("components", [])}
@@ -164,16 +164,16 @@ class EvidenceValidator:
         ids: set[str] = set()
         res = scan_dir / "scanner_results"
         if (res / "grype.json").exists():
-            for m in json.loads((res / "grype.json").read_text()).get("matches", []):
+            for m in json.loads((res / "grype.json").read_text(encoding="utf-8")).get("matches", []):
                 ids.add(m["vulnerability"]["id"])
                 ids |= {r["id"] for r in m.get("relatedVulnerabilities", []) if r.get("id")}
         if (res / "osv.json").exists():
-            for r in json.loads((res / "osv.json").read_text()).get("results", []):
+            for r in json.loads((res / "osv.json").read_text(encoding="utf-8")).get("results", []):
                 for p in r.get("packages", []):
                     for v in p.get("vulnerabilities", []):
                         ids |= {v["id"], *(v.get("aliases") or [])}
         if (res / "trivy.json").exists():
-            for r in json.loads((res / "trivy.json").read_text()).get("Results") or []:
+            for r in json.loads((res / "trivy.json").read_text(encoding="utf-8")).get("Results") or []:
                 for v in r.get("Vulnerabilities") or []:
                     ids |= {v["VulnerabilityID"], *(v.get("VendorIDs") or [])}
         self.scanner_ids = {i.upper() for i in ids}
@@ -216,13 +216,13 @@ def _sev_band_from_cvss(score: float | None) -> str | None:
 
 def build_report(scan_dir: Path) -> dict:
     scan_dir = Path(scan_dir)
-    meta = json.loads((scan_dir / "scan.json").read_text())
-    graph = json.loads((scan_dir / "graphs" / "graph.json").read_text())
+    meta = json.loads((scan_dir / "scan.json").read_text(encoding="utf-8"))
+    graph = json.loads((scan_dir / "graphs" / "graph.json").read_text(encoding="utf-8"))
     rep_path = scan_dir / "agents" / "guardian-report.json"
-    rep = json.loads(rep_path.read_text()) if rep_path.exists() else {"findings": [], "remediation_plans": {}}
+    rep = json.loads(rep_path.read_text(encoding="utf-8")) if rep_path.exists() else {"findings": [], "remediation_plans": {}}
     inv_path = scan_dir / "agents" / "investigation.json"
-    inv = json.loads(inv_path.read_text()) if inv_path.exists() else {}
-    bom = json.loads((scan_dir / "sbom" / "bom.json").read_text())
+    inv = json.loads(inv_path.read_text(encoding="utf-8")) if inv_path.exists() else {}
+    bom = json.loads((scan_dir / "sbom" / "bom.json").read_text(encoding="utf-8"))
     purl_to_ref = {c["purl"]: c.get("bom-ref", c["purl"]) for c in bom.get("components", []) if c.get("purl")}
     nodes = {n["id"]: n for n in graph["nodes"]}
     label = lambda nid: f"{nodes[nid]['name']}@{nodes[nid]['version']}" if nid in nodes else nid
@@ -666,8 +666,8 @@ def write_reports(scan_dir: Path) -> dict:
     out = scan_dir / "report"
     out.mkdir(exist_ok=True)
     report = build_report(scan_dir)
-    (out / "guardian-report.json").write_text(json.dumps(report, indent=2, default=str))
-    (out / "guardian-report.html").write_text(render_html(report))
+    (out / "guardian-report.json").write_text(json.dumps(report, indent=2, default=str), encoding="utf-8")
+    (out / "guardian-report.html").write_text(render_html(report), encoding="utf-8")
     pdf_status = render_pdf(out / "guardian-report.html", out / "guardian-report.pdf")
     return {"dir": str(out), "findings": len(report["findings"]), "rejected": len(report["validation"]["rejected"]),
             "pdf": pdf_status, "by_category": report["executive_summary"]["by_category"]}

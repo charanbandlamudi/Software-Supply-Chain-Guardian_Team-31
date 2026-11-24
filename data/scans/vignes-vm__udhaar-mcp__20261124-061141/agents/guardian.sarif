@@ -1,0 +1,402 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Supply Chain Guardian",
+          "version": "2.0",
+          "rules": [
+            {
+              "id": "install_script"
+            },
+            {
+              "id": "misconfiguration"
+            },
+            {
+              "id": "typosquat_suspect"
+            },
+            {
+              "id": "unpinned_base_image"
+            },
+            {
+              "id": "vulnerability"
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2026-111181 in pkg:npm/body-parser@2.3.0: body-parser vulnerable to Denial of Service via trailing bytes after a compressed request body"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/body-parser@2.3.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 31.4,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "typosquat_suspect",
+          "level": "note",
+          "message": {
+            "text": "TYPOSQUAT_SUSPECT in pkg:npm/cors@2.8.6: 'cors' is within edit distance 2 of popular package 'colors' (no registry history checked); unverified: name similarity alone does not prove malicious intent."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/cors@2.8.6"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 28.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-126343 in pkg:npm/%40hono/node-server@2.1.5: @hono/node-server: Unhandled `ECONNRESET` on the socket during an asynchronous WebSocket upgrade crashes the process"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/%40hono/node-server@2.1.5"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 26.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-126357 in pkg:npm/hono@4.13.13: Hono: `mount()` and `app.mount()` can forward a path that bypasses middleware scoped inside the mount prefix"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/hono@4.13.13"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 25.3,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-126356 in pkg:npm/hono@4.13.13: Hono: `validator('form')` skips validation for `multipart/form-data` requests with extra parameters"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/hono@4.13.13"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 25.2,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-126210 in pkg:npm/%40hono/node-server@2.1.5: @hono/node-server: Backslash in the request path is parsed as a path separator, bypassing path-based access control at a reverse proxy"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/%40hono/node-server@2.1.5"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 24.9,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-110306 in pkg:npm/fast-uri@3.1.8: fast-uri vulnerable to URI scheme spoofing via percent-encoded scheme decoding"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/fast-uri@3.1.8"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 24.9,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-126358 in pkg:npm/hono@4.13.13: Hono: RegExpRouter skips wildcard middleware for some route sets and for paths with an encoded line terminator"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/hono@4.13.13"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 24.8,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_base_image",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/repo/Dockerfile: Base image node:22-slim is referenced by tag, not digest; the tag can be re-pointed."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/repo/Dockerfile"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 22.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_base_image",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/repo/Dockerfile: Base image node:22-slim is referenced by tag, not digest; the tag can be re-pointed."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-061141/repo/Dockerfile"
+                },
+                "region": {
+                  "startLine": 9
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 22.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-126355 in pkg:npm/hono@4.13.13: Hono: `csrf()` does not check requests sent by hyperlink auditing (`text/ping`)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/hono@4.13.13"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 21.3,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-110180 in pkg:npm/fast-uri@3.1.8: fast-uri vulnerable to host confusion via unchecked WHATWG host canonicalization"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/fast-uri@3.1.8"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 21.3,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "install_script",
+          "level": "note",
+          "message": {
+            "text": "INSTALL_SCRIPT in pkg:npm/esbuild@0.28.2: esbuild runs code at install time."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/esbuild@0.28.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "install_script",
+          "level": "note",
+          "message": {
+            "text": "INSTALL_SCRIPT in pkg:npm/fsevents@2.3.3: fsevents runs code at install time."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/fsevents@2.3.3"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-110725 in pkg:npm/fast-uri@3.1.8: fast-uri vulnerable to scheme injection via an unescaped first-segment colon in suffix references"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/fast-uri@3.1.8"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 19.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-110095 in pkg:npm/fast-uri@3.1.8: fast-uri vulnerable to improper path equivalence in relative reference normalization"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/fast-uri@3.1.8"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 18.8,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-126359 in pkg:npm/hono@4.13.13: Hono: `css` helper does not escape a closing tag split between the template and an interpolated value, allowing HTML injection"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/hono@4.13.13"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 17.4,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "DS-0026 in file:Dockerfile: No HEALTHCHECK defined: Add HEALTHCHECK instruction in your Dockerfile"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Dockerfile"
+                },
+                "region": {
+                  "startLine": null
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        }
+      ]
+    }
+  ]
+}
