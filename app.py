@@ -113,9 +113,9 @@ if stats:
                                       ("Medium", sev.get("MEDIUM", 0)), ("Low", sev.get("LOW", 0))]):
         col.metric(lbl, val)
 
-tab_graph, tab_report, tab_changes, tab_agents, tab_fix, tab_repo, tab_steps, tab_files = st.tabs(
-    ["Dependency graph", "Final report", "What changed", "Agent investigation", "Remediation review (human-in-the-loop)",
-     "Misconfigurations & secrets", "Scan steps & tools", "Artifacts"])
+tab_graph, tab_report, tab_changes, tab_blast, tab_agents, tab_fix, tab_repo, tab_steps, tab_files = st.tabs(
+    ["Dependency graph", "Final report", "What changed", "Blast radius & attack paths", "Agent investigation",
+     "Remediation review (human-in-the-loop)", "Misconfigurations & secrets", "Scan steps & tools", "Artifacts"])
 
 with tab_graph:
     html = current["artifacts"].get("graph_html")
@@ -216,6 +216,146 @@ with tab_changes:
         if ch.get("baseline_lockfile"):
             st.caption(f"Baseline lockfile for the anomaly agent: {ch['baseline_lockfile']['source']} — used to flag "
                        "unexpected dependencies, lockfile tampering and suspicious updates.")
+
+with tab_blast:
+    from pipeline.analysis import load_or_run
+    import plotly.graph_objects as go
+    try:
+        BR = load_or_run(Path(current["scan_dir"]))
+    except Exception as e:
+        BR = None
+        st.info(f"Blast radius analysis unavailable for this scan: {e}")
+    if BR and not BR["packages"]:
+        st.success("No vulnerable packages in the dependency graph — nothing to analyse.")
+    elif BR:
+        TIER_C = {"CRITICAL": "#dc2626", "HIGH": "#ea580c", "MEDIUM": "#d97706", "LOW": "#65a30d"}
+        tot = BR["totals"]
+        st.caption("How far each vulnerable package's impact reaches through the dependency graph, and every path by which "
+                   "it is reachable from the application. Computed from the SBOM graph and scanner data (CVSS, EPSS, CWE) "
+                   "by `ssg_analysis.py`; paths show reachability in the dependency tree, not proof of exploitation.")
+        k = st.columns(6)
+        for col, (lbl, val) in zip(k, [("Vulnerable packages", tot["vulnerable_packages"]),
+                                       ("Critical blast radius", tot["by_tier"].get("CRITICAL", 0)),
+                                       ("High blast radius", tot["by_tier"].get("HIGH", 0)),
+                                       ("Attack paths", tot["attack_paths"]), ("Entry points", tot["entry_points"]),
+                                       ("Chokepoints", tot["chokepoints"])]):
+            col.metric(lbl, val)
+
+        pk = BR["packages"]
+        st.markdown("#### 1 · Blast radius ranking")
+        w = BR["weights"]
+        st.caption("Score 0–100 = " + " + ".join(f"{int(v * 100)}% {k_}" for k_, v in w.items())
+                   + f". Severity = worst CVSS/10 or severity band; exploit = worst EPSS (≥{int(BR['epss_saturation'] * 100)}% counts as 1.0); "
+                   "proximity decays with hops from the app; spread = dependents above + packages below (log-scaled); "
+                   "volume = findings/10. Tiers: " + ", ".join(f"{t} ≥ {lim}" for lim, t in BR["tiers"]) + ".")
+        fig = go.Figure(go.Bar(x=[p["score"] for p in pk][::-1], y=[p["label"] for p in pk][::-1], orientation="h",
+                               marker_color=[TIER_C.get(p["tier"], "#94a3b8") for p in pk][::-1],
+                               text=[p["tier"] for p in pk][::-1], textposition="inside",
+                               hovertemplate="%{y}<br>score %{x}<extra></extra>"))
+        fig.update_layout(height=max(320, 26 * len(pk)), margin=dict(l=10, r=10, t=10, b=10), xaxis_title="Blast radius score",
+                          xaxis_range=[0, 100], plot_bgcolor="rgba(0,0,0,0)")
+        st.plotly_chart(fig, width="stretch")
+        st.dataframe([{"Package": p["label"], "Tier": p["tier"], "Score": p["score"], "Worst severity": p["sev"],
+                       "Findings": len(p["findings"]), "Max CVSS": p["max_cvss"] or None,
+                       "Max EPSS %": round(p["max_epss"] * 100, 2) if p["max_epss"] else None, "Hops": p["hops"],
+                       "Dependents (above)": len(p["dependents"]), "Subtree (below)": len(p["subtree"]),
+                       "Paths": len(p["paths"]), "Enters via": ", ".join(p["entry"])} for p in pk],
+                     hide_index=True, width="stretch")
+
+        st.markdown("#### 2 · Package drill-down")
+        sel = st.selectbox("Package", [p["label"] for p in pk], key="br-pkg")
+        P = next(p for p in pk if p["label"] == sel)
+        c1, c2 = st.columns([2, 3])
+        with c1:
+            st.markdown(f"**{P['label']}** — {P['tier']} blast radius (**{P['score']}**) · {P['dep_type']} dependency, "
+                        f"{P['hops']} hop(s) from the app")
+            comp = P.get("components") or {}
+            if comp:
+                cf = go.Figure(go.Bar(x=[round(100 * w[k_] * comp[k_], 1) for k_ in w], y=list(w), orientation="h",
+                                      marker_color="#2563eb",
+                                      hovertemplate="%{y}: %{x} points<extra></extra>"))
+                cf.update_layout(height=220, margin=dict(l=10, r=10, t=10, b=10), xaxis_title="points contributed",
+                                 plot_bgcolor="rgba(0,0,0,0)")
+                st.plotly_chart(cf, width="stretch")
+            st.markdown(f"**Dependents (blast upward):** {len(P['dependents'])}  \n" + ", ".join(f"`{d}`" for d in P["dependents"][:15]))
+            st.markdown(f"**Sub-dependencies (blast downward):** {len(P['subtree'])}  \n" + ", ".join(f"`{d}`" for d in P["subtree"][:15]))
+        with c2:
+            st.markdown(f"**Attack paths** ({len(P['paths'])}{', search truncated' if P['trunc'] else ''}) — application → … → vulnerable package")
+            for path in P["paths"][:8]:
+                st.markdown(" → ".join(f"`{x}`" for x in path[:-1]) + (" → " if len(path) > 1 else "") + f"**`{path[-1]}`**")
+            st.markdown("**Findings**")
+            st.dataframe([{"ID": c["id"], "Severity": c["sev"], "CVSS": c["cvss"], "EPSS %": round(c["epss"] * 100, 2) if c["epss"] else None,
+                           "Exposure class": c["cls"], "Fixed in": c["fix"], "Summary": c["desc"]} for c in P["findings"]],
+                         hide_index=True, width="stretch")
+
+        st.markdown("#### 3 · Attack path map")
+        st.caption("Every dependency path from the application to a vulnerable package, merged. Band width = number of distinct "
+                   "paths using that edge; red nodes are vulnerable packages, amber nodes are chokepoints.")
+        edges = BR["path_edges"]
+        unlinked = [p["label"] for p in pk if not p["paths"]]
+        if unlinked:
+            st.info(f"{len(unlinked)} vulnerable package(s) have no path from the application because the SBOM does not "
+                    f"link them into the dependency tree (common when cdxgen cannot fully resolve a Maven/Gradle build): "
+                    f"{', '.join(unlinked[:10])}{' …' if len(unlinked) > 10 else ''}. Their blast radius uses severity, "
+                    "exploitability and volume only.")
+        names = sorted({e["from"] for e in edges} | {e["to"] for e in edges})
+        ix = {n: i for i, n in enumerate(names)}
+        vuln_short = {p["id"].split("/", 1)[-1] for p in pk}
+        choke_names = {c["package"] for c in BR["chokepoints"]}
+        ncol = ["#0f172a" if n == BR["root"] else "#dc2626" if n in vuln_short else "#d97706" if n in choke_names else "#94a3b8"
+                for n in names]
+        if not edges:
+            st.caption("No dependency paths to draw.")
+        sk = None if not edges else go.Figure(go.Sankey(arrangement="snap",
+                                 node=dict(label=names, color=ncol, pad=12, thickness=14),
+                                 link=dict(source=[ix[e["from"]] for e in edges], target=[ix[e["to"]] for e in edges],
+                                           value=[e["paths"] for e in edges], color="rgba(100,116,139,0.25)")))
+        if sk:
+            sk.update_layout(height=max(500, 14 * len(names)), margin=dict(l=10, r=10, t=10, b=10), font_size=11)
+            st.plotly_chart(sk, width="stretch")
+
+        e1, e2 = st.columns(2)
+        with e1:
+            st.markdown("#### 4 · Entry points & fix leverage")
+            st.caption("Direct dependencies through which vulnerable code enters. Upgrading one can clear every finding beneath it "
+                       "(check it pins patched transitive versions, or use overrides).")
+            st.dataframe([{"Direct dependency": x["direct_dependency"], "Findings cleared": x["findings"], "Worst": x["worst"],
+                           "Vulnerable packages beneath": ", ".join(x["vulnerable_packages"])} for x in BR["entry_points"]],
+                         hide_index=True, width="stretch")
+        with e2:
+            st.markdown("#### 5 · Chokepoints")
+            st.caption("Intermediate packages on the paths to several vulnerable packages — fixing or replacing one breaks them all.")
+            st.dataframe([{"Package": c["package"], "Vulnerable targets": c["vulnerable_targets"],
+                           "Findings behind it": c["findings_behind"], "Targets": ", ".join(c["targets"])}
+                          for c in BR["chokepoints"][:15]], hide_index=True, width="stretch")
+
+        st.markdown("#### 6 · Exposure classes (from CWE)")
+        cls = BR["exposure_classes"]
+        cfig = go.Figure(go.Bar(x=list(cls), y=[len(v) for v in cls.values()], marker_color="#7c3aed"))
+        cfig.update_layout(height=280, margin=dict(l=10, r=10, t=10, b=10), yaxis_title="vulnerable packages",
+                           plot_bgcolor="rgba(0,0,0,0)")
+        st.plotly_chart(cfig, width="stretch")
+        for name, items in sorted(cls.items(), key=lambda kv: -max(i["score"] for i in kv[1])):
+            with st.expander(f"{name} — {len(items)} package(s)"):
+                st.dataframe([{"Package": i["package"], "Blast radius": i["score"], "Findings": i["findings"],
+                               "Worst finding": i["worst"]} for i in items], hide_index=True, width="stretch")
+
+        env = BR["environment"]
+        st.markdown("#### 7 · Environment amplifiers (Trivy)")
+        st.caption("Things that widen the damage once a path is exploited.")
+        a1, a2, a3 = st.columns(3)
+        a1.metric("Secrets in the repository", len(env["secrets"]))
+        a2.metric("Dockerfile misconfigurations", len(env["dockerfile_misconfigurations"]))
+        a3.metric("IaC misconfigurations", sum(env["iac_misconfigurations"].values()))
+        if env["secrets"]:
+            st.dataframe(env["secrets"], hide_index=True, width="stretch")
+
+        adir = Path(current["scan_dir"]) / "analysis"
+        d1, d2 = st.columns(2)
+        for col, fname, label in ((d1, "blast_radius_report.md", "⬇️ Blast radius report (Markdown)"),
+                                  (d2, "attack_path_report.md", "⬇️ Attack path report (Markdown)")):
+            if (adir / fname).exists():
+                col.download_button(label, (adir / fname).read_bytes(), file_name=fname, key=f"br-{fname}", width="stretch")
 
 with tab_agents:
     adir = Path(current["artifacts"].get("agents_dir") or Path(current["scan_dir"]) / "agents")

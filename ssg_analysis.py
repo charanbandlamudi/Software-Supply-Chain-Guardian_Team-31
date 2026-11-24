@@ -202,6 +202,7 @@ def analyse(graph, indexes, max_paths):
                     spread=math.log10(1 + len(p["dependents"]) + len(p["subtree"])) / math.log10(1 + top_span),
                     volume=min(1, len(p["cves"]) / 10))
         p["score"] = round(100 * sum(W[k] * comp[k] for k in W), 1)
+        p["components"] = {k: round(v, 3) for k, v in comp.items()}   # kept for the UI's score breakdown
         p["tier"] = next(t for lim, t in TIERS if p["score"] >= lim)
     pkgs.sort(key=lambda p: -p["score"])
     return nodes, root, pkgs
@@ -227,9 +228,10 @@ def fix_plan(pkgs):
             by[e].append(p)
     rows = []
     for entry, ps in by.items():
-        worst = min((SEV_ORDER.index(p["sev"]) for p in ps))
-        rows.append((entry, sum(len(p["cves"]) for p in ps), SEV_ORDER[worst], ps))
-    return sorted(rows, key=lambda r: (-r[1], SEV_ORDER.index(r[2])))
+        rank = lambda s_: SEV_ORDER.index(s_) if s_ in SEV_ORDER else len(SEV_ORDER)   # UNKNOWN etc. sort last
+        worst = min(ps, key=lambda p: rank(p["sev"]))["sev"]
+        rows.append((entry, sum(len(p["cves"]) for p in ps), worst, ps))
+    return sorted(rows, key=lambda r: (-r[1], SEV_ORDER.index(r[2]) if r[2] in SEV_ORDER else len(SEV_ORDER)))
 
 
 # ---------------------------------------------------------------- reports

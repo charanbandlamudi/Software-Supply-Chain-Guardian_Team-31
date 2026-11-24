@@ -328,6 +328,7 @@ data/scans/<owner>__<repo>__<YYYYmmdd-HHMMSS>/
 │   ├── scan.py               # pipeline: clone → lockfile → SBOM → scanners → graph → agents; scan.json; background runner
 │   ├── agents.py             # bridge: scan folder → guardian_v2 inputs; runs the agents; saves investigation.json
 │   ├── changes.py            # what changed: git history diff + previous-scan diff + baseline lockfile
+│   ├── analysis.py           # blast radius + attack paths (wraps ssg_analysis.py) → analysis/*.md + analysis.json
 │   └── remediation.py        # Gate 1 → policy → apply → resolve → sandbox (packages + whole app before/after:
 │                             #   install, build, tests, image, Trivy, SBOM diff) → re-scan → Gate 2 → report → draft PR
 ├── graph/
@@ -593,6 +594,38 @@ using facts only:
 The UI's *What changed* tab and the report's *What changed* section show the timeline and the diffs. On Juice
 Shop, the latest dependency commit ("Replace module dependencies with native Node.") removed seven `@types/*`
 dev dependencies.
+
+## Blast radius & attack paths
+
+The **Blast radius & attack paths** tab (pipeline step 8, [`pipeline/analysis.py`](pipeline/analysis.py) wrapping
+the team's [`ssg_analysis.py`](ssg_analysis.py)) shows how far each vulnerable package's impact reaches, and every
+path by which it can be reached from the application. All inputs come from `graph.json` and the raw
+Grype / OSV-Scanner / Trivy output (CVSS, EPSS, CWE, fix versions).
+
+- **Blast radius score (0–100):** 35% severity (worst CVSS/10 or severity band), 25% exploitability (worst EPSS;
+  ≥20% counts as 1.0), 15% proximity (decays with hops from the app), 15% spread (dependents above plus
+  packages below, log-scaled) and 10% volume (findings/10). Tiers: CRITICAL ≥60, HIGH ≥45, MEDIUM ≥30. The tab
+  shows a ranked chart and table, plus a **per-package breakdown** of how many points each part contributed.
+- **Attack paths:** every dependency path from the application to each vulnerable package (capped at 50 per
+  package, with truncation flagged), and a **Sankey map** of all paths merged. Red marks vulnerable packages,
+  amber marks chokepoints.
+- **Entry points / fix leverage:** the direct dependency each vulnerable package comes in through, and how many
+  findings upgrading it could clear.
+- **Chokepoints:** intermediate packages that sit on the paths to several vulnerable packages, so fixing one
+  breaks them all.
+- **Exposure classes** from CWE (injection, authentication bypass, prototype pollution, denial of service…), and
+  **environment amplifiers** from Trivy (secrets, Dockerfile and IaC misconfigurations).
+- **Downloads:** `analysis/blast_radius_report.md` and `analysis/attack_path_report.md`. The structured data is
+  in `analysis/analysis.json`.
+
+On Juice Shop: 20 vulnerable packages, 7 with a critical and 6 with a high blast radius. The top three are
+`lodash@2.4.2` (79.7, entering through `sanitize-html`), `jsonwebtoken@0.4.0` (69.5, direct) and
+`jsonwebtoken@0.1.0` (69.4, through `express-jwt`). There are 30 attack paths up to 7 hops deep, 14 entry points
+and 24 chokepoints (for example `sqlite3@5.1.7`, which 13 findings sit behind).
+
+Paths show reachability in the dependency tree, not proof that vulnerable code is called. Packages the SBOM
+doesn't link into the tree (common for some Maven/Gradle builds) have no path; the tab says so, and scores them
+on severity, exploitability and volume only. Older scans get the analysis computed the first time the tab opens.
 
 ## Provenance: where each piece of data comes from
 

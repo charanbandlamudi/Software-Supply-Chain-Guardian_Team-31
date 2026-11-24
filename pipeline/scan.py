@@ -46,6 +46,7 @@ STEPS = [
     ("changes", "What changed (git history + previous scan)"),
     ("agents", "Agent investigation (guardian_v2)"),
     ("report", "Final Guardian Report (JSON / HTML / PDF)"),
+    ("analysis", "Blast radius & attack paths"),
 ]
 
 
@@ -187,6 +188,25 @@ def load_scan(scan_id: str) -> dict | None:
         return None
     if m.get("status") == "running" and not is_active(scan_id):
         m["status"] = "interrupted"  # server restarted / process died mid-scan
+    return _localize_paths(m, scan_id)
+
+
+def _localize_paths(m: dict, scan_id: str) -> dict:
+    """Scans shared through git keep the absolute paths of the machine that ran them (e.g. C:\\Users\\...).
+    Re-anchor scan_dir and artifact paths to this machine's data/scans/<scan_id> when they don't exist here."""
+    local = SCANS_DIR / scan_id
+
+    def fix(p):
+        if not isinstance(p, str) or Path(p).exists():
+            return p
+        norm = p.replace("\\", "/")
+        if f"/{scan_id}/" in norm or norm.endswith(f"/{scan_id}"):
+            rest = norm.split(f"/{scan_id}", 1)[1].lstrip("/")
+            cand = local / rest if rest else local
+            return str(cand)
+        return p
+    m["scan_dir"] = fix(m.get("scan_dir")) if m.get("scan_dir") else str(local)
+    m["artifacts"] = {k: fix(v) for k, v in (m.get("artifacts") or {}).items()}
     return m
 
 
@@ -419,6 +439,19 @@ def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) ->
              f"{rp['rejected']} rejected; PDF: {rp['pdf']}", t0)
     except Exception as e:
         step("report", "failed", f"{type(e).__name__}: {str(e)[:300]}", t0)
+
+    # 8. blast radius + attack paths (ssg_analysis.py) -----------------------------------
+    t0 = time.monotonic(); step("analysis", "running")
+    try:
+        from pipeline.analysis import run_analysis
+        br = run_analysis(scan_dir)
+        meta["artifacts"]["analysis"] = str(scan_dir / "analysis")
+        t = br["totals"]
+        step("analysis", "ok", f"{t['vulnerable_packages']} vulnerable packages ranked "
+             f"({t['by_tier'].get('CRITICAL', 0)} critical blast radius), {t['attack_paths']} attack paths, "
+             f"{t['chokepoints']} chokepoints", t0)
+    except Exception as e:      # informational: never fails the scan
+        step("analysis", "warn", f"{type(e).__name__}: {str(e)[:200]}", t0)
 
     # A scan is only "complete" if every required step succeeded.
     ok = all(meta["steps"][k]["status"] == "ok" for k in REQUIRED)
