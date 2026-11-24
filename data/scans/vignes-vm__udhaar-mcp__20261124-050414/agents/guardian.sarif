@@ -12,6 +12,9 @@
               "id": "install_script"
             },
             {
+              "id": "misconfiguration"
+            },
+            {
               "id": "typosquat_suspect"
             },
             {
@@ -48,7 +51,7 @@
           "ruleId": "typosquat_suspect",
           "level": "note",
           "message": {
-            "text": "TYPOSQUAT_SUSPECT in pkg:npm/cors@2.8.6: 'cors' is within edit distance 2 of popular package 'colors'."
+            "text": "TYPOSQUAT_SUSPECT in pkg:npm/cors@2.8.6: 'cors' is within edit distance 2 of popular package 'colors' (no registry history checked); unverified: name similarity alone does not prove malicious intent."
           },
           "locations": [
             {
@@ -188,13 +191,13 @@
           "ruleId": "unpinned_base_image",
           "level": "note",
           "message": {
-            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile: Base image node:22-slim is referenced by tag, not digest; the tag can be re-pointed."
+            "text": "UNPINNED_BASE_IMAGE in file:data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile: Base image node:22-slim is referenced by tag, not digest; the tag can be re-pointed."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile"
+                  "uri": "data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile"
                 },
                 "region": {
                   "startLine": 1
@@ -211,13 +214,13 @@
           "ruleId": "unpinned_base_image",
           "level": "note",
           "message": {
-            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile: Base image node:22-slim is referenced by tag, not digest; the tag can be re-pointed."
+            "text": "UNPINNED_BASE_IMAGE in file:data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile: Base image node:22-slim is referenced by tag, not digest; the tag can be re-pointed."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile"
+                  "uri": "data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile"
                 },
                 "region": {
                   "startLine": 9
@@ -367,6 +370,29 @@
           ],
           "properties": {
             "score": 17.4,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "DS-0026 in file:Dockerfile: No HEALTHCHECK defined: Add HEALTHCHECK instruction in your Dockerfile"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Dockerfile"
+                },
+                "region": {
+                  "startLine": null
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
             "confidence": "Medium"
           }
         }

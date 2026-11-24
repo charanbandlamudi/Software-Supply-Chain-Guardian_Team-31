@@ -1,6 +1,6 @@
-# Guardian Report: run 153f96df
+# Guardian Report: run 4ca33430
 
-181 components, 361 edges, 12 unique vulnerabilities, 5 non-CVE findings.
+181 components, 361 edges, 12 unique vulnerabilities, 6 non-CVE findings.
 
 ## Top findings
 
@@ -23,6 +23,7 @@
 | 19.0 | Medium | Track | CVE-2026-110725 | fast-uri@3.1.8 | used_transitively | plan proposed |
 | 18.8 | Medium | Track | CVE-2026-110095 | fast-uri@3.1.8 | used_transitively | plan proposed |
 | 17.4 | Medium | Track | CVE-2026-126359 | hono@4.13.13 | used_transitively | plan proposed |
+| 12.0 | Medium | Track | DS-0026 | file:Dockerfile | n/a | plan proposed |
 
 ## What changed
 
@@ -589,7 +590,8 @@ flowchart LR
   class pkg_npm_body_parser_2_3_0 vuln
   class pkg_npm_fast_uri_3_1_8 vuln
   class pkg_npm_hono_4_13_13 vuln
-  class file__Users_rithvikrajesh_Projects_Dummies_Software_Supply_Chain_Guardian_Team_31_data_scans_vignes_vm__udhaar_mcp__20261124_050414_repo_Dockerfile anomaly
+  class file_Dockerfile anomaly
+  class file_data_scans_vignes_vm__udhaar_mcp__20261124_050414_repo_Dockerfile anomaly
   class pkg_npm_cors_2_8_6 anomaly
   class pkg_npm_esbuild_0_28_2 anomaly
   class pkg_npm_fsevents_2_3_3 anomaly
@@ -600,6 +602,7 @@ flowchart LR
 | Component | Action | Target | Attempt | Status | Rationale |
 |---|---|---|---|---|---|
 | Dockerfile | pin |  | 1 | proposed | Pin the base image by @sha256 digest (and move off EOL tags). |
+| file:Dockerfile | fix_config |  | 1 | proposed | Apply the fix described by the failed Trivy check. Add HEALTHCHECK instruction in Dockerfi |
 | node-server@2.1.5 | upgrade | 2.1.6 | 1 | proposed | minimal: @hono/node-server 2.1.6 re-scanned clean on the registry (0 known advisories) |
 | hono@4.13.13 | upgrade | 4.13.16 | 1 | proposed | minimal: hono 4.13.16 re-scanned clean on the registry (0 known advisories) |
 | fast-uri@3.1.8 | upgrade | 3.1.9 | 1 | proposed | co-upgrade: ajv 8.20.0 requires fast-uri ^3.0.1 |
@@ -616,21 +619,23 @@ flowchart LR
 - source:pypi-osv: ok
 - source:npm-audit: ok
 - source:osv: ok
+- source:osv-scanner: ok
+- source:trivy: ok
 - source:grype: ok
 - source:ghsa: skipped: set GITHUB_TOKEN (unauthenticated limit is 60 req/h)
 - source:cisa-kev: ok (1792 entries)
 - source:epss: ok (12/12)
-- llm: no LLM key configured; deterministic templates used
+- llm: ok via ['groq', 'gemini']
 
 ## Agent trace
 
  1. **supervisor** → ['discovery', 'cicd']: policy: ready=['discovery', 'cicd'], handoffs=[]
- 1. **cicd** → supervisor: 2 container/CI findings in 1 files
+ 1. **cicd** → supervisor: 2 container/CI findings in 1 files; Trivy: 1 misconfigurations, 0 secrets (values redacted)
  1. **discovery** → supervisor: 181 components (8 direct), 361 edges; SBOM CycloneDX 1.7: 181 components; package-lock v3: 184 packages
  2. **supervisor** → ['vuln_intel', 'reputation', 'reachability']: policy: ready=['vuln_intel', 'reputation', 'reachability'], handoffs=[]
  2. **reachability** → supervisor: reachability: {'imported': 4, 'used_transitively': 116, 'not_imported': 61}
  2. **reputation** → supervisor: registry metadata for 12 packages
- 2. **vuln_intel** → supervisor: 43 raw advisory records from 4/4 sources -> 12 unique vulnerabilities on 4 packages (hono@4.13.13=5, fast-uri@3.1.8=4, node-server@2.1.5=2, body-parser@2.3.0=1)
+ 2. **vuln_intel** → supervisor: 67 raw advisory records from 6/6 sources -> 12 unique vulnerabilities on 4 packages (hono@4.13.13=5, fast-uri@3.1.8=4, node-server@2.1.5=2, body-parser@2.3.0=1)
  3. **supervisor** → ['exploit_intel', 'anomaly']: policy: ready=['exploit_intel', 'anomaly'], handoffs=[]
  3. **anomaly** → supervisor: 3 non-CVE findings: {'typosquat_suspect': 1, 'install_script': 2}
  3. **anomaly** → reachability: handoff: suspicious packages found; check whether source code imports them
@@ -638,11 +643,11 @@ flowchart LR
  4. **supervisor** → ['reachability']: policy: ready=['scoring'], handoffs=['reachability']
  4. **reachability** → supervisor: reachability: {'imported': 4, 'used_transitively': 116, 'not_imported': 61}; handoff check on 1 suspicious packages: imported by source = none
  5. **supervisor** → ['scoring']: policy: ready=['scoring'], handoffs=[]
- 5. **scoring** → supervisor: scored 17 findings; top: CVE-2026-111181 on body-parser@2.3.0 = 31.4; TYPOSQUAT_SUSPECT on cors@2.8.6 = 28.0; CVE-2026-126343 on node-server@2.1.5 = 26.0
+ 5. **scoring** → supervisor: scored 18 findings; top: CVE-2026-111181 on body-parser@2.3.0 = 31.4; TYPOSQUAT_SUSPECT on cors@2.8.6 = 28.0; CVE-2026-126343 on node-server@2.1.5 = 26.0
  6. **supervisor** → ['remediation']: policy: ready=['remediation'], handoffs=[]
- 6. **remediation** → supervisor: 6 plans (strategy=minimal): upgrades [@hono/node-server 2.1.5->2.1.6, hono 4.13.13->4.13.16, fast-uri 3.1.8->3.1.9, body-parser 2.3.0->2.4.0]; other actions {'pin': 1, 'remove': 1}; resolver: fast-uri -> 3.1.9 to satisfy ajv ^3.0.1
+ 6. **remediation** → supervisor: 7 plans (strategy=minimal): upgrades [@hono/node-server 2.1.5->2.1.6, hono 4.13.13->4.13.16, fast-uri 3.1.8->3.1.9, body-parser 2.3.0->2.4.0]; other actions {'pin': 1, 'fix_config': 1, 'remove': 1}; resolver: fast-uri -> 3.1.9 to satisfy ajv ^3.0.1
  7. **supervisor** → ['explainer']: policy: ready=['explainer'], handoffs=[]
- 7. **explainer** → supervisor: 12 template explanations (no LLM key configured; deterministic templates used)
+ 7. **explainer** → supervisor: LLM produced 14 evidence-cited claims for 14 findings  [55.9s]
  8. **supervisor** → ['critic']: policy: ready=['critic'], handoffs=[]
- 8. **critic** → supervisor: verified 12 claims; 0 replaced by templates
+ 8. **critic** → supervisor: verified 14 claims; 0 replaced by templates
  9. **supervisor** → report: finish: no agent has new inputs and no handoffs are open

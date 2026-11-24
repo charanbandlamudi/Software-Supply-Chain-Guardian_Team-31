@@ -326,7 +326,8 @@ data/scans/<owner>__<repo>__<YYYYmmdd-HHMMSS>/
 ├── app.py                    # Streamlit UI: start scans, live progress, results, graph, downloads
 ├── pipeline/
 │   ├── scan.py               # pipeline: clone → lockfile → SBOM → scanners → graph → agents; scan.json; background runner
-│   └── agents.py             # bridge: scan folder → guardian_v2 inputs; runs the agents; saves investigation.json
+│   ├── agents.py             # bridge: scan folder → guardian_v2 inputs; runs the agents; saves investigation.json
+│   └── remediation.py        # Gate 1 → policy → apply → resolve → Docker sandbox (install, test) → re-scan → Gate 2
 ├── graph/
 │   └── build_graph.py        # SBOM + scanner output → NetworkX graph → graph.json + PyVis HTML (+ graph UI)
 ├── guardian_v2/              # LangGraph multi-agent system (supervisor, agents, critic, CLI with approval gate)
@@ -550,22 +551,63 @@ listed in the report, not silently dropped (Juice Shop: 188 accepted, 0 rejected
 links, registry metadata is fetched only for direct dependencies and packages a scanner flagged (98 + about 20 for
 Juice Shop, instead of 1,135). Responses are cached in `data/agent_cache/` and reused across scans.
 
-**Human approval and sandbox validation** run only in the CLI, which pauses for a reviewer:
+**Governance controls** (merged from `feature/v2-multi-agent-architecture`):
+- Every agent turn is sealed into a SHA-256 hash-chained audit trail (`agents/audit.jsonl`). Agents in the same
+  turn emit events that the supervisor seals in a fixed order, so the chain stays verifiable when agents run in parallel.
+- A deterministic policy firewall (`guardian_v2/policy.py`, mirrored as OPA rules in `policies/`) keeps merge,
+  publish and deploy human-only, and only allows changes on `guardian/*` branches with Gate 1 approval.
+- The agents' report also includes OpenVEX "not affected" statements and an in-toto statement
+  (`guardian.openvex.json`, `guardian.in-toto.json`).
 
-```bash
-cd guardian_v2/demo-app && PYTHONPATH=.. ../../.venv/bin/python ../run_guardian.py --config guardian.json
-```
+## Human-in-the-loop remediation (sandboxed)
 
-Proposed fixes are applied only in a container with no network, a read-only filesystem, all privileges dropped
-and install scripts disabled.
+The UI's **Remediation review** tab ([`pipeline/remediation.py`](pipeline/remediation.py)) turns the agents'
+proposed fixes into verified changes. Nothing touches your code, gets pushed or gets merged.
+
+1. **Gate 1, human approval.** The reviewer sees every plan (component, action, target version, CVEs it clears,
+   blockers, risk) and ticks the ones to approve. Unticked plans are recorded as rejected, under the reviewer's name.
+   - *Sandbox* rows are npm package changes the system applies and tests.
+   - *Manual* rows (pinning actions or images, rotating secrets, fixing config, transitive removals) become a
+     checklist in the draft PR.
+2. **Sandbox validation** (runs in the background; the page shows live progress):
+   1. **Policy firewall:** `pkg.apply`, `docker.build` and `test.run` must be allowed on a
+      `guardian/remediation-*` branch with Gate 1.
+   2. **Apply** to a *copy* of `package.json`: direct dependencies get the new version; packages pulled in
+      indirectly are forced with npm `overrides`.
+   3. **Resolve** the new lockfile with `npm install --package-lock-only --ignore-scripts`. This only reads
+      metadata; no package code runs.
+   4. **Verify** the target versions are in the new lockfile and the vulnerable versions are gone.
+   5. **Sandbox install** in Docker (`node:22-slim`): network on so packages can download, install scripts **off**.
+   6. **Sandbox test:** each upgraded package's code is loaded in a container with **no network, a read-only
+      filesystem, all capabilities dropped, a non-root user and pid/memory/CPU limits**.
+   7. **Re-scan** the new lockfile with OSV-Scanner: vulnerabilities before and after, cleared, remaining and
+      newly introduced.
+3. **Gate 2, human approval of the validated change.** The firewall must allow a **draft** PR. The system then
+   writes `remediation/guardian-remediation.patch`, `package-lock.remediated.json` and `PR_DRAFT.md`, which holds
+   the changes, the validation evidence, the manual-task checklist and the audit-chain head. Merging stays
+   human-only.
+
+Every human decision, policy verdict and sandbox result is appended to `remediation/audit.jsonl`, a hash chain
+whose integrity the tab checks and displays.
+
+Juice Shop example (approving `jsonwebtoken@0.4.0` → 9.0.0, `lodash` → 4.18.1, `moment` → 2.31.0):
+- all steps pass, and all 3 packages load in the network-less sandbox;
+- known vulnerabilities go from **54 to 43** (11 cleared, 0 newly introduced);
+- the whole run takes about 10 s.
+
+**Requires** Docker Desktop (or another Docker engine) running. Without it, the sandbox steps are reported as
+skipped and the other steps still run. Only npm changes are executed in the web sandbox; other ecosystems are
+handled as manual tasks. The CLI flow (`guardian_v2/run_guardian.py`, which pauses for a reviewer in the terminal)
+is still available.
 
 ## Roadmap
 
-Done in this version: discovery and cloning, SBOM generation, Grype, OSV-Scanner and Trivy scanning (vulnerabilities, misconfigurations, secrets), dependency graph analysis, the interactive graph, the web UI, and the LangGraph multi-agent investigation (supervisor, specialist agents, evidence critic) connected to the pipeline and fed by all three scanners, the agents' assessment in the graph, and the evidence-validated Final Guardian Report (JSON, HTML, PDF).
+Done in this version: discovery and cloning, SBOM generation, Grype, OSV-Scanner and Trivy scanning (vulnerabilities, misconfigurations, secrets), dependency graph analysis, the interactive graph, the web UI, and the LangGraph multi-agent investigation (supervisor, specialist agents, evidence critic) connected to the pipeline and fed by all three scanners, the agents' assessment in the graph, the evidence-validated Final Guardian Report (JSON, HTML, PDF), the hash-chained audit trail and policy firewall, and human-in-the-loop remediation with sandboxed validation.
 
 Planned, following the hackathon problem statement:
 
-- [ ] Human approval gate and sandbox validation in the web UI (currently CLI only)
+- [ ] Sandbox execution for PyPI / Go / Maven changes (npm only today)
+- [ ] Run the project's own test suite in the sandbox (today: install + load each changed package)
 - [ ] **Multi-page dashboard**: overview, SBOM explorer, vulnerabilities, anomalies, agent activity, report
 - [ ] **SQLite** storage for scan history
 

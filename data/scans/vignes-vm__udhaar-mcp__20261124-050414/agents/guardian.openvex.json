@@ -1,0 +1,35 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "@id": "urn:uuid:guardian-4ca33430",
+  "author": "Software Supply Chain Guardian",
+  "timestamp": "2026-11-24T06:27:07.909842+00:00",
+  "version": 1,
+  "statements": [
+    {
+      "vulnerability": {
+        "name": "INSTALL_SCRIPT"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/esbuild@0.28.2"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "INSTALL_SCRIPT"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/fsevents@2.3.3"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "run_id": "153f96df",
+  "run_id": "4ca33430",
   "stage": "analysis",
   "inventory": {
     "components": [
@@ -5121,7 +5121,9 @@
       "sources": [
         "grype",
         "npm-audit",
-        "osv"
+        "osv",
+        "osv-scanner",
+        "trivy"
       ],
       "source_conflicts": [
         {
@@ -5129,6 +5131,8 @@
           "by_source": {
             "npm-audit": true,
             "osv": false,
+            "osv-scanner": true,
+            "trivy": true,
             "grype": true
           }
         }
@@ -5162,26 +5166,33 @@
       "evidence_ids": [
         "EV-grype-bd710e5bb5629766",
         "EV-npm-audit-9f58412dc7d7aa9b",
-        "EV-osv-a08d3b50e7ef069a"
+        "EV-osv-a08d3b50e7ef069a",
+        "EV-osv-scanner-6e98c1f5fc382853",
+        "EV-trivy-78c0f208f6c4e93e"
       ],
       "ai_inferences": [
         {
           "finding_id": "VULN::CVE-2026-111181::pkg:npm/body-parser@2.3.0",
-          "statement": "CVE-2026-111181 affects pkg:npm/body-parser@2.3.0; via app -> pkg:npm/express@5.3.0 -> pkg:npm/body-parser@2.3.0; upgrade to 2.4.0.",
+          "statement": "The body-parser 2.3.0 package can be triggered to cause a denial\u2011of\u2011service by sending a request with trailing bytes after a compressed body. It is pulled in transitively through express and other SDKs, so the vulnerable code can be executed in the application. With a CVSS of 7.5 (score 31.4) and an EPSS of 0.00388, the issue is high\u2011severity and reachable; upgrade to body-parser\u202f2.4.0, which is clean on the registry.",
           "evidence_ids": [
             "EV-grype-bd710e5bb5629766",
             "EV-npm-audit-9f58412dc7d7aa9b",
-            "EV-osv-a08d3b50e7ef069a"
+            "EV-osv-a08d3b50e7ef069a",
+            "EV-osv-scanner-6e98c1f5fc382853"
           ],
           "facts": {
             "cvss": 7.5,
             "kev": false,
             "target_version": "2.4.0"
           },
-          "next_step": "approve remediation plan",
-          "kind": "template"
+          "next_step": "upgrade",
+          "kind": "inference"
         }
       ],
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": null,
       "resolution": "plan proposed",
       "location": null
     },
@@ -5235,17 +5246,17 @@
       "paths": [],
       "introduced_by": null,
       "recommended_fix": null,
-      "summary": "'cors' is within edit distance 2 of popular package 'colors'.",
+      "summary": "'cors' is within edit distance 2 of popular package 'colors' (no registry history checked); unverified: name similarity alone does not prove malicious intent.",
       "evidence_ids": [
-        "EV-anomaly-typosquat_suspect-4709ad727f4267da",
+        "EV-anomaly-typosquat_suspect-716386d0c473826a",
         "EV-input-d4ec34fa11e01a5d"
       ],
       "ai_inferences": [
         {
           "finding_id": "TYPOSQUAT_SUSPECT::pkg:npm/cors@2.8.6",
-          "statement": "TYPOSQUAT_SUSPECT affects pkg:npm/cors@2.8.6; no safe version found; request security review.",
+          "statement": "The npm package cors@2.8.6 is flagged as a possible typosquat of the popular colors package. Although it is used transitively, the name similarity alone does not prove malicious intent, but the suspicion warrants review. Remove the package or replace it with the intended dependency after verification.",
           "evidence_ids": [
-            "EV-anomaly-typosquat_suspect-4709ad727f4267da",
+            "EV-anomaly-typosquat_suspect-716386d0c473826a",
             "EV-input-d4ec34fa11e01a5d"
           ],
           "facts": {
@@ -5253,10 +5264,19 @@
             "kev": null,
             "target_version": null
           },
-          "next_step": "security review",
-          "kind": "template"
+          "next_step": "remove",
+          "kind": "inference"
         }
       ],
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": {
+        "name": "cors",
+        "looks_like": "colors",
+        "registry_versions": 0,
+        "age_days": null
+      },
       "resolution": "plan proposed",
       "location": null
     },
@@ -5310,13 +5330,17 @@
       },
       "sources": [
         "grype",
-        "npm-audit"
+        "npm-audit",
+        "osv-scanner",
+        "trivy"
       ],
       "source_conflicts": [
         {
           "field": "severity",
           "by_source": {
             "npm-audit": "MODERATE",
+            "osv-scanner": "MEDIUM",
+            "trivy": "MEDIUM",
             "grype": "MEDIUM"
           }
         }
@@ -5335,25 +5359,33 @@
       "summary": "@hono/node-server: Unhandled `ECONNRESET` on the socket during an asynchronous WebSocket upgrade crashes the process",
       "evidence_ids": [
         "EV-grype-6b0d82b98485d451",
-        "EV-npm-audit-9f58412dc7d7aa9b"
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-scanner-39bd3d030e5a2ccf",
+        "EV-trivy-810cb4aac5a9af40"
       ],
       "ai_inferences": [
         {
           "finding_id": "VULN::CVE-2026-126343::pkg:npm/%40hono/node-server@2.1.5",
-          "statement": "CVE-2026-126343 affects pkg:npm/%40hono/node-server@2.1.5; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/%40hono/node-server@2.1.5; upgrade to 2.1.6.",
+          "statement": "The @hono/node-server 2.1.5 module can crash the process when an ECONNRESET occurs during an asynchronous WebSocket upgrade. It is included transitively via the @modelcontextprotocol/sdk, making the crash reachable in the app. The vulnerability has a CVSS of 5.3 (score 26.0) and EPSS 0.00453; upgrade to @hono/node-server\u202f2.1.6 to resolve the issue.",
           "evidence_ids": [
             "EV-grype-6b0d82b98485d451",
-            "EV-npm-audit-9f58412dc7d7aa9b"
+            "EV-npm-audit-9f58412dc7d7aa9b",
+            "EV-osv-scanner-39bd3d030e5a2ccf",
+            "EV-trivy-810cb4aac5a9af40"
           ],
           "facts": {
             "cvss": 5.3,
             "kev": false,
             "target_version": "2.1.6"
           },
-          "next_step": "approve remediation plan",
-          "kind": "template"
+          "next_step": "upgrade",
+          "kind": "inference"
         }
       ],
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": null,
       "resolution": "plan proposed",
       "location": null
     },
@@ -5408,7 +5440,9 @@
       "sources": [
         "grype",
         "npm-audit",
-        "osv"
+        "osv",
+        "osv-scanner",
+        "trivy"
       ],
       "source_conflicts": [
         {
@@ -5416,6 +5450,8 @@
           "by_source": {
             "npm-audit": "MODERATE",
             "osv": "MODERATE",
+            "osv-scanner": "MEDIUM",
+            "trivy": "MEDIUM",
             "grype": "MEDIUM"
           }
         }
@@ -5441,26 +5477,33 @@
       "evidence_ids": [
         "EV-grype-ffc43ba3de02f15c",
         "EV-npm-audit-9f58412dc7d7aa9b",
-        "EV-osv-bb4abb0c67d4ce43"
+        "EV-osv-bb4abb0c67d4ce43",
+        "EV-osv-scanner-e519487bbf0454ed",
+        "EV-trivy-b587364513133307"
       ],
       "ai_inferences": [
         {
           "finding_id": "VULN::CVE-2026-126357::pkg:npm/hono@4.13.13",
-          "statement": "CVE-2026-126357 affects pkg:npm/hono@4.13.13; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/hono@4.13.13; upgrade to 4.13.16.",
+          "statement": "hono 4.13.13 allows mount() and app.mount() to forward a path that bypasses middleware scoped inside the mount prefix, potentially skipping security checks. The package is pulled in transitively via the SDK and also via @hono/node-server, so the bypass can affect the application. It carries a CVSS of 5.3 (score 25.3) and EPSS 0.004; upgrade to hono\u202f4.13.16 to mitigate the risk.",
           "evidence_ids": [
             "EV-grype-ffc43ba3de02f15c",
             "EV-npm-audit-9f58412dc7d7aa9b",
-            "EV-osv-bb4abb0c67d4ce43"
+            "EV-osv-bb4abb0c67d4ce43",
+            "EV-osv-scanner-e519487bbf0454ed"
           ],
           "facts": {
             "cvss": 5.3,
             "kev": false,
             "target_version": "4.13.16"
           },
-          "next_step": "approve remediation plan",
-          "kind": "template"
+          "next_step": "upgrade",
+          "kind": "inference"
         }
       ],
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": null,
       "resolution": "plan proposed",
       "location": null
     },
@@ -5515,7 +5558,9 @@
       "sources": [
         "grype",
         "npm-audit",
-        "osv"
+        "osv",
+        "osv-scanner",
+        "trivy"
       ],
       "source_conflicts": [
         {
@@ -5523,6 +5568,8 @@
           "by_source": {
             "npm-audit": "MODERATE",
             "osv": "MODERATE",
+            "osv-scanner": "MEDIUM",
+            "trivy": "MEDIUM",
             "grype": "MEDIUM"
           }
         }
@@ -5548,26 +5595,33 @@
       "evidence_ids": [
         "EV-grype-39b47d470d72e417",
         "EV-npm-audit-9f58412dc7d7aa9b",
-        "EV-osv-3f18e9d7bee6ca5e"
+        "EV-osv-3f18e9d7bee6ca5e",
+        "EV-osv-scanner-1cdf242be1311c86",
+        "EV-trivy-5e89e82770a8793e"
       ],
       "ai_inferences": [
         {
           "finding_id": "VULN::CVE-2026-126356::pkg:npm/hono@4.13.13",
-          "statement": "CVE-2026-126356 affects pkg:npm/hono@4.13.13; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/hono@4.13.13; upgrade to 4.13.16.",
+          "statement": "hono 4.13.13 has a flaw where validator('form') skips validation for multipart/form-data requests that contain extra parameters. This code is reachable through the SDK and @hono/node-server, allowing malformed requests to bypass form validation. With a CVSS of 5.3 (score 25.2) and EPSS 0.00392, the issue is moderate; upgrade to hono\u202f4.13.16 to fix the problem.",
           "evidence_ids": [
             "EV-grype-39b47d470d72e417",
             "EV-npm-audit-9f58412dc7d7aa9b",
-            "EV-osv-3f18e9d7bee6ca5e"
+            "EV-osv-3f18e9d7bee6ca5e",
+            "EV-osv-scanner-1cdf242be1311c86"
           ],
           "facts": {
             "cvss": 5.3,
             "kev": false,
             "target_version": "4.13.16"
           },
-          "next_step": "approve remediation plan",
-          "kind": "template"
+          "next_step": "upgrade",
+          "kind": "inference"
         }
       ],
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": null,
       "resolution": "plan proposed",
       "location": null
     },
@@ -5621,13 +5675,17 @@
       },
       "sources": [
         "grype",
-        "npm-audit"
+        "npm-audit",
+        "osv-scanner",
+        "trivy"
       ],
       "source_conflicts": [
         {
           "field": "severity",
           "by_source": {
             "npm-audit": "MODERATE",
+            "osv-scanner": "MEDIUM",
+            "trivy": "MEDIUM",
             "grype": "MEDIUM"
           }
         }
@@ -5646,25 +5704,33 @@
       "summary": "@hono/node-server: Backslash in the request path is parsed as a path separator, bypassing path-based access control at a reverse proxy",
       "evidence_ids": [
         "EV-grype-4d37095190716287",
-        "EV-npm-audit-9f58412dc7d7aa9b"
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-scanner-41d4dddd5be0b895",
+        "EV-trivy-a959d2342c994863"
       ],
       "ai_inferences": [
         {
           "finding_id": "VULN::CVE-2026-126210::pkg:npm/%40hono/node-server@2.1.5",
-          "statement": "CVE-2026-126210 affects pkg:npm/%40hono/node-server@2.1.5; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/%40hono/node-server@2.1.5; upgrade to 2.1.6.",
+          "statement": "The @hono/node-server 2.1.5 module parses a backslash in the request path as a path separator, allowing an attacker to bypass path\u2011based access control at a reverse proxy. This code is reachable transitively via the SDK, so the bypass can be exploited in the application. It has a CVSS of 5.3 (score 24.9) and EPSS 0.00375; upgrading to @hono/node-server\u202f2.1.6 resolves the vulnerability.",
           "evidence_ids": [
             "EV-grype-4d37095190716287",
-            "EV-npm-audit-9f58412dc7d7aa9b"
+            "EV-npm-audit-9f58412dc7d7aa9b",
+            "EV-osv-scanner-41d4dddd5be0b895",
+            "EV-trivy-a959d2342c994863"
           ],
           "facts": {
             "cvss": 5.3,
             "kev": false,
             "target_version": "2.1.6"
           },
-          "next_step": "approve remediation plan",
-          "kind": "template"
+          "next_step": "upgrade",
+          "kind": "inference"
         }
       ],
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": null,
       "resolution": "plan proposed",
       "location": null
     },
@@ -5719,7 +5785,9 @@
       "sources": [
         "grype",
         "npm-audit",
-        "osv"
+        "osv",
+        "osv-scanner",
+        "trivy"
       ],
       "source_conflicts": [
         {
@@ -5727,6 +5795,8 @@
           "by_source": {
             "npm-audit": true,
             "osv": false,
+            "osv-scanner": true,
+            "trivy": true,
             "grype": true
           }
         },
@@ -5734,6 +5804,8 @@
           "field": "fixed_version",
           "by_source": {
             "osv": "4.2.3",
+            "osv-scanner": "3.1.9",
+            "trivy": "3.1.9",
             "grype": "3.1.9"
           }
         },
@@ -5742,6 +5814,8 @@
           "by_source": {
             "npm-audit": "MODERATE",
             "osv": "MODERATE",
+            "osv-scanner": "MEDIUM",
+            "trivy": "MEDIUM",
             "grype": "MEDIUM"
           }
         }
@@ -5769,26 +5843,33 @@
       "evidence_ids": [
         "EV-grype-ad593ea48493204b",
         "EV-npm-audit-9f58412dc7d7aa9b",
-        "EV-osv-95e3df3382524b8a"
+        "EV-osv-95e3df3382524b8a",
+        "EV-osv-scanner-526d3de3a986aeb9",
+        "EV-trivy-a1e8f9028f5857cf"
       ],
       "ai_inferences": [
         {
           "finding_id": "VULN::CVE-2026-110306::pkg:npm/fast-uri@3.1.8",
-          "statement": "CVE-2026-110306 affects pkg:npm/fast-uri@3.1.8; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/ajv@8.20.0 -> pkg:npm/fast-uri@3.1.8; upgrade to 3.1.9.",
+          "statement": "fast-uri\u202f3.1.8 is vulnerable to URI\u2011scheme spoofing via percent\u2011encoded scheme decoding. The vulnerable module is pulled in transitively through @modelcontextprotocol/sdk \u2192 ajv \u2192 fast-uri (see the two paths). With a CVSS\u202f6.1, a score of\u202f24.9 (SSVC\u202fTrack) and an EPS\u2011S of\u202f0.0025, this issue is relevant to the application. Upgrade fast-uri to\u202f3.1.9 (co\u2011upgrade ajv\u202f8.20.0 which requires fast-uri\u202f^3.0.1) to remediate.",
           "evidence_ids": [
             "EV-grype-ad593ea48493204b",
             "EV-npm-audit-9f58412dc7d7aa9b",
-            "EV-osv-95e3df3382524b8a"
+            "EV-osv-95e3df3382524b8a",
+            "EV-osv-scanner-526d3de3a986aeb9"
           ],
           "facts": {
             "cvss": 6.1,
             "kev": false,
             "target_version": "3.1.9"
           },
-          "next_step": "approve remediation plan",
-          "kind": "template"
+          "next_step": "Upgrade fast-uri to 3.1.9 (co\u2011upgrade ajv as needed)",
+          "kind": "inference"
         }
       ],
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": null,
       "resolution": "plan proposed",
       "location": null
     },
@@ -5843,7 +5924,9 @@
       "sources": [
         "grype",
         "npm-audit",
-        "osv"
+        "osv",
+        "osv-scanner",
+        "trivy"
       ],
       "source_conflicts": [
         {
@@ -5851,6 +5934,8 @@
           "by_source": {
             "npm-audit": "MODERATE",
             "osv": "MODERATE",
+            "osv-scanner": "MEDIUM",
+            "trivy": "MEDIUM",
             "grype": "MEDIUM"
           }
         }
@@ -5876,35 +5961,42 @@
       "evidence_ids": [
         "EV-grype-b59b083eb78d4380",
         "EV-npm-audit-9f58412dc7d7aa9b",
-        "EV-osv-a7b9955e3844a87b"
+        "EV-osv-a7b9955e3844a87b",
+        "EV-osv-scanner-4db104c2061d6c3c",
+        "EV-trivy-e51f5fdb1f67dc49"
       ],
       "ai_inferences": [
         {
           "finding_id": "VULN::CVE-2026-126358::pkg:npm/hono@4.13.13",
-          "statement": "CVE-2026-126358 affects pkg:npm/hono@4.13.13; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/hono@4.13.13; upgrade to 4.13.16.",
+          "statement": "hono\u202f4.13.13 has a routing bug where RegExpRouter may skip wildcard middleware for certain routes and for paths containing an encoded line terminator. The package is included transitively via @modelcontextprotocol/sdk (directly and via @hono/node-server). With CVSS\u202f5.3, a score of\u202f24.8 (SSVC\u202fTrack) and EPS\u2011S\u202f0.00367, the flaw can affect request handling in the app. Upgrade to hono\u202f4.13.16, which has been rescanned clean.",
           "evidence_ids": [
             "EV-grype-b59b083eb78d4380",
             "EV-npm-audit-9f58412dc7d7aa9b",
-            "EV-osv-a7b9955e3844a87b"
+            "EV-osv-a7b9955e3844a87b",
+            "EV-osv-scanner-4db104c2061d6c3c"
           ],
           "facts": {
             "cvss": 5.3,
             "kev": false,
             "target_version": "4.13.16"
           },
-          "next_step": "approve remediation plan",
-          "kind": "template"
+          "next_step": "Upgrade hono to 4.13.16",
+          "kind": "inference"
         }
       ],
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": null,
       "resolution": "plan proposed",
       "location": null
     },
     {
-      "id": "UNPINNED_BASE_IMAGE::/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:1",
+      "id": "UNPINNED_BASE_IMAGE::data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:1",
       "type": "unpinned_base_image",
       "canonical_id": "UNPINNED_BASE_IMAGE",
       "aliases": [],
-      "component_purl": "file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile",
+      "component_purl": "file:data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile",
       "score": 22.0,
       "confidence": "Medium",
       "ssvc": {
@@ -5955,8 +6047,8 @@
       ],
       "ai_inferences": [
         {
-          "finding_id": "UNPINNED_BASE_IMAGE::/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:1",
-          "statement": "UNPINNED_BASE_IMAGE affects file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile; no safe version found; request security review.",
+          "finding_id": "UNPINNED_BASE_IMAGE::data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:1",
+          "statement": "The Dockerfile uses the base image node:22-slim referenced by a mutable tag, which can be retagged to a vulnerable version. This unpinned reference appears at line\u202f1 of the Dockerfile, making the build image potentially change without notice. With a score of\u202f22.0 (SSVC\u202fTrack) the risk is significant for supply\u2011chain integrity. Pin the base image to a specific @sha256 digest and avoid end\u2011of\u2011life tags.",
           "evidence_ids": [
             "EV-cicd-5ece4b89f921d637"
           ],
@@ -5965,22 +6057,26 @@
             "kev": null,
             "target_version": null
           },
-          "next_step": "security review",
-          "kind": "template"
+          "next_step": "Pin the base image to a specific digest (e.g., @sha256) and use a supported tag",
+          "kind": "inference"
         }
       ],
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": null,
       "resolution": "plan proposed",
       "location": {
-        "file": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile",
+        "file": "data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile",
         "line": 1
       }
     },
     {
-      "id": "UNPINNED_BASE_IMAGE::/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:9",
+      "id": "UNPINNED_BASE_IMAGE::data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:9",
       "type": "unpinned_base_image",
       "canonical_id": "UNPINNED_BASE_IMAGE",
       "aliases": [],
-      "component_purl": "file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile",
+      "component_purl": "file:data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile",
       "score": 22.0,
       "confidence": "Medium",
       "ssvc": {
@@ -6031,8 +6127,8 @@
       ],
       "ai_inferences": [
         {
-          "finding_id": "UNPINNED_BASE_IMAGE::/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:9",
-          "statement": "UNPINNED_BASE_IMAGE affects file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile; no safe version found; request security review.",
+          "finding_id": "UNPINNED_BASE_IMAGE::data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:9",
+          "statement": "The Dockerfile also references node:22-slim by tag at line\u202f9, which suffers the same mutable\u2011tag issue. Because the tag can be repointed, the built image may unintentionally include vulnerable code. The finding carries a score of\u202f22.0 (SSVC\u202fTrack), indicating a notable supply\u2011chain risk. Pin the base image to a specific @sha256 digest and move off end\u2011of\u2011life tags.",
           "evidence_ids": [
             "EV-cicd-253857e741c30cb0"
           ],
@@ -6041,13 +6137,17 @@
             "kev": null,
             "target_version": null
           },
-          "next_step": "security review",
-          "kind": "template"
+          "next_step": "Pin the base image to a specific digest (e.g., @sha256) and use a supported tag",
+          "kind": "inference"
         }
       ],
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": null,
       "resolution": "plan proposed",
       "location": {
-        "file": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile",
+        "file": "data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile",
         "line": 9
       }
     },
@@ -6102,7 +6202,9 @@
       "sources": [
         "grype",
         "npm-audit",
-        "osv"
+        "osv",
+        "osv-scanner",
+        "trivy"
       ],
       "source_conflicts": [
         {
@@ -6110,6 +6212,8 @@
           "by_source": {
             "npm-audit": "MODERATE",
             "osv": "MODERATE",
+            "osv-scanner": "MEDIUM",
+            "trivy": "MEDIUM",
             "grype": "MEDIUM"
           }
         }
@@ -6135,26 +6239,33 @@
       "evidence_ids": [
         "EV-grype-a2bfefcefaf5219c",
         "EV-npm-audit-9f58412dc7d7aa9b",
-        "EV-osv-26bd276f50f6862f"
+        "EV-osv-26bd276f50f6862f",
+        "EV-osv-scanner-2436f1e0033326a1",
+        "EV-trivy-260263f8caff596c"
       ],
       "ai_inferences": [
         {
           "finding_id": "VULN::CVE-2026-126355::pkg:npm/hono@4.13.13",
-          "statement": "CVE-2026-126355 affects pkg:npm/hono@4.13.13; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/hono@4.13.13; upgrade to 4.13.16.",
+          "statement": "hono\u202f4.13.13\u2019s csrf() middleware does not validate requests sent via hyperlink auditing (text/ping), potentially allowing CSRF bypass. The vulnerable code is pulled in transitively through @modelcontextprotocol/sdk (directly and via @hono/node-server). With CVSS\u202f5.3, a score of\u202f21.3 (SSVC\u202fTrack) and EPS\u2011S\u202f0.00176, this weakness can be exploited in the application. Upgrade to hono\u202f4.13.16, which resolves the issue.",
           "evidence_ids": [
             "EV-grype-a2bfefcefaf5219c",
             "EV-npm-audit-9f58412dc7d7aa9b",
-            "EV-osv-26bd276f50f6862f"
+            "EV-osv-26bd276f50f6862f",
+            "EV-osv-scanner-2436f1e0033326a1"
           ],
           "facts": {
             "cvss": 5.3,
             "kev": false,
             "target_version": "4.13.16"
           },
-          "next_step": "approve remediation plan",
-          "kind": "template"
+          "next_step": "Upgrade hono to 4.13.16",
+          "kind": "inference"
         }
       ],
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": null,
       "resolution": "plan proposed",
       "location": null
     },
@@ -6209,7 +6320,9 @@
       "sources": [
         "grype",
         "npm-audit",
-        "osv"
+        "osv",
+        "osv-scanner",
+        "trivy"
       ],
       "source_conflicts": [
         {
@@ -6217,6 +6330,8 @@
           "by_source": {
             "npm-audit": true,
             "osv": false,
+            "osv-scanner": true,
+            "trivy": true,
             "grype": true
           }
         },
@@ -6224,6 +6339,8 @@
           "field": "fixed_version",
           "by_source": {
             "osv": "4.2.3",
+            "osv-scanner": "3.1.9",
+            "trivy": "3.1.9",
             "grype": "3.1.9"
           }
         },
@@ -6232,6 +6349,8 @@
           "by_source": {
             "npm-audit": "MODERATE",
             "osv": "MODERATE",
+            "osv-scanner": "MEDIUM",
+            "trivy": "MEDIUM",
             "grype": "MEDIUM"
           }
         }
@@ -6259,26 +6378,33 @@
       "evidence_ids": [
         "EV-grype-bd1fc180f2ff5bfc",
         "EV-npm-audit-9f58412dc7d7aa9b",
-        "EV-osv-ebcb09e36afe9901"
+        "EV-osv-ebcb09e36afe9901",
+        "EV-osv-scanner-1af48ddd0e128d4b",
+        "EV-trivy-0395b5cc888cba48"
       ],
       "ai_inferences": [
         {
           "finding_id": "VULN::CVE-2026-110180::pkg:npm/fast-uri@3.1.8",
-          "statement": "CVE-2026-110180 affects pkg:npm/fast-uri@3.1.8; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/ajv@8.20.0 -> pkg:npm/fast-uri@3.1.8; upgrade to 3.1.9.",
+          "statement": "fast-uri\u202f3.1.8 is vulnerable to host confusion due to unchecked WHATWG host canonicalization. The module is included transitively via @modelcontextprotocol/sdk \u2192 ajv \u2192 fast-uri (both paths shown). With CVSS\u202f4.8, a score of\u202f21.3 (SSVC\u202fTrack) and EPS\u2011S\u202f0.00255, the flaw can affect URL handling in the app. Upgrade fast-uri to\u202f3.1.9 (co\u2011upgrade ajv as required) to fix the issue.",
           "evidence_ids": [
             "EV-grype-bd1fc180f2ff5bfc",
             "EV-npm-audit-9f58412dc7d7aa9b",
-            "EV-osv-ebcb09e36afe9901"
+            "EV-osv-ebcb09e36afe9901",
+            "EV-osv-scanner-1af48ddd0e128d4b"
           ],
           "facts": {
             "cvss": 4.8,
             "kev": false,
             "target_version": "3.1.9"
           },
-          "next_step": "approve remediation plan",
-          "kind": "template"
+          "next_step": "Upgrade fast-uri to 3.1.9 (co\u2011upgrade ajv as needed)",
+          "kind": "inference"
         }
       ],
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": null,
       "resolution": "plan proposed",
       "location": null
     },
@@ -6335,9 +6461,34 @@
       "summary": "esbuild runs code at install time.",
       "evidence_ids": [
         "EV-anomaly-install_script-eed4342306653489",
-        "EV-input-d4ec34fa11e01a5d"
+        "EV-input-d4ec34fa11e01a5d",
+        "EV-ast-import-scan-4939dc237d0fd9c2"
       ],
-      "ai_inferences": null,
+      "ai_inferences": [
+        {
+          "finding_id": "INSTALL_SCRIPT::pkg:npm/esbuild@0.28.2",
+          "statement": "The esbuild package (npm/esbuild@0.28.2) executes code during its install script. This code runs on the host when the package is installed, even though the package is not imported by the application (reachability: not_imported). Because install\u2011time code can modify the environment or introduce malicious behavior, the finding is scored 20.0 and marked with an Ssvc of \u201cTrack\u201d. No fixed version is provided, so the recommended next step is to monitor the package and consider replacing or upgrading it.",
+          "evidence_ids": [
+            "EV-anomaly-install_script-eed4342306653489",
+            "EV-input-d4ec34fa11e01a5d",
+            "EV-ast-import-scan-4939dc237d0fd9c2"
+          ],
+          "facts": {
+            "cvss": null,
+            "kev": null,
+            "target_version": null
+          },
+          "next_step": "Monitor the package and evaluate upgrading or replacement",
+          "kind": "inference"
+        }
+      ],
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": {
+        "lockfile_flag": true,
+        "scripts": null
+      },
       "resolution": "open",
       "location": null
     },
@@ -6394,9 +6545,17 @@
       "summary": "fsevents runs code at install time.",
       "evidence_ids": [
         "EV-anomaly-install_script-eed4342306653489",
-        "EV-input-d4ec34fa11e01a5d"
+        "EV-input-d4ec34fa11e01a5d",
+        "EV-ast-import-scan-4939dc237d0fd9c2"
       ],
       "ai_inferences": null,
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": {
+        "lockfile_flag": true,
+        "scripts": null
+      },
       "resolution": "open",
       "location": null
     },
@@ -6451,7 +6610,9 @@
       "sources": [
         "grype",
         "npm-audit",
-        "osv"
+        "osv",
+        "osv-scanner",
+        "trivy"
       ],
       "source_conflicts": [
         {
@@ -6459,6 +6620,8 @@
           "by_source": {
             "npm-audit": true,
             "osv": false,
+            "osv-scanner": true,
+            "trivy": true,
             "grype": true
           }
         },
@@ -6466,6 +6629,8 @@
           "field": "fixed_version",
           "by_source": {
             "osv": "4.2.3",
+            "osv-scanner": "3.1.9",
+            "trivy": "3.1.9",
             "grype": "3.1.9"
           }
         }
@@ -6493,9 +6658,15 @@
       "evidence_ids": [
         "EV-grype-ccfe4cc26c4ec6fb",
         "EV-npm-audit-9f58412dc7d7aa9b",
-        "EV-osv-b89b8158c3bcc713"
+        "EV-osv-b89b8158c3bcc713",
+        "EV-osv-scanner-a013c8cbb86dfe30",
+        "EV-trivy-13d5e6fad7b4ff6a"
       ],
       "ai_inferences": null,
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": null,
       "resolution": "plan proposed",
       "location": null
     },
@@ -6550,7 +6721,9 @@
       "sources": [
         "grype",
         "npm-audit",
-        "osv"
+        "osv",
+        "osv-scanner",
+        "trivy"
       ],
       "source_conflicts": [
         {
@@ -6558,6 +6731,8 @@
           "by_source": {
             "npm-audit": true,
             "osv": false,
+            "osv-scanner": true,
+            "trivy": true,
             "grype": true
           }
         },
@@ -6565,6 +6740,8 @@
           "field": "fixed_version",
           "by_source": {
             "osv": "4.2.3",
+            "osv-scanner": "3.1.9",
+            "trivy": "3.1.9",
             "grype": "3.1.9"
           }
         }
@@ -6592,9 +6769,15 @@
       "evidence_ids": [
         "EV-grype-2e3e148fc5479eae",
         "EV-npm-audit-9f58412dc7d7aa9b",
-        "EV-osv-f97730c0fee43bb6"
+        "EV-osv-f97730c0fee43bb6",
+        "EV-osv-scanner-a3be07b40a9914ed",
+        "EV-trivy-81f2d5c39a948262"
       ],
       "ai_inferences": null,
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": null,
       "resolution": "plan proposed",
       "location": null
     },
@@ -6649,7 +6832,9 @@
       "sources": [
         "grype",
         "npm-audit",
-        "osv"
+        "osv",
+        "osv-scanner",
+        "trivy"
       ],
       "source_conflicts": [],
       "paths": [
@@ -6673,23 +6858,109 @@
       "evidence_ids": [
         "EV-grype-ca0d8c6da311a527",
         "EV-npm-audit-9f58412dc7d7aa9b",
-        "EV-osv-eff89da8b5b57d8a"
+        "EV-osv-eff89da8b5b57d8a",
+        "EV-osv-scanner-91e8dd7685868461",
+        "EV-trivy-ca08e6f4c7294f28"
       ],
       "ai_inferences": null,
+      "tool_severity": null,
+      "recommended_action": null,
+      "reference": null,
+      "facts": null,
       "resolution": "plan proposed",
       "location": null
+    },
+    {
+      "id": "MISCONFIGURATION::DS-0026::Dockerfile:None",
+      "type": "misconfiguration",
+      "canonical_id": "DS-0026",
+      "aliases": [],
+      "component_purl": "file:Dockerfile",
+      "score": 12.0,
+      "confidence": "Medium",
+      "ssvc": {
+        "decision": "Track",
+        "exploitation": "none",
+        "automatable": false,
+        "technical_impact": "partial",
+        "mission": "medium",
+        "note": "simplified SSVC mapping"
+      },
+      "score_breakdown": {
+        "base": 12.0,
+        "base_source": "calibrated detector base",
+        "exploit": 0.0,
+        "exploitation": "none",
+        "reachability": [
+          "n/a: CI/container configuration",
+          1.0
+        ],
+        "scope": [
+          "prod",
+          1.0
+        ],
+        "exposure": [
+          "internet",
+          1.0
+        ],
+        "depth": 1.0,
+        "corroboration": [
+          0,
+          0.0
+        ],
+        "fix_bonus": 0.0
+      },
+      "reachability_state": "n/a",
+      "kev": null,
+      "epss": null,
+      "sources": [
+        "trivy"
+      ],
+      "source_conflicts": null,
+      "paths": [],
+      "introduced_by": null,
+      "recommended_fix": null,
+      "summary": "No HEALTHCHECK defined: Add HEALTHCHECK instruction in your Dockerfile",
+      "evidence_ids": [
+        "EV-trivy-misconfig-c2ae0c7ad18e68b8"
+      ],
+      "ai_inferences": [
+        {
+          "finding_id": "MISCONFIGURATION::DS-0026::Dockerfile:None",
+          "statement": "The Dockerfile lacks a HEALTHCHECK instruction, which means the container\u2019s liveness cannot be automatically verified. This misconfiguration is identified by Trivy (DS\u20110026) and has a score of 12.0 with an Ssvc of \u201cTrack\u201d. Adding a HEALTHCHECK as described in the Trivy recommendation mitigates the risk. The next step is to apply the suggested fix by adding the HEALTHCHECK instruction to the Dockerfile.",
+          "evidence_ids": [
+            "EV-trivy-misconfig-c2ae0c7ad18e68b8"
+          ],
+          "facts": {
+            "cvss": null,
+            "kev": null,
+            "target_version": null
+          },
+          "next_step": "Apply the recommended HEALTHCHECK instruction to the Dockerfile",
+          "kind": "inference"
+        }
+      ],
+      "tool_severity": "LOW",
+      "recommended_action": "Add HEALTHCHECK instruction in Dockerfile",
+      "reference": "https://avd.aquasec.com/misconfig/ds-0026",
+      "facts": null,
+      "resolution": "plan proposed",
+      "location": {
+        "file": "Dockerfile",
+        "line": null
+      }
     }
   ],
   "remediation_plans": {
-    "PLAN::file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile": {
-      "component": "file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile",
+    "PLAN::file:data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile": {
+      "component": "file:data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile",
       "attempt": 1,
       "requires_human_approval": true,
       "merge": false,
       "status": "proposed",
       "finding_ids": [
-        "UNPINNED_BASE_IMAGE::/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:1",
-        "UNPINNED_BASE_IMAGE::/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:9"
+        "UNPINNED_BASE_IMAGE::data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:1",
+        "UNPINNED_BASE_IMAGE::data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:9"
       ],
       "evidence_ids": [],
       "rollback": "revert the manifest/lockfile commit; previous lockfile hash is in the evidence store",
@@ -6698,6 +6969,24 @@
       "rationale": "Pin the base image by @sha256 digest (and move off EOL tags).",
       "also_resolves": [
         "unpinned_base_image"
+      ]
+    },
+    "PLAN::file:Dockerfile": {
+      "component": "file:Dockerfile",
+      "attempt": 1,
+      "requires_human_approval": true,
+      "merge": false,
+      "status": "proposed",
+      "finding_ids": [
+        "MISCONFIGURATION::DS-0026::Dockerfile:None"
+      ],
+      "evidence_ids": [],
+      "rollback": "revert the manifest/lockfile commit; previous lockfile hash is in the evidence store",
+      "action": "fix_config",
+      "target_version": null,
+      "rationale": "Apply the fix described by the failed Trivy check. Add HEALTHCHECK instruction in Dockerfile",
+      "also_resolves": [
+        "misconfiguration"
       ]
     },
     "PLAN::pkg:npm/%40hono/node-server@2.1.5": {
@@ -6843,11 +7132,13 @@
     "source:pypi-osv": "ok",
     "source:npm-audit": "ok",
     "source:osv": "ok",
+    "source:osv-scanner": "ok",
+    "source:trivy": "ok",
     "source:grype": "ok",
     "source:ghsa": "skipped: set GITHUB_TOKEN (unauthenticated limit is 60 req/h)",
     "source:cisa-kev": "ok (1792 entries)",
     "source:epss": "ok (12/12)",
-    "llm": "no LLM key configured; deterministic templates used"
+    "llm": "ok via ['groq', 'gemini']"
   },
   "agent_trace": [
     {
@@ -6863,7 +7154,7 @@
       "turn": 1,
       "from": "cicd",
       "to": "supervisor",
-      "text": "2 container/CI findings in 1 files"
+      "text": "2 container/CI findings in 1 files; Trivy: 1 misconfigurations, 0 secrets (values redacted)"
     },
     {
       "turn": 1,
@@ -6897,7 +7188,7 @@
       "turn": 2,
       "from": "vuln_intel",
       "to": "supervisor",
-      "text": "43 raw advisory records from 4/4 sources -> 12 unique vulnerabilities on 4 packages (hono@4.13.13=5, fast-uri@3.1.8=4, node-server@2.1.5=2, body-parser@2.3.0=1)"
+      "text": "67 raw advisory records from 6/6 sources -> 12 unique vulnerabilities on 4 packages (hono@4.13.13=5, fast-uri@3.1.8=4, node-server@2.1.5=2, body-parser@2.3.0=1)"
     },
     {
       "turn": 3,
@@ -6952,7 +7243,7 @@
       "turn": 5,
       "from": "scoring",
       "to": "supervisor",
-      "text": "scored 17 findings; top: CVE-2026-111181 on body-parser@2.3.0 = 31.4; TYPOSQUAT_SUSPECT on cors@2.8.6 = 28.0; CVE-2026-126343 on node-server@2.1.5 = 26.0"
+      "text": "scored 18 findings; top: CVE-2026-111181 on body-parser@2.3.0 = 31.4; TYPOSQUAT_SUSPECT on cors@2.8.6 = 28.0; CVE-2026-126343 on node-server@2.1.5 = 26.0"
     },
     {
       "turn": 6,
@@ -6966,7 +7257,7 @@
       "turn": 6,
       "from": "remediation",
       "to": "supervisor",
-      "text": "6 plans (strategy=minimal): upgrades [@hono/node-server 2.1.5->2.1.6, hono 4.13.13->4.13.16, fast-uri 3.1.8->3.1.9, body-parser 2.3.0->2.4.0]; other actions {'pin': 1, 'remove': 1}; resolver: fast-uri -> 3.1.9 to satisfy ajv ^3.0.1"
+      "text": "7 plans (strategy=minimal): upgrades [@hono/node-server 2.1.5->2.1.6, hono 4.13.13->4.13.16, fast-uri 3.1.8->3.1.9, body-parser 2.3.0->2.4.0]; other actions {'pin': 1, 'fix_config': 1, 'remove': 1}; resolver: fast-uri -> 3.1.9 to satisfy ajv ^3.0.1"
     },
     {
       "turn": 7,
@@ -6980,7 +7271,7 @@
       "turn": 7,
       "from": "explainer",
       "to": "supervisor",
-      "text": "12 template explanations (no LLM key configured; deterministic templates used)"
+      "text": "LLM produced 14 evidence-cited claims for 14 findings  [55.9s]"
     },
     {
       "turn": 8,
@@ -6994,7 +7285,7 @@
       "turn": 8,
       "from": "critic",
       "to": "supervisor",
-      "text": "verified 12 claims; 0 replaced by templates"
+      "text": "verified 14 claims; 0 replaced by templates"
     },
     {
       "turn": 9,
@@ -7002,5 +7293,240 @@
       "to": "report",
       "text": "finish: no agent has new inputs and no handoffs are open"
     }
-  ]
+  ],
+  "claims": [
+    {
+      "finding_id": "VULN::CVE-2026-111181::pkg:npm/body-parser@2.3.0",
+      "statement": "The body-parser 2.3.0 package can be triggered to cause a denial\u2011of\u2011service by sending a request with trailing bytes after a compressed body. It is pulled in transitively through express and other SDKs, so the vulnerable code can be executed in the application. With a CVSS of 7.5 (score 31.4) and an EPSS of 0.00388, the issue is high\u2011severity and reachable; upgrade to body-parser\u202f2.4.0, which is clean on the registry.",
+      "evidence_ids": [
+        "EV-grype-bd710e5bb5629766",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-a08d3b50e7ef069a",
+        "EV-osv-scanner-6e98c1f5fc382853"
+      ],
+      "facts": {
+        "cvss": 7.5,
+        "kev": false,
+        "target_version": "2.4.0"
+      },
+      "next_step": "upgrade",
+      "kind": "inference"
+    },
+    {
+      "finding_id": "TYPOSQUAT_SUSPECT::pkg:npm/cors@2.8.6",
+      "statement": "The npm package cors@2.8.6 is flagged as a possible typosquat of the popular colors package. Although it is used transitively, the name similarity alone does not prove malicious intent, but the suspicion warrants review. Remove the package or replace it with the intended dependency after verification.",
+      "evidence_ids": [
+        "EV-anomaly-typosquat_suspect-716386d0c473826a",
+        "EV-input-d4ec34fa11e01a5d"
+      ],
+      "facts": {
+        "cvss": null,
+        "kev": null,
+        "target_version": null
+      },
+      "next_step": "remove",
+      "kind": "inference"
+    },
+    {
+      "finding_id": "VULN::CVE-2026-126343::pkg:npm/%40hono/node-server@2.1.5",
+      "statement": "The @hono/node-server 2.1.5 module can crash the process when an ECONNRESET occurs during an asynchronous WebSocket upgrade. It is included transitively via the @modelcontextprotocol/sdk, making the crash reachable in the app. The vulnerability has a CVSS of 5.3 (score 26.0) and EPSS 0.00453; upgrade to @hono/node-server\u202f2.1.6 to resolve the issue.",
+      "evidence_ids": [
+        "EV-grype-6b0d82b98485d451",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-scanner-39bd3d030e5a2ccf",
+        "EV-trivy-810cb4aac5a9af40"
+      ],
+      "facts": {
+        "cvss": 5.3,
+        "kev": false,
+        "target_version": "2.1.6"
+      },
+      "next_step": "upgrade",
+      "kind": "inference"
+    },
+    {
+      "finding_id": "VULN::CVE-2026-126357::pkg:npm/hono@4.13.13",
+      "statement": "hono 4.13.13 allows mount() and app.mount() to forward a path that bypasses middleware scoped inside the mount prefix, potentially skipping security checks. The package is pulled in transitively via the SDK and also via @hono/node-server, so the bypass can affect the application. It carries a CVSS of 5.3 (score 25.3) and EPSS 0.004; upgrade to hono\u202f4.13.16 to mitigate the risk.",
+      "evidence_ids": [
+        "EV-grype-ffc43ba3de02f15c",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-bb4abb0c67d4ce43",
+        "EV-osv-scanner-e519487bbf0454ed"
+      ],
+      "facts": {
+        "cvss": 5.3,
+        "kev": false,
+        "target_version": "4.13.16"
+      },
+      "next_step": "upgrade",
+      "kind": "inference"
+    },
+    {
+      "finding_id": "VULN::CVE-2026-126356::pkg:npm/hono@4.13.13",
+      "statement": "hono 4.13.13 has a flaw where validator('form') skips validation for multipart/form-data requests that contain extra parameters. This code is reachable through the SDK and @hono/node-server, allowing malformed requests to bypass form validation. With a CVSS of 5.3 (score 25.2) and EPSS 0.00392, the issue is moderate; upgrade to hono\u202f4.13.16 to fix the problem.",
+      "evidence_ids": [
+        "EV-grype-39b47d470d72e417",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-3f18e9d7bee6ca5e",
+        "EV-osv-scanner-1cdf242be1311c86"
+      ],
+      "facts": {
+        "cvss": 5.3,
+        "kev": false,
+        "target_version": "4.13.16"
+      },
+      "next_step": "upgrade",
+      "kind": "inference"
+    },
+    {
+      "finding_id": "VULN::CVE-2026-126210::pkg:npm/%40hono/node-server@2.1.5",
+      "statement": "The @hono/node-server 2.1.5 module parses a backslash in the request path as a path separator, allowing an attacker to bypass path\u2011based access control at a reverse proxy. This code is reachable transitively via the SDK, so the bypass can be exploited in the application. It has a CVSS of 5.3 (score 24.9) and EPSS 0.00375; upgrading to @hono/node-server\u202f2.1.6 resolves the vulnerability.",
+      "evidence_ids": [
+        "EV-grype-4d37095190716287",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-scanner-41d4dddd5be0b895",
+        "EV-trivy-a959d2342c994863"
+      ],
+      "facts": {
+        "cvss": 5.3,
+        "kev": false,
+        "target_version": "2.1.6"
+      },
+      "next_step": "upgrade",
+      "kind": "inference"
+    },
+    {
+      "finding_id": "VULN::CVE-2026-110306::pkg:npm/fast-uri@3.1.8",
+      "statement": "fast-uri\u202f3.1.8 is vulnerable to URI\u2011scheme spoofing via percent\u2011encoded scheme decoding. The vulnerable module is pulled in transitively through @modelcontextprotocol/sdk \u2192 ajv \u2192 fast-uri (see the two paths). With a CVSS\u202f6.1, a score of\u202f24.9 (SSVC\u202fTrack) and an EPS\u2011S of\u202f0.0025, this issue is relevant to the application. Upgrade fast-uri to\u202f3.1.9 (co\u2011upgrade ajv\u202f8.20.0 which requires fast-uri\u202f^3.0.1) to remediate.",
+      "evidence_ids": [
+        "EV-grype-ad593ea48493204b",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-95e3df3382524b8a",
+        "EV-osv-scanner-526d3de3a986aeb9"
+      ],
+      "facts": {
+        "cvss": 6.1,
+        "kev": false,
+        "target_version": "3.1.9"
+      },
+      "next_step": "Upgrade fast-uri to 3.1.9 (co\u2011upgrade ajv as needed)",
+      "kind": "inference"
+    },
+    {
+      "finding_id": "VULN::CVE-2026-126358::pkg:npm/hono@4.13.13",
+      "statement": "hono\u202f4.13.13 has a routing bug where RegExpRouter may skip wildcard middleware for certain routes and for paths containing an encoded line terminator. The package is included transitively via @modelcontextprotocol/sdk (directly and via @hono/node-server). With CVSS\u202f5.3, a score of\u202f24.8 (SSVC\u202fTrack) and EPS\u2011S\u202f0.00367, the flaw can affect request handling in the app. Upgrade to hono\u202f4.13.16, which has been rescanned clean.",
+      "evidence_ids": [
+        "EV-grype-b59b083eb78d4380",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-a7b9955e3844a87b",
+        "EV-osv-scanner-4db104c2061d6c3c"
+      ],
+      "facts": {
+        "cvss": 5.3,
+        "kev": false,
+        "target_version": "4.13.16"
+      },
+      "next_step": "Upgrade hono to 4.13.16",
+      "kind": "inference"
+    },
+    {
+      "finding_id": "UNPINNED_BASE_IMAGE::data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:1",
+      "statement": "The Dockerfile uses the base image node:22-slim referenced by a mutable tag, which can be retagged to a vulnerable version. This unpinned reference appears at line\u202f1 of the Dockerfile, making the build image potentially change without notice. With a score of\u202f22.0 (SSVC\u202fTrack) the risk is significant for supply\u2011chain integrity. Pin the base image to a specific @sha256 digest and avoid end\u2011of\u2011life tags.",
+      "evidence_ids": [
+        "EV-cicd-5ece4b89f921d637"
+      ],
+      "facts": {
+        "cvss": null,
+        "kev": null,
+        "target_version": null
+      },
+      "next_step": "Pin the base image to a specific digest (e.g., @sha256) and use a supported tag",
+      "kind": "inference"
+    },
+    {
+      "finding_id": "UNPINNED_BASE_IMAGE::data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:9",
+      "statement": "The Dockerfile also references node:22-slim by tag at line\u202f9, which suffers the same mutable\u2011tag issue. Because the tag can be repointed, the built image may unintentionally include vulnerable code. The finding carries a score of\u202f22.0 (SSVC\u202fTrack), indicating a notable supply\u2011chain risk. Pin the base image to a specific @sha256 digest and move off end\u2011of\u2011life tags.",
+      "evidence_ids": [
+        "EV-cicd-253857e741c30cb0"
+      ],
+      "facts": {
+        "cvss": null,
+        "kev": null,
+        "target_version": null
+      },
+      "next_step": "Pin the base image to a specific digest (e.g., @sha256) and use a supported tag",
+      "kind": "inference"
+    },
+    {
+      "finding_id": "VULN::CVE-2026-126355::pkg:npm/hono@4.13.13",
+      "statement": "hono\u202f4.13.13\u2019s csrf() middleware does not validate requests sent via hyperlink auditing (text/ping), potentially allowing CSRF bypass. The vulnerable code is pulled in transitively through @modelcontextprotocol/sdk (directly and via @hono/node-server). With CVSS\u202f5.3, a score of\u202f21.3 (SSVC\u202fTrack) and EPS\u2011S\u202f0.00176, this weakness can be exploited in the application. Upgrade to hono\u202f4.13.16, which resolves the issue.",
+      "evidence_ids": [
+        "EV-grype-a2bfefcefaf5219c",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-26bd276f50f6862f",
+        "EV-osv-scanner-2436f1e0033326a1"
+      ],
+      "facts": {
+        "cvss": 5.3,
+        "kev": false,
+        "target_version": "4.13.16"
+      },
+      "next_step": "Upgrade hono to 4.13.16",
+      "kind": "inference"
+    },
+    {
+      "finding_id": "VULN::CVE-2026-110180::pkg:npm/fast-uri@3.1.8",
+      "statement": "fast-uri\u202f3.1.8 is vulnerable to host confusion due to unchecked WHATWG host canonicalization. The module is included transitively via @modelcontextprotocol/sdk \u2192 ajv \u2192 fast-uri (both paths shown). With CVSS\u202f4.8, a score of\u202f21.3 (SSVC\u202fTrack) and EPS\u2011S\u202f0.00255, the flaw can affect URL handling in the app. Upgrade fast-uri to\u202f3.1.9 (co\u2011upgrade ajv as required) to fix the issue.",
+      "evidence_ids": [
+        "EV-grype-bd1fc180f2ff5bfc",
+        "EV-npm-audit-9f58412dc7d7aa9b",
+        "EV-osv-ebcb09e36afe9901",
+        "EV-osv-scanner-1af48ddd0e128d4b"
+      ],
+      "facts": {
+        "cvss": 4.8,
+        "kev": false,
+        "target_version": "3.1.9"
+      },
+      "next_step": "Upgrade fast-uri to 3.1.9 (co\u2011upgrade ajv as needed)",
+      "kind": "inference"
+    },
+    {
+      "finding_id": "INSTALL_SCRIPT::pkg:npm/esbuild@0.28.2",
+      "statement": "The esbuild package (npm/esbuild@0.28.2) executes code during its install script. This code runs on the host when the package is installed, even though the package is not imported by the application (reachability: not_imported). Because install\u2011time code can modify the environment or introduce malicious behavior, the finding is scored 20.0 and marked with an Ssvc of \u201cTrack\u201d. No fixed version is provided, so the recommended next step is to monitor the package and consider replacing or upgrading it.",
+      "evidence_ids": [
+        "EV-anomaly-install_script-eed4342306653489",
+        "EV-input-d4ec34fa11e01a5d",
+        "EV-ast-import-scan-4939dc237d0fd9c2"
+      ],
+      "facts": {
+        "cvss": null,
+        "kev": null,
+        "target_version": null
+      },
+      "next_step": "Monitor the package and evaluate upgrading or replacement",
+      "kind": "inference"
+    },
+    {
+      "finding_id": "MISCONFIGURATION::DS-0026::Dockerfile:None",
+      "statement": "The Dockerfile lacks a HEALTHCHECK instruction, which means the container\u2019s liveness cannot be automatically verified. This misconfiguration is identified by Trivy (DS\u20110026) and has a score of 12.0 with an Ssvc of \u201cTrack\u201d. Adding a HEALTHCHECK as described in the Trivy recommendation mitigates the risk. The next step is to apply the suggested fix by adding the HEALTHCHECK instruction to the Dockerfile.",
+      "evidence_ids": [
+        "EV-trivy-misconfig-c2ae0c7ad18e68b8"
+      ],
+      "facts": {
+        "cvss": null,
+        "kev": null,
+        "target_version": null
+      },
+      "next_step": "Apply the recommended HEALTHCHECK instruction to the Dockerfile",
+      "kind": "inference"
+    }
+  ],
+  "audit": {
+    "entries": 12,
+    "head_hash": "476e7409a957b16c013b357de8c41807948226d2e102d08576133481e3f0cf87",
+    "integrity": "valid",
+    "error": null,
+    "sha256": "1fec60f40d6e2ef7b6f547e177a87feeaf34c1e24f4f3d44fc8c958842f2f189"
+  }
 }

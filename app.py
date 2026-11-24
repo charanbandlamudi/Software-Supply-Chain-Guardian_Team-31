@@ -13,6 +13,7 @@ from pathlib import Path
 import streamlit as st
 import streamlit.components.v1 as components
 
+from pipeline import remediation as RM
 from pipeline.scan import list_scans, load_scan, parse_target, start_scan
 
 st.set_page_config(page_title="Software Supply Chain Guardian", page_icon="🛡️", layout="wide")
@@ -112,9 +113,9 @@ if stats:
                                       ("Medium", sev.get("MEDIUM", 0)), ("Low", sev.get("LOW", 0))]):
         col.metric(lbl, val)
 
-tab_graph, tab_report, tab_agents, tab_repo, tab_steps, tab_files = st.tabs(
-    ["Dependency graph", "Final report", "Agent investigation", "Misconfigurations & secrets",
-     "Scan steps & tools", "Artifacts"])
+tab_graph, tab_report, tab_agents, tab_fix, tab_repo, tab_steps, tab_files = st.tabs(
+    ["Dependency graph", "Final report", "Agent investigation", "Remediation review (human-in-the-loop)",
+     "Misconfigurations & secrets", "Scan steps & tools", "Artifacts"])
 
 with tab_graph:
     html = current["artifacts"].get("graph_html")
@@ -209,6 +210,173 @@ with tab_agents:
 
         with st.expander("Source coverage"):
             st.json(sm["coverage"])
+
+with tab_fix:
+    sdir = Path(current["scan_dir"])
+    plans = RM.load_plans(sdir)
+    if not plans:
+        st.info("No remediation plans for this scan (the agent step has not produced any).")
+    else:
+        review, val = RM.load_review(sdir), RM.load_validation(sdir)
+        running = RM.validation_running(sdir)
+        docker_ok, docker_info = RM.docker_available()
+        g1 = review.get("gate1", {})
+        by_id = {p["plan_id"]: p for p in plans}
+        approved = [by_id[k] for k, d in g1.items() if d["decision"] == "approve" and k in by_id]
+        approved_auto = [p for p in approved if p["automatable"]]
+        g2 = review.get("gate2")
+        stale = bool(val) and sorted(val.get("plans", [])) != sorted(p["plan_id"] for p in approved_auto)
+
+        def chip(done, label):
+            return f"{'✅' if done else '⚪'} {label}"
+        st.markdown(" &nbsp;→&nbsp; ".join([
+            chip(bool(g1), f"**Gate 1** human approval ({len(approved)} approved)"),
+            chip(bool(val) and val.get("status") == "passed" and not stale, "**Sandbox** apply · install · test · re-scan"),
+            chip(bool(g2) and g2.get("decision") == "approve", "**Gate 2** approve validated change")]))
+        st.caption("Nothing is applied to your code, pushed or merged. Approved package changes are applied to a copy of "
+                   "the manifest and executed only inside an isolated container; every human decision and policy verdict "
+                   "is written to a hash-chained audit trail.")
+
+        # ---------------- Gate 1
+        st.markdown("#### 1 · Gate 1 — review the agents' remediation plans")
+        st.caption("Tick the plans you approve; unticked plans are recorded as rejected. *Sandbox* rows are package "
+                   "changes the system will apply and test; *Manual* rows (pins, secret rotation, config fixes) become "
+                   "a checklist in the draft PR.")
+        import pandas as pd
+        df = pd.DataFrame([{
+            "Approve": g1.get(p["plan_id"], {}).get("decision") == "approve",
+            "Mode": "Sandbox" if p["automatable"] else "Manual",
+            "Component": p["name"] + (f"@{p['version']}" if p.get("version") else ""),
+            "Action": p["action"], "Target": p.get("target_version") or "",
+            "Clears": ", ".join(p["clears"][:4]) + (f" +{len(p['clears']) - 4}" if len(p["clears"]) > 4 else ""),
+            "Signals": ", ".join(p["signals"]), "Risk": p["max_score"],
+            "Blocker": p.get("blocker") or "", "Why": p.get("rationale") or p.get("manual_reason") or "",
+            "Last decision": (lambda d: f"{d['decision']} by {d['reviewer']}" if d else "—")(g1.get(p["plan_id"])),
+            "plan_id": p["plan_id"]} for p in plans])
+        edited = st.data_editor(
+            df, hide_index=True, width="stretch", height=420, key=f"g1-{current['scan_id']}",
+            column_config={"Approve": st.column_config.CheckboxColumn("Approve", help="Approve this plan"),
+                           "plan_id": None, "Risk": st.column_config.NumberColumn(format="%.1f")},
+            disabled=[c for c in df.columns if c != "Approve"])
+        c1, c2, c3 = st.columns([2, 3, 2])
+        reviewer = c1.text_input("Reviewer name", key="rev-name", placeholder="e.g. Asha (security lead)")
+        note = c2.text_input("Comment (optional)", key="rev-note")
+        n_sel = int(edited["Approve"].sum())
+        if c3.button(f"Submit Gate 1 ({n_sel} approve / {len(edited) - n_sel} reject)", type="primary",
+                     disabled=running, width="stretch"):
+            try:
+                RM.record_gate1(sdir, {r.plan_id: ("approve" if r.Approve else "reject") for r in edited.itertuples()},
+                                reviewer, note)
+                st.success("Gate 1 decisions recorded in the audit trail.")
+                st.rerun()
+            except ValueError as e:
+                st.error(str(e))
+
+        # ---------------- Sandbox
+        st.markdown("#### 2 · Sandbox validation")
+        st.caption(f"Container runtime: {'✅ Docker ' + docker_info if docker_ok else '❌ ' + docker_info + ' — start Docker Desktop to execute changes in the sandbox (other steps still run).'}")
+        if stale and not running:
+            st.warning("Gate 1 decisions changed since the last validation — run the sandbox again.")
+        b1, b2 = st.columns([2, 5])
+        if b1.button(f"▶ Run sandbox on {len(approved_auto)} approved package change(s)", disabled=running or not approved,
+                     width="stretch"):
+            RM.start_validation(sdir)
+            st.rerun()
+        b2.caption("Steps: policy firewall → apply to a copy of package.json → resolve lockfile (no scripts) → verify "
+                   "versions → install in container (scripts off) → **load each package in a container with no network, "
+                   "read-only filesystem, no capabilities** → OSV re-scan before/after.")
+
+        ICON = {"ok": "✅", "warn": "⚠️", "failed": "❌", "skipped": "⏭️", "running": "🔄"}
+
+        def show_steps(v):
+            st.dataframe([{"": ICON.get(x["status"], ""), "Step": x["name"], "Result": x["detail"],
+                           "Time (s)": x.get("seconds")} for x in v.get("steps", [])], hide_index=True, width="stretch")
+
+        if running:
+            @st.fragment(run_every=2)
+            def live():
+                if not RM.validation_running(sdir):
+                    st.rerun()
+                v = RM.load_validation(sdir)
+                st.info("🔄 Sandbox validation running…")
+                if v:
+                    show_steps(v)
+            live()
+        elif val:
+            badge = {"passed": "✅ PASSED", "failed": "❌ FAILED", "nothing_to_validate": "— nothing to validate"}.get(val["status"], val["status"])
+            st.markdown(f"**Result: {badge}** · {val['id']} · approved by {val.get('approved_by')} · finished {val.get('finished_at')}")
+            show_steps(val)
+            res = val.get("results", {})
+            if res.get("rescan"):
+                rs = res["rescan"]
+                m = st.columns(4)
+                m[0].metric("Known vulns before", rs["before_total"])
+                m[1].metric("After the change", rs["after_total"], delta=rs["after_total"] - rs["before_total"], delta_color="inverse")
+                m[2].metric("Cleared on changed packages", len(rs["cleared"]))
+                m[3].metric("Newly introduced", len(rs["newly_introduced"]))
+            if res.get("version_checks"):
+                st.markdown("**Version checks in the new lockfile**")
+                st.dataframe([{"": "✅" if c["ok"] else "❌", "Package": c["package"], "Was": c.get("was", ""),
+                               "Expected": c["expected"], "Found in lockfile": ", ".join(c["found"]) or "—"}
+                              for c in res["version_checks"]], hide_index=True, width="stretch")
+            if res.get("sandbox_load"):
+                st.markdown("**Executed in the sandbox** (each package's code loaded with no network)")
+                st.dataframe([{"Package": n, "Version": r.get("version", ""), "Result": r.get("status"),
+                               "Error": r.get("error", "")} for n, r in res["sandbox_load"].items()],
+                             hide_index=True, width="stretch")
+            if res.get("package_json_diff"):
+                with st.expander("Proposed change (package.json diff)", expanded=True):
+                    st.code(res["package_json_diff"], language="diff")
+            if res.get("rescan"):
+                with st.expander("Re-scan details"):
+                    st.write("**Cleared**", res["rescan"]["cleared"] or "—")
+                    st.write("**Still present on changed package names**", res["rescan"]["residual_on_changed_packages"] or "—")
+                    st.write("**Newly introduced**", res["rescan"]["newly_introduced"] or "—")
+            with st.expander("Logs"):
+                for x in val.get("steps", []):
+                    if x.get("log"):
+                        st.markdown(f"`{x['name']}`")
+                        st.code(x["log"][-2000:])
+
+        # ---------------- Gate 2
+        st.markdown("#### 3 · Gate 2 — approve the validated change")
+        if not val or val.get("status") != "passed" or stale or running:
+            st.caption("Available once a sandbox validation for the current Gate 1 decisions has passed.")
+        else:
+            g = st.columns([2, 3, 1, 1])
+            rev2 = g[0].text_input("Reviewer name", key="rev2-name")
+            note2 = g[1].text_input("Comment (optional)", key="rev2-note")
+            for col, (label, decision) in zip(g[2:], (("✅ Approve", "approve"), ("✋ Reject", "reject"))):
+                if col.button(label, key=f"g2-{decision}", width="stretch"):
+                    try:
+                        RM.record_gate2(sdir, decision, rev2, note2)
+                        st.rerun()
+                    except ValueError as e:
+                        st.error(str(e))
+        if g2:
+            pol = g2.get("policy", {})
+            st.markdown(f"**Gate 2: {g2['decision'].upper()}** by {g2['reviewer']} at {g2['ts']} · policy firewall "
+                        f"{'allowed a draft PR' if pol.get('allow') else 'denied: ' + '; '.join(pol.get('deny_reason', []))}")
+            art = g2.get("artifacts") or {}
+            if art:
+                d = st.columns(3)
+                for col, (k, label) in zip(d, (("patch", "⬇️ package.json patch"), ("lockfile", "⬇️ remediated lockfile"),
+                                               ("pr_draft", "⬇️ draft PR (Markdown)"))):
+                    if art.get(k) and Path(art[k]).exists():
+                        col.download_button(label, Path(art[k]).read_bytes(), file_name=Path(art[k]).name,
+                                            key=f"art-{k}", width="stretch")
+                if art.get("pr_draft") and Path(art["pr_draft"]).exists():
+                    with st.expander("Draft PR description", expanded=True):
+                        st.markdown(Path(art["pr_draft"]).read_text(encoding="utf-8"))
+                st.caption("Not pushed or merged: the policy firewall keeps merge/publish/deploy human-only.")
+
+        # ---------------- audit trail
+        entries = RM.audit_entries(sdir)
+        ok, err = RM.audit_integrity(sdir)
+        with st.expander(f"Audit trail — {len(entries)} entries · integrity {'✅ valid' if ok else '❌ ' + str(err)}"):
+            st.dataframe([{"#": e["seq"], "Time": e["ts"], "Actor": e["actor"], "Action": e["action"], "Tool": e["tool"],
+                           "Policy": "allow" if e["policy_decision"].get("allow") else "deny: " + "; ".join(e["policy_decision"].get("deny_reason", [])),
+                           "Hash": e["hash"][:16]} for e in entries], hide_index=True, width="stretch")
 
 with tab_repo:
     gj = current["artifacts"].get("graph_json")
