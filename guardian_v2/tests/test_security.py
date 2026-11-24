@@ -27,6 +27,8 @@ def test_container_sandbox_has_hardening(tmp_path):
     assert "--security-opt=no-new-privileges" in args
     assert "--user" in args
     assert "65532:65532" in args
+    mount = next(v for v in args if v.startswith("type=bind,src="))
+    assert ",rw" not in mount
 
 
 def test_safe_copy_rejects_absolute_and_traversal(tmp_path):

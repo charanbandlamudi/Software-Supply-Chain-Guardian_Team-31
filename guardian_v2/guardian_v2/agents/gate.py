@@ -97,7 +97,7 @@ def _container_args(runtime: str, work: Path, image: str, command: list[str]) ->
         "--cap-drop=ALL",
         "--security-opt=no-new-privileges",
         "--user", "65532:65532",
-        "--mount", f"type=bind,src={work.resolve()},dst=/work,rw",
+        "--mount", f"type=bind,src={work.resolve()},dst=/work",
         "--workdir", "/work",
         "--env", "PYTHONNOUSERSITE=1",
         "--env", "PIP_DISABLE_PIP_VERSION_CHECK=1",
@@ -174,7 +174,7 @@ def _validate_python(state, plans, evidence):
         if c.get("direct") or purl in target:
             pins.append(f"{c['name']}=={target.get(purl, c['version'])}")
     work = Path(tempfile.mkdtemp(prefix="guardian-py-", dir=tempfile.gettempdir()))
-    work.chmod(0o700)
+    work.chmod(0o777)
     steps = {}
     (work / "requirements.txt").write_text("\n".join(pins) + ("\n" if pins else ""), encoding="utf-8")
     code, out = _run_sandbox(
@@ -221,7 +221,7 @@ def _validate_npm(state, plans, evidence):
     if overrides:
         manifest["overrides"] = overrides
     work = Path(tempfile.mkdtemp(prefix="guardian-npm-", dir=tempfile.gettempdir()))
-    work.chmod(0o700)
+    work.chmod(0o777)
     (work / "package.json").write_text(json.dumps(manifest, indent=2))
     src = Path(inp["npm_manifest"]).parent
     for d in inp.get("npm_copy", []):
