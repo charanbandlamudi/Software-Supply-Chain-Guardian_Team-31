@@ -42,6 +42,8 @@ class OrchestratorState(GuardianState, total=False):
     turn: int
     discrepancies: list
     plan_log: Annotated[list, operator.add]
+    audit_pending: Annotated[list, operator.add]   # unsealed audit events from parallel agents
+    audit_sealed: int                              # how many pending events are already chained
 
 
 def build_catalog(context: dict, llm_call=None, providers=()) -> list[Agent]:
@@ -100,6 +102,7 @@ def make_supervisor(catalog: list[Agent], planner_llm: Callable | None):
     by_name = {a.name: a for a in catalog}
 
     def supervisor(state: OrchestratorState):
+        sealed = _seal_audit(state)
         turn = state.get("turn", 0) + 1
         open_reqs = {rid: r for rid, r in state.get("requests", {}).items() if r["status"] == "open"
                      and all(state.get("gen", {}).get(x, 0) > 0 for x in by_name[r["to"]].requires)}
@@ -108,7 +111,7 @@ def make_supervisor(catalog: list[Agent], planner_llm: Callable | None):
 
         if turn > MAX_TURNS or not (ready or requested):
             why = "turn budget exhausted" if turn > MAX_TURNS else "no agent has new inputs and no handoffs are open"
-            return Command(goto="report", update={"turn": turn, "messages": [
+            return Command(goto="report", update={**sealed, "turn": turn, "messages": [
                 {"turn": turn, "from": "supervisor", "to": "report", "text": f"finish: {why}"}]})
 
         chosen = _policy(catalog, state, ready, requested)
@@ -137,10 +140,24 @@ def make_supervisor(catalog: list[Agent], planner_llm: Callable | None):
         for n in chosen:
             assignments.setdefault(n, {})
         msg = {"turn": turn, "from": "supervisor", "to": chosen, "text": reason}
-        return Command(goto=chosen, update={"turn": turn, "assignments": assignments,
+        return Command(goto=chosen, update={**sealed, "turn": turn, "assignments": assignments,
                                             "requests": {**dispatched, **extra}, "messages": [msg],
                                             "plan_log": [{"turn": turn, "run": chosen, "reason": reason}]})
     return supervisor
+
+
+def _seal_audit(state) -> dict:
+    """Chain audit events emitted since the last seal, in a deterministic order (turn, actor)."""
+    from .audit import append_entry
+    pending = state.get("audit_pending", [])
+    done = state.get("audit_sealed", 0)
+    if done >= len(pending):
+        return {}
+    chain, new = list(state.get("audit", [])), []
+    for ev in sorted(pending[done:], key=lambda e: (e.get("turn", 0), e.get("actor", ""))):
+        new.append(append_entry(chain, ev["actor"], ev["action"], ev["tool"], ev["args_redacted"],
+                                ev["policy_decision"], ev.get("result_ref")))
+    return {"audit": new, "audit_sealed": len(pending)}
 
 
 def _planner_prompt(catalog, state, ready, requested):
@@ -177,6 +194,13 @@ def make_node(agent: Agent):
         msgs += [{"turn": turn, "from": agent.name, "to": r["to"], "text": f"handoff: {r['reason']}"}
                  for r in res.requests]
         delta = dict(res.delta)
+        # Agents in the same superstep run in parallel, so they cannot each extend the hash chain
+        # (they would all claim the same seq/prev_hash). They emit an unsealed event; the supervisor,
+        # which runs alone between supersteps, seals events into the chain in a fixed order.
+        delta["audit_pending"] = [{
+            "turn": turn, "actor": f"agent:{agent.name}", "action": "agent.run", "tool": agent.name,
+            "args_redacted": {k: v for k, v in task.items() if k not in ("api_key", "token", "secret")},
+            "policy_decision": {"allow": True, "rule": "agent lifecycle"}, "result_ref": "state delta"}]
         delta.update({"gen": {agent.name: gen.get(agent.name, 0) + 1},
                       "seen": {agent.name: {r: gen.get(r, 0) for r in agent.requires}},
                       "requests": {**new_reqs, **done}, "messages": msgs})

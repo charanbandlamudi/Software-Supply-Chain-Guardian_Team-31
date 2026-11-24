@@ -2,7 +2,11 @@
 from __future__ import annotations
 
 import json
+import hashlib
+from datetime import datetime, timezone
 from pathlib import Path
+
+from ..audit import verify_chain, write_audit
 
 from .base import AgentResult
 from .day1_outputs import cyclonedx, mermaid_graph, origin
@@ -30,6 +34,10 @@ def run(state: dict, task: dict) -> AgentResult:
     for f in fs:
         f["resolution"] = _status(f, plans)
 
+    audit_entries = state.get("audit", [])
+    audit_ok, audit_error = verify_chain(audit_entries)
+    audit_sha = write_audit(out_dir / "audit.jsonl", audit_entries) if audit_entries else None
+    head_hash = audit_entries[-1]["hash"] if audit_entries else None
     report = {
         "run_id": state.get("run_id"),
         "stage": state.get("inputs", {}).get("stage", "full"),
@@ -47,6 +55,13 @@ def run(state: dict, task: dict) -> AgentResult:
         "remediation_plans": plans, "approvals": state.get("approvals", []),
         "validation": state.get("validation", {}), "coverage": state.get("coverage", {}),
         "agent_trace": state.get("messages", []),
+        "claims": state.get("critic", {}).get("accepted", []) + [
+            {**x["claim"], "label": "REJECTED", "reasons": x["reasons"]}
+            for x in state.get("critic", {}).get("rejected", [])
+        ],
+        "audit": {"entries": len(audit_entries), "head_hash": head_hash,
+                  "integrity": "valid" if audit_ok else "invalid",
+                  "error": audit_error, "sha256": audit_sha},
     }
     (out_dir / "guardian-report.json").write_text(json.dumps(report, indent=2, default=str))
     (out_dir / "guardian-sbom.cdx.json").write_text(json.dumps(cyclonedx(state), indent=2))
@@ -64,6 +79,39 @@ def run(state: dict, task: dict) -> AgentResult:
                                     "properties": {"score": f.get("score"), "confidence": f.get("confidence")}}
                                    for f in fs]}]}
     (out_dir / "guardian.sarif").write_text(json.dumps(sarif, indent=2))
+    vex_statements = []
+    for f in fs:
+        if f["component_purl"].startswith("file:"):
+            continue
+        if f.get("reachability_state") == "not_in_runtime" or f.get("reachability_state") == "not_imported":
+            c = comps.get(f["component_purl"], {})
+            evidence_ids = c.get("reachability", {}).get("evidence_ids", [])
+            if evidence_ids:
+                vex_statements.append({
+                    "vulnerability": {"name": f.get("canonical_id")},
+                    "products": [{"@id": f["component_purl"]}],
+                    "status": "not_affected",
+                    "justification": "vulnerable_code_not_in_execute_path",
+                    "impact_statement": "Static reachability evidence found no application import or runtime call path.",
+                })
+    vex = {"@context": "https://openvex.dev/ns/v0.2.0",
+           "@id": f"urn:uuid:guardian-{state.get('run_id')}",
+           "author": "Software Supply Chain Guardian",
+           "timestamp": datetime.now(timezone.utc).isoformat(),
+           "version": 1, "statements": vex_statements}
+    (out_dir / "guardian.openvex.json").write_text(json.dumps(vex, indent=2))
+
+    report_bytes = (out_dir / "guardian-report.json").read_bytes()
+    statement = {
+        "_type": "https://in-toto.io/Statement/v1",
+        "subject": [{"name": "guardian-report.json", "digest": {"sha256": hashlib.sha256(report_bytes).hexdigest()}},
+                    {"name": "guardian-sbom.cdx.json",
+                     "digest": {"sha256": hashlib.sha256((out_dir / "guardian-sbom.cdx.json").read_bytes()).hexdigest()}}],
+        "predicateType": "https://bgsw.example/guardian-report/v1",
+        "predicate": {"run_id": state.get("run_id"), "audit_head_hash": head_hash,
+                      "validated_by": "Software Supply Chain Guardian"},
+    }
+    (out_dir / "guardian.in-toto.json").write_text(json.dumps(statement, indent=2))
 
     md = [f"# Guardian Report: run {state.get('run_id')}", ""]
     vulns = [f for f in fs if f["type"] == "vulnerability"]

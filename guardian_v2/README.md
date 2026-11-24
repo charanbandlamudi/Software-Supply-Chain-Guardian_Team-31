@@ -55,3 +55,10 @@ architecture, agent hierarchy and innovation showcase.
 |---|---|
 | `GITHUB_TOKEN` | Enables the GHSA source |
 | `ANTHROPIC_API_KEY` / `GROQ_API_KEY` / `GEMINI_API_KEY` | Enable LLM explanations; add `--llm-planner` for LLM routing |
+
+## Architecture controls
+
+- Every agent turn is appended to a SHA-256 hash-chained audit trail (`guardian-out/audit.jsonl`).
+- Tool calls are evaluated by the deterministic policy firewall in `guardian_v2/policy.py`; merge, publish, deploy, and public egress actions remain human-only.
+- Reports include claim provenance, OpenVEX statements, an in-toto statement, audit-head integrity, and the enriched CycloneDX SBOM.
+- Day 2 validation and remediation require Gate 1; draft PR/report approval requires Gate 2. Neither gate auto-merges or publishes.

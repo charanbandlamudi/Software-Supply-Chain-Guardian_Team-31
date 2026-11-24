@@ -17,6 +17,24 @@ from .base import AgentResult, handoff
 
 def run_approval(state: dict, task: dict) -> AgentResult:
     plans = {pid: p for pid, p in state.get("remediation_plans", {}).items() if p.get("status") == "proposed"}
+    validated = {pid: p for pid, p in state.get("remediation_plans", {}).items()
+                 if p.get("status") == "validated"}
+    if validated:
+        decision = interrupt({"question": "Approve the draft PR and signed report? Nothing is merged or published.",
+                              "gate": 2, "plans": validated})
+        choices = decision.get("decisions", {})
+        default = decision.get("all")
+        updates, approvals = {}, []
+        for pid, plan in validated.items():
+            choice = choices.get(pid, default)
+            if choice not in ("approve", "reject"):
+                continue
+            status = "pr_approved" if choice == "approve" else "publish_rejected"
+            updates[pid] = {"status": status}
+            approvals.append({"plan_id": pid, "decision": status, "gate": 2,
+                              "reviewer": decision.get("reviewer", "unknown")})
+        return AgentResult(delta={"remediation_plans": updates, "approvals": approvals},
+                           summary=f"Gate 2: {sum(a['decision'] == 'pr_approved' for a in approvals)} approved")
     if not plans:
         return AgentResult(summary="no plans awaiting approval")
     comps = state.get("components", {})
@@ -295,6 +313,8 @@ def run_validation(state: dict, task: dict) -> AgentResult:
             lines.append(f"{eco}: build+tests pass; added {len(res['sbom_diff']['added'])} / removed "
                          f"{len(res['sbom_diff']['removed'])} packages; residual vulnerable packages after "
                          f"change: {len(residual)}")
+            requests.append(handoff("approval", f"{eco} sandbox validation passed; request Gate 2 review",
+                                    gate=2, ecosystem=eco))
         else:
             failed = next(k for k, s in steps.items() if not s["ok"])
             log = steps[failed]["log"].strip().splitlines()

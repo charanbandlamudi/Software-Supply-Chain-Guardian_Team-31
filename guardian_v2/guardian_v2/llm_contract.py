@@ -57,7 +57,10 @@ def parse_response(text: str) -> list[dict]:
     data = json.loads(clean)
     if isinstance(data, list):
         data = {"claims": data}
-    claims = data.get("claims", [])
+    claims = data.get("claims", []) if isinstance(data, dict) else []
+    # Models occasionally return bare strings or partial objects; keep only well-formed claims.
+    # Skipped findings get a labelled template from the critic, so nothing disappears silently.
+    claims = [c for c in (claims if isinstance(claims, list) else []) if isinstance(c, dict) and c.get("finding_id")]
     for c in claims:
         c["kind"] = "inference"
     return claims
