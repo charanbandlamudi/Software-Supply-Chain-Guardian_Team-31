@@ -1,0 +1,23 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": "guardian-report.json",
+      "digest": {
+        "sha256": "9daff85a9e687f9e2a32b30cfe65a52eeed22bfe6d7ba4b89af702940b8baf28"
+      }
+    },
+    {
+      "name": "guardian-sbom.cdx.json",
+      "digest": {
+        "sha256": "d4d3b88a5666f14a21732d4432fadffd4e375529766e6f221f4cce7f94e758d0"
+      }
+    }
+  ],
+  "predicateType": "https://bgsw.example/guardian-report/v1",
+  "predicate": {
+    "run_id": "16dee38e",
+    "audit_head_hash": "3d44458989c423e5a6aecf8f3a4628b58aa2f906dd9c70b44617e3898718111e",
+    "validated_by": "Software Supply Chain Guardian"
+  }
+}

@@ -14,10 +14,11 @@
       "critic"
     ],
     "llm": [
+      "gemini",
       "groq"
     ],
     "turns": 9,
-    "seconds": 77.9,
+    "seconds": 64.9,
     "findings": 188,
     "by_type": {
       "misconfiguration": 87,
@@ -32,7 +33,7 @@
     },
     "handoffs": 1,
     "critic": {
-      "accepted": 19,
+      "accepted": 16,
       "rejected": 0
     },
     "remediation_plans": 47,
@@ -48,40 +49,54 @@
       "source:ghsa": "skipped: set GITHUB_TOKEN (unauthenticated limit is 60 req/h)",
       "source:cisa-kev": "ok (1792 entries)",
       "source:epss": "ok (47/48)",
-      "llm": "ok via ['groq']"
+      "llm": "ok via ['gemini', 'groq']"
+    },
+    "llm_usage": {
+      "gemini": {
+        "calls": 3,
+        "ok": 1,
+        "failed": 2,
+        "rate_limited": 0
+      },
+      "groq": {
+        "calls": 4,
+        "ok": 3,
+        "failed": 1,
+        "rate_limited": 1
+      }
     },
     "reputation_focus": 110,
-    "report_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/agents"
+    "report_dir": "data/scans/juice-shop__juice-shop__20261124-055536/agents"
   },
   "inputs": {
-    "sbom": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/sbom/bom.json",
+    "sbom": "data/scans/juice-shop__juice-shop__20261124-055536/sbom/bom.json",
     "source_dirs": [
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo"
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo"
     ],
     "dockerfiles": [
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/Dockerfile",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/infrastructure/Dockerfile",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/test/smoke/Dockerfile"
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/Dockerfile",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/infrastructure/Dockerfile",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/test/smoke/Dockerfile"
     ],
     "workflows": [
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/ci.yml",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/codeql-analysis.yml",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/frontend-bundle-analysis.yml",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/image_actions.yml",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/issue-compliance.yml",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/lint-fixer.yml",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/lock.yml",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/pr-compliance.yml",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/rebase.yml",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/release.yml",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/stale.yml",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/update-challenges-ebook.yml",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/update-challenges-www-legacy.yml",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/update-challenges-www.yml",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/update-news-www-legacy.yml",
-      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/update-news-www.yml"
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/ci.yml",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/codeql-analysis.yml",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/frontend-bundle-analysis.yml",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/image_actions.yml",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/issue-compliance.yml",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/lint-fixer.yml",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/lock.yml",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/pr-compliance.yml",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/rebase.yml",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/release.yml",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/stale.yml",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/update-challenges-ebook.yml",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/update-challenges-www-legacy.yml",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/update-challenges-www.yml",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/update-news-www-legacy.yml",
+      "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/update-news-www.yml"
     ],
-    "out_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/agents",
+    "out_dir": "data/scans/juice-shop__juice-shop__20261124-055536/agents",
     "stage": "analysis",
     "reputation_focus": [
       "pkg:npm/%40ai-sdk/openai-compatible@2.0.94",
@@ -195,11 +210,11 @@
       "pkg:npm/z85@0.0.2",
       "pkg:npm/zod@4.6.7"
     ],
-    "npm_manifest": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/package.json",
-    "npm_lock": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/package-lock.json",
-    "grype_report": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/scanner_results/grype.json",
-    "osv_scanner_report": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/scanner_results/osv.json",
-    "trivy_report": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/scanner_results/trivy.json"
+    "npm_manifest": "data/scans/juice-shop__juice-shop__20261124-055536/repo/package.json",
+    "npm_lock": "data/scans/juice-shop__juice-shop__20261124-055536/repo/package-lock.json",
+    "grype_report": "data/scans/juice-shop__juice-shop__20261124-055536/scanner_results/grype.json",
+    "osv_scanner_report": "data/scans/juice-shop__juice-shop__20261124-055536/scanner_results/osv.json",
+    "trivy_report": "data/scans/juice-shop__juice-shop__20261124-055536/scanner_results/trivy.json"
   },
   "messages": [
     {
@@ -243,7 +258,7 @@
       "turn": 2,
       "from": "vuln_intel",
       "to": "supervisor",
-      "text": "294 raw advisory records from 6/6 sources -> 58 unique vulnerabilities on 20 packages (tar@6.2.1=12, sanitize-html@1.4.2=11, jsonwebtoken@0.1.0=5, jsonwebtoken@0.4.0=5, lodash@2.4.2=4, moment@2.0.0=3)  [2.6s]"
+      "text": "294 raw advisory records from 6/6 sources -> 58 unique vulnerabilities on 20 packages (tar@6.2.1=12, sanitize-html@1.4.2=11, jsonwebtoken@0.1.0=5, jsonwebtoken@0.4.0=5, lodash@2.4.2=4, moment@2.0.0=3)  [2.5s]"
     },
     {
       "turn": 2,
@@ -270,7 +285,7 @@
       "turn": 3,
       "from": "anomaly",
       "to": "supervisor",
-      "text": "25 non-CVE findings: {'yanked_or_deprecated': 11, 'install_script': 6, 'typosquat_suspect': 3, 'suspicious_update': 5}; name-similarity cleared as established: cors (~colors: 35 versions, 13y), cypress (~express: 298 versions, 11y)  [1.4s]"
+      "text": "25 non-CVE findings: {'yanked_or_deprecated': 11, 'install_script': 6, 'typosquat_suspect': 3, 'suspicious_update': 5}; name-similarity cleared as established: cors (~colors: 35 versions, 13y), cypress (~express: 298 versions, 11y)  [1.3s]"
     },
     {
       "turn": 3,
@@ -332,7 +347,7 @@
       "turn": 7,
       "from": "explainer",
       "to": "supervisor",
-      "text": "LLM produced 19 evidence-cited claims for 20 findings  [73.1s]"
+      "text": "LLM produced 16 evidence-cited claims for 20 findings  [60.1s]"
     },
     {
       "turn": 8,
@@ -346,7 +361,7 @@
       "turn": 8,
       "from": "critic",
       "to": "supervisor",
-      "text": "verified 19 claims; 0 replaced by templates"
+      "text": "verified 16 claims; 0 replaced by templates"
     },
     {
       "turn": 9,
@@ -358,7 +373,7 @@
       "turn": 9,
       "from": "report",
       "to": "supervisor",
-      "text": "wrote guardian-report.json/.md, guardian.sarif, guardian-sbom.cdx.json, dependency-graph.mmd to /Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/agents"
+      "text": "wrote guardian-report.json/.md, guardian.sarif, guardian-sbom.cdx.json, dependency-graph.mmd to data/scans/juice-shop__juice-shop__20261124-055536/agents"
     }
   ],
   "plan_log": [
@@ -427,7 +442,7 @@
     "accepted": [
       {
         "finding_id": "VULN::CVE-2015-9235::pkg:npm/jsonwebtoken@0.1.0",
-        "statement": "The jsonwebtoken 0.1.0 package has a verification bypass (CVE\u20112015\u20119235) that can allow attackers to forge JWTs. It is imported directly by the app and also via express\u2011jwt, giving it full reachability. With a CVSS of 9.8, a score of 57.4 and a high EPS\u2011S percentile (0.951), this vulnerability is critical. Upgrade to jsonwebtoken\u202f9.0.0.",
+        "statement": "The jsonwebtoken 0.1.0 package is vulnerable to CVE\u20112015\u20119235, a verification bypass that can allow forged JWTs. It is imported directly by the application and also through express\u2011jwt, making the vulnerable code reachable at runtime. With a CVSS of 9.8, an EPSS of 0.08367 (percentile 0.95101) and a security score of 57.4, this issue is critical; upgrade jsonwebtoken to version 9.0.0.",
         "evidence_ids": [
           "EV-grype-b8372ef527a9bcdd",
           "EV-npm-audit-b23934214a0c7796",
@@ -439,63 +454,12 @@
           "kev": false,
           "target_version": "9.0.0"
         },
-        "next_step": "Upgrade jsonwebtoken to 9.0.0 and run sandbox tests.",
-        "kind": "inference"
-      },
-      {
-        "finding_id": "VULN::CVE-2015-9235::pkg:npm/jsonwebtoken@0.4.0",
-        "statement": "The jsonwebtoken 0.4.0 package has a verification bypass (CVE\u20112015\u20119235) that can allow attackers to forge JWTs. It is imported directly by the app and also via express\u2011jwt, giving it full reachability. With a CVSS of 9.8, a score of 57.4 and a high EPS\u2011S percentile (0.951), this vulnerability is critical. Upgrade to jsonwebtoken\u202f9.0.0.",
-        "evidence_ids": [
-          "EV-grype-6a9376bfd822ec70",
-          "EV-npm-audit-b23934214a0c7796",
-          "EV-osv-2917e3709dc4344f",
-          "EV-osv-scanner-c0d9cc0fd57d350d"
-        ],
-        "facts": {
-          "cvss": 9.8,
-          "kev": false,
-          "target_version": "9.0.0"
-        },
-        "next_step": "Upgrade jsonwebtoken to 9.0.0 and run sandbox tests.",
-        "kind": "inference"
-      },
-      {
-        "finding_id": "VULN::CVE-2022-25887::pkg:npm/sanitize-html@1.4.2",
-        "statement": "sanitize\u2011html 1.4.2 is vulnerable to a regular expression denial\u2011of\u2011service (CVE\u20112022\u201125887) that can be triggered by crafted input. The package is imported directly by the application, providing full reachability. Its CVSS of 7.5, score 45.7 and EPS\u2011S percentile 0.764 indicate a moderate risk. Upgrade to sanitize\u2011html\u202f2.18.1.",
-        "evidence_ids": [
-          "EV-grype-e6817ae5f7c17eba",
-          "EV-npm-audit-b23934214a0c7796",
-          "EV-osv-ecf6b7e2965dce36",
-          "EV-osv-scanner-98634f8f7e628973"
-        ],
-        "facts": {
-          "cvss": 7.5,
-          "kev": false,
-          "target_version": "2.18.1"
-        },
-        "next_step": "Upgrade sanitize-html to 2.18.1 and verify functionality.",
-        "kind": "inference"
-      },
-      {
-        "finding_id": "VULN::CVE-2020-15084::pkg:npm/express-jwt@0.1.3",
-        "statement": "express\u2011jwt 0.1.3 contains an authorization bypass (CVE\u20112020\u201115084) that may let unauthenticated requests access protected routes. It is imported directly by the app, so the vulnerability is reachable. With CVSS 7.7, score 44.6 and EPS\u2011S percentile 0.659, it is a notable concern. Upgrade to express\u2011jwt\u202f6.0.0.",
-        "evidence_ids": [
-          "EV-grype-b2a5241757ec44f8",
-          "EV-npm-audit-b23934214a0c7796",
-          "EV-osv-ccb507a9a6c64c3d",
-          "EV-osv-scanner-7242b497b7cffa5e"
-        ],
-        "facts": {
-          "cvss": 7.7,
-          "kev": false,
-          "target_version": "6.0.0"
-        },
-        "next_step": "Upgrade express-jwt to 6.0.0 and run integration tests.",
+        "next_step": "Upgrade jsonwebtoken to 9.0.0 and run sandbox tests",
         "kind": "inference"
       },
       {
         "finding_id": "VULN::CVE-2019-10744::pkg:npm/lodash@2.4.2",
-        "statement": "lodash 2.4.2 suffers from prototype pollution (CVE\u20112019\u201110744) that can modify object prototypes across the runtime. It is used transitively through finale\u2011rest, sanitize\u2011html and sequelize, giving the vulnerability indirect reach into the app. The CVSS of 9.1, score 44.5 and EPS\u2011S percentile 0.924 make it high\u2011severity. Upgrade to lodash\u202f4.18.1.",
+        "statement": "The lodash 2.4.2 library is affected by CVE\u20112019\u201110744, a prototype pollution vulnerability that can lead to arbitrary property injection. It is used transitively via finale\u2011rest, sanitize\u2011html, and sequelize, so the vulnerable code is reachable through those dependencies. With a CVSS of 9.1, EPSS 0.05006 (percentile 0.92447) and a score of 44.5, the issue is high\u2011severity; upgrade lodash to 4.18.1.",
         "evidence_ids": [
           "EV-grype-59aa595ffd262d2d",
           "EV-npm-audit-b23934214a0c7796",
@@ -507,12 +471,12 @@
           "kev": false,
           "target_version": "4.18.1"
         },
-        "next_step": "Upgrade lodash to 4.18.1 and perform regression testing.",
+        "next_step": "Upgrade lodash to 4.18.1 and run sandbox tests",
         "kind": "inference"
       },
       {
         "finding_id": "VULN::CVE-2022-23539::pkg:npm/jsonwebtoken@0.4.0",
-        "statement": "The jsonwebtoken 0.4.0 package permits unrestricted key types, which can allow legacy keys and enable token forgery. It is imported directly by the application and also pulled in via express\u2011jwt, as shown in the dependency paths. With a CVSS of 8.1, a score of 42.3, a Track SSVC, and an EPS\u2011S of 0.00524, this is a high\u2011severity issue that should be addressed. Upgrade jsonwebtoken to version 9.0.0 and re\u2011scan the application.",
+        "statement": "The jsonwebtoken\u202f0.4.0 package contains CVE\u20112022\u201123539, which allows unrestricted key types and may enable use of legacy signing keys. It is imported directly by the app and also reachable through express\u2011jwt (app \u2192 jsonwebtoken, app \u2192 express\u2011jwt \u2192 jsonwebtoken), so the vulnerable code can be executed at runtime. With a CVSS\u202f8.1, an internal score of 42.3 (SSVC\u202fTrack) and a low EPS\u2011S probability, the flaw is high\u2011impact. Upgrade jsonwebtoken to 9.0.0 and verify with sandbox tests.",
         "evidence_ids": [
           "EV-grype-34beb6ad5c898821",
           "EV-npm-audit-b23934214a0c7796",
@@ -524,12 +488,12 @@
           "kev": false,
           "target_version": "9.0.0"
         },
-        "next_step": "Upgrade jsonwebtoken to 9.0.0 and retest",
+        "next_step": "Upgrade jsonwebtoken to 9.0.0 and run sandbox tests as indicated.",
         "kind": "inference"
       },
       {
         "finding_id": "VULN::CVE-2022-24785::pkg:npm/moment@2.0.0",
-        "statement": "Moment 2.0.0 contains a path\u2011traversal flaw in its locale handling that can lead to arbitrary file access. The vulnerable module is used transitively through jsonwebtoken and express\u2011jwt, as reflected in the dependency paths. Its CVSS of 7.5, score of 40.0, Track SSVC and EPS\u2011S of 0.05338 make it a serious concern. Upgrade moment to version 2.31.0 and re\u2011scan the project.",
+        "statement": "Moment\u202f2.0.0 is vulnerable to CVE\u20112022\u201124785, a path\u2011traversal issue in moment.locale that can lead to arbitrary file access. The library is pulled in transitively via jsonwebtoken and express\u2011jwt (app \u2192 jsonwebtoken \u2192 moment, app \u2192 express\u2011jwt \u2192 jsonwebtoken \u2192 moment), making the vulnerability reachable in production code. Its CVSS\u202f7.5, score 40.0 (SSVC\u202fTrack) and EPS\u2011S 0.05338 indicate a serious risk. Upgrade moment to 2.31.0 to eliminate the flaw.",
         "evidence_ids": [
           "EV-grype-e83ff1a7097171f0",
           "EV-npm-audit-b23934214a0c7796",
@@ -541,12 +505,12 @@
           "kev": false,
           "target_version": "2.31.0"
         },
-        "next_step": "Upgrade moment to 2.31.0 and verify functionality",
+        "next_step": "Upgrade moment to 2.31.0.",
         "kind": "inference"
       },
       {
         "finding_id": "VULN::CVE-2017-16016::pkg:npm/sanitize-html@1.4.2",
-        "statement": "Sanitize\u2011html 1.4.2 is vulnerable to cross\u2011site scripting, allowing injection of malicious HTML into rendered pages. The package is imported directly by the application. With a CVSS of 6.1, a score of 39.8, Track SSVC and EPS\u2011S of 0.01311, the issue poses a moderate to high risk. Upgrade sanitize\u2011html to version 2.18.1 and re\u2011run security scans.",
+        "statement": "Sanitize\u2011html\u202f1.4.2 contains CVE\u20112017\u201116016, a cross\u2011site scripting flaw that can allow injection of malicious scripts. The package is imported directly by the application, so the vulnerable code is executed whenever HTML is sanitized. With a CVSS\u202f6.1, score 39.8 (SSVC\u202fTrack) and EPS\u2011S 0.01311, the issue is noteworthy for web\u2011exposed services. Upgrade to sanitize\u2011html\u202f2.18.1, which has no known advisories.",
         "evidence_ids": [
           "EV-grype-c3da12132bc16549",
           "EV-npm-audit-b23934214a0c7796",
@@ -558,12 +522,12 @@
           "kev": false,
           "target_version": "2.18.1"
         },
-        "next_step": "Upgrade sanitize-html to 2.18.1 and test for regressions",
+        "next_step": "Upgrade sanitize-html to 2.18.1 and test sanitization behavior.",
         "kind": "inference"
       },
       {
         "finding_id": "VULN::CVE-2021-23337::pkg:npm/lodash@2.4.2",
-        "statement": "Lodash 2.4.2 suffers from a command\u2011injection vulnerability that can be triggered by crafted input. It is used transitively via finale\u2011rest, sanitize\u2011html, and sequelize, as shown in the paths. The CVSS of 7.2, score of 39.8, Track SSVC and EPS\u2011S of 0.20158 indicate a high\u2011impact problem. Upgrade lodash to version 4.18.1 and perform sandbox testing before release.",
+        "statement": "Lodash\u202f2.4.2 is affected by CVE\u20112021\u201123337, a command\u2011injection vulnerability that can be triggered via crafted inputs. It is used transitively through finale\u2011rest, sanitize\u2011html, and sequelize (e.g., app \u2192 finale\u2011rest \u2192 lodash), so the vulnerable code can be reached from multiple code paths. The CVSS\u202f7.2, score 39.8 (SSVC\u202fTrack) and EPS\u2011S 0.20158 reflect a high likelihood of exploitation. Upgrade lodash to 4.18.1, performing sandbox tests due to the major version bump.",
         "evidence_ids": [
           "EV-grype-bb1fbfe30a5defb6",
           "EV-npm-audit-b23934214a0c7796",
@@ -575,12 +539,12 @@
           "kev": false,
           "target_version": "4.18.1"
         },
-        "next_step": "Upgrade lodash to 4.18.1 and conduct compatibility tests",
+        "next_step": "Upgrade lodash to 4.18.1 and run sandbox compatibility tests.",
         "kind": "inference"
       },
       {
         "finding_id": "VULN::CVE-2017-18214::pkg:npm/moment@2.0.0",
-        "statement": "Moment 2.0.0 is affected by a regular\u2011expression denial\u2011of\u2011service that can cause the process to hang on crafted dates. The library is used transitively through jsonwebtoken and express\u2011jwt. Its CVSS of 7.5, score of 39.5, Track SSVC and EPS\u2011S of 0.03649 make it a notable performance risk. Upgrade moment to version 2.31.0 and re\u2011evaluate the application\u2019s responsiveness.",
+        "statement": "Moment\u202f2.0.0 suffers from CVE\u20112017\u201118214, a regular\u2011expression denial\u2011of\u2011service that can cause the process to hang on crafted date strings. The library is pulled in transitively via jsonwebtoken and express\u2011jwt (app \u2192 jsonwebtoken \u2192 moment, app \u2192 express\u2011jwt \u2192 jsonwebtoken \u2192 moment), exposing the application to the DoS risk. Its CVSS\u202f7.5, score 39.5 (SSVC\u202fTrack) and EPS\u2011S 0.03649 make it a critical performance concern. Upgrade moment to 2.31.0 to obtain the patched implementation.",
         "evidence_ids": [
           "EV-grype-9c31adedc7399bb7",
           "EV-npm-audit-b23934214a0c7796",
@@ -592,12 +556,12 @@
           "kev": false,
           "target_version": "2.31.0"
         },
-        "next_step": "Upgrade moment to 2.31.0 and verify no DoS occurs",
+        "next_step": "Upgrade moment to 2.31.0.",
         "kind": "inference"
       },
       {
         "finding_id": "VULN::CVE-2021-26539::pkg:npm/sanitize-html@1.4.2",
-        "statement": "Sanitize\u2011html 1.4.2 has improper input validation that can allow malicious content to bypass sanitisation. The package is imported directly by the application. With a CVSS of 5.3, score of 38.7, Track SSVC and EPS\u2011S of 0.01977, the vulnerability is moderate but still warrants remediation. Upgrade sanitize\u2011html to version 2.18.1 and re\u2011scan for remaining issues.",
+        "statement": "Sanitize\u2011html\u202f1.4.2 is vulnerable to CVE\u20112021\u201126539, an improper input\u2011validation flaw that can allow malformed HTML to bypass sanitization. The package is imported directly by the app, so the vulnerable code runs whenever HTML is processed. With a CVSS\u202f5.3, score 38.7 (SSVC\u202fTrack) and EPS\u2011S 0.01977, the issue is moderate but still relevant for user\u2011facing content. Upgrade to sanitize\u2011html\u202f2.18.1, which is clean on the registry.",
         "evidence_ids": [
           "EV-grype-b2713e48f0c413cb",
           "EV-npm-audit-b23934214a0c7796",
@@ -609,12 +573,12 @@
           "kev": false,
           "target_version": "2.18.1"
         },
-        "next_step": "Upgrade sanitize-html to 2.18.1 and perform regression testing",
+        "next_step": "Upgrade sanitize-html to 2.18.1 and verify HTML sanitization.",
         "kind": "inference"
       },
       {
         "finding_id": "MISCONFIGURATION::AWS-0054::data/static/codefixes/iacLeakedKeyChallenge_1.tf:156",
-        "statement": "The application load balancer listener is configured to use plain HTTP instead of HTTPS, exposing traffic to potential interception. This configuration is defined in data/static/codefixes/iacLeakedKeyChallenge_1.tf at line 156. With a score of 36.0 and an Ssvc of Track, the risk is notable even though reachability is not applicable. Apply the fix described by the failed Trivy check and switch the listener to HTTPS.",
+        "statement": "The application load balancer listener is using plain HTTP instead of HTTPS at data/static/codefixes/iacLeakedKeyChallenge_1.tf on line 156. This configuration lacks TLS security features, which matters for protecting data in transit (score 36.0). Apply the fix described by the failed Trivy check to switch to HTTPS.",
         "evidence_ids": [
           "EV-trivy-misconfig-aa83db68355cd0e3"
         ],
@@ -623,12 +587,12 @@
           "kev": null,
           "target_version": null
         },
-        "next_step": "Apply the recommended action",
+        "next_step": "Apply the fix described by the failed Trivy check. Switch to HTTPS to benefit from TLS security features",
         "kind": "inference"
       },
       {
         "finding_id": "EXPOSED_SECRET::private-key::infrastructure/terraform/networking.tf:171",
-        "statement": "An asymmetric private key was committed directly in infrastructure/terraform/networking.tf at line 171, exposing a credential in source control. The secret is reachable in the Terraform configuration and can be extracted by anyone with repository access. With a score of 30.0 and an Ssvc of Track, this poses a significant credential leakage risk. Revoke and rotate the key, remove it from the code and git history, and load it from a secret store instead.",
+        "statement": "An asymmetric private key was committed directly into infrastructure/terraform/networking.tf at line 171. This exposes sensitive credentials within the codebase (score 30.0). Revoke and rotate the credential, then remove it from the code and git history while loading it from a secret store instead.",
         "evidence_ids": [
           "EV-trivy-secret-631fdc50e10dbcdf"
         ],
@@ -637,28 +601,28 @@
           "kev": null,
           "target_version": null
         },
-        "next_step": "Apply the recommended action",
+        "next_step": "Revoke and rotate the credential, then remove it from the code and git history; load it from a secret store instead.",
         "kind": "inference"
       },
       {
         "finding_id": "SUSPICIOUS_UPDATE::pkg:npm/cypress@16.3.0",
-        "statement": "The npm package cypress@16.3.0 was published only 13.4 days ago, which is within the 14\u2011day cooling\u2011off window and may indicate a suspicious update. The package is imported into the application, making the potentially risky version part of the dependency chain. It carries a score of 29.0 and an Ssvc of Track, highlighting the need for caution. Pin the dependency to the previous release until the cooling\u2011off period has passed.",
+        "statement": "The package cypress@16.3.0 was recently published and violates the cooling-off window. It is imported by the application and tracked due to being published within the last 14 days (score 29.0). Pin to the previous release until the new one passes the cooling-off window.",
         "evidence_ids": [
-          "EV-anomaly-suspicious_update-055d8474d6ada21b",
+          "EV-anomaly-suspicious_update-2d811812fbbf4183",
           "EV-input-9d4c5d82055ea10f",
-          "EV-ast-import-scan-41c06c5923a97ead"
+          "EV-ast-import-scan-21f012c8eaa6c127"
         ],
         "facts": {
           "cvss": null,
           "kev": null,
           "target_version": null
         },
-        "next_step": "Apply the recommended action",
+        "next_step": "Pin to the previous release until the new one passes the cooling-off window.",
         "kind": "inference"
       },
       {
         "finding_id": "TYPOSQUAT_SUSPECT::pkg:npm/color@5.0.3",
-        "statement": "The npm package named \"color\" is within an edit distance of two from the popular package \"colors\", raising a possible typosquat concern. It is used transitively in the application, so the suspect package could be pulled in without direct reference. With a score of 28.0 and an Ssvc of Track, the similarity warrants review. Remove the package or replace it with the intended one after verification.",
+        "statement": "The package color@5.0.3 is used transitively and falls within edit distance 2 of the popular package colors, presenting a potential typosquatting risk. This matters as an unverified supply-chain anomaly (score 28.0). Remove or replace the package with the intended one after review.",
         "evidence_ids": [
           "EV-anomaly-typosquat_suspect-e1b29135c1d84501",
           "EV-input-9d4c5d82055ea10f"
@@ -668,28 +632,28 @@
           "kev": null,
           "target_version": null
         },
-        "next_step": "Apply the recommended action",
+        "next_step": "Remove or replace with the intended package after review. Signals: typosquat_suspect.",
         "kind": "inference"
       },
       {
         "finding_id": "INSTALL_SCRIPT::pkg:npm/cypress@16.3.0",
-        "statement": "The cypress package executes code at install time, which can introduce unwanted behavior during dependency installation. This install script runs because the package is imported into the project. The finding has a score of 25.0 and an Ssvc of Track, indicating a moderate risk. Pin the dependency to the previous release until the new version passes the cooling\u2011off window.",
+        "statement": "The imported package cypress@16.3.0 runs arbitrary code at install time, which poses a supply-chain risk. It is tracked in the application (score 25.0). Pin to the previous release until the new one passes the cooling-off window.",
         "evidence_ids": [
           "EV-anomaly-install_script-64447212153055b1",
           "EV-input-9d4c5d82055ea10f",
-          "EV-ast-import-scan-41c06c5923a97ead"
+          "EV-ast-import-scan-21f012c8eaa6c127"
         ],
         "facts": {
           "cvss": null,
           "kev": null,
           "target_version": null
         },
-        "next_step": "Apply the recommended action",
+        "next_step": "Pin to the previous release until the new one passes the cooling-off window.",
         "kind": "inference"
       },
       {
-        "finding_id": "UNPINNED_BASE_IMAGE::/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/Dockerfile:1",
-        "statement": "The Dockerfile references the base image node:24 by tag rather than a immutable digest, allowing the underlying image to be changed without notice. This unpinned base image appears at line 1 of the Dockerfile and affects the entire container build. With a score of 22.0 and an Ssvc of Track, the risk of pulling a compromised or outdated image exists. Pin the base image using its @sha256 digest and avoid end\u2011of\u2011life tags.",
+        "finding_id": "UNPINNED_BASE_IMAGE::data/scans/juice-shop__juice-shop__20261124-055536/repo/Dockerfile:1",
+        "statement": "The Dockerfile at data/scans/juice-shop__juice-shop__20261124-055536/repo/Dockerfile references node:24 by an unpinned tag on line 1. Unpinned base images can be silently re-pointed by registry maintainers, impacting build integrity (score 22.0). Pin the base image by @sha256 digest and move off EOL tags.",
         "evidence_ids": [
           "EV-cicd-301ced8250ce0d00"
         ],
@@ -698,12 +662,12 @@
           "kev": null,
           "target_version": null
         },
-        "next_step": "Apply the recommended action",
+        "next_step": "Pin the base image by @sha256 digest (and move off EOL tags).",
         "kind": "inference"
       },
       {
-        "finding_id": "UNPINNED_ACTION::/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/ci.yml:198",
-        "statement": "The CI workflow uses the coverallsapp/github-action@v2 action referenced by a tag/branch instead of a fixed commit SHA. This unpinned reference appears in .github/workflows/ci.yml at line\u202f198, so the workflow can pull a malicious version if the tag is moved. With a score of\u202f20.0 and an Ssvc of\u202fTrack, the issue is considered high\u2011impact and should be addressed promptly. Pin the action to a specific 40\u2011character commit SHA as recommended.",
+        "finding_id": "UNPINNED_ACTION::data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/ci.yml:198",
+        "statement": "The CI workflow uses the GitHub Action `coverallsapp/github-action@v2` referenced by a tag or branch instead of a fixed commit SHA. Because the workflow file (`.github/workflows/ci.yml` at line\u202f198) runs on every push, the unpinned reference can be silently redirected to a malicious version, which is concerning given the high score of\u202f20.0 and the \u201cTrack\u201d Ssvc classification. Pin the action to a specific 40\u2011character commit SHA as recommended.",
         "evidence_ids": [
           "EV-cicd-661d9d4d8f42ce03"
         ],
@@ -712,23 +676,23 @@
           "kev": null,
           "target_version": null
         },
-        "next_step": "pin",
+        "next_step": "Pin the action to a full 40-character commit SHA.",
         "kind": "inference"
       },
       {
         "finding_id": "YANKED_OR_DEPRECATED::pkg:npm/jsonwebtoken@0.1.0",
-        "statement": "The project imports jsonwebtoken@0.1.0, which has been yanked or deprecated from the npm registry. Because the package is imported directly, the vulnerable code can be pulled into the application at build time. The finding has a score of\u202f14.4 and an Ssvc of\u202fTrack, indicating it should be tracked for remediation. Upgrade the dependency to version\u202f9.0.0, which is clean on the registry.",
+        "statement": "The project imports the npm package `jsonwebtoken@0.1.0`, which has been yanked or deprecated from the registry. Because the package is still imported, it can be pulled during builds, exposing the application to supply\u2011chain risk; the finding has a score of\u202f14.4 and is tracked under the \u201cTrack\u201d Ssvc. Upgrade the dependency to version\u202f9.0.0, which has been rescanned clean on the registry.",
         "evidence_ids": [
           "EV-anomaly-yanked_or_deprecated-eba333b1e1e1e05e",
           "EV-input-9d4c5d82055ea10f",
-          "EV-ast-import-scan-9f0e2991732e37c3"
+          "EV-ast-import-scan-7fb31583c8c5f63d"
         ],
         "facts": {
           "cvss": null,
           "kev": null,
           "target_version": "9.0.0"
         },
-        "next_step": "upgrade",
+        "next_step": "Upgrade jsonwebtoken to version 9.0.0.",
         "kind": "inference"
       }
     ],

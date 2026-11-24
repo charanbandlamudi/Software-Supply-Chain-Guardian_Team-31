@@ -1,0 +1,360 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "@id": "urn:uuid:guardian-16dee38e",
+  "author": "Software Supply Chain Guardian",
+  "timestamp": "2026-11-24T06:59:44.461526+00:00",
+  "version": 1,
+  "statements": [
+    {
+      "vulnerability": {
+        "name": "TYPOSQUAT_SUSPECT"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/commondir@1.0.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "INSTALL_SCRIPT"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/sqlite3@5.1.7"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "INSTALL_SCRIPT"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/libxmljs2@0.37.0"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "INSTALL_SCRIPT"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/esbuild@0.28.2"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "INSTALL_SCRIPT"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/fsevents@2.3.3"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-46233"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/crypto-js@3.3.0"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-71851"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/crypto-js@3.3.0"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-24842"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/tar@6.2.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-23745"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/tar@6.2.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-29786"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/tar@6.2.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-59873"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/tar@6.2.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-73566"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/tar@6.2.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-23950"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/tar@6.2.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-59874"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/tar@6.2.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-31802"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/tar@6.2.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-26960"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/tar@6.2.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-59871"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/tar@6.2.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-53655"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/tar@6.2.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-59875"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/tar@6.2.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-55849"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/%40cyclonedx/cyclonedx-npm@4.2.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-71538"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/%40cyclonedx/cyclonedx-npm@4.2.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-118764"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/minimatch@9.0.9"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2021-32822"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/hbs@4.4.0"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-118773"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/glob@10.5.0"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "YANKED_OR_DEPRECATED"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/crypto-js@3.3.0"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "YANKED_OR_DEPRECATED"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/tar@6.2.1"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    },
+    {
+      "vulnerability": {
+        "name": "YANKED_OR_DEPRECATED"
+      },
+      "products": [
+        {
+          "@id": "pkg:npm/glob@10.5.0"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Static reachability evidence found no application import or runtime call path."
+    }
+  ]
+}

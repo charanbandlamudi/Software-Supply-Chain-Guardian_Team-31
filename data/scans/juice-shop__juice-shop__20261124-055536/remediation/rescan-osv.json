@@ -314,6 +314,87 @@
         },
         {
           "package": {
+            "name": "base64url",
+            "version": "0.0.6",
+            "ecosystem": "npm",
+            "purl": "pkg:npm/base64url@0.0.6?source=PUBLIC_REGISTRY"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GHSA-rvg8-pwq2-xj7q"
+              ],
+              "aliases": [
+                "GHSA-rvg8-pwq2-xj7q"
+              ],
+              "max_severity": ""
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2020/09/GHSA-rvg8-pwq2-xj7q/GHSA-rvg8-pwq2-xj7q.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "base64url",
+                    "purl": "pkg:npm/base64url"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "3.0.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-125"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2020-08-31T18:31:38Z",
+                "nvd_published_at": null,
+                "severity": "MODERATE"
+              },
+              "details": "Versions of `base64url` before 3.0.0 are vulnerable to to out-of-bounds reads as it allocates uninitialized Buffers when number is passed in input on Node.js 4.x and below.\n\n\n## Recommendation\n\nUpdate to version 3.0.0 or later.",
+              "id": "GHSA-rvg8-pwq2-xj7q",
+              "modified": "2021-09-24T20:34:56Z",
+              "published": "2020-09-01T20:42:44Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/brianloveswords/base64url/pull/25"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/brianloveswords/base64url/commit/4fbd954a0a69e9d898de2146557cc6e893e79542"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://hackerone.com/reports/321687"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/brianloveswords/base64url"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "summary": "Out-of-bounds Read in base64url"
+            }
+          ]
+        },
+        {
+          "package": {
             "name": "crypto-js",
             "version": "3.3.0",
             "ecosystem": "npm",
@@ -487,6 +568,95 @@
                 }
               ],
               "summary": "crypto-js PBKDF2 1,000 times weaker than specified in 1993 and 1.3M times weaker than current standard"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "express-jwt",
+            "version": "0.1.3",
+            "ecosystem": "npm",
+            "purl": "pkg:npm/express-jwt@0.1.3?source=PUBLIC_REGISTRY"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GHSA-6g6m-m6h5-w9gf"
+              ],
+              "aliases": [
+                "CVE-2020-15084",
+                "GHSA-6g6m-m6h5-w9gf"
+              ],
+              "max_severity": "7.7"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "last_known_affected_version_range": "\u003c= 5.3.3",
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2020/06/GHSA-6g6m-m6h5-w9gf/GHSA-6g6m-m6h5-w9gf.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "express-jwt",
+                    "purl": "pkg:npm/express-jwt"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "6.0.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2020-15084"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-285",
+                  "CWE-863"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2020-06-30T16:04:48Z",
+                "nvd_published_at": "2020-06-30T16:15:00Z",
+                "severity": "HIGH"
+              },
+              "details": "### Overview\nVersions before and including 5.3.3, we are not enforcing the **algorithms** entry to be specified in the configuration.\nWhen **algorithms** is not specified in the configuration, with the combination of jwks-rsa, it may lead to authorization bypass. \n\n### Am I affected?\nYou are affected by this vulnerability if all of the following conditions apply:\n\nYou are using express-jwt\nAND \nYou do not have **algorithms**  configured in your express-jwt configuration.\nAND\nYou are using libraries such as jwks-rsa as the **secret**. \n\n### How to fix that?\nSpecify **algorithms** in the express-jwt configuration. The following is an example of a proper configuration\n\n``` \nconst checkJwt = jwt({\n  secret: jwksRsa.expressJwtSecret({\n    rateLimit: true,\n    jwksRequestsPerMinute: 5,\n    jwksUri: `https://${DOMAIN}/.well-known/jwks.json`\n  }),\n  // Validate the audience and the issuer.\n  audience: process.env.AUDIENCE,\n  issuer: `https://${DOMAIN}/`,\n  // restrict allowed algorithms\n  algorithms: ['RS256']\n}); \n```\n\n### Will this update impact my users?\nThe fix provided in patch will not affect your users if you specified the algorithms allowed. The patch now makes **algorithms** a required configuration. \n\n\n### Credit\nIST Group",
+              "id": "GHSA-6g6m-m6h5-w9gf",
+              "modified": "2026-07-08T06:28:48.938804748Z",
+              "published": "2020-06-30T16:05:24Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/auth0/express-jwt/security/advisories/GHSA-6g6m-m6h5-w9gf"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2020-15084"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/auth0/express-jwt/commit/7ecab5f8f0cab5297c2b863596566eb0c019cdef"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:C/C:H/I:H/A:N",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Authorization bypass in express-jwt"
             }
           ]
         },
@@ -773,9 +943,9 @@
         {
           "package": {
             "name": "jsonwebtoken",
-            "version": "8.5.1",
+            "version": "0.1.0",
             "ecosystem": "npm",
-            "purl": "pkg:npm/jsonwebtoken@8.5.1?source=PUBLIC_REGISTRY"
+            "purl": "pkg:npm/jsonwebtoken@0.1.0?source=PUBLIC_REGISTRY"
           },
           "groups": [
             {
@@ -787,6 +957,16 @@
                 "GHSA-8cf7-32gw-wr33"
               ],
               "max_severity": "8.1"
+            },
+            {
+              "ids": [
+                "GHSA-c7hr-j4mj-j2w6"
+              ],
+              "aliases": [
+                "CVE-2015-9235",
+                "GHSA-c7hr-j4mj-j2w6"
+              ],
+              "max_severity": ""
             },
             {
               "ids": [
@@ -883,6 +1063,77 @@
                 }
               ],
               "summary": "jsonwebtoken unrestricted key type could lead to legacy keys usage "
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2018/10/GHSA-c7hr-j4mj-j2w6/GHSA-c7hr-j4mj-j2w6.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "jsonwebtoken",
+                    "purl": "pkg:npm/jsonwebtoken"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "4.2.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2015-9235"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-20"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2020-06-16T21:30:27Z",
+                "nvd_published_at": null,
+                "severity": "CRITICAL"
+              },
+              "details": "Versions 4.2.1 and earlier of `jsonwebtoken` are affected by a verification bypass vulnerability. This is a result of weak validation of the JWT algorithm type, occuring when an attacker is allowed to arbitrarily specify the JWT algorithm.\n\n\n\n\n## Recommendation\n\nUpdate to version 4.2.2 or later.",
+              "id": "GHSA-c7hr-j4mj-j2w6",
+              "modified": "2026-09-10T03:48:15.346337398Z",
+              "published": "2018-10-09T00:38:30Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2015-9235"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/auth0/node-jsonwebtoken/commit/1bb584bc382295eeb7ee8c4452a673a77a68b687"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://auth0.com/blog/2015/03/31/critical-vulnerabilities-in-json-web-token-libraries"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://github.com/advisories/GHSA-c7hr-j4mj-j2w6"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://www.npmjs.com/advisories/17"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://www.timmclean.net/2015/02/25/jwt-alg-none.html"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "summary": "Verification Bypass in jsonwebtoken"
             },
             {
               "affected": [
@@ -1042,21 +1293,31 @@
         },
         {
           "package": {
-            "name": "lodash.set",
-            "version": "4.3.2",
+            "name": "jws",
+            "version": "0.2.6",
             "ecosystem": "npm",
-            "purl": "pkg:npm/lodash.set@4.3.2?source=PUBLIC_REGISTRY"
+            "purl": "pkg:npm/jws@0.2.6?source=PUBLIC_REGISTRY"
           },
           "groups": [
             {
               "ids": [
-                "GHSA-p6mc-m468-83gw"
+                "GHSA-869p-cjfg-cm3x"
               ],
               "aliases": [
-                "CVE-2020-8203",
-                "GHSA-p6mc-m468-83gw"
+                "CVE-2025-65945",
+                "GHSA-869p-cjfg-cm3x"
               ],
-              "max_severity": "7.4"
+              "max_severity": "7.5"
+            },
+            {
+              "ids": [
+                "GHSA-gjcw-v447-2w7q"
+              ],
+              "aliases": [
+                "CVE-2016-1000223",
+                "GHSA-gjcw-v447-2w7q"
+              ],
+              "max_severity": "8.7"
             }
           ],
           "vulnerabilities": [
@@ -1064,21 +1325,21 @@
               "affected": [
                 {
                   "database_specific": {
-                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2020/07/GHSA-p6mc-m468-83gw/GHSA-p6mc-m468-83gw.json"
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/12/GHSA-869p-cjfg-cm3x/GHSA-869p-cjfg-cm3x.json"
                   },
                   "package": {
                     "ecosystem": "npm",
-                    "name": "lodash",
-                    "purl": "pkg:npm/lodash"
+                    "name": "jws",
+                    "purl": "pkg:npm/jws"
                   },
                   "ranges": [
                     {
                       "events": [
                         {
-                          "introduced": "3.7.0"
+                          "introduced": "0"
                         },
                         {
-                          "fixed": "4.17.19"
+                          "fixed": "3.2.3"
                         }
                       ],
                       "type": "SEMVER"
@@ -1087,35 +1348,12 @@
                 },
                 {
                   "database_specific": {
-                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2020/07/GHSA-p6mc-m468-83gw/GHSA-p6mc-m468-83gw.json"
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/12/GHSA-869p-cjfg-cm3x/GHSA-869p-cjfg-cm3x.json"
                   },
                   "package": {
                     "ecosystem": "npm",
-                    "name": "lodash-es",
-                    "purl": "pkg:npm/lodash-es"
-                  },
-                  "ranges": [
-                    {
-                      "events": [
-                        {
-                          "introduced": "3.7.0"
-                        },
-                        {
-                          "fixed": "4.17.20"
-                        }
-                      ],
-                      "type": "SEMVER"
-                    }
-                  ]
-                },
-                {
-                  "database_specific": {
-                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2020/07/GHSA-p6mc-m468-83gw/GHSA-p6mc-m468-83gw.json"
-                  },
-                  "package": {
-                    "ecosystem": "npm",
-                    "name": "lodash.pick",
-                    "purl": "pkg:npm/lodash.pick"
+                    "name": "jws",
+                    "purl": "pkg:npm/jws"
                   },
                   "ranges": [
                     {
@@ -1124,230 +1362,146 @@
                           "introduced": "4.0.0"
                         },
                         {
-                          "last_affected": "4.4.0"
+                          "fixed": "4.0.1"
                         }
                       ],
                       "type": "SEMVER"
-                    }
-                  ]
-                },
-                {
-                  "database_specific": {
-                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2020/07/GHSA-p6mc-m468-83gw/GHSA-p6mc-m468-83gw.json"
-                  },
-                  "package": {
-                    "ecosystem": "npm",
-                    "name": "lodash.set",
-                    "purl": "pkg:npm/lodash.set"
-                  },
-                  "ranges": [
-                    {
-                      "events": [
-                        {
-                          "introduced": "3.7.0"
-                        },
-                        {
-                          "last_affected": "4.3.2"
-                        }
-                      ],
-                      "type": "SEMVER"
-                    }
-                  ]
-                },
-                {
-                  "database_specific": {
-                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2020/07/GHSA-p6mc-m468-83gw/GHSA-p6mc-m468-83gw.json"
-                  },
-                  "package": {
-                    "ecosystem": "npm",
-                    "name": "lodash.setwith",
-                    "purl": "pkg:npm/lodash.setwith"
-                  },
-                  "ranges": [
-                    {
-                      "events": [
-                        {
-                          "introduced": "0"
-                        },
-                        {
-                          "last_affected": "4.3.2"
-                        }
-                      ],
-                      "type": "SEMVER"
-                    }
-                  ]
-                },
-                {
-                  "database_specific": {
-                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2020/07/GHSA-p6mc-m468-83gw/GHSA-p6mc-m468-83gw.json"
-                  },
-                  "package": {
-                    "ecosystem": "npm",
-                    "name": "lodash.update",
-                    "purl": "pkg:npm/lodash.update"
-                  },
-                  "ranges": [
-                    {
-                      "events": [
-                        {
-                          "introduced": "0"
-                        },
-                        {
-                          "last_affected": "4.10.2"
-                        }
-                      ],
-                      "type": "SEMVER"
-                    }
-                  ]
-                },
-                {
-                  "database_specific": {
-                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2020/07/GHSA-p6mc-m468-83gw/GHSA-p6mc-m468-83gw.json"
-                  },
-                  "package": {
-                    "ecosystem": "npm",
-                    "name": "lodash.updatewith",
-                    "purl": "pkg:npm/lodash.updatewith"
-                  },
-                  "ranges": [
-                    {
-                      "events": [
-                        {
-                          "introduced": "0"
-                        },
-                        {
-                          "last_affected": "4.10.2"
-                        }
-                      ],
-                      "type": "SEMVER"
-                    }
-                  ]
-                },
-                {
-                  "database_specific": {
-                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2020/07/GHSA-p6mc-m468-83gw/GHSA-p6mc-m468-83gw.json"
-                  },
-                  "package": {
-                    "ecosystem": "RubyGems",
-                    "name": "lodash-rails",
-                    "purl": "pkg:gem/lodash-rails"
-                  },
-                  "ranges": [
-                    {
-                      "events": [
-                        {
-                          "introduced": "3.7.0"
-                        },
-                        {
-                          "fixed": "4.17.19"
-                        }
-                      ],
-                      "type": "ECOSYSTEM"
                     }
                   ],
                   "versions": [
-                    "3.10.0",
-                    "3.10.1",
-                    "3.7.0",
-                    "3.9.3",
-                    "4.0.0",
-                    "4.11.2",
-                    "4.12.0",
-                    "4.13.1",
-                    "4.14.1",
-                    "4.15.0",
-                    "4.16.1",
-                    "4.16.3",
-                    "4.16.4",
-                    "4.16.6",
-                    "4.17.10",
-                    "4.17.11",
-                    "4.17.14",
-                    "4.17.15",
-                    "4.17.2",
-                    "4.17.4",
-                    "4.17.5",
-                    "4.3.0",
-                    "4.5.1",
-                    "4.6.1"
+                    "4.0.0"
                   ]
                 }
               ],
               "aliases": [
-                "CVE-2020-8203"
+                "CVE-2025-65945"
               ],
               "database_specific": {
                 "cwe_ids": [
-                  "CWE-1321",
-                  "CWE-770"
+                  "CWE-347"
                 ],
                 "github_reviewed": true,
-                "github_reviewed_at": "2020-07-15T19:14:58Z",
-                "nvd_published_at": "2020-07-15T17:15:00Z",
+                "github_reviewed_at": "2025-12-04T16:54:15Z",
+                "nvd_published_at": "2025-12-04T19:16:05Z",
                 "severity": "HIGH"
               },
-              "details": "Versions of lodash prior to 4.17.19 are vulnerable to Prototype Pollution. The functions `pick`, `set`, `setWith`, `update`, `updateWith`, and `zipObjectDeep` allow a malicious user to modify the prototype of Object if the property identifiers are user-supplied. Being affected by this issue requires manipulating objects based on user-provided property values or arrays.\n\nThis vulnerability causes the addition or modification of an existing property that will exist on all objects and may lead to Denial of Service or Code Execution under specific circumstances.",
-              "id": "GHSA-p6mc-m468-83gw",
-              "modified": "2025-08-12T21:56:17.174859Z",
-              "published": "2020-07-15T19:15:48Z",
+              "details": "### Overview\nAn improper signature verification vulnerability exists when using auth0/node-jws with the HS256 algorithm under specific conditions.\n\n### Am I Affected?\nYou are affected by this vulnerability if you meet all of the following preconditions:\n\n1. Application uses the auth0/node-jws implementation of JSON Web Signatures, versions \u003c=3.2.2 || 4.0.0\n2. Application uses the jws.createVerify() function for HMAC algorithms\n3. Application uses user-provided data from the JSON Web Signature Protected Header or Payload in the HMAC secret lookup routines\n\nYou are NOT affected by this vulnerability if you meet any of the following preconditions:\n1. Application uses the jws.verify() interface (note: `auth0/node-jsonwebtoken` users fall into this category and are therefore NOT affected by this vulnerability)\n2. Application uses only asymmetric algorithms (e.g. RS256)\n3. Application doesn’t use user-provided data from the JSON Web Signature Protected Header or Payload in the HMAC secret lookup routines\n\n### Fix\nUpgrade auth0/node-jws version to version 3.2.3 or 4.0.1\n\n### Acknowledgement\nOkta would like to thank Félix Charette for discovering this vulnerability.",
+              "id": "GHSA-869p-cjfg-cm3x",
+              "modified": "2026-09-10T03:50:31.797792758Z",
+              "published": "2025-12-04T16:54:15Z",
               "references": [
                 {
+                  "type": "WEB",
+                  "url": "https://github.com/auth0/node-jws/security/advisories/GHSA-869p-cjfg-cm3x"
+                },
+                {
                   "type": "ADVISORY",
-                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2020-8203"
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-65945"
                 },
                 {
                   "type": "WEB",
-                  "url": "https://github.com/lodash/lodash/issues/4744"
+                  "url": "https://github.com/auth0/node-jws/commit/34c45b2c04434f925b638de6a061de9339c0ea2e"
                 },
                 {
                   "type": "WEB",
-                  "url": "https://github.com/lodash/lodash/issues/4874"
-                },
-                {
-                  "type": "WEB",
-                  "url": "https://github.com/github/advisory-database/pull/2884"
-                },
-                {
-                  "type": "WEB",
-                  "url": "https://github.com/lodash/lodash/commit/c84fe82760fb2d3e03a63379b297a1cc1a2fce12"
-                },
-                {
-                  "type": "WEB",
-                  "url": "https://hackerone.com/reports/712065"
-                },
-                {
-                  "type": "WEB",
-                  "url": "https://hackerone.com/reports/864701"
+                  "url": "https://github.com/auth0/node-jws/commit/4f6e73f24df42f07d632dec6431ade8eda8d11a6"
                 },
                 {
                   "type": "PACKAGE",
-                  "url": "https://github.com/lodash/lodash"
+                  "url": "https://github.com/auth0/node-jws"
                 },
                 {
                   "type": "WEB",
-                  "url": "https://github.com/lodash/lodash/wiki/Changelog#v41719"
+                  "url": "https://github.com/auth0/node-jws/releases/tag/v3.2.3"
                 },
                 {
                   "type": "WEB",
-                  "url": "https://github.com/rubysec/ruby-advisory-db/blob/master/gems/lodash-rails/CVE-2020-8203.yml"
-                },
-                {
-                  "type": "WEB",
-                  "url": "https://security.netapp.com/advisory/ntap-20200724-0006"
-                },
-                {
-                  "type": "WEB",
-                  "url": "https://web.archive.org/web/20210914001339/https://github.com/lodash/lodash/issues/4744"
+                  "url": "https://github.com/auth0/node-jws/releases/tag/v4.0.1"
                 }
               ],
               "schema_version": "1.9.0",
               "severity": [
                 {
-                  "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H",
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
                   "type": "CVSS_V3"
                 }
               ],
-              "summary": "Prototype Pollution in lodash"
+              "summary": "auth0/node-jws Improperly Verifies HMAC Signature"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2020/09/GHSA-gjcw-v447-2w7q/GHSA-gjcw-v447-2w7q.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "jws",
+                    "purl": "pkg:npm/jws"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "3.0.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2016-1000223"
+              ],
+              "database_specific": {
+                "cwe_ids": [],
+                "github_reviewed": true,
+                "github_reviewed_at": "2020-08-31T18:10:22Z",
+                "nvd_published_at": null,
+                "severity": "HIGH"
+              },
+              "details": "Affected versions of the `jws` package allow users to select what algorithm the server will use to verify a provided JWT. A malicious actor can use this behaviour to arbitrarily modify the contents of a JWT while still passing verification. For the common use case of the JWT as a bearer token, the end result is a complete authentication bypass with minimal effort.\n\n\n\n\n## Recommendation\n\nUpdate to version 3.0.0 or later.",
+              "id": "GHSA-gjcw-v447-2w7q",
+              "modified": "2023-11-08T03:58:07.352660Z",
+              "published": "2020-09-01T15:23:18Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2016-1000223"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/brianloveswords/node-jws/commit/585d0e1e97b6747c10cf5b7689ccc5618a89b299#diff-4ac32a78649ca5bdd8e0ba38b7006a1e"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://auth0.com/blog/2015/03/31/critical-vulnerabilities-in-json-web-token-libraries"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/brianloveswords/node-jws"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://snyk.io/vuln/npm:jws:20160726"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://www.npmjs.com/advisories/88"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:N",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Forgeable Public/Private Tokens in jws"
             }
           ]
         },
@@ -1618,6 +1772,433 @@
         },
         {
           "package": {
+            "name": "moment",
+            "version": "2.0.0",
+            "ecosystem": "npm",
+            "purl": "pkg:npm/moment@2.0.0?source=PUBLIC_REGISTRY"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GHSA-446m-mv8f-q348"
+              ],
+              "aliases": [
+                "CVE-2017-18214",
+                "GHSA-446m-mv8f-q348"
+              ],
+              "max_severity": "7.5"
+            },
+            {
+              "ids": [
+                "GHSA-87vv-r9j6-g5qv"
+              ],
+              "aliases": [
+                "CVE-2016-4055",
+                "GHSA-87vv-r9j6-g5qv"
+              ],
+              "max_severity": "6.5"
+            },
+            {
+              "ids": [
+                "GHSA-8hfj-j24r-96c4"
+              ],
+              "aliases": [
+                "CVE-2022-24785",
+                "GHSA-8hfj-j24r-96c4"
+              ],
+              "max_severity": "7.5"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2018/03/GHSA-446m-mv8f-q348/GHSA-446m-mv8f-q348.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "moment",
+                    "purl": "pkg:npm/moment"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "2.19.3"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2017-18214"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-400"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2020-06-16T20:57:13Z",
+                "nvd_published_at": "2018-03-04T21:29:00Z",
+                "severity": "HIGH"
+              },
+              "details": "Affected versions of `moment` are vulnerable to a low severity regular expression denial of service when parsing dates as strings.\n\n\n## Recommendation\n\nUpdate to version 2.19.3 or later.",
+              "id": "GHSA-446m-mv8f-q348",
+              "modified": "2023-11-08T03:59:15.374363Z",
+              "published": "2018-03-05T18:35:09Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-18214"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/moment/moment/issues/4163"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/moment/moment/pull/4326"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/moment/moment/commit/69ed9d44957fa6ab12b73d2ae29d286a857b80eb"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://github.com/advisories/GHSA-446m-mv8f-q348"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/moment/moment"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://www.npmjs.com/advisories/532"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://www.tenable.com/security/tns-2019-02"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Regular Expression Denial of Service in moment"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2017/10/GHSA-87vv-r9j6-g5qv/GHSA-87vv-r9j6-g5qv.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "moment",
+                    "purl": "pkg:npm/moment"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "2.11.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2016-4055"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-400"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2020-06-16T21:24:44Z",
+                "nvd_published_at": "2017-01-23T21:59:00Z",
+                "severity": "MODERATE"
+              },
+              "details": "Versions of `moment` prior to 2.11.2 are affected by a regular expression denial of service vulnerability. The vulnerability is triggered when arbitrary user input is passed into `moment.duration()`.\n\n\n## Proof of concept\n```\nvar moment = require('moment');\n\nvar genstr = function (len, chr) {\n    var result = \"\";\n    for (i=0; i\u003c=len; i++) {\n        result = result + chr;\n    }\n\n    return result;\n}\n\n\nfor (i=20000;i\u003c=10000000;i=i+10000) {\n    console.log(\"COUNT: \" + i);\n    var str = '-' + genstr(i, '1')\n    console.log(\"LENGTH: \" + str.length);\n    var start = process.hrtime();\n    moment.duration(str)\n\n    var end = process.hrtime(start);\n    console.log(end);\n}\n```\n\n### Results\n```\n$ node moment.js\nCOUNT: 20000\nLENGTH: 20002\n[ 0, 618931029 ]\nCOUNT: 30001\nLENGTH: 30003\n[ 1, 401413894 ]\nCOUNT: 40002\nLENGTH: 40004\n[ 2, 437075303 ]\nCOUNT: 50003\nLENGTH: 50005\n[ 3, 824664804 ]\nCOUNT: 60004\nLENGTH: 60006\n[ 5, 651335262 ]\n```\n\n\n## Recommendation\n\nPlease update to version 2.11.2 or later. ",
+              "id": "GHSA-87vv-r9j6-g5qv",
+              "modified": "2023-11-08T03:58:28.366374Z",
+              "published": "2017-10-24T18:33:35Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2016-4055"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://github.com/advisories/GHSA-87vv-r9j6-g5qv"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/moment/moment"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://lists.apache.org/thread.html/10f0f3aefd51444d1198c65f44ffdf2d78ca3359423dbc1c168c9731@%3Cdev.flink.apache.org%3E"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://lists.apache.org/thread.html/17ff53f7999e74fbe3cc0ceb4e1c3b00b180b7c5afec8e978837bc49@%3Cuser.flink.apache.org%3E"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://lists.apache.org/thread.html/52bafac05ad174000ea465fe275fd3cc7bd5c25535a7631c0bc9bfb2@%3Cuser.flink.apache.org%3E"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://lists.apache.org/thread.html/54df3aeb4239b64b50b356f0ca6f986e3c4ca5b84c515dce077c7854@%3Cuser.flink.apache.org%3E"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://www.npmjs.com/advisories/55"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://www.tenable.com/security/tns-2019-02"
+                },
+                {
+                  "type": "WEB",
+                  "url": "http://www.openwall.com/lists/oss-security/2016/04/20/11"
+                },
+                {
+                  "type": "WEB",
+                  "url": "http://www.oracle.com/technetwork/security-advisory/cpujul2018-4258247.html"
+                },
+                {
+                  "type": "WEB",
+                  "url": "http://www.securityfocus.com/bid/95849"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Regular Expression Denial of Service in moment"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2022/04/GHSA-8hfj-j24r-96c4/GHSA-8hfj-j24r-96c4.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "moment",
+                    "purl": "pkg:npm/moment"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "2.29.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                },
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2022/04/GHSA-8hfj-j24r-96c4/GHSA-8hfj-j24r-96c4.json"
+                  },
+                  "package": {
+                    "ecosystem": "NuGet",
+                    "name": "Moment.js",
+                    "purl": "pkg:nuget/Moment.js"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "2.29.2"
+                        }
+                      ],
+                      "type": "ECOSYSTEM"
+                    }
+                  ],
+                  "versions": [
+                    "1.2.0",
+                    "1.3.0",
+                    "1.4.0",
+                    "1.5.0",
+                    "1.5.1",
+                    "1.6.0",
+                    "1.6.1",
+                    "1.6.2",
+                    "1.7.0",
+                    "1.7.1",
+                    "1.7.2",
+                    "2.0.0",
+                    "2.1.0",
+                    "2.10.0",
+                    "2.10.1",
+                    "2.10.2",
+                    "2.10.3",
+                    "2.10.5",
+                    "2.10.6",
+                    "2.11.0",
+                    "2.11.1",
+                    "2.11.2",
+                    "2.12.0",
+                    "2.13.0",
+                    "2.14.1",
+                    "2.14.2",
+                    "2.14.3",
+                    "2.15.0",
+                    "2.15.1",
+                    "2.15.2",
+                    "2.16.0",
+                    "2.17.0",
+                    "2.17.1",
+                    "2.18.0",
+                    "2.18.1",
+                    "2.18.2",
+                    "2.19.0",
+                    "2.19.1",
+                    "2.19.2",
+                    "2.19.3",
+                    "2.19.4",
+                    "2.2.0",
+                    "2.2.1",
+                    "2.20.0",
+                    "2.20.1",
+                    "2.21.0",
+                    "2.22.0",
+                    "2.22.1",
+                    "2.22.2",
+                    "2.23.0",
+                    "2.24.0",
+                    "2.25.0",
+                    "2.25.1",
+                    "2.25.2",
+                    "2.26.0",
+                    "2.27.0",
+                    "2.28.0",
+                    "2.29.0",
+                    "2.29.1",
+                    "2.3.0",
+                    "2.3.1",
+                    "2.4.0",
+                    "2.5.0",
+                    "2.5.1",
+                    "2.6.0",
+                    "2.7.0",
+                    "2.8.0",
+                    "2.8.1",
+                    "2.8.2",
+                    "2.8.3",
+                    "2.8.4",
+                    "2.9.0"
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2022-24785"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-22",
+                  "CWE-27"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2022-04-04T21:25:48Z",
+                "nvd_published_at": "2022-04-04T17:15:00Z",
+                "severity": "HIGH"
+              },
+              "details": "### Impact\nThis vulnerability impacts npm (server) users of moment.js, especially if user provided locale string, eg `fr` is directly used to switch moment locale.\n\n### Patches\nThis problem is patched in 2.29.2, and the patch can be applied to all affected versions (from 1.0.1 up until 2.29.1, inclusive).\n\n### Workarounds\nSanitize user-provided locale name before passing it to moment.js.\n\n### References\n_Are there any links users can visit to find out more?_\n\n### For more information\nIf you have any questions or comments about this advisory:\n* Open an issue in [moment repo](https://github.com/moment/moment)",
+              "id": "GHSA-8hfj-j24r-96c4",
+              "modified": "2026-09-10T03:49:28.830024482Z",
+              "published": "2022-04-04T21:25:48Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/moment/moment/security/advisories/GHSA-8hfj-j24r-96c4"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-24785"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/moment/moment/commit/4211bfc8f15746be4019bba557e29a7ba83d54c5"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/moment/moment"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://lists.debian.org/debian-lts-announce/2023/01/msg00035.html"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/6QIO6YNLTK2T7SPKDS4JEL45FANLNC2Q"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ORJX2LF6KMPIHP6B2P6KZIVKMLE3LVJ5"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/6QIO6YNLTK2T7SPKDS4JEL45FANLNC2Q"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ORJX2LF6KMPIHP6B2P6KZIVKMLE3LVJ5"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://security.netapp.com/advisory/ntap-20220513-0006"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://security.netapp.com/advisory/ntap-20241108-0002"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://www.tenable.com/security/tns-2022-09"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Path Traversal: 'dir/../../filename' in moment.locale"
+            }
+          ]
+        },
+        {
+          "package": {
             "name": "notevil",
             "version": "1.3.3",
             "ecosystem": "npm",
@@ -1727,6 +2308,881 @@
                 }
               ],
               "summary": "Sandbox escape in notevil and argencoders-notevil"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "sanitize-html",
+            "version": "1.4.2",
+            "ecosystem": "npm",
+            "purl": "pkg:npm/sanitize-html@1.4.2?source=PUBLIC_REGISTRY"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GHSA-3j7m-hmh3-9jmp"
+              ],
+              "aliases": [
+                "CVE-2016-1000237",
+                "GHSA-3j7m-hmh3-9jmp"
+              ],
+              "max_severity": "6.1"
+            },
+            {
+              "ids": [
+                "GHSA-cgfm-xwp7-2cvr"
+              ],
+              "aliases": [
+                "CVE-2022-25887",
+                "GHSA-cgfm-xwp7-2cvr"
+              ],
+              "max_severity": "7.5"
+            },
+            {
+              "ids": [
+                "GHSA-cv27-6wvh-8x7j"
+              ],
+              "aliases": [
+                "CVE-2026-113661",
+                "GHSA-cv27-6wvh-8x7j"
+              ],
+              "max_severity": "5.4"
+            },
+            {
+              "ids": [
+                "GHSA-jxwj-j7wr-gfrw"
+              ],
+              "aliases": [
+                "CVE-2026-63670",
+                "GHSA-jxwj-j7wr-gfrw"
+              ],
+              "max_severity": "6.1"
+            },
+            {
+              "ids": [
+                "GHSA-mjxr-4v3x-q3m4"
+              ],
+              "aliases": [
+                "CVE-2021-26540",
+                "GHSA-mjxr-4v3x-q3m4"
+              ],
+              "max_severity": "5.3"
+            },
+            {
+              "ids": [
+                "GHSA-qhxp-v273-g94h"
+              ],
+              "aliases": [
+                "CVE-2019-25225",
+                "GHSA-qhxp-v273-g94h"
+              ],
+              "max_severity": "6.1"
+            },
+            {
+              "ids": [
+                "GHSA-rjqq-98f6-6j3r"
+              ],
+              "aliases": [
+                "CVE-2021-26539",
+                "GHSA-rjqq-98f6-6j3r"
+              ],
+              "max_severity": "5.3"
+            },
+            {
+              "ids": [
+                "GHSA-rm97-x556-q36h"
+              ],
+              "aliases": [
+                "CVE-2024-21501",
+                "GHSA-rm97-x556-q36h"
+              ],
+              "max_severity": "5.3"
+            },
+            {
+              "ids": [
+                "GHSA-x3q4-9hxx-gx8m"
+              ],
+              "aliases": [
+                "CVE-2026-113654",
+                "GHSA-x3q4-9hxx-gx8m"
+              ],
+              "max_severity": "5.3"
+            },
+            {
+              "ids": [
+                "GHSA-xc6g-ggrc-qq4r"
+              ],
+              "aliases": [
+                "CVE-2017-16016",
+                "GHSA-xc6g-ggrc-qq4r"
+              ],
+              "max_severity": ""
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2020/04/GHSA-3j7m-hmh3-9jmp/GHSA-3j7m-hmh3-9jmp.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "sanitize-html",
+                    "purl": "pkg:npm/sanitize-html"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.4.3"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2016-1000237"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-79"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2020-04-16T02:54:08Z",
+                "nvd_published_at": null,
+                "severity": "MODERATE"
+              },
+              "details": "Affected versions of `sanitize-html` do not sanitize input recursively, which may allow an attacker to execute arbitrary Javascript.\n\n\n## Recommendation\n\nUpdate to version 1.4.3 or later.",
+              "id": "GHSA-3j7m-hmh3-9jmp",
+              "modified": "2023-11-08T03:58:08.213705Z",
+              "published": "2020-04-16T03:14:47Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2016-1000237"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/sanitize-html/issues/29"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/punkave/sanitize-html/issues/29"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/sanitize-html/commit/762fbc7bba389f3f789cc291c1eb2b64f60f2caf"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://raw.githubusercontent.com/distributedweaknessfiling/cvelist/master/2016/1000xxx/CVE-2016-1000237.json"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://www.npmjs.com/advisories/135"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Cross-Site Scripting in sanitize-html"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2022/08/GHSA-cgfm-xwp7-2cvr/GHSA-cgfm-xwp7-2cvr.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "sanitize-html",
+                    "purl": "pkg:npm/sanitize-html"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "2.7.1"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2022-25887"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-1333"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2024-04-22T23:16:47Z",
+                "nvd_published_at": "2022-08-30T05:15:00Z",
+                "severity": "HIGH"
+              },
+              "details": "The package sanitize-html before 2.7.1 are vulnerable to Regular Expression Denial of Service (ReDoS) due to insecure global regular expression replacement logic of HTML comment removal.",
+              "id": "GHSA-cgfm-xwp7-2cvr",
+              "modified": "2024-04-22T23:56:49.765909Z",
+              "published": "2022-08-31T00:00:24Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-25887"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/sanitize-html/pull/557"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/sanitize-html/commit/b4682c12fd30e12e82fa2d9b766de91d7d2cd23c"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://security.snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-3008102"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://security.snyk.io/vuln/SNYK-JS-SANITIZEHTML-2957526"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Sanitize-html Vulnerable To REDoS Attacks"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/10/GHSA-cv27-6wvh-8x7j/GHSA-cv27-6wvh-8x7j.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "sanitize-html",
+                    "purl": "pkg:npm/sanitize-html"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "2.18.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-113661"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-79"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-10-20T18:15:33Z",
+                "nvd_published_at": null,
+                "severity": "MODERATE"
+              },
+              "details": "### Summary\n\nCVE-2026-53606 expanded `allowedSchemesAppliedToAttributes` so named URL attributes (`action`, `formaction`, `data`, `poster`, `background`, later `ping`, `xlink:href`, …) go through `naughtyHref()`. A **URL nested inside `meta` `content`** (`http-equiv=refresh`) is not an attribute name on that list, so the embedded destination is never scheme-checked.\n\nDefault `allowedTags` still omit `meta`. Same non-default integrator config as 53606: allow `meta` plus `http-equiv` / `content`.\n\nOn **2.17.7**:\n\n```text\nsanitizeHtml(\n  '\u003cmeta http-equiv=\"refresh\" content=\"0;url=javascript:alert(1)\"\u003e',\n  { allowedTags: ['meta'], allowedAttributes: { meta: ['http-equiv', 'content'] } }\n)\n// =\u003e \u003cmeta http-equiv=\"refresh\" content=\"0;url=javascript:alert(1)\" /\u003e\n```\n\n`data:text/html,…` and arbitrary `https:` destinations also survive. `formaction=\"javascript:…\"` (53606) is stripped.\n\nPlease **Request CVE**. Credit: Finder + Reporter (`adrbogacz`).\n\n### Details\n\n`naughtyHref()` only runs when the attribute name is in `allowedSchemesAppliedToAttributes` (`index.js` ~385). Refresh URLs live in a `content` value of the form `0;url=…`, so the gate never fires. Adding `content` to that list wholesale would break ordinary meta `content` (description, viewport).\n\n**Fix:** when `http-equiv` is `refresh` (case-insensitive), parse the `; url=` destination and run `naughtyHref('meta', url)`. Drop `content` (or the tag) if the URL is rejected. Leave other `meta` `content` values alone.\n\n### PoC\n\nLocal `sanitize-html@2.17.7`. Output inspection only:\n\n```text\nnode -e '\nconst sanitize = require(\"sanitize-html\");\nconst opts = { allowedTags: [\"meta\"], allowedAttributes: { meta: [\"http-equiv\", \"content\"] } };\nfor (const html of [\n  \"\u003cmeta http-equiv=\\\"refresh\\\" content=\\\"0;url=javascript:alert(1)\\\"\u003e\",\n  \"\u003cmeta http-equiv=\\\"refresh\\\" content=\\\"0;url=data:text/html,aaa\\\"\u003e\",\n  \"\u003cform\u003e\u003cbutton formaction=\\\"javascript:alert(1)\\\"\u003ex\u003c/button\u003e\u003c/form\u003e\",\n]) {\n  console.log(html, \"=\u003e\", sanitize(html, html.includes(\"meta\") ? opts : { allowedTags: [\"form\",\"button\"], allowedAttributes: { button: [\"formaction\"] } }));\n}\n'\n```\n\nExpected: refresh `javascript:` / `data:` remain; 53606 `formaction` is removed. Do not attach a browser hang or stored-XSS page.\n\n### Impact\n\nAn integrator who allowed `meta` + `content` expecting `allowedSchemes` to apply (the 53606 configuration pattern) still emits a refresh to `javascript:`, `data:`, or an attacker `https:` URL. Stored XSS / open redirect for viewers of that HTML. Default config is not affected.",
+              "id": "GHSA-cv27-6wvh-8x7j",
+              "modified": "2026-10-20T18:30:03.592709324Z",
+              "published": "2026-10-20T18:15:33Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/apostrophe/security/advisories/GHSA-cv27-6wvh-8x7j"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/apostrophe/commit/9500b8b0e1d630d5e07fbb5fd2c25ed0943845ce"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/apostrophe/commit/f84fd41cbf6c22eb8d0008fc9c25df1f7130b350"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/apostrophecms/apostrophe"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/apostrophe/releases/tag/sanitize-html@2.18.0"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "ApostropheCMS: Incomplete CVE-2026-53606: `meta http-equiv=refresh` `content` still ships `javascript:` / `data:` URLs"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "last_known_affected_version_range": "\u003c= 2.17.5",
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/09/GHSA-jxwj-j7wr-gfrw/GHSA-jxwj-j7wr-gfrw.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "sanitize-html",
+                    "purl": "pkg:npm/sanitize-html"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "2.17.6"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-63670"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-79"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-09-03T20:07:16Z",
+                "nvd_published_at": "2026-08-17T20:16:45Z",
+                "severity": "MODERATE"
+              },
+              "details": "### Summary\nA mutation-XSS / allowedTags bypass: when `textarea` (or `xmp`) is included in `allowedTags`, an input containing a literal `\u003c/textarea/\u003e` (a solidus right after the RCDATA end-tag name) lets non-allowed markup such as `\u003cimg src=x onerror=…\u003e` pass through `sanitizeHtml()` **live and unescaped**, even though `img`/`onerror` are not in the allowlist. A spec-compliant browser executes the surviving handler — XSS. This is a literal-solidus variant that bypasses the two most recent fixes in this code area (CVE-2026-40186, CVE-2026-44990), both already applied in 2.17.5. The default configuration is not affected.\n\n### Details\n`sanitize-html` emits the text content of HTML raw-text elements (`textarea`, `xmp`) without escaping. Two things combine:\n- **Parser differential:** on input, htmlparser2 does NOT recognize `\u003c/textarea/\u003e` (solidus after the RCDATA\n  end-tag name) as a close tag; it emits `\u003c/textarea/\u003e\u003cimg …\u003e` as a single raw-text node.\n- **Unescaped passthrough:** the `ontext` handler (`index.js` ~575-583) appends `textarea`/`xmp` content with\n`result += text` (no `escapeHtml`), assuming it is \"already properly encoded\" — true for entity-decoded\n  content (what CVE-2026-40186 fixed) but false for this mis-tokenized literal close tag.\nA spec browser treats `\u003c/textarea/\u003e` as a valid `textarea` close, so the following `\u003cimg onerror\u003e` is parsed as a live element. The recent fixes addressed entity-encoding (CVE-2026-40186) and the `xmp` default (CVE-2026-44990); neither covers the literal-solidus mis-tokenization, so the raw passthrough still leaks.\n\n### PoC\n```js\n// npm i sanitize-html@2.17.5 parse5 \u0026\u0026 node poc.js\nconst sanitizeHtml = require('sanitize-html');\nconst input = '\u003ctextarea\u003e\u003c/textarea/\u003e\u003cimg src=x onerror=\"alert(document.domain)\"\u003e';\nconst opts  = { allowedTags: sanitizeHtml.defaults.allowedTags.concat(['textarea']) };  // img NOT allowed\nconsole.log(sanitizeHtml(input, opts));\n// =\u003e \u003ctextarea\u003e\u003c/textarea/\u003e\u003cimg src=x onerror=\"alert(document.domain)\"\u003e\u003c/textarea\u003e\n//    the \u003cimg onerror\u003e survives live and unescaped\n\nconsole.log(sanitizeHtml(input));   // default config (no textarea allowed) =\u003e \"\"  (safe)\n```\nRe-parsing the sanitized OUTPUT with **parse5** (the WHATWG HTML parser browsers/jsdom use) yields a **live\n`\u003cimg src=x onerror=alert(document.domain)\u003e`** at `body` level (it escaped the textarea RCDATA, not inert text) → the `onerror` fires in a browser. Confirmed on 2.17.5 (Node v24). A canonical `poc.js` is attached.\n\u003cimg width=\"650\" height=\"118\" alt=\"image\" src=\"https://github.com/user-attachments/assets/d63bb5b7-ba3e-4b0e-a821-86a453ea0352\" /\u003e\n\n### Impact\nCross-site scripting (CWE-79). Requires `textarea` (or `xmp`) in `allowedTags` — a benign-looking, common addition in form builders, CMS, and rich-text editors. Adding a harmless tag that then enables XSS via *non-allowed* `img`/`onerror` breaks the sanitizer's core contract; the maintainers have fixed this class before (e.g. GHSA-9mrh). An attacker who can submit content rendered through such a configuration achieves stored/reflected XSS (cookie theft, session hijack). Severity Medium (default config is safe; user interaction to view the page). **Suggested fix:** route `textarea`/`xmp` content through `escapeHtml` instead of the raw passthrough, and/or fix the htmlparser2 `\u003c/tag/\u003e` RCDATA end-tag tokenization to match the WHATWG spec.",
+              "id": "GHSA-jxwj-j7wr-gfrw",
+              "modified": "2026-09-03T20:15:05.883593916Z",
+              "published": "2026-09-03T20:07:16Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/apostrophe/security/advisories/GHSA-jxwj-j7wr-gfrw"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-63670"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/apostrophe/pull/5501"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/apostrophe/commit/eae1fb2b72ec5d1c27d0977509c6482a0408f725"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/apostrophecms/apostrophe"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "ApostropheCMS: Mutation-XSS / allowedTags bypass via literal `\u003c/textarea/\u003e` solidus close"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2021/05/GHSA-mjxr-4v3x-q3m4/GHSA-mjxr-4v3x-q3m4.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "sanitize-html",
+                    "purl": "pkg:npm/sanitize-html"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "2.3.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2021-26540"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-20"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2021-03-29T23:13:11Z",
+                "nvd_published_at": "2021-02-08T17:15:00Z",
+                "severity": "MODERATE"
+              },
+              "details": "Apostrophe Technologies sanitize-html before 2.3.2 does not properly validate the hostnames set by the \"allowedIframeHostnames\" option when the \"allowIframeRelativeUrls\" is set to true, which allows attackers to bypass hostname whitelist for iframe element, related using an src value that starts with \"/\\\\example.com\".",
+              "id": "GHSA-mjxr-4v3x-q3m4",
+              "modified": "2023-11-08T04:05:21.154746Z",
+              "published": "2021-05-06T16:10:19Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-26540"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/sanitize-html/pull/460"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://advisory.checkmarx.net/advisory/CX-2021-4309"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/sanitize-html/blob/main/CHANGELOG.md#232-2021-01-26"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Improper Input Validation in sanitize-html"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/09/GHSA-qhxp-v273-g94h/GHSA-qhxp-v273-g94h.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "sanitize-html",
+                    "purl": "pkg:npm/sanitize-html"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "2.0.0-beta"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2019-25225"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-79"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2025-09-12T20:01:43Z",
+                "nvd_published_at": "2025-09-08T10:15:33Z",
+                "severity": "MODERATE"
+              },
+              "details": "`sanitize-html` prior to version 2.0.0-beta is vulnerable to Cross-site Scripting (XSS). The `sanitizeHtml()` function in `index.js` does not sanitize content when using the custom `transformTags` option, which is intended to convert attribute values into text. As a result, malicious input can be transformed into executable code.",
+              "id": "GHSA-qhxp-v273-g94h",
+              "modified": "2025-09-12T20:27:20.408277Z",
+              "published": "2025-09-08T12:30:33Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-25225"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/sanitize-html/issues/293"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/sanitize-html/pull/156"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/sanitize-html/commit/712cb6895825c8bb6ede71a16b42bade42abcaf3"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/Checkmarx/Vulnerabilities-Proofs-of-Concept/tree/main/2019/CVE-2019-25225"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/apostrophecms/sanitize-html"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "sanitize-html is vulnerable to XSS through incomprehensive sanitization"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2021/05/GHSA-rjqq-98f6-6j3r/GHSA-rjqq-98f6-6j3r.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "sanitize-html",
+                    "purl": "pkg:npm/sanitize-html"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "2.3.1"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2021-26539"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-20"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2021-03-29T23:13:26Z",
+                "nvd_published_at": "2021-02-08T17:15:00Z",
+                "severity": "MODERATE"
+              },
+              "details": "Apostrophe Technologies sanitize-html before 2.3.1 does not properly handle internationalized domain name (IDN) which could allow an attacker to bypass hostname whitelist validation set by the \"allowedIframeHostnames\" option.",
+              "id": "GHSA-rjqq-98f6-6j3r",
+              "modified": "2023-11-08T04:05:21.094678Z",
+              "published": "2021-05-06T16:10:05Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-26539"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/sanitize-html/pull/458"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/sanitize-html/commit/bdf7836ef8f0e5b21f9a1aab0623ae8fcd09c1da"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://advisory.checkmarx.net/advisory/CX-2021-4308"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/apostrophecms/sanitize-html"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/sanitize-html/blob/main/CHANGELOG.md#231-2021-01-22"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Improper Input Validation in sanitize-html"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/02/GHSA-rm97-x556-q36h/GHSA-rm97-x556-q36h.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "sanitize-html",
+                    "purl": "pkg:npm/sanitize-html"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "2.12.1"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2024-21501"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-200",
+                  "CWE-538"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2024-03-01T16:55:53Z",
+                "nvd_published_at": "2024-02-24T05:15:44Z",
+                "severity": "MODERATE"
+              },
+              "details": "Versions of the package sanitize-html before 2.12.1 are vulnerable to Information Exposure when used on the backend and with the style attribute allowed, allowing enumeration of files in the system (including project dependencies). An attacker could exploit this vulnerability to gather details about the file system structure and dependencies of the targeted server.",
+              "id": "GHSA-rm97-x556-q36h",
+              "modified": "2026-09-10T03:50:09.893187752Z",
+              "published": "2024-02-24T06:30:17Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-21501"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/sanitize-html/pull/650"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/sanitize-html/commit/c5dbdf77fe8b836d3bf4554ea39edb45281ec0b4"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://gist.github.com/Slonser/8b4d061abe6ee1b2e10c7242987674cf"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/apostrophe/discussions/4436"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/apostrophecms/sanitize-html"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4EB5JPYRCTS64EA5AMV3INHDPI6I4AW7"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/P4I5X6V3LYUNBMZ5YOW4BV427TH3IK4S"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://security.snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-6276557"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://security.snyk.io/vuln/SNYK-JS-SANITIZEHTML-6256334"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "sanitize-html Information Exposure vulnerability"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/10/GHSA-x3q4-9hxx-gx8m/GHSA-x3q4-9hxx-gx8m.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "sanitize-html",
+                    "purl": "pkg:npm/sanitize-html"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "2.18.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-113654"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-79"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-10-20T18:03:22Z",
+                "nvd_published_at": null,
+                "severity": "MODERATE"
+              },
+              "details": "## Summary\n\n`sanitize-html` discards the *content* of every element in `nonTextTags`. It delimits that region\nusing htmlparser2's close events, and ignores the `isImplied` flag htmlparser2 passes it. Closing a\nstill-open **ancestor** from inside a `\u003cnoscript\u003e` makes htmlparser2 unwind its stack past the\n`noscript`; the synthetic implied close it emits on the way ends the discard region early, and\neverything after it is treated as ordinary body content.\n\nA browser with scripting enabled parses `\u003cnoscript\u003e` content as **raw text**, so the same markup\nrenders as inert text there. The sanitizer therefore emits elements the page itself would not have.\n\n## Reproduction\n\n```js\nconst sanitizeHtml = require(\"sanitize-html\");\n\nsanitizeHtml('\u003cdiv\u003e\u003cnoscript\u003e\u003c/div\u003e\u003cimg src=\"http://evil.test/t.gif\"\u003e\u003c/noscript\u003e', {\n  allowedTags: [\"div\", \"img\"],\n  allowedAttributes: { img: [\"src\"] },\n  nonTextTags: [\"script\", \"style\", \"textarea\", \"option\", \"noscript\"],\n});\n// =\u003e '\u003cdiv\u003e\u003c/div\u003e\u003cimg src=\"http://evil.test/t.gif\" /\u003e'\n```\n\nChrome, given the same input, renders **no** `\u003cimg\u003e` — the whole payload is raw text inside the\nunclosed `\u003cnoscript\u003e`. Verified with Playwright, `srcdoc` into an iframe so the scripting flag is on.\n\nA `\u003c![CDATA[` variant hides the opening tag from the parser entirely and has the same effect:\n\n```\n\u003cp\u003eHi\u003c/p\u003e\u003c![CDATA[ x \u003e \u003cnoscript\u003e]]\u003e\u003ca href=\"…\"\u003eReset your password\u003c/a\u003e\u003cimg src=\"…beacon.gif\"\u003e\u003c/noscript\u003e\n```\n\nhtmlparser2 runs a CDATA token to `]]\u003e`; Chrome ends a bogus comment at the first `\u003e`, so the\n`\u003cnoscript\u003e` after it is real to the browser and invisible to the parser.\n\n## Where the behaviour is\n\n`index.js`:\n\n- `:154` — `nonTextTagsArray` (the default list, `['script','style','textarea','option','xmp']`).\n- `:638` — `onclosetag: function (name, isImplied)` — receives the flag.\n- `:644` — `skipTextDepth--` — decrements without consulting `isImplied`.\n\n## Suggested fix\n\nDo not end a discard region on an implied close. htmlparser2 already distinguishes them; the flag\nis passed and discarded. Something close to:\n\n```js\nonclosetag: function (name, isImplied) {\n  if (skipText) {\n    if (isImplied) return;   // an implied close must not end the region\n    skipTextDepth--;\n    …\n```",
+              "id": "GHSA-x3q4-9hxx-gx8m",
+              "modified": "2026-10-20T18:15:04.513263654Z",
+              "published": "2026-10-20T18:03:22Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/apostrophe/security/advisories/GHSA-x3q4-9hxx-gx8m"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/apostrophe/commit/9500b8b0e1d630d5e07fbb5fd2c25ed0943845ce"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/apostrophe/commit/f84fd41cbf6c22eb8d0008fc9c25df1f7130b350"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/apostrophecms/apostrophe"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apostrophecms/apostrophe/releases/tag/sanitize-html@2.18.0"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:L/VI:L/VA:L/SC:N/SI:N/SA:N",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "ApostropheCMS sanitize-html: nonTextTags discard region ends early on an implied close, letting \u003cnoscript\u003e content render"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "last_known_affected_version_range": "\u003c= 1.11.1",
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2018/11/GHSA-xc6g-ggrc-qq4r/GHSA-xc6g-ggrc-qq4r.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "sanitize-html",
+                    "purl": "pkg:npm/sanitize-html"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.11.4"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2017-16016"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-79"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2020-06-16T22:02:52Z",
+                "nvd_published_at": null,
+                "severity": "MODERATE"
+              },
+              "details": "Affected versions of `sanitize-html` are vulnerable to cross-site scripting when allowedTags includes at least one `nonTextTag`.\n\n## Proof of Concept\n\n```js\nvar sanitizeHtml = require('sanitize-html');\n\nvar dirty = '!\u003ctextarea\u003e\u0026lt;/textarea\u0026gt;\u003csvg/onload=prompt`xs`\u0026gt;\u003c/textarea\u003e!';\nvar clean = sanitizeHtml(dirty, {\n    allowedTags: [ 'textarea' ]\n});\n\nconsole.log(clean);\n\n// !\u003ctextarea\u003e\u003c/textarea\u003e\u003csvg/onload=prompt`xs`\u003e\u003c/textarea\u003e!\n```\n\n\n## Recommendation\n\nUpdate to version 1.11.4 or later.",
+              "id": "GHSA-xc6g-ggrc-qq4r",
+              "modified": "2023-11-08T03:58:59.829428Z",
+              "published": "2018-11-09T17:47:23Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-16016"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/punkave/sanitize-html/issues/100"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/punkave/sanitize-html/commit/5d205a1005ba0df80e21d8c64a15bb3accdb2403"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/punkave/sanitize-html/commit/5d205a1005ba0df80e21d8c64a15bb3accdb2403)))"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://github.com/advisories/GHSA-xc6g-ggrc-qq4r"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://npmjs.com/package/sanitize-html#discarding-the-entire-contents-of-a-disallowed-tag"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://www.npmjs.com/advisories/154"
+                }
+              ],
+              "schema_version": "1.9.0",
+              "summary": "Cross-Site Scripting in sanitize-html"
             }
           ]
         },

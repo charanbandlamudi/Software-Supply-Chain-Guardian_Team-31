@@ -1,4 +1,4 @@
-# Guardian Report: run de8a1f44
+# Guardian Report: run 16dee38e
 
 1137 components, 2323 edges, 58 unique vulnerabilities, 130 non-CVE findings.
 
@@ -29,11 +29,11 @@
 
 ## What changed
 
-- **suspicious_update**: cypress@16.3.0 was published 13.4 days ago (< 14-day cooling-off window).
+- **suspicious_update**: cypress@16.3.0 was published 13.5 days ago (< 14-day cooling-off window).
 - **suspicious_update**: @ai-sdk/openai-compatible@2.0.94 was published 6.5 days ago (< 14-day cooling-off window).
-- **suspicious_update**: ai@6.0.336 was published 1.3 days ago (< 14-day cooling-off window).
+- **suspicious_update**: ai@6.0.336 was published 1.4 days ago (< 14-day cooling-off window).
 - **suspicious_update**: proxy-agent@8.0.3 was published 7.5 days ago (< 14-day cooling-off window).
-- **suspicious_update**: typescript-eslint@8.74.0 was published 0.5 days ago (< 14-day cooling-off window).
+- **suspicious_update**: typescript-eslint@8.74.0 was published 0.6 days ago (< 14-day cooling-off window).
 
 ## Dependency graph
 
@@ -3618,13 +3618,13 @@ flowchart LR
   class pkg_npm_minimatch_9_0_9 vuln
   class pkg_npm_moment_2_0_0 vuln
   class pkg_npm_sanitize_html_1_4_2 vuln
-  class file__Users_rithvikrajesh_Projects_Dummies_Software_Supply_Chain_Guardian_Team_31_data_scans_juice_shop__juice_shop__20261124_055536_repo__github_workflows_ci_yml anomaly
-  class file__Users_rithvikrajesh_Projects_Dummies_Software_Supply_Chain_Guardian_Team_31_data_scans_juice_shop__juice_shop__20261124_055536_repo__github_workflows_codeql_analysis_yml anomaly
-  class file__Users_rithvikrajesh_Projects_Dummies_Software_Supply_Chain_Guardian_Team_31_data_scans_juice_shop__juice_shop__20261124_055536_repo__github_workflows_image_actions_yml anomaly
-  class file__Users_rithvikrajesh_Projects_Dummies_Software_Supply_Chain_Guardian_Team_31_data_scans_juice_shop__juice_shop__20261124_055536_repo_Dockerfile anomaly
-  class file__Users_rithvikrajesh_Projects_Dummies_Software_Supply_Chain_Guardian_Team_31_data_scans_juice_shop__juice_shop__20261124_055536_repo_infrastructure_Dockerfile anomaly
-  class file__Users_rithvikrajesh_Projects_Dummies_Software_Supply_Chain_Guardian_Team_31_data_scans_juice_shop__juice_shop__20261124_055536_repo_test_smoke_Dockerfile anomaly
   class file_Dockerfile anomaly
+  class file_data_scans_juice_shop__juice_shop__20261124_055536_repo__github_workflows_ci_yml anomaly
+  class file_data_scans_juice_shop__juice_shop__20261124_055536_repo__github_workflows_codeql_analysis_yml anomaly
+  class file_data_scans_juice_shop__juice_shop__20261124_055536_repo__github_workflows_image_actions_yml anomaly
+  class file_data_scans_juice_shop__juice_shop__20261124_055536_repo_Dockerfile anomaly
+  class file_data_scans_juice_shop__juice_shop__20261124_055536_repo_infrastructure_Dockerfile anomaly
+  class file_data_scans_juice_shop__juice_shop__20261124_055536_repo_test_smoke_Dockerfile anomaly
   class file_data_static_codefixes_iacLeakedKeyChallenge_1_tf anomaly
   class file_data_static_codefixes_iacLeakedKeyChallenge_2_tf anomaly
   class file_data_static_codefixes_iacLeakedKeyChallenge_3_correct_tf anomaly
@@ -3731,7 +3731,7 @@ flowchart LR
 - source:ghsa: skipped: set GITHUB_TOKEN (unauthenticated limit is 60 req/h)
 - source:cisa-kev: ok (1792 entries)
 - source:epss: ok (47/48)
-- llm: ok via ['groq']
+- llm: ok via ['gemini', 'groq']
 
 ## Agent trace
 
@@ -3741,9 +3741,9 @@ flowchart LR
  2. **supervisor** → ['vuln_intel', 'reputation', 'reachability']: policy: ready=['vuln_intel', 'reputation', 'reachability'], handoffs=[]
  2. **reachability** → supervisor: reachability: {'imported': 61, 'used_transitively': 656, 'not_imported': 420}  [2.7s]
  2. **reputation** → supervisor: registry metadata for 110 packages
- 2. **vuln_intel** → supervisor: 294 raw advisory records from 6/6 sources -> 58 unique vulnerabilities on 20 packages (tar@6.2.1=12, sanitize-html@1.4.2=11, jsonwebtoken@0.1.0=5, jsonwebtoken@0.4.0=5, lodash@2.4.2=4, moment@2.0.0=3)  [2.6s]
+ 2. **vuln_intel** → supervisor: 294 raw advisory records from 6/6 sources -> 58 unique vulnerabilities on 20 packages (tar@6.2.1=12, sanitize-html@1.4.2=11, jsonwebtoken@0.1.0=5, jsonwebtoken@0.4.0=5, lodash@2.4.2=4, moment@2.0.0=3)  [2.5s]
  3. **supervisor** → ['exploit_intel', 'anomaly']: policy: ready=['exploit_intel', 'anomaly'], handoffs=[]
- 3. **anomaly** → supervisor: 25 non-CVE findings: {'yanked_or_deprecated': 11, 'install_script': 6, 'typosquat_suspect': 3, 'suspicious_update': 5}; name-similarity cleared as established: cors (~colors: 35 versions, 13y), cypress (~express: 298 versions, 11y)  [1.4s]
+ 3. **anomaly** → supervisor: 25 non-CVE findings: {'yanked_or_deprecated': 11, 'install_script': 6, 'typosquat_suspect': 3, 'suspicious_update': 5}; name-similarity cleared as established: cors (~colors: 35 versions, 13y), cypress (~express: 298 versions, 11y)  [1.3s]
  3. **anomaly** → reachability: handoff: suspicious packages found; check whether source code imports them
  3. **exploit_intel** → supervisor: 48 CVEs checked: 0 in CISA KEV, EPSS for 47
  4. **supervisor** → ['reachability']: policy: ready=['scoring'], handoffs=['reachability']
@@ -3753,7 +3753,7 @@ flowchart LR
  6. **supervisor** → ['remediation']: policy: ready=['remediation'], handoffs=[]
  6. **remediation** → supervisor: 47 plans (strategy=minimal): upgrades [express-jwt 0.1.3->6.0.0, jsonwebtoken 0.1.0->9.0.0, jws 0.2.6->3.2.3, base64url 0.0.6->3.0.0, moment 2.0.0->2.31.0, file-type 16.5.4->21.3.2, jsonwebtoken 0.4.0->9.0.0, sanitize-html 1.4.2->2.18.1, lodash 2.4.2->4.18.1, uuid 8.3.2->13.0.1, tar 6.2.1->7.5.21, @tootallnate/once 1.1.2->2.0.1, @cyclonedx/cyclonedx-npm 4.2.1->6.0.0, glob 10.5.0->14.0.2, minimatch 9.0.9->11.0.1, messageformat 2.3.0->4.0.0]; other actions {'pin': 11, 'fix_config': 8, 'rotate_secret': 5, 'request_review': 4, 'remove': 3}; resolver: blocker: jwa needs base64url ~0.0.3; no clean match; blocker: jws needs jwa ^2.0.1; no clean match; jws -> 3.2.3 to satisfy jsonwebtoken ^3.2.2; blocker: express-jwt needs jsonwebtoken ^8.1.0; no clean match; blocker: file-type needs strtok3 ^10.3.4; no clean match; blocker: file-type needs token-types ^6.1.1; no clean match; blocker: i18n needs messageformat ^2.3.0; no clean match; blocker: sanitize-html needs htmlparser2 ^12.0.0; no clean match; blocker: sequelize needs uuid ^8.3.2; no clean match; blocker: tar needs chownr ^3.0.0; no clean match; blocker: tar needs minipass ^7.1.2; no clean match; blocker: tar needs minizlib ^3.1.0; no clean match; blocker: tar needs yallist ^5.0.0; no clean match; blocker: cacache needs tar ^6.0.2; no clean match; blocker: http-proxy-agent needs @tootallnate/once 1; no clean match; blocker: node-gyp needs tar ^6.1.2; no clean match; blocker: sqlite3 needs tar ^6.1.11; no clean match; blocker: minimatch needs brace-expansion ^5.0.12; no clean match; blocker: glob needs path-scurry ^3.0.0; no clean match; blocker: cacache needs glob ^10.2.2; no clean match; blocker: istanbul-lib-processinfo needs uuid ^8.3.2; no clean match; blocker: @cyclonedx/cyclonedx-npm needs commander ^14.0.0; no clean match; blocker: @cyclonedx/cyclonedx-npm needs normalize-package-data ^7.0.0 || ^8.0.0; no clean match; blocker: express-jwt needs jsonwebtoken ^8.1.0; no clean match; blocker: jsonwebtoken needs moment ~2.0.0; no clean match; blocker: jwa needs base64url ~0.0.3; no clean match; blocker: jws needs jwa ^1.4.2; no clean match; blocker: express-jwt needs jsonwebtoken ^8.1.0; no clean match; blocker: file-type needs strtok3 ^10.3.4; no clean match; blocker: file-type needs token-types ^6.1.1; no clean match; blocker: i18n needs messageformat ^2.3.0; no clean match; blocker: sanitize-html needs htmlparser2 ^12.0.0; no clean match; blocker: sequelize needs uuid ^8.3.2; no clean match; blocker: tar needs chownr ^3.0.0; no clean match; blocker: tar needs minipass ^7.1.2; no clean match; blocker: tar needs minizlib ^3.1.0; no clean match; blocker: tar needs yallist ^5.0.0; no clean match; blocker: cacache needs tar ^6.0.2; no clean match; blocker: http-proxy-agent needs @tootallnate/once 1; no clean match; blocker: node-gyp needs tar ^6.1.2; no clean match; blocker: sqlite3 needs tar ^6.1.11; no clean match; blocker: minimatch needs brace-expansion ^5.0.12; no clean match; blocker: glob needs path-scurry ^3.0.0; no clean match; blocker: cacache needs glob ^10.2.2; no clean match; blocker: istanbul-lib-processinfo needs uuid ^8.3.2; no clean match; blocker: @cyclonedx/cyclonedx-npm needs commander ^14.0.0; no clean match; blocker: @cyclonedx/cyclonedx-npm needs normalize-package-data ^7.0.0 || ^8.0.0; no clean match; blocker: express-jwt needs jsonwebtoken ^8.1.0; no clean match; blocker: jsonwebtoken needs moment ~2.0.0; no clean match
  7. **supervisor** → ['explainer']: policy: ready=['explainer'], handoffs=[]
- 7. **explainer** → supervisor: LLM produced 19 evidence-cited claims for 20 findings  [73.1s]
+ 7. **explainer** → supervisor: LLM produced 16 evidence-cited claims for 20 findings  [60.1s]
  8. **supervisor** → ['critic']: policy: ready=['critic'], handoffs=[]
- 8. **critic** → supervisor: verified 19 claims; 0 replaced by templates
+ 8. **critic** → supervisor: verified 16 claims; 0 replaced by templates
  9. **supervisor** → report: finish: no agent has new inputs and no handoffs are open

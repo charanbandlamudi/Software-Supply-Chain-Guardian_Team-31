@@ -165,7 +165,11 @@ with tab_agents:
                                           ("Claims verified", f"{sm['critic']['accepted']}/"
                                                               f"{sm['critic']['accepted'] + sm['critic']['rejected']}")]):
             col.metric(lbl, val)
-        st.caption(f"LLM: {', '.join(sm['llm']) if sm['llm'] else 'none configured — explanations are deterministic templates'}"
+        usage = sm.get("llm_usage") or {}
+        usage_txt = (" (round-robin with failover: " + ", ".join(
+            f"{n} {u['ok']}/{u['calls']} ok" + (f", {u['rate_limited']} rate-limited" if u.get("rate_limited") else "")
+            for n, u in usage.items()) + ")") if usage else ""
+        st.caption(f"LLM: {', '.join(sm['llm']) if sm['llm'] else 'none configured — explanations are deterministic templates'}{usage_txt}"
                    f" · ran in {sm['seconds']}s · registry metadata checked for {sm['reputation_focus']} packages "
                    "(direct dependencies + scanner-flagged)")
 

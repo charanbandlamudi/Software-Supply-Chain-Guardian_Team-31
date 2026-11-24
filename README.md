@@ -498,8 +498,19 @@ their own filter option. Outputs are saved in
 `GEMINI_API_KEY`. `GITHUB_TOKEN` enables the GHSA source. Without keys, everything still runs, with template
 explanations.
 
-Groq's default model is `openai/gpt-oss-120b`; override it with `GROQ_MODEL`. On Groq's free tier (8,000 tokens
-per minute) the explainer takes about 80 s for Juice Shop, because it waits between batches as Groq asks.
+**Several keys rotate.** With more than one key set, calls alternate between providers (round-robin, default order
+`gemini,groq,anthropic`; change it with `GUARDIAN_LLM_ORDER`), which spreads load across free-tier rate limits:
+- If a provider fails, the next one is tried immediately, and the failing one is skipped for a while: the wait it
+  asks for on HTTP 429, 30 s on 503/timeouts, 10 min on 401/403/404.
+- If every provider is cooling down, the explainer waits for the shortest cooldown and retries.
+- The *Agent investigation* tab shows how many calls each provider served.
+- `GUARDIAN_LLM_MODE=fallback` restores strict first-provider-first ordering.
+
+Default models:
+- **Groq:** `openai/gpt-oss-120b` (`GROQ_MODEL`). The free tier allows 8,000 tokens per minute.
+- **Gemini:** `gemini-flash-latest` (`GEMINI_MODEL`). When it's overloaded (503) or retired (404), Gemini first
+  falls back to `gemini-flash-lite-latest` (`GEMINI_FALLBACK_MODELS`). The `*-latest` aliases follow Google's
+  current models, so they don't break when a version is retired.
 
 ## Final Guardian Report
 

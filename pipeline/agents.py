@@ -116,6 +116,8 @@ def run_agents(scan_dir: Path, repo: Path, on_message: Callable[[dict], None] = 
         "critic": {"accepted": len(critic.get("accepted", [])), "rejected": len(critic.get("rejected", []))},
         "remediation_plans": len(values.get("remediation_plans", {})),
         "coverage": values.get("coverage", {}),
+        # per-provider call counts when the LLM pool rotates between providers (gemini/groq/...)
+        "llm_usage": getattr(llm_call, "stats", None),
         "reputation_focus": len(inputs["reputation_focus"]),
         "report_dir": (values.get("report") or {}).get("dir"),
     }

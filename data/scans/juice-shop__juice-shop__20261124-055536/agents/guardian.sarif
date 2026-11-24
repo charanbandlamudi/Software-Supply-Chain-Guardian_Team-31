@@ -1632,7 +1632,7 @@
           "ruleId": "suspicious_update",
           "level": "note",
           "message": {
-            "text": "SUSPICIOUS_UPDATE in pkg:npm/cypress@16.3.0: cypress@16.3.0 was published 13.4 days ago (< 14-day cooling-off window)."
+            "text": "SUSPICIOUS_UPDATE in pkg:npm/cypress@16.3.0: cypress@16.3.0 was published 13.5 days ago (< 14-day cooling-off window)."
           },
           "locations": [
             {
@@ -1772,7 +1772,7 @@
           "ruleId": "suspicious_update",
           "level": "note",
           "message": {
-            "text": "SUSPICIOUS_UPDATE in pkg:npm/ai@6.0.336: ai@6.0.336 was published 1.3 days ago (< 14-day cooling-off window)."
+            "text": "SUSPICIOUS_UPDATE in pkg:npm/ai@6.0.336: ai@6.0.336 was published 1.4 days ago (< 14-day cooling-off window)."
           },
           "locations": [
             {
@@ -1812,7 +1812,7 @@
           "ruleId": "suspicious_update",
           "level": "note",
           "message": {
-            "text": "SUSPICIOUS_UPDATE in pkg:npm/typescript-eslint@8.74.0: typescript-eslint@8.74.0 was published 0.5 days ago (< 14-day cooling-off window)."
+            "text": "SUSPICIOUS_UPDATE in pkg:npm/typescript-eslint@8.74.0: typescript-eslint@8.74.0 was published 0.6 days ago (< 14-day cooling-off window)."
           },
           "locations": [
             {
@@ -1892,13 +1892,13 @@
           "ruleId": "unpinned_base_image",
           "level": "note",
           "message": {
-            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/Dockerfile: Base image node:24 is referenced by tag, not digest; the tag can be re-pointed."
+            "text": "UNPINNED_BASE_IMAGE in file:data/scans/juice-shop__juice-shop__20261124-055536/repo/Dockerfile: Base image node:24 is referenced by tag, not digest; the tag can be re-pointed."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/Dockerfile"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-055536/repo/Dockerfile"
                 },
                 "region": {
                   "startLine": 1
@@ -1915,13 +1915,13 @@
           "ruleId": "unpinned_base_image",
           "level": "note",
           "message": {
-            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/Dockerfile: Base image gcr.io/distroless/nodejs24-debian13 is referenced by tag, not digest; the tag can be re-pointed."
+            "text": "UNPINNED_BASE_IMAGE in file:data/scans/juice-shop__juice-shop__20261124-055536/repo/Dockerfile: Base image gcr.io/distroless/nodejs24-debian13 is referenced by tag, not digest; the tag can be re-pointed."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/Dockerfile"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-055536/repo/Dockerfile"
                 },
                 "region": {
                   "startLine": 22
@@ -1938,13 +1938,13 @@
           "ruleId": "unpinned_base_image",
           "level": "note",
           "message": {
-            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/infrastructure/Dockerfile: Base image node:20.19.2-bookworm-slim is referenced by tag, not digest; the tag can be re-pointed."
+            "text": "UNPINNED_BASE_IMAGE in file:data/scans/juice-shop__juice-shop__20261124-055536/repo/infrastructure/Dockerfile: Base image node:20.19.2-bookworm-slim is referenced by tag, not digest; the tag can be re-pointed."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/infrastructure/Dockerfile"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-055536/repo/infrastructure/Dockerfile"
                 },
                 "region": {
                   "startLine": 1
@@ -1961,13 +1961,13 @@
           "ruleId": "unpinned_base_image",
           "level": "note",
           "message": {
-            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/infrastructure/Dockerfile: Base image node:20.19.2-bookworm is referenced by tag, not digest; the tag can be re-pointed."
+            "text": "UNPINNED_BASE_IMAGE in file:data/scans/juice-shop__juice-shop__20261124-055536/repo/infrastructure/Dockerfile: Base image node:20.19.2-bookworm is referenced by tag, not digest; the tag can be re-pointed."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/infrastructure/Dockerfile"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-055536/repo/infrastructure/Dockerfile"
                 },
                 "region": {
                   "startLine": 6
@@ -1984,13 +1984,13 @@
           "ruleId": "unpinned_base_image",
           "level": "note",
           "message": {
-            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/infrastructure/Dockerfile: Base image base is referenced by tag, not digest; the tag can be re-pointed."
+            "text": "UNPINNED_BASE_IMAGE in file:data/scans/juice-shop__juice-shop__20261124-055536/repo/infrastructure/Dockerfile: Base image base is referenced by tag, not digest; the tag can be re-pointed."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/infrastructure/Dockerfile"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-055536/repo/infrastructure/Dockerfile"
                 },
                 "region": {
                   "startLine": 14
@@ -2007,13 +2007,13 @@
           "ruleId": "unpinned_base_image",
           "level": "note",
           "message": {
-            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/test/smoke/Dockerfile: Base image alpine is referenced by tag, not digest; the tag can be re-pointed."
+            "text": "UNPINNED_BASE_IMAGE in file:data/scans/juice-shop__juice-shop__20261124-055536/repo/test/smoke/Dockerfile: Base image alpine is referenced by tag, not digest; the tag can be re-pointed."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/test/smoke/Dockerfile"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-055536/repo/test/smoke/Dockerfile"
                 },
                 "region": {
                   "startLine": 1
@@ -2030,13 +2030,13 @@
           "ruleId": "unpinned_action",
           "level": "note",
           "message": {
-            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/ci.yml: Action coverallsapp/github-action@v2 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+            "text": "UNPINNED_ACTION in file:data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/ci.yml: Action coverallsapp/github-action@v2 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/ci.yml"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/ci.yml"
                 },
                 "region": {
                   "startLine": 198
@@ -2053,13 +2053,13 @@
           "ruleId": "unpinned_action",
           "level": "note",
           "message": {
-            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/codeql-analysis.yml: Action github/codeql-action/init@v3 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+            "text": "UNPINNED_ACTION in file:data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/codeql-analysis.yml: Action github/codeql-action/init@v3 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/codeql-analysis.yml"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/codeql-analysis.yml"
                 },
                 "region": {
                   "startLine": 23
@@ -2076,13 +2076,13 @@
           "ruleId": "unpinned_action",
           "level": "note",
           "message": {
-            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/codeql-analysis.yml: Action github/codeql-action/autobuild@v3 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+            "text": "UNPINNED_ACTION in file:data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/codeql-analysis.yml: Action github/codeql-action/autobuild@v3 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/codeql-analysis.yml"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/codeql-analysis.yml"
                 },
                 "region": {
                   "startLine": 34
@@ -2099,13 +2099,13 @@
           "ruleId": "unpinned_action",
           "level": "note",
           "message": {
-            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/codeql-analysis.yml: Action github/codeql-action/analyze@v3 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+            "text": "UNPINNED_ACTION in file:data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/codeql-analysis.yml: Action github/codeql-action/analyze@v3 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/codeql-analysis.yml"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/codeql-analysis.yml"
                 },
                 "region": {
                   "startLine": 36
@@ -2122,13 +2122,13 @@
           "ruleId": "unpinned_action",
           "level": "note",
           "message": {
-            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/image_actions.yml: Action actions/checkout@v6 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+            "text": "UNPINNED_ACTION in file:data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/image_actions.yml: Action actions/checkout@v6 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/image_actions.yml"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/image_actions.yml"
                 },
                 "region": {
                   "startLine": 30
@@ -2145,13 +2145,13 @@
           "ruleId": "unpinned_action",
           "level": "note",
           "message": {
-            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/image_actions.yml: Action calibreapp/image-actions@main is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+            "text": "UNPINNED_ACTION in file:data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/image_actions.yml: Action calibreapp/image-actions@main is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/image_actions.yml"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/image_actions.yml"
                 },
                 "region": {
                   "startLine": 33
@@ -2168,13 +2168,13 @@
           "ruleId": "unpinned_action",
           "level": "note",
           "message": {
-            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/image_actions.yml: Action peter-evans/create-pull-request@v8 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+            "text": "UNPINNED_ACTION in file:data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/image_actions.yml: Action peter-evans/create-pull-request@v8 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/image_actions.yml"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/image_actions.yml"
                 },
                 "region": {
                   "startLine": 42
