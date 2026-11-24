@@ -4,6 +4,7 @@ from __future__ import annotations
 from ..critic import verify_claims
 from ..llm_contract import build_prompt, parse_response, template_claim
 from ..scoring import score
+from ..reachability_advisory import advisory_state
 from .base import AgentResult, handoff
 
 TOP_N = 12          # highest-scored findings explained
@@ -37,6 +38,13 @@ def make_scoring(context: dict):
             reach = comp.get("reachability") or {}
             s["reachability_state"] = reach.get("state", "n/a" if f["component_purl"].startswith("file:") else "unknown")
             s["evidence_ids"] = reach.get("evidence_ids", [])
+            if f.get("type") == "vulnerability":
+                source_dirs = state.get("inputs", {}).get("source_dirs", [])
+                advisory = advisory_state(
+                    source_dirs,
+                    [comp.get("name"), f.get("canonical_id"), *(f.get("aliases") or [])],
+                )
+                s["advisory_reachability"] = advisory
             out[fid] = s
         ranked = sorted(out.items(), key=lambda kv: -kv[1]["score"])[:3]
         top = "; ".join(f"{state['findings'][k].get('canonical_id')} on "

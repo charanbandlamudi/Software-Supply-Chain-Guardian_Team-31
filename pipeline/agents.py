@@ -103,6 +103,12 @@ def run_agents(scan_dir: Path, repo: Path, on_message: Callable[[dict], None] = 
                 messages.append(m)
                 on_message(m)
     values = app.get_state(cfg).values
+    checkpoint_path = os.getenv("GUARDIAN_CHECKPOINT_DB")
+    if checkpoint_path:
+        from guardian_v2.checkpoints import SQLiteCheckpointStore
+        store = SQLiteCheckpointStore(Path(checkpoint_path))
+        store.save(cfg["configurable"]["thread_id"], values)
+        store.close()
 
     findings = values.get("findings", {})
     by_type: dict[str, int] = {}

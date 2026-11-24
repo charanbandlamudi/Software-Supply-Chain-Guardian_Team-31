@@ -51,7 +51,7 @@ flowchart TD
     end
 
     subgraph GATE1["Gate 1 — Human Approval (interrupt)"]
-        APPR["👤 approval\n• Shows: component, action, from→to,\n  rationale, CVEs cleared\n• Reviewer ticks approve/reject per plan\n• Sandbox rows = automatable (npm)\n• Manual rows = checklist in draft PR\n• Writes: approved / rejected status"]
+        APPR["👤 approval\n• Shows: component, action, from→to,\n  rationale, CVEs cleared\n• Reviewer ticks approve/reject per plan\n• Sandbox rows = automatable (npm)\n        • Manual rows = local change-set checklist\n• Writes: approved / rejected status"]
     end
 
     subgraph SANDBOX["Sandbox Validation (if any approved)"]
@@ -59,7 +59,7 @@ flowchart TD
     end
 
     subgraph GATE2["Gate 2 — Human Approval of Validated Change"]
-        APPR2["👤 approval (gate 2)\n• Shows validated changeset\n• Approve → draft PR artifacts written\n  (patch, lockfile, PR_DRAFT.md)\n• Writes: pr_approved / publish_rejected"]
+        APPR2["👤 approval (gate 2)\n• Shows validated changeset\n• Approve → local change-set artifacts written\n  (patch, lockfile, CHANGESET.md)\n• Writes: approved / rejected"]
     end
 
     subgraph REPORT["Report"]
@@ -105,7 +105,7 @@ flowchart TD
 | **remediation** | `findings`, `components` (ecosystem, version, edges) | `remediation_plans{PLAN::purl→{action,target_version,rationale,evidence_ids,status:proposed}}` |
 | **explainer** | `findings` (top 12+), `components`, `evidence`, `remediation_plans` | `llm_claims[]` (statement, facts, evidence_ids, next_steps per finding) |
 | **critic** | `llm_claims[]`, `findings`, `evidence`, `remediation_plans` | `critic:{accepted[],rejected[],pass}` |
-| **approval** | `remediation_plans` (proposed / validated) | `remediation_plans{+status:approved/rejected/pr_approved}`, `approvals[]` |
+| **approval** | `remediation_plans` (proposed / validated) | `remediation_plans{+status:approved/rejected}`, `approvals[]` |
 | **validation** | `remediation_plans` (approved), `components`, `inputs` | `validation{plan_id→{lockfile_ok,docker_install,docker_test,osv_rescan,sbom_diff,new_findings}}`, `remediation_plans{+status:validated}` |
 | **report** | `findings`, `components`, `edges`, `remediation_plans`, `approvals`, `validation`, `critic`, `coverage` | `report{dir,findings[],inventory,coverage}` → writes files |
 
@@ -245,7 +245,6 @@ flowchart TD
     CHK -->|"tool not in allowlist"| DENY2["❌ DENY\ntool not allow-listed"]
     CHK -->|"mutation tool\nno guardian/* branch"| DENY3["❌ DENY\nmutation needs guardian/* branch"]
     CHK -->|"mutation tool\nno Gate 1 approval"| DENY4["❌ DENY\nmutation needs Gate 1"]
-    CHK -->|"git.open_pr\nnot draft OR no Gate 2"| DENY5["❌ DENY\nPR must be draft + Gate 2"]
     CHK -->|"egress to non-allowlisted host"| DENY6["❌ DENY\negress blocked"]
     CHK -->|"secret-like value in args"| DENY7["❌ DENY\nsecret in args"]
     CHK -->|"all checks pass"| ALLOW["✅ ALLOW"]
@@ -270,5 +269,5 @@ remediation/
 ├── audit.jsonl               ← SHA-256 hash-chained audit trail
 ├── guardian-remediation.patch
 ├── package-lock.remediated.json
-└── PR_DRAFT.md               ← validation evidence + manual checklist
+└── CHANGESET.md              ← validation evidence + manual checklist
 ```

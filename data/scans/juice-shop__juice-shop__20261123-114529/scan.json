@@ -1,12 +1,12 @@
 {
   "scan_id": "juice-shop__juice-shop__20261123-114529",
-  "scan_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261123-114529",
+  "scan_dir": "/home/pranaav/bosch/codebase/day2/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261123-114529",
   "target": "https://github.com/juice-shop/juice-shop",
   "kind": "github",
   "repo_name": "juice-shop/juice-shop",
   "started_at": "2026-11-23T11:45:29+00:00",
   "finished_at": null,
-  "status": "running",
+  "status": "interrupted",
   "commit": "c9f99228d9d56afb5f5ca7925376292f7fa44b13",
   "tools": {
     "git": "git version 2.44.0",
@@ -59,7 +59,7 @@
     }
   },
   "artifacts": {
-    "sbom": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261123-114529/sbom/bom.json"
+    "sbom": "/home/pranaav/bosch/codebase/day2/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261123-114529/sbom/bom.json"
   },
   "stats": null
 }

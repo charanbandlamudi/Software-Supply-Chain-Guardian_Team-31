@@ -20,15 +20,26 @@ allow if {
 }
 
 allow if {
-  input.tool in {"git.branch", "pkg.apply", "docker.build", "test.run"}
+  input.tool in {"pkg.apply", "docker.build", "test.run"}
   startswith(input.args.branch, "guardian/")
   input.approval.gate1 == true
 }
 
-allow if {
-  input.tool == "git.open_pr"
-  input.args.draft == true
-  input.approval.gate2 == true
+deny_reason contains "unresolved ACT finding" if {
+  input.report.ssvc_decision == "Act"
+  input.report.resolution != "validated"
+}
+
+deny_reason contains "unpinned GitHub Action" if {
+  input.report.unpinned_actions > 0
+}
+
+deny_reason contains "unpinned base digest" if {
+  input.report.unpinned_base_images > 0
+}
+
+deny_reason contains "license policy violation" if {
+  input.report.license_violations > 0
 }
 
 deny_reason contains "merge/deploy/publish is human-only" if {

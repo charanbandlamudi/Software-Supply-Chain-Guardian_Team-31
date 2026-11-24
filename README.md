@@ -675,9 +675,13 @@ rotating secrets, fixing config, transitive removals) become a checklist in the 
 problems after merging. The original `package.json` and lockfile are kept with their SHA-256 hashes, along with
 step-by-step restore instructions.
 
-**3. Gate 2, human approval of the validated change.** The firewall must allow a **draft** PR. This writes a
-valid git patch, the remediated lockfile, `PR_DRAFT.md` and the **post-remediation report**
-(`remediation/remediation-report.{json,html,pdf}`). That report covers:
+**3. Gate 2, human approval of the validated change.** The **build gate** (policy-as-code,
+`guardian_v2/build_gate.py`) must pass. It blocks approval while an SSVC *Act* finding is unresolved, a GitHub
+Action or container image is unpinned, a license policy is violated, or a merge or publish action is requested.
+Gate 2 then writes a valid git patch, the remediated lockfile, **`CHANGESET.md`** and the **post-remediation
+report** (`remediation/remediation-report.{json,html,pdf}`). The change set holds the changes, validation
+evidence, whole-app results, final confidence, accepted risks, rollback, the manual-task checklist and the audit
+head. The report covers:
 - the original findings and their evidence;
 - the approved, rejected and accepted-risk actions, with reviewers;
 - build and test results before and after;
@@ -685,10 +689,12 @@ valid git patch, the remediated lockfile, `PR_DRAFT.md` and the **post-remediati
 - remaining risk (residual vulnerabilities, rejected and undecided plans, pending manual tasks);
 - final confidence, rollback, and the audit-chain head.
 
+Nothing is pushed at this point.
+
 **4. Draft PR (optional).** *Preview PR (dry run)* clones the target branch, applies the approved change to its
 *current* `package.json`, commits locally and shows the diff and the exact commands, without pushing anything.
 *Open draft PR*, after ticking a confirmation box, pushes a `guardian/remediation-*` branch and opens a
-**draft** PR with `gh`:
+**draft** PR with `gh`, using `CHANGESET.md` as the description:
 - **to the scanned repository** if you have push access to it;
 - **otherwise to your own fork** (created if needed). Upstream is never touched.
 

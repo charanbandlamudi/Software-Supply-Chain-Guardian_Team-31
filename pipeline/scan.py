@@ -132,6 +132,8 @@ def tool_versions() -> dict:
 def parse_target(target: str) -> tuple[str, str, str]:
     """Return (kind, owner, name). Only https GitHub URLs or existing local dirs are accepted."""
     target = target.strip()
+    if not target:
+        raise ValueError("Enter an https://github.com/<owner>/<repo> URL or an existing local folder.")
     m = GITHUB_RE.match(target)
     if m:
         return "github", m.group(1), m.group(2)
@@ -186,27 +188,33 @@ def load_scan(scan_id: str) -> dict | None:
         m = json.loads(f.read_text(encoding="utf-8"))
     except json.JSONDecodeError:  # being written right now
         return None
+
     if m.get("status") == "running" and not is_active(scan_id):
         m["status"] = "interrupted"  # server restarted / process died mid-scan
+        tmp = f.with_suffix(".json.tmp")   # persist it so every reader sees the same status
+        tmp.write_text(json.dumps(m, indent=2), encoding="utf-8")
+        tmp.replace(f)
     return _localize_paths(m, scan_id)
 
 
 def _localize_paths(m: dict, scan_id: str) -> dict:
-    """Scans shared through git keep the absolute paths of the machine that ran them (e.g. C:\\Users\\...).
-    Re-anchor scan_dir and artifact paths to this machine's data/scans/<scan_id> when they don't exist here."""
+    """Scans shared through git keep the paths of the machine that ran them (e.g. C:\\Users\\... or a
+    relative path). Re-anchor scan_dir and artifact paths to this checkout's data/scans/<scan_id>.
+    Backslash paths are normalised first: on macOS/Linux Path("C:\\x\\y").parts is a single part."""
     local = SCANS_DIR / scan_id
 
     def fix(p):
-        if not isinstance(p, str) or Path(p).exists():
+        if not isinstance(p, str) or not p or Path(p).exists():
             return p
         norm = p.replace("\\", "/")
         if f"/{scan_id}/" in norm or norm.endswith(f"/{scan_id}"):
             rest = norm.split(f"/{scan_id}", 1)[1].lstrip("/")
-            cand = local / rest if rest else local
-            return str(cand)
+            return str(local / rest) if rest else str(local)
+        if not Path(norm).is_absolute() and (ROOT / norm).exists():
+            return str(ROOT / norm)
         return p
-    m["scan_dir"] = fix(m.get("scan_dir")) if m.get("scan_dir") else str(local)
-    m["artifacts"] = {k: fix(v) for k, v in (m.get("artifacts") or {}).items()}
+    m["scan_dir"] = str(local)
+    m["artifacts"] = {k: fix(v) for k, v in (m.get("artifacts") or {}).items() if v}
     return m
 
 
@@ -218,7 +226,7 @@ def list_scans() -> list[dict]:
 def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) -> dict:
     kind, owner, name = parse_target(target)
     started = datetime.now(timezone.utc)
-    scan_dir = SCANS_DIR / f"{owner}__{name}__{started:%Y%m%d-%H%M%S}"
+    scan_dir = SCANS_DIR / f"{owner}__{name}__{started:%Y%m%d-%H%M%S-%f}"
     repo, sbom, res, graphs = (scan_dir / d for d in ("repo", "sbom", "scanner_results", "graphs"))
     for d in (sbom, res, graphs):
         d.mkdir(parents=True, exist_ok=True)
