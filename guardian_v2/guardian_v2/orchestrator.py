@@ -177,6 +177,18 @@ def make_node(agent: Agent):
         msgs += [{"turn": turn, "from": agent.name, "to": r["to"], "text": f"handoff: {r['reason']}"}
                  for r in res.requests]
         delta = dict(res.delta)
+        from .audit import append_entry
+        audit = list(state.get("audit", []))
+        audit_entry = append_entry(
+            audit,
+            actor=f"agent:{agent.name}",
+            action="agent.run",
+            tool=agent.name,
+            args_redacted={k: v for k, v in task.items() if k not in ("api_key", "token", "secret")},
+            policy_decision={"allow": True, "rule": "agent lifecycle"},
+            result_ref="state delta",
+        )
+        delta["audit"] = [audit_entry]
         delta.update({"gen": {agent.name: gen.get(agent.name, 0) + 1},
                       "seen": {agent.name: {r: gen.get(r, 0) for r in agent.requires}},
                       "requests": {**new_reqs, **done}, "messages": msgs})

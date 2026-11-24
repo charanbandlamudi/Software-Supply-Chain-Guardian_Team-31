@@ -62,3 +62,4 @@ class GuardianState(TypedDict, total=False):
     approvals: Annotated[list, operator.add]
     validation: Annotated[dict, merge_dict]        # plan_id -> validation result
     report: dict
+    audit: Annotated[list, operator.add]           # append-only hash-chained entries
