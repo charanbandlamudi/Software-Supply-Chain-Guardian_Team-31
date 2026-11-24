@@ -1,0 +1,153 @@
+{
+  "scan_id": "juice-shop__juice-shop__20261124-050957",
+  "scan_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957",
+  "target": "https://github.com/juice-shop/juice-shop",
+  "kind": "github",
+  "repo_name": "juice-shop/juice-shop",
+  "started_at": "2026-11-24T05:09:57+00:00",
+  "finished_at": "2026-11-24T05:10:45+00:00",
+  "status": "complete",
+  "commit": "c9f99228d9d56afb5f5ca7925376292f7fa44b13",
+  "tools": {
+    "git": "git version 2.44.0",
+    "npm": "10.9.8",
+    "cdxgen": "\u001b[1mCycloneDX Generator 12.9.3\u001b[0m",
+    "osv-scanner": "osv-scanner version: 2.7.1",
+    "grype": "0.122.1",
+    "grype_db": {
+      "schema": "v6.1.10",
+      "built": "2026-11-23T06:28:32Z",
+      "valid": true
+    },
+    "trivy": "0.76.2",
+    "trivy_db": {
+      "version": 2,
+      "updated": "2026-11-23T07:04:04.632673631Z",
+      "downloaded": "2026-11-23T12:43:24.627303Z"
+    }
+  },
+  "steps": {
+    "clone": {
+      "label": "Clone repository",
+      "status": "ok",
+      "detail": "commit c9f99228d9d5",
+      "seconds": 6.1
+    },
+    "lockfile": {
+      "label": "Resolve npm lockfile",
+      "status": "ok",
+      "detail": "generated \u2014 versions resolved today, not committed by the repo",
+      "seconds": 15.6
+    },
+    "sbom": {
+      "label": "Generate SBOM (cdxgen)",
+      "status": "ok",
+      "detail": "1134 components",
+      "seconds": 3.5
+    },
+    "grype": {
+      "label": "Scan SBOM (Grype)",
+      "status": "ok",
+      "detail": "53 matches",
+      "seconds": 3.5
+    },
+    "osv": {
+      "label": "Scan repository (OSV-Scanner)",
+      "status": "ok",
+      "detail": "54 vulnerabilities",
+      "seconds": 4.5
+    },
+    "trivy": {
+      "label": "Scan repository (Trivy)",
+      "status": "ok",
+      "detail": "58 vulnerabilities, 89 misconfigurations, 5 secrets",
+      "seconds": 4.5
+    },
+    "graph": {
+      "label": "Build dependency graph",
+      "status": "ok",
+      "detail": "1135 nodes, 58 findings",
+      "seconds": 10.0
+    },
+    "agents": {
+      "label": "Agent investigation (guardian_v2)",
+      "status": "ok",
+      "detail": "9 turns, 94 findings, 1 handoffs, LLM: none (templates)",
+      "seconds": 5.6
+    }
+  },
+  "artifacts": {
+    "sbom": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/sbom/bom.json",
+    "grype": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/scanner_results/grype.json",
+    "osv": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/scanner_results/osv.json",
+    "trivy": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/scanner_results/trivy.json",
+    "graph_html": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/graphs/dependency_graph.html",
+    "graph_json": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/graphs/graph.json",
+    "agents_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/agents"
+  },
+  "stats": {
+    "nodes": 1135,
+    "edges": 2147,
+    "direct": 98,
+    "transitive": 1011,
+    "unresolved": 25,
+    "vulnerable_packages": 20,
+    "findings": 58,
+    "findings_by_severity": {
+      "CRITICAL": 7,
+      "HIGH": 23,
+      "MEDIUM": 26,
+      "LOW": 2
+    },
+    "misconfigurations": 89,
+    "secrets": 5
+  },
+  "agents": {
+    "agents": [
+      "discovery",
+      "cicd",
+      "vuln_intel",
+      "reputation",
+      "reachability",
+      "exploit_intel",
+      "anomaly",
+      "scoring",
+      "remediation",
+      "explainer",
+      "critic"
+    ],
+    "llm": null,
+    "turns": 9,
+    "seconds": 4.9,
+    "findings": 94,
+    "by_type": {
+      "vulnerability": 54,
+      "yanked_or_deprecated": 11,
+      "unpinned_action": 7,
+      "unpinned_base_image": 6,
+      "install_script": 6,
+      "typosquat_suspect": 5,
+      "suspicious_update": 5
+    },
+    "handoffs": 1,
+    "critic": {
+      "accepted": 12,
+      "rejected": 0
+    },
+    "remediation_plans": 35,
+    "coverage": {
+      "discovery": "SBOM CycloneDX 1.7: 1134 components; package-lock v3: 1249 packages",
+      "reputation": "110 ok, 0 failed",
+      "source:pypi-osv": "ok",
+      "source:npm-audit": "ok",
+      "source:osv": "ok",
+      "source:grype": "ok",
+      "source:ghsa": "skipped: set GITHUB_TOKEN (unauthenticated limit is 60 req/h)",
+      "source:cisa-kev": "ok (1792 entries)",
+      "source:epss": "ok (47/48)",
+      "llm": "no LLM key configured; deterministic templates used"
+    },
+    "reputation_focus": 110,
+    "report_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/agents"
+  }
+}

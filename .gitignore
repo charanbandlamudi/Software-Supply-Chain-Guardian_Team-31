@@ -11,3 +11,4 @@ build/
 *.egg-info/
 .guardian_cache/
 .DS_Store
+data/agent_cache/

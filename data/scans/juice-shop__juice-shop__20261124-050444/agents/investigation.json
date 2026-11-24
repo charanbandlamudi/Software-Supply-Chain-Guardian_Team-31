@@ -1,0 +1,617 @@
+{
+  "summary": {
+    "agents": [
+      "discovery",
+      "cicd",
+      "vuln_intel",
+      "reputation",
+      "reachability",
+      "exploit_intel",
+      "anomaly",
+      "scoring",
+      "remediation",
+      "explainer",
+      "critic"
+    ],
+    "llm": null,
+    "turns": 9,
+    "seconds": 4.7,
+    "findings": 94,
+    "by_type": {
+      "vulnerability": 54,
+      "yanked_or_deprecated": 11,
+      "unpinned_action": 7,
+      "unpinned_base_image": 6,
+      "install_script": 6,
+      "typosquat_suspect": 5,
+      "suspicious_update": 5
+    },
+    "handoffs": 1,
+    "critic": {
+      "accepted": 12,
+      "rejected": 0
+    },
+    "remediation_plans": 35,
+    "coverage": {
+      "discovery": "SBOM CycloneDX 1.7: 1134 components; package-lock v3: 1249 packages",
+      "reputation": "110 ok, 0 failed",
+      "source:pypi-osv": "ok",
+      "source:npm-audit": "ok",
+      "source:osv": "ok",
+      "source:grype": "ok",
+      "source:ghsa": "skipped: set GITHUB_TOKEN (unauthenticated limit is 60 req/h)",
+      "source:cisa-kev": "ok (1792 entries)",
+      "source:epss": "ok (47/48)",
+      "llm": "no LLM key configured; deterministic templates used"
+    },
+    "reputation_focus": 110,
+    "report_dir": "data/scans/juice-shop__juice-shop__20261124-050444/agents"
+  },
+  "inputs": {
+    "sbom": "data/scans/juice-shop__juice-shop__20261124-050444/sbom/bom.json",
+    "source_dirs": [
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo"
+    ],
+    "dockerfiles": [
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/Dockerfile",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/infrastructure/Dockerfile",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/test/smoke/Dockerfile"
+    ],
+    "workflows": [
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/ci.yml",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/codeql-analysis.yml",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/frontend-bundle-analysis.yml",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/image_actions.yml",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/issue-compliance.yml",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/lint-fixer.yml",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/lock.yml",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/pr-compliance.yml",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/rebase.yml",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/release.yml",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/stale.yml",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/update-challenges-ebook.yml",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/update-challenges-www-legacy.yml",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/update-challenges-www.yml",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/update-news-www-legacy.yml",
+      "data/scans/juice-shop__juice-shop__20261124-050444/repo/.github/workflows/update-news-www.yml"
+    ],
+    "out_dir": "data/scans/juice-shop__juice-shop__20261124-050444/agents",
+    "stage": "analysis",
+    "reputation_focus": [
+      "pkg:npm/%40ai-sdk/openai-compatible@2.0.94",
+      "pkg:npm/%40cyclonedx/cyclonedx-npm@4.2.1",
+      "pkg:npm/%40eslint/js@9.39.5",
+      "pkg:npm/%40fontsource/roboto@5.3.0",
+      "pkg:npm/%40istanbuljs/nyc-config-typescript@1.0.2",
+      "pkg:npm/%40simplewebauthn/server@14.1.0",
+      "pkg:npm/%40tootallnate/once@1.1.2",
+      "pkg:npm/%40types/clarinet@0.12.3",
+      "pkg:npm/%40types/compression@1.8.1",
+      "pkg:npm/%40types/config@3.3.5",
+      "pkg:npm/%40types/cookie-parser@1.4.10",
+      "pkg:npm/%40types/cors@2.8.19",
+      "pkg:npm/%40types/cross-spawn@6.0.6",
+      "pkg:npm/%40types/diff@7.0.2",
+      "pkg:npm/%40types/errorhandler@1.5.3",
+      "pkg:npm/%40types/exif@0.6.5",
+      "pkg:npm/%40types/express-jwt@6.0.4",
+      "pkg:npm/%40types/express@4.17.25",
+      "pkg:npm/%40types/i18n@0.12.0",
+      "pkg:npm/%40types/js-yaml@3.12.10",
+      "pkg:npm/%40types/jsonwebtoken@8.5.9",
+      "pkg:npm/%40types/jws@3.2.11",
+      "pkg:npm/%40types/lodash@4.17.27",
+      "pkg:npm/%40types/morgan@1.9.10",
+      "pkg:npm/%40types/multer@1.4.13",
+      "pkg:npm/%40types/node@26.6.6",
+      "pkg:npm/%40types/pdfkit@0.10.6",
+      "pkg:npm/%40types/pug@2.0.10",
+      "pkg:npm/%40types/sanitize-html@1.27.2",
+      "pkg:npm/%40types/semver@7.8.0",
+      "pkg:npm/%40types/sequelize@4.28.20",
+      "pkg:npm/%40types/serve-index@1.9.4",
+      "pkg:npm/%40types/supertest@7.2.1",
+      "pkg:npm/%40types/swagger-ui-express@4.1.8",
+      "pkg:npm/%40types/unzipper@0.10.11",
+      "pkg:npm/ai@6.0.336",
+      "pkg:npm/base64url@0.0.6",
+      "pkg:npm/beercss@4.0.23",
+      "pkg:npm/clarinet@0.12.6",
+      "pkg:npm/compression@1.8.2",
+      "pkg:npm/concurrently@5.3.0",
+      "pkg:npm/config@3.3.12",
+      "pkg:npm/cookie-parser@1.4.7",
+      "pkg:npm/cookieconsent@3.1.1",
+      "pkg:npm/cors@2.8.6",
+      "pkg:npm/crypto-js@3.3.0",
+      "pkg:npm/cypress@16.3.0",
+      "pkg:npm/diff@9.0.0",
+      "pkg:npm/errorhandler@1.5.2",
+      "pkg:npm/eslint@9.39.5",
+      "pkg:npm/ethers@6.17.0",
+      "pkg:npm/exif@0.6.0",
+      "pkg:npm/express-ipfilter@1.4.0",
+      "pkg:npm/express-jwt@0.1.3",
+      "pkg:npm/express-rate-limit@7.5.1",
+      "pkg:npm/express-robots-txt@0.5.0",
+      "pkg:npm/express-security.txt@2.0.0",
+      "pkg:npm/express@4.22.3",
+      "pkg:npm/feature-policy@0.6.0",
+      "pkg:npm/file-stream-rotator@1.0.0",
+      "pkg:npm/file-type@16.5.4",
+      "pkg:npm/finale-rest@1.2.2",
+      "pkg:npm/glob@10.5.0",
+      "pkg:npm/globals@17.14.0",
+      "pkg:npm/hashids@2.3.0",
+      "pkg:npm/hbs@4.4.0",
+      "pkg:npm/helmet@4.6.0",
+      "pkg:npm/html-entities@1.4.0",
+      "pkg:npm/i18n@0.11.1",
+      "pkg:npm/js-yaml@3.15.2",
+      "pkg:npm/jsonwebtoken@0.1.0",
+      "pkg:npm/jsonwebtoken@0.4.0",
+      "pkg:npm/jws@0.2.6",
+      "pkg:npm/libxml2-wasm@0.7.2",
+      "pkg:npm/lodash@2.4.2",
+      "pkg:npm/marsdb@0.6.11",
+      "pkg:npm/material-icons@1.13.14",
+      "pkg:npm/messageformat@2.3.0",
+      "pkg:npm/minimatch@9.0.9",
+      "pkg:npm/moment@2.0.0",
+      "pkg:npm/morgan@1.12.1",
+      "pkg:npm/multer@2.5.0",
+      "pkg:npm/neostandard@0.13.0",
+      "pkg:npm/notevil@1.3.3",
+      "pkg:npm/nyc@15.1.0",
+      "pkg:npm/otplib@13.6.0",
+      "pkg:npm/pdfkit@0.11.0",
+      "pkg:npm/prom-client@15.1.3",
+      "pkg:npm/proxy-agent@8.0.3",
+      "pkg:npm/pug@3.0.4",
+      "pkg:npm/sanitize-filename@1.6.5",
+      "pkg:npm/sanitize-html@1.4.2",
+      "pkg:npm/semver@7.8.6",
+      "pkg:npm/sequelize@6.37.8",
+      "pkg:npm/serve-index@1.9.2",
+      "pkg:npm/socket.io-client@4.8.4",
+      "pkg:npm/socket.io@4.8.4",
+      "pkg:npm/sqlite3@5.1.7",
+      "pkg:npm/supertest@7.3.2",
+      "pkg:npm/svg-captcha@1.4.0",
+      "pkg:npm/swagger-ui-express@5.0.1",
+      "pkg:npm/tar@6.2.1",
+      "pkg:npm/tsx@4.23.15",
+      "pkg:npm/typescript-eslint@8.74.0",
+      "pkg:npm/typescript@6.0.3",
+      "pkg:npm/unzipper@0.12.5",
+      "pkg:npm/uuid@8.3.2",
+      "pkg:npm/winston@3.19.0",
+      "pkg:npm/z85@0.0.2",
+      "pkg:npm/zod@4.6.7"
+    ],
+    "npm_manifest": "data/scans/juice-shop__juice-shop__20261124-050444/repo/package.json",
+    "npm_lock": "data/scans/juice-shop__juice-shop__20261124-050444/repo/package-lock.json",
+    "grype_report": "data/scans/juice-shop__juice-shop__20261124-050444/scanner_results/grype.json"
+  },
+  "messages": [
+    {
+      "turn": 1,
+      "from": "supervisor",
+      "to": [
+        "discovery",
+        "cicd"
+      ],
+      "text": "policy: ready=['discovery', 'cicd'], handoffs=[]"
+    },
+    {
+      "turn": 1,
+      "from": "discovery",
+      "to": "supervisor",
+      "text": "1137 components (105 direct), 2323 edges; SBOM CycloneDX 1.7: 1134 components; package-lock v3: 1249 packages"
+    },
+    {
+      "turn": 1,
+      "from": "cicd",
+      "to": "supervisor",
+      "text": "13 container/CI findings in 19 files"
+    },
+    {
+      "turn": 2,
+      "from": "supervisor",
+      "to": [
+        "vuln_intel",
+        "reputation",
+        "reachability"
+      ],
+      "text": "policy: ready=['vuln_intel', 'reputation', 'reachability'], handoffs=[]"
+    },
+    {
+      "turn": 2,
+      "from": "reputation",
+      "to": "supervisor",
+      "text": "registry metadata for 110 packages"
+    },
+    {
+      "turn": 2,
+      "from": "vuln_intel",
+      "to": "supervisor",
+      "text": "182 raw advisory records from 4/4 sources -> 54 unique vulnerabilities on 20 packages (tar@6.2.1=12, sanitize-html@1.4.2=10, jsonwebtoken@0.1.0=4, jsonwebtoken@0.4.0=4, lodash@2.4.2=4, moment@2.0.0=3)  [2.5s]"
+    },
+    {
+      "turn": 2,
+      "from": "reachability",
+      "to": "supervisor",
+      "text": "reachability: {'imported': 61, 'used_transitively': 656, 'not_imported': 420}  [2.6s]"
+    },
+    {
+      "turn": 3,
+      "from": "supervisor",
+      "to": [
+        "exploit_intel",
+        "anomaly"
+      ],
+      "text": "policy: ready=['exploit_intel', 'anomaly'], handoffs=[]"
+    },
+    {
+      "turn": 3,
+      "from": "exploit_intel",
+      "to": "supervisor",
+      "text": "48 CVEs checked: 0 in CISA KEV, EPSS for 47"
+    },
+    {
+      "turn": 3,
+      "from": "anomaly",
+      "to": "supervisor",
+      "text": "27 non-CVE findings: {'typosquat_suspect': 5, 'yanked_or_deprecated': 11, 'install_script': 6, 'suspicious_update': 5}  [1.3s]"
+    },
+    {
+      "turn": 3,
+      "from": "anomaly",
+      "to": "reachability",
+      "text": "handoff: suspicious packages found; check whether source code imports them"
+    },
+    {
+      "turn": 4,
+      "from": "supervisor",
+      "to": [
+        "reachability"
+      ],
+      "text": "policy: ready=['scoring'], handoffs=['reachability']"
+    },
+    {
+      "turn": 4,
+      "from": "reachability",
+      "to": "supervisor",
+      "text": "reachability: {'imported': 61, 'used_transitively': 656, 'not_imported': 420}; handoff check on 5 suspicious packages: imported by source = ['cors@2.8.6', 'cypress@16.3.0']"
+    },
+    {
+      "turn": 5,
+      "from": "supervisor",
+      "to": [
+        "scoring"
+      ],
+      "text": "policy: ready=['scoring'], handoffs=[]"
+    },
+    {
+      "turn": 5,
+      "from": "scoring",
+      "to": "supervisor",
+      "text": "scored 94 findings; top: CVE-2015-9235 on jsonwebtoken@0.1.0 = 57.4; CVE-2015-9235 on jsonwebtoken@0.4.0 = 57.4; CVE-2022-25887 on sanitize-html@1.4.2 = 45.7"
+    },
+    {
+      "turn": 6,
+      "from": "supervisor",
+      "to": [
+        "remediation"
+      ],
+      "text": "policy: ready=['remediation'], handoffs=[]"
+    },
+    {
+      "turn": 6,
+      "from": "remediation",
+      "to": "supervisor",
+      "text": "35 plans (strategy=minimal): upgrades [express-jwt 0.1.3->6.0.0, jsonwebtoken 0.1.0->9.0.0, jws 0.2.6->3.2.3, base64url 0.0.6->3.0.0, moment 2.0.0->2.31.0, file-type 16.5.4->21.3.2, jsonwebtoken 0.4.0->9.0.0, sanitize-html 1.4.2->2.18.1, lodash 2.4.2->4.18.1, uuid 8.3.2->13.0.1, tar 6.2.1->7.5.21, @tootallnate/once 1.1.2->2.0.1, @cyclonedx/cyclonedx-npm 4.2.1->6.0.0, glob 10.5.0->14.0.2, minimatch 9.0.9->11.0.1, messageformat 2.3.0->4.0.0]; other actions {'pin': 10, 'request_review': 4, 'remove': 5}; resolver: blocker: jwa needs base64url ~0.0.3; no clean match; blocker: jws needs jwa ^2.0.1; no clean match; jws -> 3.2.3 to satisfy jsonwebtoken ^3.2.2; blocker: express-jwt needs jsonwebtoken ^8.1.0; no clean match; blocker: file-type needs strtok3 ^10.3.4; no clean match; blocker: file-type needs token-types ^6.1.1; no clean match; blocker: i18n needs messageformat ^2.3.0; no clean match; blocker: sanitize-html needs htmlparser2 ^12.0.0; no clean match; blocker: sequelize needs uuid ^8.3.2; no clean match; blocker: tar needs chownr ^3.0.0; no clean match; blocker: tar needs minipass ^7.1.2; no clean match; blocker: tar needs minizlib ^3.1.0; no clean match; blocker: tar needs yallist ^5.0.0; no clean match; blocker: cacache needs tar ^6.0.2; no clean match; blocker: http-proxy-agent needs @tootallnate/once 1; no clean match; blocker: node-gyp needs tar ^6.1.2; no clean match; blocker: sqlite3 needs tar ^6.1.11; no clean match; blocker: minimatch needs brace-expansion ^5.0.12; no clean match; blocker: glob needs path-scurry ^3.0.0; no clean match; blocker: cacache needs glob ^10.2.2; no clean match; blocker: istanbul-lib-processinfo needs uuid ^8.3.2; no clean match; blocker: @cyclonedx/cyclonedx-npm needs commander ^14.0.0; no clean match; blocker: @cyclonedx/cyclonedx-npm needs normalize-package-data ^7.0.0 || ^8.0.0; no clean match; blocker: express-jwt needs jsonwebtoken ^8.1.0; no clean match; blocker: jsonwebtoken needs moment ~2.0.0; no clean match; blocker: jwa needs base64url ~0.0.3; no clean match; blocker: jws needs jwa ^1.4.2; no clean match; blocker: express-jwt needs jsonwebtoken ^8.1.0; no clean match; blocker: file-type needs strtok3 ^10.3.4; no clean match; blocker: file-type needs token-types ^6.1.1; no clean match; blocker: i18n needs messageformat ^2.3.0; no clean match; blocker: sanitize-html needs htmlparser2 ^12.0.0; no clean match; blocker: sequelize needs uuid ^8.3.2; no clean match; blocker: tar needs chownr ^3.0.0; no clean match; blocker: tar needs minipass ^7.1.2; no clean match; blocker: tar needs minizlib ^3.1.0; no clean match; blocker: tar needs yallist ^5.0.0; no clean match; blocker: cacache needs tar ^6.0.2; no clean match; blocker: http-proxy-agent needs @tootallnate/once 1; no clean match; blocker: node-gyp needs tar ^6.1.2; no clean match; blocker: sqlite3 needs tar ^6.1.11; no clean match; blocker: minimatch needs brace-expansion ^5.0.12; no clean match; blocker: glob needs path-scurry ^3.0.0; no clean match; blocker: cacache needs glob ^10.2.2; no clean match; blocker: istanbul-lib-processinfo needs uuid ^8.3.2; no clean match; blocker: @cyclonedx/cyclonedx-npm needs commander ^14.0.0; no clean match; blocker: @cyclonedx/cyclonedx-npm needs normalize-package-data ^7.0.0 || ^8.0.0; no clean match; blocker: express-jwt needs jsonwebtoken ^8.1.0; no clean match; blocker: jsonwebtoken needs moment ~2.0.0; no clean match"
+    },
+    {
+      "turn": 7,
+      "from": "supervisor",
+      "to": [
+        "explainer"
+      ],
+      "text": "policy: ready=['explainer'], handoffs=[]"
+    },
+    {
+      "turn": 7,
+      "from": "explainer",
+      "to": "supervisor",
+      "text": "12 template explanations (no LLM key configured; deterministic templates used)"
+    },
+    {
+      "turn": 8,
+      "from": "supervisor",
+      "to": [
+        "critic"
+      ],
+      "text": "policy: ready=['critic'], handoffs=[]"
+    },
+    {
+      "turn": 8,
+      "from": "critic",
+      "to": "supervisor",
+      "text": "verified 12 claims; 0 replaced by templates"
+    },
+    {
+      "turn": 9,
+      "from": "supervisor",
+      "to": "report",
+      "text": "finish: no agent has new inputs and no handoffs are open"
+    },
+    {
+      "turn": 9,
+      "from": "report",
+      "to": "supervisor",
+      "text": "wrote guardian-report.json/.md, guardian.sarif, guardian-sbom.cdx.json, dependency-graph.mmd to data/scans/juice-shop__juice-shop__20261124-050444/agents"
+    }
+  ],
+  "plan_log": [
+    {
+      "turn": 1,
+      "run": [
+        "discovery",
+        "cicd"
+      ],
+      "reason": "policy: ready=['discovery', 'cicd'], handoffs=[]"
+    },
+    {
+      "turn": 2,
+      "run": [
+        "vuln_intel",
+        "reputation",
+        "reachability"
+      ],
+      "reason": "policy: ready=['vuln_intel', 'reputation', 'reachability'], handoffs=[]"
+    },
+    {
+      "turn": 3,
+      "run": [
+        "exploit_intel",
+        "anomaly"
+      ],
+      "reason": "policy: ready=['exploit_intel', 'anomaly'], handoffs=[]"
+    },
+    {
+      "turn": 4,
+      "run": [
+        "reachability"
+      ],
+      "reason": "policy: ready=['scoring'], handoffs=['reachability']"
+    },
+    {
+      "turn": 5,
+      "run": [
+        "scoring"
+      ],
+      "reason": "policy: ready=['scoring'], handoffs=[]"
+    },
+    {
+      "turn": 6,
+      "run": [
+        "remediation"
+      ],
+      "reason": "policy: ready=['remediation'], handoffs=[]"
+    },
+    {
+      "turn": 7,
+      "run": [
+        "explainer"
+      ],
+      "reason": "policy: ready=['explainer'], handoffs=[]"
+    },
+    {
+      "turn": 8,
+      "run": [
+        "critic"
+      ],
+      "reason": "policy: ready=['critic'], handoffs=[]"
+    }
+  ],
+  "critic": {
+    "accepted": [
+      {
+        "finding_id": "VULN::CVE-2015-9235::pkg:npm/jsonwebtoken@0.1.0",
+        "statement": "CVE-2015-9235 affects pkg:npm/jsonwebtoken@0.1.0; via app -> pkg:npm/jsonwebtoken@0.1.0; upgrade to 9.0.0.",
+        "evidence_ids": [
+          "EV-grype-b8372ef527a9bcdd",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-2917e3709dc4344f"
+        ],
+        "facts": {
+          "cvss": 9.8,
+          "kev": false,
+          "target_version": "9.0.0"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2015-9235::pkg:npm/jsonwebtoken@0.4.0",
+        "statement": "CVE-2015-9235 affects pkg:npm/jsonwebtoken@0.4.0; via app -> pkg:npm/jsonwebtoken@0.4.0; upgrade to 9.0.0.",
+        "evidence_ids": [
+          "EV-grype-6a9376bfd822ec70",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-2917e3709dc4344f"
+        ],
+        "facts": {
+          "cvss": 9.8,
+          "kev": false,
+          "target_version": "9.0.0"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2022-25887::pkg:npm/sanitize-html@1.4.2",
+        "statement": "CVE-2022-25887 affects pkg:npm/sanitize-html@1.4.2; via app -> pkg:npm/sanitize-html@1.4.2; upgrade to 2.18.1.",
+        "evidence_ids": [
+          "EV-grype-e6817ae5f7c17eba",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-ecf6b7e2965dce36"
+        ],
+        "facts": {
+          "cvss": 7.5,
+          "kev": false,
+          "target_version": "2.18.1"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2020-15084::pkg:npm/express-jwt@0.1.3",
+        "statement": "CVE-2020-15084 affects pkg:npm/express-jwt@0.1.3; via app -> pkg:npm/express-jwt@0.1.3; upgrade to 6.0.0.",
+        "evidence_ids": [
+          "EV-grype-b2a5241757ec44f8",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-ccb507a9a6c64c3d"
+        ],
+        "facts": {
+          "cvss": 7.7,
+          "kev": false,
+          "target_version": "6.0.0"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2019-10744::pkg:npm/lodash@2.4.2",
+        "statement": "CVE-2019-10744 affects pkg:npm/lodash@2.4.2; via app -> pkg:npm/finale-rest@1.2.2 -> pkg:npm/lodash@2.4.2; upgrade to 4.18.1.",
+        "evidence_ids": [
+          "EV-grype-59aa595ffd262d2d",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-dc0bb95ac8d9c951"
+        ],
+        "facts": {
+          "cvss": 9.1,
+          "kev": false,
+          "target_version": "4.18.1"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2022-23539::pkg:npm/jsonwebtoken@0.1.0",
+        "statement": "CVE-2022-23539 affects pkg:npm/jsonwebtoken@0.1.0; via app -> pkg:npm/jsonwebtoken@0.1.0; upgrade to 9.0.0.",
+        "evidence_ids": [
+          "EV-grype-763b03c789d33318",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-e72bb9b159a435c4"
+        ],
+        "facts": {
+          "cvss": 8.1,
+          "kev": false,
+          "target_version": "9.0.0"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2022-23539::pkg:npm/jsonwebtoken@0.4.0",
+        "statement": "CVE-2022-23539 affects pkg:npm/jsonwebtoken@0.4.0; via app -> pkg:npm/jsonwebtoken@0.4.0; upgrade to 9.0.0.",
+        "evidence_ids": [
+          "EV-grype-34beb6ad5c898821",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-e72bb9b159a435c4"
+        ],
+        "facts": {
+          "cvss": 8.1,
+          "kev": false,
+          "target_version": "9.0.0"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2022-24785::pkg:npm/moment@2.0.0",
+        "statement": "CVE-2022-24785 affects pkg:npm/moment@2.0.0; via app -> pkg:npm/jsonwebtoken@0.1.0 -> pkg:npm/moment@2.0.0; upgrade to 2.31.0.",
+        "evidence_ids": [
+          "EV-grype-e83ff1a7097171f0",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-a4eaf6331a0016ac"
+        ],
+        "facts": {
+          "cvss": 7.5,
+          "kev": false,
+          "target_version": "2.31.0"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2017-16016::pkg:npm/sanitize-html@1.4.2",
+        "statement": "CVE-2017-16016 affects pkg:npm/sanitize-html@1.4.2; via app -> pkg:npm/sanitize-html@1.4.2; upgrade to 2.18.1.",
+        "evidence_ids": [
+          "EV-grype-c3da12132bc16549",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-e96d2999b45c590a"
+        ],
+        "facts": {
+          "cvss": 6.1,
+          "kev": false,
+          "target_version": "2.18.1"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2021-23337::pkg:npm/lodash@2.4.2",
+        "statement": "CVE-2021-23337 affects pkg:npm/lodash@2.4.2; via app -> pkg:npm/finale-rest@1.2.2 -> pkg:npm/lodash@2.4.2; upgrade to 4.18.1.",
+        "evidence_ids": [
+          "EV-grype-bb1fbfe30a5defb6",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-1cee82c254d58a08"
+        ],
+        "facts": {
+          "cvss": 7.2,
+          "kev": false,
+          "target_version": "4.18.1"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2017-18214::pkg:npm/moment@2.0.0",
+        "statement": "CVE-2017-18214 affects pkg:npm/moment@2.0.0; via app -> pkg:npm/jsonwebtoken@0.1.0 -> pkg:npm/moment@2.0.0; upgrade to 2.31.0.",
+        "evidence_ids": [
+          "EV-grype-9c31adedc7399bb7",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-bd4c008b6258c450"
+        ],
+        "facts": {
+          "cvss": 7.5,
+          "kev": false,
+          "target_version": "2.31.0"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2021-26539::pkg:npm/sanitize-html@1.4.2",
+        "statement": "CVE-2021-26539 affects pkg:npm/sanitize-html@1.4.2; via app -> pkg:npm/sanitize-html@1.4.2; upgrade to 2.18.1.",
+        "evidence_ids": [
+          "EV-grype-b2713e48f0c413cb",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-f36486418b11427b"
+        ],
+        "facts": {
+          "cvss": 5.3,
+          "kev": false,
+          "target_version": "2.18.1"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      }
+    ],
+    "rejected": [],
+    "pass": true,
+    "final": true
+  }
+}

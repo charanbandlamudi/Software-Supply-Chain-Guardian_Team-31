@@ -40,19 +40,19 @@ with st.sidebar:
     for m in scans[:25]:
         label, _ = STATUS_BADGE.get(m["status"], (m["status"], "gray"))
         if st.button(f"{m['repo_name']}  \n{m['started_at'][:16].replace('T', ' ')} UTC · {label}",
-                     key=f"open-{m['scan_id']}", use_container_width=True):
+                     key=f"open-{m['scan_id']}", width="stretch"):
             st.session_state.scan_id = m["scan_id"]
 
 # ---------------------------------------------------------------- header + input
 st.markdown("## 🛡️ SOFTWARE SUPPLY CHAIN GUARDIAN")
-st.caption("Clone → SBOM (cdxgen) → scan (Grype + OSV-Scanner + Trivy) → interactive dependency graph. "
+st.caption("Clone → SBOM (cdxgen) → scan (Grype + OSV-Scanner + Trivy) → interactive dependency graph → multi-agent investigation. "
            "The target repository is treated as untrusted: none of its code or scripts are executed.")
 
 with st.form("scan"):
     c1, c2 = st.columns([5, 1])
     target = c1.text_input("GitHub repository URL", value="https://github.com/juice-shop/juice-shop",
                            label_visibility="collapsed", placeholder="https://github.com/owner/repo")
-    go = c2.form_submit_button("Run scan", type="primary", use_container_width=True)
+    go = c2.form_submit_button("Run scan", type="primary", width="stretch")
 
 if go:
     try:
@@ -112,8 +112,8 @@ if stats:
                                       ("Medium", sev.get("MEDIUM", 0)), ("Low", sev.get("LOW", 0))]):
         col.metric(lbl, val)
 
-tab_graph, tab_repo, tab_steps, tab_files = st.tabs(
-    ["Dependency graph", "Misconfigurations & secrets", "Scan steps & tools", "Artifacts"])
+tab_graph, tab_agents, tab_repo, tab_steps, tab_files = st.tabs(
+    ["Dependency graph", "Agent investigation", "Misconfigurations & secrets", "Scan steps & tools", "Artifacts"])
 
 with tab_graph:
     html = current["artifacts"].get("graph_html")
@@ -122,6 +122,69 @@ with tab_graph:
         st.caption("Click a node to focus its path and dependencies · `/` to search · `Esc` to clear.")
     else:
         st.error("No graph was produced for this scan.")
+
+with tab_agents:
+    adir = Path(current["artifacts"].get("agents_dir") or Path(current["scan_dir"]) / "agents")
+    inv_p, rep_p = adir / "investigation.json", adir / "guardian-report.json"
+    if not inv_p.exists():
+        st.info("The multi-agent investigation has not run for this scan "
+                f"({current['steps'].get('agents', {}).get('detail') or 'scan predates the agent step'}).")
+    else:
+        inv = json.loads(inv_p.read_text())
+        rep = json.loads(rep_p.read_text()) if rep_p.exists() else {}
+        sm = inv["summary"]
+        cols = st.columns(6)
+        for col, (lbl, val) in zip(cols, [("Agents", len(sm["agents"])), ("Supervisor turns", sm["turns"]),
+                                          ("Handoffs", sm["handoffs"]), ("Findings", sm["findings"]),
+                                          ("Remediation plans", sm["remediation_plans"]),
+                                          ("Claims verified", f"{sm['critic']['accepted']}/"
+                                                              f"{sm['critic']['accepted'] + sm['critic']['rejected']}")]):
+            col.metric(lbl, val)
+        st.caption(f"LLM: {', '.join(sm['llm']) if sm['llm'] else 'none configured — explanations are deterministic templates'}"
+                   f" · ran in {sm['seconds']}s · registry metadata checked for {sm['reputation_focus']} packages "
+                   "(direct dependencies + scanner-flagged)")
+
+        st.markdown("#### Agent conversation")
+        st.caption("The supervisor picks which agents run each turn from data readiness and the handoff requests "
+                   "agents send each other. Every decision is logged.")
+        st.dataframe([{"Turn": m.get("turn"), "From": m.get("from"),
+                       "To": ", ".join(m["to"]) if isinstance(m.get("to"), list) else m.get("to"),
+                       "Message": m.get("text")} for m in inv["messages"]],
+                     width="stretch", hide_index=True, height=420)
+
+        fs = rep.get("findings", [])
+        st.markdown(f"#### Prioritised findings ({len(fs)})")
+        st.caption("Score, confidence and SSVC are deterministic and explainable; reachability comes from source "
+                   "import analysis. Non-CVE types (typosquats, install scripts, unpinned images…) come from the "
+                   "anomaly and CI/CD agents.")
+        st.dataframe([{"Score": f.get("score"), "Type": f.get("type"), "ID": f.get("canonical_id"),
+                       "Component": (f.get("component_purl") or "").replace("pkg:", ""),
+                       "SSVC": (f.get("ssvc") or {}).get("decision"), "Confidence": f.get("confidence"),
+                       "Reachability": f.get("reachability_state"), "KEV": f.get("kev"),
+                       "EPSS": (f.get("epss") or {}).get("epss") if isinstance(f.get("epss"), dict) else f.get("epss"),
+                       "Status": f.get("resolution")} for f in fs], width="stretch", hide_index=True)
+
+        explained = [(f, a) for f in fs for a in (f.get("ai_inferences") or [])]
+        st.markdown(f"#### Evidence-checked explanations ({len(explained)})")
+        st.caption("Each claim cites evidence IDs and passed the critic agent (no invented IDs, scores or versions). "
+                   "'template' = deterministic text because no LLM key is set; 'inference' = LLM-written.")
+        for f, a in explained[:25]:
+            with st.expander(f"[{a.get('kind')}] {f.get('canonical_id')} · {(f.get('component_purl') or '').replace('pkg:', '')}"):
+                st.write(a.get("statement"))
+                st.caption(f"Next step: {a.get('next_step')} · evidence: {', '.join(a.get('evidence_ids', [])[:3])}")
+
+        plans = rep.get("remediation_plans", {})
+        if plans:
+            st.markdown(f"#### Proposed remediation ({len(plans)})")
+            st.caption("Proposed only — nothing is changed. The human approval gate and sandbox validation run "
+                       "in the CLI (`guardian_v2/run_guardian.py`), not in this unattended web run.")
+            st.dataframe([{"Component": (p.get("component") or "").replace("pkg:", ""), "Action": p.get("action"),
+                           "Target": p.get("target_version"), "Status": p.get("status"),
+                           "Rationale": p.get("rationale")} for p in plans.values()],
+                         width="stretch", hide_index=True)
+
+        with st.expander("Source coverage"):
+            st.json(sm["coverage"])
 
 with tab_repo:
     gj = current["artifacts"].get("graph_json")
@@ -140,7 +203,7 @@ with tab_repo:
         if mis:
             st.dataframe([{"Severity": m["severity"], "Check": m["id"], "Title": m["title"],
                            "File": m["file"], "Line": m["start_line"], "Message": m["message"],
-                           "Fix": m["resolution"]} for m in mis], use_container_width=True, hide_index=True)
+                           "Fix": m["resolution"]} for m in mis], width="stretch", hide_index=True)
         else:
             st.caption("No failed checks reported.")
         st.markdown("#### Secrets")
@@ -149,7 +212,7 @@ with tab_repo:
         if sec:
             st.dataframe([{"Severity": x["severity"], "Rule": x["rule_id"], "Title": x["title"],
                            "File": x["file"], "Line": x["start_line"], "Value": "•••• redacted"}
-                          for x in sec], use_container_width=True, hide_index=True)
+                          for x in sec], width="stretch", hide_index=True)
         else:
             st.caption("No secrets reported.")
 
@@ -163,6 +226,11 @@ with tab_files:
     names = {"sbom": "CycloneDX SBOM (bom.json)", "grype": "Grype raw results (grype.json)",
              "osv": "OSV-Scanner raw results (osv.json)", "trivy": "Trivy raw results (trivy.json)", "graph_json": "Graph + evidence (graph.json)",
              "graph_html": "Interactive graph (dependency_graph.html)"}
+    adir = Path(current["scan_dir"]) / "agents"
+    for fname, title in (("guardian-report.md", "Agent report (Markdown)"), ("guardian-report.json", "Agent report (JSON)"),
+                         ("guardian.sarif", "Agent findings (SARIF)"), ("investigation.json", "Agent conversation (investigation.json)")):
+        if (adir / fname).exists():
+            st.download_button(f"⬇️ {title}", (adir / fname).read_bytes(), file_name=fname, key=f"dl-ag-{fname}")
     for key, title in names.items():
         p = current["artifacts"].get(key)
         if p and Path(p).exists():

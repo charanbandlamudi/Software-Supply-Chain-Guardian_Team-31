@@ -189,12 +189,20 @@ DAY1_AGENTS = {"discovery", "cicd", "vuln_intel", "reputation", "reachability", 
                "anomaly", "scoring"}
 
 
+# Agents that need a human or a container runtime; left out of unattended runs.
+INTERACTIVE_AGENTS = {"approval", "validation"}
+
+
 def build_orchestrator(context: dict | None = None, llm_call=None, providers=(), planner_llm=None,
                        checkpointer=None, stage: str = "full"):
-    """stage="day1": Discover + Detect + initial risk level, then report (no remediation)."""
+    """stage="day1": Discover + Detect + initial risk level, then report (no remediation).
+    stage="analysis": every agent except the human approval gate and sandbox validation,
+    so the run never pauses (used by the web pipeline; remediation plans stay "proposed")."""
     catalog = build_catalog(context or {"exposure": "internet", "mission": "medium"}, llm_call, providers)
     if stage == "day1":
         catalog = [a for a in catalog if a.name in DAY1_AGENTS]
+    elif stage == "analysis":
+        catalog = [a for a in catalog if a.name not in INTERACTIVE_AGENTS]
     g = StateGraph(OrchestratorState)
     g.add_node("supervisor", make_supervisor(catalog, planner_llm),
                destinations=tuple(a.name for a in catalog) + ("report",))

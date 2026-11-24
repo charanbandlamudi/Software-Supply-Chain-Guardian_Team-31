@@ -42,7 +42,10 @@ def _npm(c):
 
 def run(state: dict, task: dict) -> AgentResult:
     comps = state.get("components", {})
-    focus = set(task.get("focus", [])) or set(comps)
+    # Optional inputs["reputation_focus"] limits the default scope (full packuments for
+    # 1000+ packages are too heavy on slow links); explicit handoff focus always wins.
+    scope = state.get("inputs", {}).get("reputation_focus")
+    focus = set(task.get("focus", [])) or (set(scope) & set(comps) if scope else set(comps))
     out, evidence, errors = {}, {}, []
     def one(c):
         return (_pypi if c["ecosystem"] == "pypi" else _npm)(c)

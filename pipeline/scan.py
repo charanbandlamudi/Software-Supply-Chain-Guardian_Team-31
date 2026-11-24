@@ -6,6 +6,7 @@
     -> CycloneDX SBOM (cdxgen, --no-install-deps)
     -> Grype (on the SBOM) + OSV-Scanner + Trivy (on the repo), in parallel
     -> dependency graph (graph.json + interactive HTML)
+    -> multi-agent investigation (guardian_v2, unattended analysis stage)
 
 Every scan gets its own folder under data/scans/ with a scan.json that records
 tool versions, the Grype DB build date, per-step status and timings. The target
@@ -32,7 +33,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SCANS_DIR = ROOT / "data" / "scans"
 GITHUB_RE = re.compile(r"^https://github\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+?)(?:\.git)?/?$")
 LOCKFILES = ("package-lock.json", "npm-shrinkwrap.json", "yarn.lock", "pnpm-lock.yaml")
-REQUIRED = ("clone", "sbom", "grype", "osv", "trivy", "graph")  # any failure here => scan not complete
+REQUIRED = ("clone", "sbom", "grype", "osv", "trivy", "graph", "agents")  # any failure here => scan not complete
 
 STEPS = [
     ("clone", "Clone repository"),
@@ -42,6 +43,7 @@ STEPS = [
     ("osv", "Scan repository (OSV-Scanner)"),
     ("trivy", "Scan repository (Trivy)"),
     ("graph", "Build dependency graph"),
+    ("agents", "Agent investigation (guardian_v2)"),
 ]
 
 
@@ -363,6 +365,27 @@ def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) ->
         step("graph", "ok", f"{meta['stats']['nodes']} nodes, {meta['stats']['findings']} findings", t0)
     except Exception as e:
         return fail("graph", f"{type(e).__name__}: {e}", t0)
+
+    # 6. multi-agent investigation (guardian_v2 supervisor + specialist agents) ----------
+    t0 = time.monotonic(); step("agents", "running", "starting supervisor")
+    try:
+        from pipeline.agents import run_agents
+
+        def on_message(m: dict) -> None:
+            to = ",".join(m["to"]) if isinstance(m.get("to"), list) else m.get("to")
+            meta["steps"]["agents"]["detail"] = f"turn {m.get('turn')}: {m.get('from')} → {to}"
+            save()
+
+        ag = run_agents(scan_dir, repo, on_message=on_message)
+        meta["agents"] = ag
+        meta["artifacts"]["agents_dir"] = str(scan_dir / "agents")
+        failed_cov = [k for k, v in ag["coverage"].items() if str(v).startswith("failed")]
+        step("agents", "warn" if failed_cov else "ok",
+             f"{ag['turns']} turns, {ag['findings']} findings, {ag['handoffs']} handoffs, "
+             f"LLM: {', '.join(ag['llm']) if ag['llm'] else 'none (templates)'}"
+             + (f"; failed: {', '.join(failed_cov)}" if failed_cov else ""), t0)
+    except Exception as e:
+        step("agents", "failed", f"{type(e).__name__}: {str(e)[:300]}", t0)
 
     # A scan is only "complete" if every required step succeeded.
     ok = all(meta["steps"][k]["status"] == "ok" for k in REQUIRED)

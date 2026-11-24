@@ -2,3 +2,8 @@
 networkx==3.7      # dependency graph + ForceAtlas2 layout
 pyvis==0.3.2       # interactive HTML graph (vis-network)
 streamlit==1.67.0  # web UI
+# multi-agent investigation (guardian_v2)
+langgraph==1.2.24  # supervisor + agent graph
+univers==32.0.1    # ecosystem-aware version ranges
+packaging==26.3
+cvss==3.6          # CVSS vector -> base score

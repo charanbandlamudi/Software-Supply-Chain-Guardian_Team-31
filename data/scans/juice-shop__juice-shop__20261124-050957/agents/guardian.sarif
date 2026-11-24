@@ -1,0 +1,1958 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Supply Chain Guardian",
+          "version": "2.0",
+          "rules": [
+            {
+              "id": "install_script"
+            },
+            {
+              "id": "suspicious_update"
+            },
+            {
+              "id": "typosquat_suspect"
+            },
+            {
+              "id": "unpinned_action"
+            },
+            {
+              "id": "unpinned_base_image"
+            },
+            {
+              "id": "vulnerability"
+            },
+            {
+              "id": "yanked_or_deprecated"
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2015-9235 in pkg:npm/jsonwebtoken@0.1.0: Verification Bypass in jsonwebtoken"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/jsonwebtoken@0.1.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 57.4,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2015-9235 in pkg:npm/jsonwebtoken@0.4.0: Verification Bypass in jsonwebtoken"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/jsonwebtoken@0.4.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 57.4,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2022-25887 in pkg:npm/sanitize-html@1.4.2: Sanitize-html Vulnerable To REDoS Attacks"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/sanitize-html@1.4.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 45.7,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2020-15084 in pkg:npm/express-jwt@0.1.3: Authorization bypass in express-jwt"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/express-jwt@0.1.3"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 44.6,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2019-10744 in pkg:npm/lodash@2.4.2: Prototype Pollution in lodash"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/lodash@2.4.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 44.5,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2022-23539 in pkg:npm/jsonwebtoken@0.1.0: jsonwebtoken unrestricted key type could lead to legacy keys usage "
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/jsonwebtoken@0.1.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 42.3,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2022-23539 in pkg:npm/jsonwebtoken@0.4.0: jsonwebtoken unrestricted key type could lead to legacy keys usage "
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/jsonwebtoken@0.4.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 42.3,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2022-24785 in pkg:npm/moment@2.0.0: Path Traversal: 'dir/../../filename' in moment.locale"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/moment@2.0.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 40.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2017-16016 in pkg:npm/sanitize-html@1.4.2: Cross-Site Scripting in sanitize-html"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/sanitize-html@1.4.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 39.8,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2021-23337 in pkg:npm/lodash@2.4.2: Command Injection in lodash"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/lodash@2.4.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 39.8,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2017-18214 in pkg:npm/moment@2.0.0: Regular Expression Denial of Service in moment"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/moment@2.0.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 39.5,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2021-26539 in pkg:npm/sanitize-html@1.4.2: Improper Input Validation in sanitize-html"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/sanitize-html@1.4.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 38.7,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2021-26540 in pkg:npm/sanitize-html@1.4.2: Improper Input Validation in sanitize-html"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/sanitize-html@1.4.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 38.3,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "typosquat_suspect",
+          "level": "warning",
+          "message": {
+            "text": "TYPOSQUAT_SUSPECT in pkg:npm/cypress@16.3.0: 'cypress' is within edit distance 2 of popular package 'express'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/cypress@16.3.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 38.0,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2016-4055 in pkg:npm/moment@2.0.0: Regular Expression Denial of Service in moment"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/moment@2.0.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 37.5,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2016-1000237 in pkg:npm/sanitize-html@1.4.2: Cross-Site Scripting in sanitize-html"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/sanitize-html@1.4.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 37.5,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2022-23540 in pkg:npm/jsonwebtoken@0.1.0: jsonwebtoken vulnerable to signature validation bypass due to insecure default algorithm in jwt.verify()"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/jsonwebtoken@0.1.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.7,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2022-23540 in pkg:npm/jsonwebtoken@0.4.0: jsonwebtoken vulnerable to signature validation bypass due to insecure default algorithm in jwt.verify()"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/jsonwebtoken@0.4.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.7,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2018-3721 in pkg:npm/lodash@2.4.2: Prototype Pollution in lodash"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/lodash@2.4.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 35.8,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2024-21501 in pkg:npm/sanitize-html@1.4.2: sanitize-html Information Exposure vulnerability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/sanitize-html@1.4.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 35.7,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2021-23771 in pkg:npm/notevil@1.3.3: Sandbox escape in notevil and argencoders-notevil"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/notevil@1.3.3"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 34.9,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "suspicious_update",
+          "level": "warning",
+          "message": {
+            "text": "SUSPICIOUS_UPDATE in pkg:npm/cypress@16.3.0: cypress@16.3.0 was published 13.4 days ago (< 14-day cooling-off window)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/cypress@16.3.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 34.0,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2022-23541 in pkg:npm/jsonwebtoken@0.1.0: jsonwebtoken's insecure implementation of key retrieval function could lead to Forgeable Public/Private Tokens from RSA to HMAC"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/jsonwebtoken@0.1.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 33.4,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2022-23541 in pkg:npm/jsonwebtoken@0.4.0: jsonwebtoken's insecure implementation of key retrieval function could lead to Forgeable Public/Private Tokens from RSA to HMAC"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/jsonwebtoken@0.4.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 33.4,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2016-1000223 in pkg:npm/jws@0.2.6: Forgeable Public/Private Tokens in jws"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/jws@0.2.6"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 33.2,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2018-16487 in pkg:npm/lodash@2.4.2: Prototype Pollution in lodash"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/lodash@2.4.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 31.9,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2026-63670 in pkg:npm/sanitize-html@1.4.2: ApostropheCMS: Mutation-XSS / allowedTags bypass via literal `</textarea/>` solidus close"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/sanitize-html@1.4.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 31.7,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2026-41907 in pkg:npm/uuid@8.3.2: uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/uuid@8.3.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 31.7,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2025-65945 in pkg:npm/jws@0.2.6: auth0/node-jws Improperly Verifies HMAC Signature"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/jws@0.2.6"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 31.6,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2026-113654 in pkg:npm/sanitize-html@1.4.2: ApostropheCMS sanitize-html: nonTextTags discard region ends early on an implied close, letting <noscript> content render"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/sanitize-html@1.4.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 31.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "warning",
+          "message": {
+            "text": "CVE-2019-25225 in pkg:npm/sanitize-html@1.4.2: sanitize-html is vulnerable to XSS through incomprehensive sanitization"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/sanitize-html@1.4.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.7,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "install_script",
+          "level": "warning",
+          "message": {
+            "text": "INSTALL_SCRIPT in pkg:npm/cypress@16.3.0: cypress runs code at install time."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/cypress@16.3.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-31808 in pkg:npm/file-type@16.5.4: file-type affected by infinite loop in ASF parser on malformed input with zero-size sub-header"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/file-type@16.5.4"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 29.7,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "typosquat_suspect",
+          "level": "note",
+          "message": {
+            "text": "TYPOSQUAT_SUSPECT in pkg:npm/cors@2.8.6: 'cors' is within edit distance 2 of popular package 'colors'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/cors@2.8.6"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 28.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "typosquat_suspect",
+          "level": "note",
+          "message": {
+            "text": "TYPOSQUAT_SUSPECT in pkg:npm/color@5.0.3: 'color' is within edit distance 2 of popular package 'colors'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/color@5.0.3"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 28.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "typosquat_suspect",
+          "level": "note",
+          "message": {
+            "text": "TYPOSQUAT_SUSPECT in pkg:npm/commondir@1.0.1: 'commondir' is within edit distance 2 of popular package 'commander'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/commondir@1.0.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 28.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "typosquat_suspect",
+          "level": "note",
+          "message": {
+            "text": "TYPOSQUAT_SUSPECT in pkg:npm/esquery@1.7.0: 'esquery' is within edit distance 2 of popular package 'jquery'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/esquery@1.7.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 28.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-113661 in pkg:npm/sanitize-html@1.4.2: ApostropheCMS: Incomplete CVE-2026-53606: `meta http-equiv=refresh` `content` still ships `javascript:` / `data:` URLs"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/sanitize-html@1.4.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 27.7,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "suspicious_update",
+          "level": "note",
+          "message": {
+            "text": "SUSPICIOUS_UPDATE in pkg:npm/%40ai-sdk/openai-compatible@2.0.94: @ai-sdk/openai-compatible@2.0.94 was published 6.4 days ago (< 14-day cooling-off window)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/%40ai-sdk/openai-compatible@2.0.94"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 24.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "suspicious_update",
+          "level": "note",
+          "message": {
+            "text": "SUSPICIOUS_UPDATE in pkg:npm/ai@6.0.336: ai@6.0.336 was published 1.3 days ago (< 14-day cooling-off window)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/ai@6.0.336"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 24.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "suspicious_update",
+          "level": "note",
+          "message": {
+            "text": "SUSPICIOUS_UPDATE in pkg:npm/proxy-agent@8.0.3: proxy-agent@8.0.3 was published 7.4 days ago (< 14-day cooling-off window)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/proxy-agent@8.0.3"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 24.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "suspicious_update",
+          "level": "note",
+          "message": {
+            "text": "SUSPICIOUS_UPDATE in pkg:npm/typescript-eslint@8.74.0: typescript-eslint@8.74.0 was published 0.5 days ago (< 14-day cooling-off window)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/typescript-eslint@8.74.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 24.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_base_image",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/Dockerfile: Base image node:24 is referenced by tag, not digest; the tag can be re-pointed."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/Dockerfile"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 22.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_base_image",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/Dockerfile: Base image gcr.io/distroless/nodejs24-debian13 is referenced by tag, not digest; the tag can be re-pointed."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/Dockerfile"
+                },
+                "region": {
+                  "startLine": 22
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 22.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_base_image",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/infrastructure/Dockerfile: Base image node:20.19.2-bookworm-slim is referenced by tag, not digest; the tag can be re-pointed."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/infrastructure/Dockerfile"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 22.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_base_image",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/infrastructure/Dockerfile: Base image node:20.19.2-bookworm is referenced by tag, not digest; the tag can be re-pointed."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/infrastructure/Dockerfile"
+                },
+                "region": {
+                  "startLine": 6
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 22.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_base_image",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/infrastructure/Dockerfile: Base image base is referenced by tag, not digest; the tag can be re-pointed."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/infrastructure/Dockerfile"
+                },
+                "region": {
+                  "startLine": 14
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 22.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_base_image",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/test/smoke/Dockerfile: Base image alpine is referenced by tag, not digest; the tag can be re-pointed."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/test/smoke/Dockerfile"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 22.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_action",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/.github/workflows/ci.yml: Action coverallsapp/github-action@v2 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/.github/workflows/ci.yml"
+                },
+                "region": {
+                  "startLine": 198
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_action",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/.github/workflows/codeql-analysis.yml: Action github/codeql-action/init@v3 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/.github/workflows/codeql-analysis.yml"
+                },
+                "region": {
+                  "startLine": 23
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_action",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/.github/workflows/codeql-analysis.yml: Action github/codeql-action/autobuild@v3 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/.github/workflows/codeql-analysis.yml"
+                },
+                "region": {
+                  "startLine": 34
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_action",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/.github/workflows/codeql-analysis.yml: Action github/codeql-action/analyze@v3 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/.github/workflows/codeql-analysis.yml"
+                },
+                "region": {
+                  "startLine": 36
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_action",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/.github/workflows/image_actions.yml: Action actions/checkout@v6 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/.github/workflows/image_actions.yml"
+                },
+                "region": {
+                  "startLine": 30
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_action",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/.github/workflows/image_actions.yml: Action calibreapp/image-actions@main is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/.github/workflows/image_actions.yml"
+                },
+                "region": {
+                  "startLine": 33
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_action",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/.github/workflows/image_actions.yml: Action peter-evans/create-pull-request@v8 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050957/repo/.github/workflows/image_actions.yml"
+                },
+                "region": {
+                  "startLine": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "install_script",
+          "level": "note",
+          "message": {
+            "text": "INSTALL_SCRIPT in pkg:npm/sqlite3@5.1.7: sqlite3 runs code at install time."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/sqlite3@5.1.7"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "install_script",
+          "level": "note",
+          "message": {
+            "text": "INSTALL_SCRIPT in pkg:npm/%40scarf/scarf@1.4.0: @scarf/scarf runs code at install time."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/%40scarf/scarf@1.4.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "install_script",
+          "level": "note",
+          "message": {
+            "text": "INSTALL_SCRIPT in pkg:npm/libxmljs2@0.37.0: libxmljs2 runs code at install time."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/libxmljs2@0.37.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "install_script",
+          "level": "note",
+          "message": {
+            "text": "INSTALL_SCRIPT in pkg:npm/esbuild@0.28.2: esbuild runs code at install time."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/esbuild@0.28.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "install_script",
+          "level": "note",
+          "message": {
+            "text": "INSTALL_SCRIPT in pkg:npm/fsevents@2.3.3: fsevents runs code at install time."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/fsevents@2.3.3"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "GHSA-rvg8-pwq2-xj7q in pkg:npm/base64url@0.0.6: Out-of-bounds Read in base64url"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/base64url@0.0.6"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 19.4,
+            "confidence": "Low"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "GHSA-5mrr-rgp6-x4gr in pkg:npm/marsdb@0.6.11: Command Injection in marsdb"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/marsdb@0.6.11"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 18.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2023-46233 in pkg:npm/crypto-js@3.3.0: crypto-js PBKDF2 1,000 times weaker than specified in 1993 and 1.3M times weaker than current standard"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/crypto-js@3.3.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 17.6,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-71851 in pkg:npm/crypto-js@3.3.0: crypto-js: Insufficient Entropy in Cryptographic Secret Generation via Vulnerable CryptoJS Dependency Chain"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/crypto-js@3.3.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 17.3,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-24842 in pkg:npm/tar@6.2.1: node-tar Vulnerable to Arbitrary File Creation/Overwrite via Hardlink Path Traversal"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/tar@6.2.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 16.6,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-23745 in pkg:npm/tar@6.2.1: node-tar is Vulnerable to Arbitrary File Overwrite and Symlink Poisoning via Insufficient Path Sanitization"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/tar@6.2.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 16.5,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-29786 in pkg:npm/tar@6.2.1: tar has Hardlink Path Traversal via Drive-Relative Linkpath"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/tar@6.2.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 16.3,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-59873 in pkg:npm/tar@6.2.1: node-tar: Decompression/parse DoS via unlimited input"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/tar@6.2.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 15.7,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-73566 in pkg:npm/tar@6.2.1: node-tar: Uncontrolled recursion in mapHas/filesFilter allows uncatchable stack-overflow DoS via crafted long-path tar with member selection"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/tar@6.2.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 15.6,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-23950 in pkg:npm/tar@6.2.1: Race Condition in node-tar Path Reservations via Unicode Ligature Collisions on macOS APFS"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/tar@6.2.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 15.5,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-59874 in pkg:npm/tar@6.2.1: node-tar: Negative tar entry size causes infinite loop in archive replace"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/tar@6.2.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 15.2,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-31802 in pkg:npm/tar@6.2.1: node-tar Symlink Path Traversal via Drive-Relative Linkpath"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/tar@6.2.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 15.0,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2025-57349 in pkg:npm/messageformat@2.3.0: messageformat has a prototype pollution vulnerability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/messageformat@2.3.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 15.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-3449 in pkg:npm/%40tootallnate/once@1.1.2: @tootallnate/once vulnerable to Incorrect Control Flow Scoping"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/%40tootallnate/once@1.1.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 14.9,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "yanked_or_deprecated",
+          "level": "note",
+          "message": {
+            "text": "YANKED_OR_DEPRECATED in pkg:npm/jsonwebtoken@0.1.0: jsonwebtoken@0.1.0 is yanked or deprecated."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/jsonwebtoken@0.1.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 14.4,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "yanked_or_deprecated",
+          "level": "note",
+          "message": {
+            "text": "YANKED_OR_DEPRECATED in pkg:npm/jsonwebtoken@0.4.0: jsonwebtoken@0.4.0 is yanked or deprecated."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/jsonwebtoken@0.4.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 14.4,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "yanked_or_deprecated",
+          "level": "note",
+          "message": {
+            "text": "YANKED_OR_DEPRECATED in pkg:npm/notevil@1.3.3: notevil@1.3.3 is yanked or deprecated."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/notevil@1.3.3"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 14.4,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "yanked_or_deprecated",
+          "level": "note",
+          "message": {
+            "text": "YANKED_OR_DEPRECATED in pkg:npm/prom-client@15.1.3: prom-client@15.1.3 is yanked or deprecated."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/prom-client@15.1.3"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 14.4,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-26960 in pkg:npm/tar@6.2.1: Arbitrary File Read/Write via Hardlink Target Escape Through Symlink Chain in node-tar Extraction"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/tar@6.2.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 14.1,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-59871 in pkg:npm/tar@6.2.1: node-tar: Process crash via PAX numeric path type confusion"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/tar@6.2.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 13.5,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "yanked_or_deprecated",
+          "level": "note",
+          "message": {
+            "text": "YANKED_OR_DEPRECATED in pkg:npm/jws@0.2.6: jws@0.2.6 is yanked or deprecated."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/jws@0.2.6"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 13.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-53655 in pkg:npm/tar@6.2.1: node-tar applies PAX size override to intermediary GNU long-name/long-link headers, causing tar parser interpretation differential (file smuggling)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/tar@6.2.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.7,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-59875 in pkg:npm/tar@6.2.1: node-tar: Uncaught Exception DoS via NUL byte in PAX path/linkpath records"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/tar@6.2.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.3,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "yanked_or_deprecated",
+          "level": "note",
+          "message": {
+            "text": "YANKED_OR_DEPRECATED in pkg:npm/messageformat@2.3.0: messageformat@2.3.0 is yanked or deprecated."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/messageformat@2.3.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 11.5,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "yanked_or_deprecated",
+          "level": "note",
+          "message": {
+            "text": "YANKED_OR_DEPRECATED in pkg:npm/uuid@8.3.2: uuid@8.3.2 is yanked or deprecated."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/uuid@8.3.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 11.5,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-55849 in pkg:npm/%40cyclonedx/cyclonedx-npm@4.2.1: @cyclonedx/cyclonedx-npm: Shell Injection via Unsanitized --workspace Argument"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/%40cyclonedx/cyclonedx-npm@4.2.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 9.4,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-71538 in pkg:npm/%40cyclonedx/cyclonedx-npm@4.2.1: @cyclonedx/cyclonedx-npm: Shell Injection via Unsanitized --workspace Argument on Windows"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/%40cyclonedx/cyclonedx-npm@4.2.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 9.4,
+            "confidence": "High"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-118764 in pkg:npm/minimatch@9.0.9: minimatch has potential denial of service via globparts amplification"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/minimatch@9.0.9"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 8.8,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2021-32822 in pkg:npm/hbs@4.4.0: hbs: Insertion of Sensitive Information into Externally-Accessible File or Directory and Exposure of Sensitive Information to an Unauthorized Actor"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/hbs@4.4.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 8.6,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "CVE-2026-118773 in pkg:npm/glob@10.5.0: Glob: AbortSignal cancellation bypass allows post-timeout filesystem traversal"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/glob@10.5.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 8.6,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "yanked_or_deprecated",
+          "level": "note",
+          "message": {
+            "text": "YANKED_OR_DEPRECATED in pkg:npm/eslint@9.39.5: eslint@9.39.5 is yanked or deprecated."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/eslint@9.39.5"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 5.1,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "yanked_or_deprecated",
+          "level": "note",
+          "message": {
+            "text": "YANKED_OR_DEPRECATED in pkg:npm/crypto-js@3.3.0: crypto-js@3.3.0 is yanked or deprecated."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/crypto-js@3.3.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 4.3,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "yanked_or_deprecated",
+          "level": "note",
+          "message": {
+            "text": "YANKED_OR_DEPRECATED in pkg:npm/tar@6.2.1: tar@6.2.1 is yanked or deprecated."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/tar@6.2.1"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 4.3,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "yanked_or_deprecated",
+          "level": "note",
+          "message": {
+            "text": "YANKED_OR_DEPRECATED in pkg:npm/glob@10.5.0: glob@10.5.0 is yanked or deprecated."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/glob@10.5.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 1.7,
+            "confidence": "Medium"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -214,9 +214,16 @@ def run(state: dict, task: dict) -> AgentResult:
                     notes.append(f"{child['name']} -> {new} to satisfy {parent['name']} {spec}")
                     changed = True
                 else:
-                    pid_p = f"PLAN::{e['from']}"
-                    plans.setdefault(pid_p, prior.get(pid_p, {"component": e["from"]}))
-                    plans[pid_p]["compatibility_blocker"] = f"{parent['name']} needs {child['name']} {spec}; no clean match"
+                    # Record the blocker on whichever side already has a plan (usually the child
+                    # upgrade that breaks the parent's range). Never create an action-less plan:
+                    # it has no "action" and would break approval, reports and the summary below.
+                    blocker = f"{parent['name']} needs {child['name']} {spec}; no clean match"
+                    for cand in (f"PLAN::{e['from']}", pid):
+                        if cand in plans or cand in prior:
+                            plans.setdefault(cand, dict(prior[cand]) if cand in prior else plans[cand])
+                            plans[cand]["compatibility_blocker"] = blocker
+                            break
+                    notes.append(f"blocker: {blocker}")
         if not changed:
             break
 

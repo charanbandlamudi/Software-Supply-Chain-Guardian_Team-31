@@ -1,0 +1,4 @@
+Scanning dir /Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo
+Starting filesystem walk for root: /
+Scanned /Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/package-lock.json file and found 181 packages
+End status: 24 dirs visited, 79 inodes visited, 1 Extract calls, 27.148417ms elapsed, 27.149ms wall time

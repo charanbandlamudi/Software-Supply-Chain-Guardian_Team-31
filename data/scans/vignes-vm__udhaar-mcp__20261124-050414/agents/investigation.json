@@ -1,0 +1,490 @@
+{
+  "summary": {
+    "agents": [
+      "discovery",
+      "cicd",
+      "vuln_intel",
+      "reputation",
+      "reachability",
+      "exploit_intel",
+      "anomaly",
+      "scoring",
+      "remediation",
+      "explainer",
+      "critic"
+    ],
+    "llm": null,
+    "turns": 9,
+    "seconds": 0.6,
+    "findings": 17,
+    "by_type": {
+      "vulnerability": 12,
+      "unpinned_base_image": 2,
+      "install_script": 2,
+      "typosquat_suspect": 1
+    },
+    "handoffs": 1,
+    "critic": {
+      "accepted": 12,
+      "rejected": 0
+    },
+    "remediation_plans": 6,
+    "coverage": {
+      "discovery": "SBOM CycloneDX 1.7: 181 components; package-lock v3: 184 packages",
+      "reputation": "12 ok, 0 failed",
+      "source:pypi-osv": "ok",
+      "source:npm-audit": "ok",
+      "source:osv": "ok",
+      "source:grype": "ok",
+      "source:ghsa": "skipped: set GITHUB_TOKEN (unauthenticated limit is 60 req/h)",
+      "source:cisa-kev": "ok (1792 entries)",
+      "source:epss": "ok (12/12)",
+      "llm": "no LLM key configured; deterministic templates used"
+    },
+    "reputation_focus": 12,
+    "report_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/agents"
+  },
+  "inputs": {
+    "sbom": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/sbom/bom.json",
+    "source_dirs": [
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo"
+    ],
+    "dockerfiles": [
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile"
+    ],
+    "workflows": [],
+    "out_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/agents",
+    "stage": "analysis",
+    "reputation_focus": [
+      "pkg:npm/%40aws-sdk/client-bedrock-runtime@3.1152.0",
+      "pkg:npm/%40hono/node-server@2.1.5",
+      "pkg:npm/%40modelcontextprotocol/sdk@1.32.1",
+      "pkg:npm/%40types/express@5.0.6",
+      "pkg:npm/%40types/node@26.6.5",
+      "pkg:npm/body-parser@2.3.0",
+      "pkg:npm/express@5.3.0",
+      "pkg:npm/fast-uri@3.1.8",
+      "pkg:npm/hono@4.13.13",
+      "pkg:npm/tsx@4.23.15",
+      "pkg:npm/typescript@7.0.2",
+      "pkg:npm/zod@4.6.7"
+    ],
+    "npm_manifest": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/package.json",
+    "npm_lock": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/package-lock.json",
+    "grype_report": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/scanner_results/grype.json"
+  },
+  "messages": [
+    {
+      "turn": 1,
+      "from": "supervisor",
+      "to": [
+        "discovery",
+        "cicd"
+      ],
+      "text": "policy: ready=['discovery', 'cicd'], handoffs=[]"
+    },
+    {
+      "turn": 1,
+      "from": "cicd",
+      "to": "supervisor",
+      "text": "2 container/CI findings in 1 files"
+    },
+    {
+      "turn": 1,
+      "from": "discovery",
+      "to": "supervisor",
+      "text": "181 components (8 direct), 361 edges; SBOM CycloneDX 1.7: 181 components; package-lock v3: 184 packages"
+    },
+    {
+      "turn": 2,
+      "from": "supervisor",
+      "to": [
+        "vuln_intel",
+        "reputation",
+        "reachability"
+      ],
+      "text": "policy: ready=['vuln_intel', 'reputation', 'reachability'], handoffs=[]"
+    },
+    {
+      "turn": 2,
+      "from": "reputation",
+      "to": "supervisor",
+      "text": "registry metadata for 12 packages"
+    },
+    {
+      "turn": 2,
+      "from": "vuln_intel",
+      "to": "supervisor",
+      "text": "43 raw advisory records from 4/4 sources -> 12 unique vulnerabilities on 4 packages (hono@4.13.13=5, fast-uri@3.1.8=4, node-server@2.1.5=2, body-parser@2.3.0=1)"
+    },
+    {
+      "turn": 2,
+      "from": "reachability",
+      "to": "supervisor",
+      "text": "reachability: {'imported': 4, 'used_transitively': 116, 'not_imported': 61}"
+    },
+    {
+      "turn": 3,
+      "from": "supervisor",
+      "to": [
+        "exploit_intel",
+        "anomaly"
+      ],
+      "text": "policy: ready=['exploit_intel', 'anomaly'], handoffs=[]"
+    },
+    {
+      "turn": 3,
+      "from": "anomaly",
+      "to": "supervisor",
+      "text": "3 non-CVE findings: {'typosquat_suspect': 1, 'install_script': 2}"
+    },
+    {
+      "turn": 3,
+      "from": "anomaly",
+      "to": "reachability",
+      "text": "handoff: suspicious packages found; check whether source code imports them"
+    },
+    {
+      "turn": 3,
+      "from": "exploit_intel",
+      "to": "supervisor",
+      "text": "12 CVEs checked: 0 in CISA KEV, EPSS for 12"
+    },
+    {
+      "turn": 4,
+      "from": "supervisor",
+      "to": [
+        "reachability"
+      ],
+      "text": "policy: ready=['scoring'], handoffs=['reachability']"
+    },
+    {
+      "turn": 4,
+      "from": "reachability",
+      "to": "supervisor",
+      "text": "reachability: {'imported': 4, 'used_transitively': 116, 'not_imported': 61}; handoff check on 1 suspicious packages: imported by source = none"
+    },
+    {
+      "turn": 5,
+      "from": "supervisor",
+      "to": [
+        "scoring"
+      ],
+      "text": "policy: ready=['scoring'], handoffs=[]"
+    },
+    {
+      "turn": 5,
+      "from": "scoring",
+      "to": "supervisor",
+      "text": "scored 17 findings; top: CVE-2026-111181 on body-parser@2.3.0 = 31.4; TYPOSQUAT_SUSPECT on cors@2.8.6 = 28.0; CVE-2026-126343 on node-server@2.1.5 = 26.0"
+    },
+    {
+      "turn": 6,
+      "from": "supervisor",
+      "to": [
+        "remediation"
+      ],
+      "text": "policy: ready=['remediation'], handoffs=[]"
+    },
+    {
+      "turn": 6,
+      "from": "remediation",
+      "to": "supervisor",
+      "text": "6 plans (strategy=minimal): upgrades [@hono/node-server 2.1.5->2.1.6, hono 4.13.13->4.13.16, fast-uri 3.1.8->3.1.9, body-parser 2.3.0->2.4.0]; other actions {'pin': 1, 'remove': 1}; resolver: fast-uri -> 3.1.9 to satisfy ajv ^3.0.1"
+    },
+    {
+      "turn": 7,
+      "from": "supervisor",
+      "to": [
+        "explainer"
+      ],
+      "text": "policy: ready=['explainer'], handoffs=[]"
+    },
+    {
+      "turn": 7,
+      "from": "explainer",
+      "to": "supervisor",
+      "text": "12 template explanations (no LLM key configured; deterministic templates used)"
+    },
+    {
+      "turn": 8,
+      "from": "supervisor",
+      "to": [
+        "critic"
+      ],
+      "text": "policy: ready=['critic'], handoffs=[]"
+    },
+    {
+      "turn": 8,
+      "from": "critic",
+      "to": "supervisor",
+      "text": "verified 12 claims; 0 replaced by templates"
+    },
+    {
+      "turn": 9,
+      "from": "supervisor",
+      "to": "report",
+      "text": "finish: no agent has new inputs and no handoffs are open"
+    },
+    {
+      "turn": 9,
+      "from": "report",
+      "to": "supervisor",
+      "text": "wrote guardian-report.json/.md, guardian.sarif, guardian-sbom.cdx.json, dependency-graph.mmd to /Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/agents"
+    }
+  ],
+  "plan_log": [
+    {
+      "turn": 1,
+      "run": [
+        "discovery",
+        "cicd"
+      ],
+      "reason": "policy: ready=['discovery', 'cicd'], handoffs=[]"
+    },
+    {
+      "turn": 2,
+      "run": [
+        "vuln_intel",
+        "reputation",
+        "reachability"
+      ],
+      "reason": "policy: ready=['vuln_intel', 'reputation', 'reachability'], handoffs=[]"
+    },
+    {
+      "turn": 3,
+      "run": [
+        "exploit_intel",
+        "anomaly"
+      ],
+      "reason": "policy: ready=['exploit_intel', 'anomaly'], handoffs=[]"
+    },
+    {
+      "turn": 4,
+      "run": [
+        "reachability"
+      ],
+      "reason": "policy: ready=['scoring'], handoffs=['reachability']"
+    },
+    {
+      "turn": 5,
+      "run": [
+        "scoring"
+      ],
+      "reason": "policy: ready=['scoring'], handoffs=[]"
+    },
+    {
+      "turn": 6,
+      "run": [
+        "remediation"
+      ],
+      "reason": "policy: ready=['remediation'], handoffs=[]"
+    },
+    {
+      "turn": 7,
+      "run": [
+        "explainer"
+      ],
+      "reason": "policy: ready=['explainer'], handoffs=[]"
+    },
+    {
+      "turn": 8,
+      "run": [
+        "critic"
+      ],
+      "reason": "policy: ready=['critic'], handoffs=[]"
+    }
+  ],
+  "critic": {
+    "accepted": [
+      {
+        "finding_id": "VULN::CVE-2026-111181::pkg:npm/body-parser@2.3.0",
+        "statement": "CVE-2026-111181 affects pkg:npm/body-parser@2.3.0; via app -> pkg:npm/express@5.3.0 -> pkg:npm/body-parser@2.3.0; upgrade to 2.4.0.",
+        "evidence_ids": [
+          "EV-grype-bd710e5bb5629766",
+          "EV-npm-audit-9f58412dc7d7aa9b",
+          "EV-osv-a08d3b50e7ef069a"
+        ],
+        "facts": {
+          "cvss": 7.5,
+          "kev": false,
+          "target_version": "2.4.0"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "TYPOSQUAT_SUSPECT::pkg:npm/cors@2.8.6",
+        "statement": "TYPOSQUAT_SUSPECT affects pkg:npm/cors@2.8.6; no safe version found; request security review.",
+        "evidence_ids": [
+          "EV-anomaly-typosquat_suspect-4709ad727f4267da",
+          "EV-input-d4ec34fa11e01a5d"
+        ],
+        "facts": {
+          "cvss": null,
+          "kev": null,
+          "target_version": null
+        },
+        "next_step": "security review",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2026-126343::pkg:npm/%40hono/node-server@2.1.5",
+        "statement": "CVE-2026-126343 affects pkg:npm/%40hono/node-server@2.1.5; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/%40hono/node-server@2.1.5; upgrade to 2.1.6.",
+        "evidence_ids": [
+          "EV-grype-6b0d82b98485d451",
+          "EV-npm-audit-9f58412dc7d7aa9b"
+        ],
+        "facts": {
+          "cvss": 5.3,
+          "kev": false,
+          "target_version": "2.1.6"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2026-126357::pkg:npm/hono@4.13.13",
+        "statement": "CVE-2026-126357 affects pkg:npm/hono@4.13.13; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/hono@4.13.13; upgrade to 4.13.16.",
+        "evidence_ids": [
+          "EV-grype-ffc43ba3de02f15c",
+          "EV-npm-audit-9f58412dc7d7aa9b",
+          "EV-osv-bb4abb0c67d4ce43"
+        ],
+        "facts": {
+          "cvss": 5.3,
+          "kev": false,
+          "target_version": "4.13.16"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2026-126356::pkg:npm/hono@4.13.13",
+        "statement": "CVE-2026-126356 affects pkg:npm/hono@4.13.13; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/hono@4.13.13; upgrade to 4.13.16.",
+        "evidence_ids": [
+          "EV-grype-39b47d470d72e417",
+          "EV-npm-audit-9f58412dc7d7aa9b",
+          "EV-osv-3f18e9d7bee6ca5e"
+        ],
+        "facts": {
+          "cvss": 5.3,
+          "kev": false,
+          "target_version": "4.13.16"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2026-126210::pkg:npm/%40hono/node-server@2.1.5",
+        "statement": "CVE-2026-126210 affects pkg:npm/%40hono/node-server@2.1.5; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/%40hono/node-server@2.1.5; upgrade to 2.1.6.",
+        "evidence_ids": [
+          "EV-grype-4d37095190716287",
+          "EV-npm-audit-9f58412dc7d7aa9b"
+        ],
+        "facts": {
+          "cvss": 5.3,
+          "kev": false,
+          "target_version": "2.1.6"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2026-110306::pkg:npm/fast-uri@3.1.8",
+        "statement": "CVE-2026-110306 affects pkg:npm/fast-uri@3.1.8; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/ajv@8.20.0 -> pkg:npm/fast-uri@3.1.8; upgrade to 3.1.9.",
+        "evidence_ids": [
+          "EV-grype-ad593ea48493204b",
+          "EV-npm-audit-9f58412dc7d7aa9b",
+          "EV-osv-95e3df3382524b8a"
+        ],
+        "facts": {
+          "cvss": 6.1,
+          "kev": false,
+          "target_version": "3.1.9"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2026-126358::pkg:npm/hono@4.13.13",
+        "statement": "CVE-2026-126358 affects pkg:npm/hono@4.13.13; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/hono@4.13.13; upgrade to 4.13.16.",
+        "evidence_ids": [
+          "EV-grype-b59b083eb78d4380",
+          "EV-npm-audit-9f58412dc7d7aa9b",
+          "EV-osv-a7b9955e3844a87b"
+        ],
+        "facts": {
+          "cvss": 5.3,
+          "kev": false,
+          "target_version": "4.13.16"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "UNPINNED_BASE_IMAGE::/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:1",
+        "statement": "UNPINNED_BASE_IMAGE affects file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile; no safe version found; request security review.",
+        "evidence_ids": [
+          "EV-cicd-5ece4b89f921d637"
+        ],
+        "facts": {
+          "cvss": null,
+          "kev": null,
+          "target_version": null
+        },
+        "next_step": "security review",
+        "kind": "template"
+      },
+      {
+        "finding_id": "UNPINNED_BASE_IMAGE::/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile:9",
+        "statement": "UNPINNED_BASE_IMAGE affects file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo/Dockerfile; no safe version found; request security review.",
+        "evidence_ids": [
+          "EV-cicd-253857e741c30cb0"
+        ],
+        "facts": {
+          "cvss": null,
+          "kev": null,
+          "target_version": null
+        },
+        "next_step": "security review",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2026-126355::pkg:npm/hono@4.13.13",
+        "statement": "CVE-2026-126355 affects pkg:npm/hono@4.13.13; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/hono@4.13.13; upgrade to 4.13.16.",
+        "evidence_ids": [
+          "EV-grype-a2bfefcefaf5219c",
+          "EV-npm-audit-9f58412dc7d7aa9b",
+          "EV-osv-26bd276f50f6862f"
+        ],
+        "facts": {
+          "cvss": 5.3,
+          "kev": false,
+          "target_version": "4.13.16"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      },
+      {
+        "finding_id": "VULN::CVE-2026-110180::pkg:npm/fast-uri@3.1.8",
+        "statement": "CVE-2026-110180 affects pkg:npm/fast-uri@3.1.8; via app -> pkg:npm/%40modelcontextprotocol/sdk@1.32.1 -> pkg:npm/ajv@8.20.0 -> pkg:npm/fast-uri@3.1.8; upgrade to 3.1.9.",
+        "evidence_ids": [
+          "EV-grype-bd1fc180f2ff5bfc",
+          "EV-npm-audit-9f58412dc7d7aa9b",
+          "EV-osv-ebcb09e36afe9901"
+        ],
+        "facts": {
+          "cvss": 4.8,
+          "kev": false,
+          "target_version": "3.1.9"
+        },
+        "next_step": "approve remediation plan",
+        "kind": "template"
+      }
+    ],
+    "rejected": [],
+    "pass": true,
+    "final": true
+  }
+}

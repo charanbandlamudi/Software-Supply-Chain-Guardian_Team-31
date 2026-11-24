@@ -66,6 +66,9 @@ GitHub URL ───▶ │ 1. clone        git clone --depth 1 (hooks disabled)
                 │                   ├─ merge findings across scanners (by CVE/GHSA)   │
                 │                   ├─ direct/transitive, paths to root               │
                 │                   └─▶ graph.json + dependency_graph.html (PyVis)    │
+                │ 6. agents       pipeline/agents.py → guardian_v2 (LangGraph)        │
+                │                   supervisor routes 11 specialist agents; critic    │
+                │                   verifies every claim ──▶ agents/guardian-report.* │
                 └─────────────────────────────────────────────────────────────────────┘
                                          │
                                          ▼
@@ -81,6 +84,7 @@ GitHub URL ───▶ │ 1. clone        git clone --depth 1 (hooks disabled)
 | Scan | **OSV-Scanner** | Looks lockfiles up live on osv.dev: an independent second opinion |
 | Scan | **Trivy** | Aqua Security's database for vulnerabilities, plus misconfiguration checks (Dockerfile, Terraform, Kubernetes, CI) and secret detection |
 | Graph | **NetworkX + PyVis** | Graph analysis (paths, parents, layout) and interactive HTML rendering |
+| Agents | **LangGraph** (`guardian_v2`) | A supervisor decides each turn which specialist agents run (reputation, reachability, exploit intel, anomaly, scoring, remediation, explainer, critic, …) and agents hand work to each other. See [Multi-agent investigation](#multi-agent-investigation). |
 
 ## Quick start
 
@@ -315,9 +319,12 @@ data/scans/<owner>__<repo>__<YYYYmmdd-HHMMSS>/
 .
 ├── app.py                    # Streamlit UI: start scans, live progress, results, graph, downloads
 ├── pipeline/
-│   └── scan.py               # pipeline: clone → lockfile → SBOM → scanners → graph; scan.json; background runner
+│   ├── scan.py               # pipeline: clone → lockfile → SBOM → scanners → graph → agents; scan.json; background runner
+│   └── agents.py             # bridge: scan folder → guardian_v2 inputs; runs the agents; saves investigation.json
 ├── graph/
 │   └── build_graph.py        # SBOM + scanner output → NetworkX graph → graph.json + PyVis HTML (+ graph UI)
+├── guardian_v2/              # LangGraph multi-agent system (supervisor, agents, critic, CLI with approval gate)
+├── agent/                    # earlier agent scaffold (superseded by guardian_v2)
 ├── data/scans/               # one folder per scan (cloned repos are git-ignored)
 ├── .streamlit/config.toml    # light theme
 ├── .claude/launch.json       # dev-server launch config
@@ -399,6 +406,7 @@ OWASP Juice Shop, commit `c9f99228d9d5`, scanned 23 Nov 2026 (Grype database bui
 | Scanner agreement | 53 found by all three · 1 by OSV-Scanner + Trivy (`messageformat`) · 4 Trivy-only (legacy `NSWG-ECO-*` advisories) · 1 severity disagreement (`lodash` CVE-2018-3721: Trivy LOW, others MEDIUM) |
 | Misconfigurations | **89** failed checks (20 critical, 22 high), mostly the deliberately insecure Terraform in Juice Shop's challenges, plus the Dockerfile |
 | Secrets | **5** (3 private keys, 2 JWTs), values redacted |
+| Agent investigation | 11 agents, 9 supervisor turns, 1 handoff; **94** prioritised findings (54 vulnerabilities + 40 non-CVE: deprecated packages, unpinned actions/base images, install scripts, typosquat suspects, suspicious updates); **35** proposed fixes; 12/12 explanations passed the critic |
 | Scan time | about 2 min (mostly clone and lockfile resolution; the three scanners together take about 7 s) |
 
 Many of these packages are deliberately outdated, since Juice Shop is an intentionally vulnerable training application.
@@ -430,14 +438,66 @@ The pipeline has been verified across multiple language ecosystems:
 | cdxgen prints a *SECURE MODE: Environment audit* table | It's warning about secrets in the shell environment. The pipeline already runs cdxgen with a clean environment. |
 | Scan shows **Interrupted** | The server restarted mid-scan. Run it again. |
 
+## Multi-agent investigation
+
+The last pipeline step hands the finished scan to **`guardian_v2`**, a LangGraph multi-agent system, through
+[`pipeline/agents.py`](pipeline/agents.py). It runs unattended in the `analysis` stage: every agent except the human
+approval gate and sandbox validation, so a web scan never pauses for input.
+
+**Inputs taken from the scan folder:** the SBOM, the npm lockfile and manifest, `requirements.txt`, Grype's output,
+Dockerfiles, `.github/workflows/*`, and the source tree (for reachability).
+
+**How the supervisor works.** Each turn, the supervisor (the head agent) picks which agents run, from:
+1. which agents have new inputs to work on;
+2. requests agents send each other through the supervisor (for example, anomaly asking reachability whether a suspicious package is imported);
+3. optionally, an LLM planner whose choice is checked by guardrails.
+
+Every decision and message is logged.
+
+| Agent | Role |
+|---|---|
+| discovery | SBOM + lockfiles → inventory and dependency graph |
+| cicd | Unpinned base images and GitHub Actions, unsafe workflows |
+| vuln_intel | Advisories from OSV, npm audit, PyPI, Grype (and GHSA with `GITHUB_TOKEN`), deduplicated by alias |
+| reputation | Registry metadata: yanked/deprecated versions, maintainers, integrity, install scripts |
+| reachability | Is each package imported by the source code? |
+| exploit_intel | CISA KEV and FIRST EPSS |
+| anomaly | Typosquats, malicious packages, lockfile tampering, untrusted URLs, dependency confusion |
+| scoring | Explainable risk score, confidence and a simplified SSVC decision |
+| remediation | Verified safe versions and the other packages that must be upgraded with them (proposed only) |
+| explainer | LLM explanations when a key is set (Anthropic → Groq → Gemini); deterministic templates otherwise |
+| critic | Rejects claims with missing or unlinked evidence, IDs that aren't aliases of the finding, changed CVSS or KEV values, unverified versions, or exploitation claims without KEV evidence |
+
+**In the UI**, the *Agent investigation* tab shows the agent conversation, prioritised findings (score, SSVC,
+reachability, KEV, EPSS), the critic-checked explanations and the proposed fixes. Outputs are saved in
+`data/scans/<scan>/agents/`: `investigation.json`, `guardian-report.json`, `guardian-report.md`, `guardian.sarif`,
+`guardian-sbom.cdx.json` and `dependency-graph.mmd`.
+
+**LLM keys** (optional) come from the environment or a `.env` file: `ANTHROPIC_API_KEY`, `GROQ_API_KEY` or
+`GEMINI_API_KEY`. `GITHUB_TOKEN` enables the GHSA source. Without keys, everything still runs, with template
+explanations.
+
+**Network use.** The agents query the npm, PyPI and OSV registries plus KEV and EPSS. To keep this practical on slow
+links, registry metadata is fetched only for direct dependencies and packages a scanner flagged (98 + about 20 for
+Juice Shop, instead of 1,135). Responses are cached in `data/agent_cache/` and reused across scans.
+
+**Human approval and sandbox validation** run only in the CLI, which pauses for a reviewer:
+
+```bash
+cd guardian_v2/demo-app && PYTHONPATH=.. ../../.venv/bin/python ../run_guardian.py --config guardian.json
+```
+
+Proposed fixes are applied only in a container with no network, a read-only filesystem, all privileges dropped
+and install scripts disabled.
+
 ## Roadmap
 
-Done in this version: discovery and cloning, SBOM generation, Grype, OSV-Scanner and Trivy scanning (vulnerabilities, misconfigurations, secrets), dependency graph analysis, the interactive graph, and the web UI.
+Done in this version: discovery and cloning, SBOM generation, Grype, OSV-Scanner and Trivy scanning (vulnerabilities, misconfigurations, secrets), dependency graph analysis, the interactive graph, the web UI, and the LangGraph multi-agent investigation (supervisor, specialist agents, evidence critic) connected to the pipeline.
 
 Planned, following the hackathon problem statement:
 
-- [ ] **LangGraph multi-agent system**: a head agent (Guardian Coordinator) plus discovery, SBOM, vulnerability, dependency-risk, anomaly and risk-analyst agents, with conditional routing and an investigation history
-- [ ] **Supply chain anomaly checks**: typosquatting, lifecycle scripts, unpinned GitHub Actions (for example `@main`), Dockerfile and CI/CD risks
+- [ ] Human approval gate and sandbox validation in the web UI (currently CLI only)
+- [ ] Feed OSV-Scanner and Trivy results into the agents (they currently query OSV themselves; Trivy findings stay in the scan view)
 - [ ] **Evidence validator** (Pydantic models) that rejects unsupported CVEs, versions or paths before reporting
 - [ ] **Risk engine** and LLM-written summaries that only use validated evidence
 - [ ] **Reports** in JSON, HTML and PDF

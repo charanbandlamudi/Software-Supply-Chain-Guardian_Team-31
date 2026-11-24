@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import threading
 import urllib.error
 import urllib.request
@@ -10,7 +11,7 @@ from pathlib import Path
 
 from ..evidence import make_evidence
 
-CACHE_DIR = Path(".guardian_cache")
+CACHE_DIR = Path(os.environ.get("GUARDIAN_CACHE_DIR", ".guardian_cache"))
 _LOCK = threading.Lock()
 USER_AGENT = "supply-chain-guardian/2.0 (hackathon; read-only)"
 

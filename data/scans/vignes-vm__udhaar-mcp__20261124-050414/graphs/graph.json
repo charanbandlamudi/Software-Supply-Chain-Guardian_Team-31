@@ -1,0 +1,6381 @@
+{
+  "schema": "ssg-dependency-graph/1",
+  "generated_at": "2026-11-24T05:04:22+00:00",
+  "source": "cdxgen SBOM",
+  "root": "pkg:npm/udhaar-mcp@0.1.0",
+  "inputs": {
+    "sbom": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/sbom/bom.json",
+    "repo": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/repo",
+    "scanner_results": {
+      "Grype": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/scanner_results/grype.json",
+      "OSV-Scanner": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/scanner_results/osv.json",
+      "Trivy": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/vignes-vm__udhaar-mcp__20261124-050414/scanner_results/trivy.json"
+    },
+    "scanners_used": [
+      "Grype",
+      "OSV-Scanner",
+      "Trivy"
+    ]
+  },
+  "scan": {
+    "scan_id": "vignes-vm__udhaar-mcp__20261124-050414",
+    "target": "https://github.com/vignes-vm/udhaar-mcp",
+    "commit": "7c94a4a830f1c7ee1aaf9c2669d62f0701e3331a",
+    "started_at": "2026-11-24T05:04:14+00:00",
+    "tools": {
+      "git": "git version 2.44.0",
+      "npm": "10.9.8",
+      "cdxgen": "\u001b[1mCycloneDX Generator 12.9.3\u001b[0m",
+      "osv-scanner": "osv-scanner version: 2.7.1",
+      "grype": "0.122.1",
+      "grype_db": {
+        "schema": "v6.1.10",
+        "built": "2026-11-23T06:28:32Z",
+        "valid": true
+      },
+      "trivy": "0.76.2",
+      "trivy_db": {
+        "version": 2,
+        "updated": "2026-11-23T07:04:04.632673631Z",
+        "downloaded": "2026-11-23T12:43:24.627303Z"
+      }
+    },
+    "scanner_status": {
+      "grype": "ok",
+      "osv": "ok",
+      "trivy": "ok"
+    }
+  },
+  "stats": {
+    "nodes": 182,
+    "edges": 367,
+    "direct": 8,
+    "transitive": 173,
+    "unresolved": 0,
+    "vulnerable_packages": 4,
+    "findings": 12,
+    "findings_by_severity": {
+      "HIGH": 1,
+      "MEDIUM": 8,
+      "LOW": 3
+    },
+    "misconfigurations": 1,
+    "secrets": 0
+  },
+  "nodes": [
+    {
+      "id": "pkg:npm/udhaar-mcp@0.1.0",
+      "name": "udhaar-mcp",
+      "version": "0.1.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/udhaar-mcp@0.1.0",
+      "scope": "",
+      "dep_type": "root",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0"
+      ],
+      "parent_ids": [],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/@types/express@5.0.6",
+        "pkg:npm/@types/node@26.6.5",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/zod@4.6.7"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+      "name": "@aws-sdk/client-bedrock-runtime",
+      "version": "3.1152.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/client-bedrock-runtime@3.1152.0",
+      "scope": "required",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+        "pkg:npm/@aws-sdk/eventstream-handler-node@3.972.36",
+        "pkg:npm/@aws-sdk/middleware-eventstream@3.972.31",
+        "pkg:npm/@aws-sdk/middleware-websocket@3.972.56",
+        "pkg:npm/@aws-sdk/token-providers@3.1152.0",
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/fetch-http-handler@5.8.0",
+        "pkg:npm/@smithy/node-http-handler@4.12.1",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/core@3.978.3",
+      "name": "@aws-sdk/core",
+      "version": "3.978.3",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/core@3.978.3",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/core@3.978.3"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/credential-provider-env@3.972.74",
+        "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+        "pkg:npm/@aws-sdk/credential-provider-login@3.972.81",
+        "pkg:npm/@aws-sdk/credential-provider-process@3.972.74",
+        "pkg:npm/@aws-sdk/token-providers@3.1150.0",
+        "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+        "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80",
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+        "pkg:npm/@aws-sdk/middleware-websocket@3.972.56",
+        "pkg:npm/@aws-sdk/token-providers@3.1152.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@aws-sdk/xml-builder@3.972.41",
+        "pkg:npm/@aws/lambda-invoke-store@0.3.0",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/signature-v4@5.7.4",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/bowser@2.14.1",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/types@3.974.6",
+      "name": "@aws-sdk/types",
+      "version": "3.974.6",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/types@3.974.6",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/types@3.974.6"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/credential-provider-env@3.972.74",
+        "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+        "pkg:npm/@aws-sdk/signature-v4-multi-region@3.996.48",
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+        "pkg:npm/@aws-sdk/credential-provider-login@3.972.81",
+        "pkg:npm/@aws-sdk/credential-provider-process@3.972.74",
+        "pkg:npm/@aws-sdk/token-providers@3.1150.0",
+        "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+        "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80",
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+        "pkg:npm/@aws-sdk/eventstream-handler-node@3.972.36",
+        "pkg:npm/@aws-sdk/middleware-eventstream@3.972.31",
+        "pkg:npm/@aws-sdk/middleware-websocket@3.972.56",
+        "pkg:npm/@aws-sdk/token-providers@3.1152.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0"
+      ],
+      "child_ids": [
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@smithy/types@4.19.0",
+      "name": "@smithy/types",
+      "version": "4.19.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40smithy/types@4.19.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@smithy/types@4.19.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@aws-sdk/xml-builder@3.972.41",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/signature-v4@5.7.4",
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/credential-provider-env@3.972.74",
+        "pkg:npm/@smithy/fetch-http-handler@5.8.0",
+        "pkg:npm/@smithy/node-http-handler@4.12.1",
+        "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+        "pkg:npm/@aws-sdk/signature-v4-multi-region@3.996.48",
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+        "pkg:npm/@aws-sdk/credential-provider-login@3.972.81",
+        "pkg:npm/@aws-sdk/credential-provider-process@3.972.74",
+        "pkg:npm/@aws-sdk/token-providers@3.1150.0",
+        "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+        "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80",
+        "pkg:npm/@smithy/credential-provider-imds@4.5.2",
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+        "pkg:npm/@aws-sdk/eventstream-handler-node@3.972.36",
+        "pkg:npm/@aws-sdk/middleware-eventstream@3.972.31",
+        "pkg:npm/@aws-sdk/middleware-websocket@3.972.56",
+        "pkg:npm/@aws-sdk/token-providers@3.1152.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0"
+      ],
+      "child_ids": [
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/tslib@2.8.1",
+      "name": "tslib",
+      "version": "2.8.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/tslib@2.8.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@aws-sdk/xml-builder@3.972.41",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/signature-v4@5.7.4",
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/credential-provider-env@3.972.74",
+        "pkg:npm/@smithy/fetch-http-handler@5.8.0",
+        "pkg:npm/@smithy/node-http-handler@4.12.1",
+        "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+        "pkg:npm/@aws-sdk/signature-v4-multi-region@3.996.48",
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+        "pkg:npm/@aws-sdk/credential-provider-login@3.972.81",
+        "pkg:npm/@aws-sdk/credential-provider-process@3.972.74",
+        "pkg:npm/@aws-sdk/token-providers@3.1150.0",
+        "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+        "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80",
+        "pkg:npm/@smithy/credential-provider-imds@4.5.2",
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+        "pkg:npm/@aws-sdk/eventstream-handler-node@3.972.36",
+        "pkg:npm/@aws-sdk/middleware-eventstream@3.972.31",
+        "pkg:npm/@aws-sdk/middleware-websocket@3.972.56",
+        "pkg:npm/@aws-sdk/token-providers@3.1152.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/xml-builder@3.972.41",
+      "name": "@aws-sdk/xml-builder",
+      "version": "3.972.41",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/xml-builder@3.972.41",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/xml-builder@3.972.41"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3"
+      ],
+      "child_ids": [
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws/lambda-invoke-store@0.3.0",
+      "name": "@aws/lambda-invoke-store",
+      "version": "0.3.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws/lambda-invoke-store@0.3.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws/lambda-invoke-store@0.3.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@smithy/core@3.36.0",
+      "name": "@smithy/core",
+      "version": "3.36.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40smithy/core@3.36.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@smithy/core@3.36.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/@smithy/signature-v4@5.7.4",
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/credential-provider-env@3.972.74",
+        "pkg:npm/@smithy/fetch-http-handler@5.8.0",
+        "pkg:npm/@smithy/node-http-handler@4.12.1",
+        "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+        "pkg:npm/@aws-sdk/credential-provider-login@3.972.81",
+        "pkg:npm/@aws-sdk/credential-provider-process@3.972.74",
+        "pkg:npm/@aws-sdk/token-providers@3.1150.0",
+        "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+        "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80",
+        "pkg:npm/@smithy/credential-provider-imds@4.5.2",
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+        "pkg:npm/@aws-sdk/eventstream-handler-node@3.972.36",
+        "pkg:npm/@aws-sdk/middleware-eventstream@3.972.31",
+        "pkg:npm/@aws-sdk/middleware-websocket@3.972.56",
+        "pkg:npm/@aws-sdk/token-providers@3.1152.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0"
+      ],
+      "child_ids": [
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@smithy/signature-v4@5.7.4",
+      "name": "@smithy/signature-v4",
+      "version": "5.7.4",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40smithy/signature-v4@5.7.4",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@smithy/signature-v4@5.7.4"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/signature-v4-multi-region@3.996.48",
+        "pkg:npm/@aws-sdk/middleware-websocket@3.972.56"
+      ],
+      "child_ids": [
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/bowser@2.14.1",
+      "name": "bowser",
+      "version": "2.14.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/bowser@2.14.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/bowser@2.14.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+      "name": "@aws-sdk/credential-provider-node",
+      "version": "3.972.86",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/credential-provider-node@3.972.86",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/credential-provider-env@3.972.74",
+        "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+        "pkg:npm/@aws-sdk/credential-provider-process@3.972.74",
+        "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+        "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80",
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/credential-provider-imds@4.5.2",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/credential-provider-env@3.972.74",
+      "name": "@aws-sdk/credential-provider-env",
+      "version": "3.972.74",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/credential-provider-env@3.972.74",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+        "pkg:npm/@aws-sdk/credential-provider-env@3.972.74"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+      "name": "@aws-sdk/credential-provider-http",
+      "version": "3.972.76",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/credential-provider-http@3.972.76",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+        "pkg:npm/@aws-sdk/credential-provider-http@3.972.76"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/fetch-http-handler@5.8.0",
+        "pkg:npm/@smithy/node-http-handler@4.12.1",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@smithy/fetch-http-handler@5.8.0",
+      "name": "@smithy/fetch-http-handler",
+      "version": "5.8.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40smithy/fetch-http-handler@5.8.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@smithy/fetch-http-handler@5.8.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+        "pkg:npm/@aws-sdk/middleware-websocket@3.972.56",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0"
+      ],
+      "child_ids": [
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@smithy/node-http-handler@4.12.1",
+      "name": "@smithy/node-http-handler",
+      "version": "4.12.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40smithy/node-http-handler@4.12.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@smithy/node-http-handler@4.12.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0"
+      ],
+      "child_ids": [
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+      "name": "@aws-sdk/credential-provider-ini",
+      "version": "3.973.19",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/credential-provider-ini@3.973.19",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/credential-provider-env@3.972.74",
+        "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+        "pkg:npm/@aws-sdk/credential-provider-login@3.972.81",
+        "pkg:npm/@aws-sdk/credential-provider-process@3.972.74",
+        "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+        "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80",
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/credential-provider-imds@4.5.2",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/credential-provider-login@3.972.81",
+      "name": "@aws-sdk/credential-provider-login",
+      "version": "3.972.81",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/credential-provider-login@3.972.81",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+        "pkg:npm/@aws-sdk/credential-provider-login@3.972.81"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+      "name": "@aws-sdk/nested-clients",
+      "version": "3.997.48",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/nested-clients@3.997.48",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/token-providers@3.1152.0",
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/credential-provider-login@3.972.81",
+        "pkg:npm/@aws-sdk/token-providers@3.1150.0",
+        "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+        "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80",
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+        "pkg:npm/@aws-sdk/token-providers@3.1152.0"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/signature-v4-multi-region@3.996.48",
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/fetch-http-handler@5.8.0",
+        "pkg:npm/@smithy/node-http-handler@4.12.1",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/signature-v4-multi-region@3.996.48",
+      "name": "@aws-sdk/signature-v4-multi-region",
+      "version": "3.996.48",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/signature-v4-multi-region@3.996.48",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/token-providers@3.1152.0",
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+        "pkg:npm/@aws-sdk/signature-v4-multi-region@3.996.48"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/signature-v4@5.7.4",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/credential-provider-process@3.972.74",
+      "name": "@aws-sdk/credential-provider-process",
+      "version": "3.972.74",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/credential-provider-process@3.972.74",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+        "pkg:npm/@aws-sdk/credential-provider-process@3.972.74"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+      "name": "@aws-sdk/credential-provider-sso",
+      "version": "3.973.18",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/credential-provider-sso@3.973.18",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+        "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+        "pkg:npm/@aws-sdk/token-providers@3.1150.0",
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/token-providers@3.1150.0",
+      "name": "@aws-sdk/token-providers",
+      "version": "3.1150.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/token-providers@3.1150.0",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+        "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+        "pkg:npm/@aws-sdk/token-providers@3.1150.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80",
+      "name": "@aws-sdk/credential-provider-web-identity",
+      "version": "3.972.80",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/credential-provider-web-identity@3.972.80",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+        "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@smithy/credential-provider-imds@4.5.2",
+      "name": "@smithy/credential-provider-imds",
+      "version": "4.5.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40smithy/credential-provider-imds@4.5.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+        "pkg:npm/@smithy/credential-provider-imds@4.5.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+        "pkg:npm/@aws-sdk/credential-provider-node@3.972.86"
+      ],
+      "child_ids": [
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/eventstream-handler-node@3.972.36",
+      "name": "@aws-sdk/eventstream-handler-node",
+      "version": "3.972.36",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/eventstream-handler-node@3.972.36",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/eventstream-handler-node@3.972.36"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/middleware-eventstream@3.972.31",
+      "name": "@aws-sdk/middleware-eventstream",
+      "version": "3.972.31",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/middleware-eventstream@3.972.31",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/middleware-eventstream@3.972.31"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/middleware-websocket@3.972.56",
+      "name": "@aws-sdk/middleware-websocket",
+      "version": "3.972.56",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/middleware-websocket@3.972.56",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/middleware-websocket@3.972.56"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/fetch-http-handler@5.8.0",
+        "pkg:npm/@smithy/signature-v4@5.7.4",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@aws-sdk/token-providers@3.1152.0",
+      "name": "@aws-sdk/token-providers",
+      "version": "3.1152.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40aws-sdk/token-providers@3.1152.0",
+      "scope": "required",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+        "pkg:npm/@aws-sdk/token-providers@3.1152.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0"
+      ],
+      "child_ids": [
+        "pkg:npm/@aws-sdk/core@3.978.3",
+        "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+        "pkg:npm/@aws-sdk/types@3.974.6",
+        "pkg:npm/@smithy/core@3.36.0",
+        "pkg:npm/@smithy/types@4.19.0",
+        "pkg:npm/tslib@2.8.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "name": "@modelcontextprotocol/sdk",
+      "version": "1.32.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40modelcontextprotocol/sdk@1.32.1",
+      "scope": "required",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0"
+      ],
+      "child_ids": [
+        "pkg:npm/@hono/node-server@2.1.5",
+        "pkg:npm/ajv-formats@3.0.1",
+        "pkg:npm/ajv@8.20.0",
+        "pkg:npm/content-type@1.0.5",
+        "pkg:npm/cors@2.8.6",
+        "pkg:npm/cross-spawn@7.0.6",
+        "pkg:npm/eventsource-parser@3.1.1",
+        "pkg:npm/eventsource@3.0.7",
+        "pkg:npm/express-rate-limit@8.7.1",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/hono@4.13.13",
+        "pkg:npm/jose@6.2.12",
+        "pkg:npm/json-schema-typed@8.0.2",
+        "pkg:npm/pkce-challenge@5.0.1",
+        "pkg:npm/raw-body@3.0.2",
+        "pkg:npm/zod-to-json-schema@3.25.2",
+        "pkg:npm/zod@4.6.7"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@hono/node-server@2.1.5",
+      "name": "@hono/node-server",
+      "version": "2.1.5",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40hono/node-server@2.1.5",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/@hono/node-server@2.1.5"
+      ],
+      "parent_ids": [
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "child_ids": [
+        "pkg:npm/hono@4.13.13"
+      ],
+      "max_sev": "MEDIUM",
+      "vulns": [
+        {
+          "id": "CVE-2026-126343",
+          "ids": [
+            "CVE-2026-126343",
+            "GHSA-qv5m-9pm6-hqp3"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "2.1.6"
+              ]
+            },
+            "OSV-Scanner": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "2.1.6"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "2.1.6"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "OSV-Scanner",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-126210",
+          "ids": [
+            "CVE-2026-126210",
+            "GHSA-jpvv-r467-5p4w"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "2.1.6"
+              ]
+            },
+            "OSV-Scanner": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "1.19.18",
+                "2.1.6"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "2.1.6",
+                "1.19.18"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "OSV-Scanner",
+            "Trivy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pkg:npm/hono@4.13.13",
+      "name": "hono",
+      "version": "4.13.13",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/hono@4.13.13",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/hono@4.13.13"
+      ],
+      "parent_ids": [
+        "pkg:npm/@hono/node-server@2.1.5",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "child_ids": [],
+      "max_sev": "MEDIUM",
+      "vulns": [
+        {
+          "id": "CVE-2026-126357",
+          "ids": [
+            "CVE-2026-126357",
+            "GHSA-4m76-xfj5-7975"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "4.13.16"
+              ]
+            },
+            "OSV-Scanner": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "4.13.16"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "4.13.16"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "OSV-Scanner",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-126356",
+          "ids": [
+            "CVE-2026-126356",
+            "GHSA-4h7h-rv7c-7m2v"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "4.13.16"
+              ]
+            },
+            "OSV-Scanner": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "4.13.16"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "4.13.16"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "OSV-Scanner",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-126358",
+          "ids": [
+            "CVE-2026-126358",
+            "GHSA-h7mg-cq63-vhpq"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "4.13.16"
+              ]
+            },
+            "OSV-Scanner": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "4.13.16"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "4.13.16"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "OSV-Scanner",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-126355",
+          "ids": [
+            "CVE-2026-126355",
+            "GHSA-46wx-v44x-9hh2"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "4.13.16"
+              ]
+            },
+            "OSV-Scanner": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "4.13.16"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "4.13.16"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "OSV-Scanner",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-126359",
+          "ids": [
+            "CVE-2026-126359",
+            "GHSA-3gg2-335m-rxc6"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "LOW",
+              "fixed_versions": [
+                "4.13.16"
+              ]
+            },
+            "OSV-Scanner": {
+              "severity": "LOW",
+              "fixed_versions": [
+                "4.13.16"
+              ]
+            },
+            "Trivy": {
+              "severity": "LOW",
+              "fixed_versions": [
+                "4.13.16"
+              ]
+            }
+          },
+          "severity": "LOW",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "OSV-Scanner",
+            "Trivy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pkg:npm/ajv@8.20.0",
+      "name": "ajv",
+      "version": "8.20.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/ajv@8.20.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/ajv@8.20.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/ajv-formats@3.0.1",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "child_ids": [
+        "pkg:npm/fast-deep-equal@3.1.3",
+        "pkg:npm/fast-uri@3.1.8",
+        "pkg:npm/json-schema-traverse@1.0.0",
+        "pkg:npm/require-from-string@2.0.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/fast-deep-equal@3.1.3",
+      "name": "fast-deep-equal",
+      "version": "3.1.3",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/fast-deep-equal@3.1.3",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/ajv@8.20.0",
+        "pkg:npm/fast-deep-equal@3.1.3"
+      ],
+      "parent_ids": [
+        "pkg:npm/ajv@8.20.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/fast-uri@3.1.8",
+      "name": "fast-uri",
+      "version": "3.1.8",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/fast-uri@3.1.8",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/ajv@8.20.0",
+        "pkg:npm/fast-uri@3.1.8"
+      ],
+      "parent_ids": [
+        "pkg:npm/ajv@8.20.0"
+      ],
+      "child_ids": [],
+      "max_sev": "MEDIUM",
+      "vulns": [
+        {
+          "id": "CVE-2026-110306",
+          "ids": [
+            "CVE-2026-110306",
+            "GHSA-w74x-v6f9-j3xg"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "3.1.9"
+              ]
+            },
+            "OSV-Scanner": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "2.4.8",
+                "3.1.9",
+                "4.2.3"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "2.4.8",
+                "3.1.9",
+                "4.2.3"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "OSV-Scanner",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-110180",
+          "ids": [
+            "CVE-2026-110180",
+            "GHSA-wjr9-j795-jxcr"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "3.1.9"
+              ]
+            },
+            "OSV-Scanner": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "2.4.8",
+                "3.1.9",
+                "4.2.3"
+              ]
+            },
+            "Trivy": {
+              "severity": "MEDIUM",
+              "fixed_versions": [
+                "2.4.8",
+                "3.1.9",
+                "4.2.3"
+              ]
+            }
+          },
+          "severity": "MEDIUM",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "OSV-Scanner",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-110725",
+          "ids": [
+            "CVE-2026-110725",
+            "GHSA-333x-w4r6-6crp"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "LOW",
+              "fixed_versions": [
+                "3.1.9"
+              ]
+            },
+            "OSV-Scanner": {
+              "severity": "LOW",
+              "fixed_versions": [
+                "2.4.8",
+                "3.1.9",
+                "4.2.3"
+              ]
+            },
+            "Trivy": {
+              "severity": "LOW",
+              "fixed_versions": [
+                "2.4.8",
+                "3.1.9",
+                "4.2.3"
+              ]
+            }
+          },
+          "severity": "LOW",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "OSV-Scanner",
+            "Trivy"
+          ]
+        },
+        {
+          "id": "CVE-2026-110095",
+          "ids": [
+            "CVE-2026-110095",
+            "GHSA-xhq7-xmqj-769h"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "LOW",
+              "fixed_versions": [
+                "3.1.9"
+              ]
+            },
+            "OSV-Scanner": {
+              "severity": "LOW",
+              "fixed_versions": [
+                "2.4.8",
+                "3.1.9",
+                "4.2.3"
+              ]
+            },
+            "Trivy": {
+              "severity": "LOW",
+              "fixed_versions": [
+                "2.4.8",
+                "3.1.9",
+                "4.2.3"
+              ]
+            }
+          },
+          "severity": "LOW",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "OSV-Scanner",
+            "Trivy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pkg:npm/json-schema-traverse@1.0.0",
+      "name": "json-schema-traverse",
+      "version": "1.0.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/json-schema-traverse@1.0.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/ajv@8.20.0",
+        "pkg:npm/json-schema-traverse@1.0.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/ajv@8.20.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/require-from-string@2.0.2",
+      "name": "require-from-string",
+      "version": "2.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/require-from-string@2.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/ajv@8.20.0",
+        "pkg:npm/require-from-string@2.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/ajv@8.20.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/ajv-formats@3.0.1",
+      "name": "ajv-formats",
+      "version": "3.0.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/ajv-formats@3.0.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/ajv-formats@3.0.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "child_ids": [
+        "pkg:npm/ajv@8.20.0"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/content-type@1.0.5",
+      "name": "content-type",
+      "version": "1.0.5",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/content-type@1.0.5",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/content-type@1.0.5"
+      ],
+      "parent_ids": [
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/cors@2.8.6",
+      "name": "cors",
+      "version": "2.8.6",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/cors@2.8.6",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/cors@2.8.6"
+      ],
+      "parent_ids": [
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "child_ids": [
+        "pkg:npm/object-assign@4.1.1",
+        "pkg:npm/vary@1.1.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/object-assign@4.1.1",
+      "name": "object-assign",
+      "version": "4.1.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/object-assign@4.1.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/cors@2.8.6",
+        "pkg:npm/object-assign@4.1.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/cors@2.8.6"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/vary@1.1.2",
+      "name": "vary",
+      "version": "1.1.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/vary@1.1.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/vary@1.1.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/cors@2.8.6",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/cross-spawn@7.0.6",
+      "name": "cross-spawn",
+      "version": "7.0.6",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/cross-spawn@7.0.6",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/cross-spawn@7.0.6"
+      ],
+      "parent_ids": [
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "child_ids": [
+        "pkg:npm/path-key@3.1.1",
+        "pkg:npm/shebang-command@2.0.0",
+        "pkg:npm/which@2.0.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/path-key@3.1.1",
+      "name": "path-key",
+      "version": "3.1.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/path-key@3.1.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/cross-spawn@7.0.6",
+        "pkg:npm/path-key@3.1.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/cross-spawn@7.0.6"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/shebang-command@2.0.0",
+      "name": "shebang-command",
+      "version": "2.0.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/shebang-command@2.0.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/cross-spawn@7.0.6",
+        "pkg:npm/shebang-command@2.0.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/cross-spawn@7.0.6"
+      ],
+      "child_ids": [
+        "pkg:npm/shebang-regex@3.0.0"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/shebang-regex@3.0.0",
+      "name": "shebang-regex",
+      "version": "3.0.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/shebang-regex@3.0.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/cross-spawn@7.0.6",
+        "pkg:npm/shebang-command@2.0.0",
+        "pkg:npm/shebang-regex@3.0.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/shebang-command@2.0.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/which@2.0.2",
+      "name": "which",
+      "version": "2.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/which@2.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/cross-spawn@7.0.6",
+        "pkg:npm/which@2.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/cross-spawn@7.0.6"
+      ],
+      "child_ids": [
+        "pkg:npm/isexe@2.0.0"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/isexe@2.0.0",
+      "name": "isexe",
+      "version": "2.0.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/isexe@2.0.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/cross-spawn@7.0.6",
+        "pkg:npm/which@2.0.2",
+        "pkg:npm/isexe@2.0.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/which@2.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/eventsource@3.0.7",
+      "name": "eventsource",
+      "version": "3.0.7",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/eventsource@3.0.7",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/eventsource@3.0.7"
+      ],
+      "parent_ids": [
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "child_ids": [
+        "pkg:npm/eventsource-parser@3.1.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/eventsource-parser@3.1.1",
+      "name": "eventsource-parser",
+      "version": "3.1.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/eventsource-parser@3.1.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/eventsource-parser@3.1.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/eventsource@3.0.7",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/express@5.3.0",
+      "name": "express",
+      "version": "5.3.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/express@5.3.0",
+      "scope": "required",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/express-rate-limit@8.7.1",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/udhaar-mcp@0.1.0"
+      ],
+      "child_ids": [
+        "pkg:npm/accepts@2.0.0",
+        "pkg:npm/body-parser@2.3.0",
+        "pkg:npm/content-disposition@2.0.1",
+        "pkg:npm/content-type@2.1.0",
+        "pkg:npm/cookie-signature@1.2.2",
+        "pkg:npm/cookie@0.7.2",
+        "pkg:npm/debug@4.4.3",
+        "pkg:npm/depd@2.0.0",
+        "pkg:npm/encodeurl@2.0.0",
+        "pkg:npm/escape-html@1.0.3",
+        "pkg:npm/etag@1.8.1",
+        "pkg:npm/finalhandler@2.1.1",
+        "pkg:npm/fresh@2.0.0",
+        "pkg:npm/http-errors@2.0.1",
+        "pkg:npm/merge-descriptors@2.0.0",
+        "pkg:npm/mime-types@3.0.2",
+        "pkg:npm/on-finished@2.4.1",
+        "pkg:npm/once@1.4.0",
+        "pkg:npm/parseurl@1.3.3",
+        "pkg:npm/proxy-addr@2.0.8",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/range-parser@1.3.0",
+        "pkg:npm/router@2.2.0",
+        "pkg:npm/send@1.2.1",
+        "pkg:npm/serve-static@2.2.1",
+        "pkg:npm/statuses@2.0.2",
+        "pkg:npm/type-is@2.1.0",
+        "pkg:npm/vary@1.1.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/accepts@2.0.0",
+      "name": "accepts",
+      "version": "2.0.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/accepts@2.0.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/accepts@2.0.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/mime-types@3.0.2",
+        "pkg:npm/negotiator@1.1.0"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/mime-types@3.0.2",
+      "name": "mime-types",
+      "version": "3.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/mime-types@3.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/mime-types@3.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/accepts@2.0.0",
+        "pkg:npm/type-is@2.1.0",
+        "pkg:npm/send@1.2.1",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/mime-db@1.54.0"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/mime-db@1.54.0",
+      "name": "mime-db",
+      "version": "1.54.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/mime-db@1.54.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/mime-types@3.0.2",
+        "pkg:npm/mime-db@1.54.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/mime-types@3.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/negotiator@1.1.0",
+      "name": "negotiator",
+      "version": "1.1.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/negotiator@1.1.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/accepts@2.0.0",
+        "pkg:npm/negotiator@1.1.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/accepts@2.0.0"
+      ],
+      "child_ids": [
+        "pkg:npm/content-type@2.1.0"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/content-type@2.1.0",
+      "name": "content-type",
+      "version": "2.1.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/content-type@2.1.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/content-type@2.1.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/negotiator@1.1.0",
+        "pkg:npm/type-is@2.1.0",
+        "pkg:npm/body-parser@2.3.0",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/body-parser@2.3.0",
+      "name": "body-parser",
+      "version": "2.3.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/body-parser@2.3.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/body-parser@2.3.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/bytes@3.1.2",
+        "pkg:npm/content-type@2.1.0",
+        "pkg:npm/debug@4.4.3",
+        "pkg:npm/http-errors@2.0.1",
+        "pkg:npm/iconv-lite@0.7.3",
+        "pkg:npm/on-finished@2.4.1",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/raw-body@3.0.2",
+        "pkg:npm/type-is@2.1.0"
+      ],
+      "max_sev": "HIGH",
+      "vulns": [
+        {
+          "id": "CVE-2026-111181",
+          "ids": [
+            "CVE-2026-111181",
+            "GHSA-27r3-jxmh-p828"
+          ],
+          "by_tool": {
+            "Grype": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "2.4.0"
+              ]
+            },
+            "OSV-Scanner": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "1.20.9",
+                "2.4.0"
+              ]
+            },
+            "Trivy": {
+              "severity": "HIGH",
+              "fixed_versions": [
+                "2.4.0",
+                "1.20.9"
+              ]
+            }
+          },
+          "severity": "HIGH",
+          "severity_disagreement": false,
+          "source_tools": [
+            "Grype",
+            "OSV-Scanner",
+            "Trivy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pkg:npm/bytes@3.1.2",
+      "name": "bytes",
+      "version": "3.1.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/bytes@3.1.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/raw-body@3.0.2",
+        "pkg:npm/bytes@3.1.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/raw-body@3.0.2",
+        "pkg:npm/body-parser@2.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/debug@4.4.3",
+      "name": "debug",
+      "version": "4.4.3",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/debug@4.4.3",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/debug@4.4.3"
+      ],
+      "parent_ids": [
+        "pkg:npm/body-parser@2.3.0",
+        "pkg:npm/finalhandler@2.1.1",
+        "pkg:npm/router@2.2.0",
+        "pkg:npm/send@1.2.1",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/express-rate-limit@8.7.1"
+      ],
+      "child_ids": [
+        "pkg:npm/ms@2.1.3"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/ms@2.1.3",
+      "name": "ms",
+      "version": "2.1.3",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/ms@2.1.3",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/debug@4.4.3",
+        "pkg:npm/ms@2.1.3"
+      ],
+      "parent_ids": [
+        "pkg:npm/debug@4.4.3",
+        "pkg:npm/send@1.2.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/http-errors@2.0.1",
+      "name": "http-errors",
+      "version": "2.0.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/http-errors@2.0.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/http-errors@2.0.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/raw-body@3.0.2",
+        "pkg:npm/body-parser@2.3.0",
+        "pkg:npm/send@1.2.1",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/depd@2.0.0",
+        "pkg:npm/inherits@2.0.4",
+        "pkg:npm/setprototypeof@1.2.0",
+        "pkg:npm/statuses@2.0.2",
+        "pkg:npm/toidentifier@1.0.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/depd@2.0.0",
+      "name": "depd",
+      "version": "2.0.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/depd@2.0.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/depd@2.0.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/http-errors@2.0.1",
+        "pkg:npm/router@2.2.0",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/inherits@2.0.4",
+      "name": "inherits",
+      "version": "2.0.4",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/inherits@2.0.4",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/http-errors@2.0.1",
+        "pkg:npm/inherits@2.0.4"
+      ],
+      "parent_ids": [
+        "pkg:npm/http-errors@2.0.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/setprototypeof@1.2.0",
+      "name": "setprototypeof",
+      "version": "1.2.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/setprototypeof@1.2.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/http-errors@2.0.1",
+        "pkg:npm/setprototypeof@1.2.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/http-errors@2.0.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/statuses@2.0.2",
+      "name": "statuses",
+      "version": "2.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/statuses@2.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/statuses@2.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/http-errors@2.0.1",
+        "pkg:npm/finalhandler@2.1.1",
+        "pkg:npm/send@1.2.1",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/toidentifier@1.0.1",
+      "name": "toidentifier",
+      "version": "1.0.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/toidentifier@1.0.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/http-errors@2.0.1",
+        "pkg:npm/toidentifier@1.0.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/http-errors@2.0.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/iconv-lite@0.7.3",
+      "name": "iconv-lite",
+      "version": "0.7.3",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/iconv-lite@0.7.3",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/raw-body@3.0.2",
+        "pkg:npm/iconv-lite@0.7.3"
+      ],
+      "parent_ids": [
+        "pkg:npm/raw-body@3.0.2",
+        "pkg:npm/body-parser@2.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/safer-buffer@2.1.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/safer-buffer@2.1.2",
+      "name": "safer-buffer",
+      "version": "2.1.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/safer-buffer@2.1.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/raw-body@3.0.2",
+        "pkg:npm/iconv-lite@0.7.3",
+        "pkg:npm/safer-buffer@2.1.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/iconv-lite@0.7.3"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/on-finished@2.4.1",
+      "name": "on-finished",
+      "version": "2.4.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/on-finished@2.4.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/on-finished@2.4.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/body-parser@2.3.0",
+        "pkg:npm/finalhandler@2.1.1",
+        "pkg:npm/send@1.2.1",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/ee-first@1.1.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/ee-first@1.1.1",
+      "name": "ee-first",
+      "version": "1.1.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/ee-first@1.1.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/on-finished@2.4.1",
+        "pkg:npm/ee-first@1.1.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/on-finished@2.4.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/qs@6.16.1",
+      "name": "qs",
+      "version": "6.16.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/qs@6.16.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/body-parser@2.3.0",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/es-define-property@1.0.1",
+        "pkg:npm/side-channel@1.1.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/es-define-property@1.0.1",
+      "name": "es-define-property",
+      "version": "1.0.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/es-define-property@1.0.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/es-define-property@1.0.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/get-intrinsic@1.3.0",
+        "pkg:npm/qs@6.16.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/side-channel@1.1.1",
+      "name": "side-channel",
+      "version": "1.1.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/side-channel@1.1.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/qs@6.16.1"
+      ],
+      "child_ids": [
+        "pkg:npm/es-errors@1.3.0",
+        "pkg:npm/object-inspect@1.13.4",
+        "pkg:npm/side-channel-list@1.0.1",
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/side-channel-weakmap@1.0.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/es-errors@1.3.0",
+      "name": "es-errors",
+      "version": "1.3.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/es-errors@1.3.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/es-errors@1.3.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/side-channel-list@1.0.1",
+        "pkg:npm/call-bind-apply-helpers@1.0.2",
+        "pkg:npm/es-object-atoms@1.1.2",
+        "pkg:npm/dunder-proto@1.0.1",
+        "pkg:npm/get-intrinsic@1.3.0",
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/side-channel-weakmap@1.0.2",
+        "pkg:npm/side-channel@1.1.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/object-inspect@1.13.4",
+      "name": "object-inspect",
+      "version": "1.13.4",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/object-inspect@1.13.4",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/object-inspect@1.13.4"
+      ],
+      "parent_ids": [
+        "pkg:npm/side-channel-list@1.0.1",
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/side-channel-weakmap@1.0.2",
+        "pkg:npm/side-channel@1.1.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/side-channel-list@1.0.1",
+      "name": "side-channel-list",
+      "version": "1.0.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/side-channel-list@1.0.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/side-channel-list@1.0.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/side-channel@1.1.1"
+      ],
+      "child_ids": [
+        "pkg:npm/es-errors@1.3.0",
+        "pkg:npm/object-inspect@1.13.4"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/side-channel-map@1.0.1",
+      "name": "side-channel-map",
+      "version": "1.0.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/side-channel-map@1.0.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/side-channel-map@1.0.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/side-channel-weakmap@1.0.2",
+        "pkg:npm/side-channel@1.1.1"
+      ],
+      "child_ids": [
+        "pkg:npm/call-bound@1.0.4",
+        "pkg:npm/es-errors@1.3.0",
+        "pkg:npm/get-intrinsic@1.3.0",
+        "pkg:npm/object-inspect@1.13.4"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/call-bound@1.0.4",
+      "name": "call-bound",
+      "version": "1.0.4",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/call-bound@1.0.4",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/call-bound@1.0.4"
+      ],
+      "parent_ids": [
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/side-channel-weakmap@1.0.2"
+      ],
+      "child_ids": [
+        "pkg:npm/call-bind-apply-helpers@1.0.2",
+        "pkg:npm/get-intrinsic@1.3.0"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/call-bind-apply-helpers@1.0.2",
+      "name": "call-bind-apply-helpers",
+      "version": "1.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/call-bind-apply-helpers@1.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/call-bound@1.0.4",
+        "pkg:npm/call-bind-apply-helpers@1.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/dunder-proto@1.0.1",
+        "pkg:npm/get-intrinsic@1.3.0",
+        "pkg:npm/call-bound@1.0.4"
+      ],
+      "child_ids": [
+        "pkg:npm/es-errors@1.3.0",
+        "pkg:npm/function-bind@1.1.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/function-bind@1.1.2",
+      "name": "function-bind",
+      "version": "1.1.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/function-bind@1.1.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/get-intrinsic@1.3.0",
+        "pkg:npm/function-bind@1.1.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/call-bind-apply-helpers@1.0.2",
+        "pkg:npm/hasown@2.0.4",
+        "pkg:npm/get-intrinsic@1.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/get-intrinsic@1.3.0",
+      "name": "get-intrinsic",
+      "version": "1.3.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/get-intrinsic@1.3.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/get-intrinsic@1.3.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/call-bound@1.0.4",
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/side-channel-weakmap@1.0.2"
+      ],
+      "child_ids": [
+        "pkg:npm/call-bind-apply-helpers@1.0.2",
+        "pkg:npm/es-define-property@1.0.1",
+        "pkg:npm/es-errors@1.3.0",
+        "pkg:npm/es-object-atoms@1.1.2",
+        "pkg:npm/function-bind@1.1.2",
+        "pkg:npm/get-proto@1.0.1",
+        "pkg:npm/gopd@1.2.0",
+        "pkg:npm/has-symbols@1.1.0",
+        "pkg:npm/hasown@2.0.4",
+        "pkg:npm/math-intrinsics@1.1.0"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/es-object-atoms@1.1.2",
+      "name": "es-object-atoms",
+      "version": "1.1.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/es-object-atoms@1.1.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/get-intrinsic@1.3.0",
+        "pkg:npm/es-object-atoms@1.1.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/get-proto@1.0.1",
+        "pkg:npm/get-intrinsic@1.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/es-errors@1.3.0"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/get-proto@1.0.1",
+      "name": "get-proto",
+      "version": "1.0.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/get-proto@1.0.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/get-intrinsic@1.3.0",
+        "pkg:npm/get-proto@1.0.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/get-intrinsic@1.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/dunder-proto@1.0.1",
+        "pkg:npm/es-object-atoms@1.1.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/dunder-proto@1.0.1",
+      "name": "dunder-proto",
+      "version": "1.0.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/dunder-proto@1.0.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/get-intrinsic@1.3.0",
+        "pkg:npm/get-proto@1.0.1",
+        "pkg:npm/dunder-proto@1.0.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/get-proto@1.0.1"
+      ],
+      "child_ids": [
+        "pkg:npm/call-bind-apply-helpers@1.0.2",
+        "pkg:npm/es-errors@1.3.0",
+        "pkg:npm/gopd@1.2.0"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/gopd@1.2.0",
+      "name": "gopd",
+      "version": "1.2.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/gopd@1.2.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/get-intrinsic@1.3.0",
+        "pkg:npm/gopd@1.2.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/dunder-proto@1.0.1",
+        "pkg:npm/get-intrinsic@1.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/has-symbols@1.1.0",
+      "name": "has-symbols",
+      "version": "1.1.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/has-symbols@1.1.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/get-intrinsic@1.3.0",
+        "pkg:npm/has-symbols@1.1.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/get-intrinsic@1.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/hasown@2.0.4",
+      "name": "hasown",
+      "version": "2.0.4",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/hasown@2.0.4",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/get-intrinsic@1.3.0",
+        "pkg:npm/hasown@2.0.4"
+      ],
+      "parent_ids": [
+        "pkg:npm/get-intrinsic@1.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/function-bind@1.1.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/math-intrinsics@1.1.0",
+      "name": "math-intrinsics",
+      "version": "1.1.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/math-intrinsics@1.1.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/side-channel-map@1.0.1",
+        "pkg:npm/get-intrinsic@1.3.0",
+        "pkg:npm/math-intrinsics@1.1.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/get-intrinsic@1.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/side-channel-weakmap@1.0.2",
+      "name": "side-channel-weakmap",
+      "version": "1.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/side-channel-weakmap@1.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/qs@6.16.1",
+        "pkg:npm/side-channel@1.1.1",
+        "pkg:npm/side-channel-weakmap@1.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/side-channel@1.1.1"
+      ],
+      "child_ids": [
+        "pkg:npm/call-bound@1.0.4",
+        "pkg:npm/es-errors@1.3.0",
+        "pkg:npm/get-intrinsic@1.3.0",
+        "pkg:npm/object-inspect@1.13.4",
+        "pkg:npm/side-channel-map@1.0.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/raw-body@3.0.2",
+      "name": "raw-body",
+      "version": "3.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/raw-body@3.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/raw-body@3.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/body-parser@2.3.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "child_ids": [
+        "pkg:npm/bytes@3.1.2",
+        "pkg:npm/http-errors@2.0.1",
+        "pkg:npm/iconv-lite@0.7.3",
+        "pkg:npm/unpipe@1.0.0"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/unpipe@1.0.0",
+      "name": "unpipe",
+      "version": "1.0.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/unpipe@1.0.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/raw-body@3.0.2",
+        "pkg:npm/unpipe@1.0.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/raw-body@3.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/type-is@2.1.0",
+      "name": "type-is",
+      "version": "2.1.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/type-is@2.1.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/type-is@2.1.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/body-parser@2.3.0",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/content-type@2.1.0",
+        "pkg:npm/media-typer@1.1.1",
+        "pkg:npm/mime-types@3.0.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/media-typer@1.1.1",
+      "name": "media-typer",
+      "version": "1.1.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/media-typer@1.1.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/type-is@2.1.0",
+        "pkg:npm/media-typer@1.1.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/type-is@2.1.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/content-disposition@2.0.1",
+      "name": "content-disposition",
+      "version": "2.0.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/content-disposition@2.0.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/content-disposition@2.0.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/cookie@0.7.2",
+      "name": "cookie",
+      "version": "0.7.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/cookie@0.7.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/cookie@0.7.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/cookie-signature@1.2.2",
+      "name": "cookie-signature",
+      "version": "1.2.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/cookie-signature@1.2.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/cookie-signature@1.2.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/encodeurl@2.0.0",
+      "name": "encodeurl",
+      "version": "2.0.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/encodeurl@2.0.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/encodeurl@2.0.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/finalhandler@2.1.1",
+        "pkg:npm/send@1.2.1",
+        "pkg:npm/serve-static@2.2.1",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/escape-html@1.0.3",
+      "name": "escape-html",
+      "version": "1.0.3",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/escape-html@1.0.3",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/escape-html@1.0.3"
+      ],
+      "parent_ids": [
+        "pkg:npm/finalhandler@2.1.1",
+        "pkg:npm/send@1.2.1",
+        "pkg:npm/serve-static@2.2.1",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/etag@1.8.1",
+      "name": "etag",
+      "version": "1.8.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/etag@1.8.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/etag@1.8.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/send@1.2.1",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/finalhandler@2.1.1",
+      "name": "finalhandler",
+      "version": "2.1.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/finalhandler@2.1.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/finalhandler@2.1.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/debug@4.4.3",
+        "pkg:npm/encodeurl@2.0.0",
+        "pkg:npm/escape-html@1.0.3",
+        "pkg:npm/on-finished@2.4.1",
+        "pkg:npm/parseurl@1.3.3",
+        "pkg:npm/statuses@2.0.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/parseurl@1.3.3",
+      "name": "parseurl",
+      "version": "1.3.3",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/parseurl@1.3.3",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/parseurl@1.3.3"
+      ],
+      "parent_ids": [
+        "pkg:npm/finalhandler@2.1.1",
+        "pkg:npm/router@2.2.0",
+        "pkg:npm/serve-static@2.2.1",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/fresh@2.0.0",
+      "name": "fresh",
+      "version": "2.0.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/fresh@2.0.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/fresh@2.0.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/send@1.2.1",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/merge-descriptors@2.0.0",
+      "name": "merge-descriptors",
+      "version": "2.0.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/merge-descriptors@2.0.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/merge-descriptors@2.0.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/once@1.4.0",
+      "name": "once",
+      "version": "1.4.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/once@1.4.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/once@1.4.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/wrappy@1.0.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/wrappy@1.0.2",
+      "name": "wrappy",
+      "version": "1.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/wrappy@1.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/once@1.4.0",
+        "pkg:npm/wrappy@1.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/once@1.4.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/proxy-addr@2.0.8",
+      "name": "proxy-addr",
+      "version": "2.0.8",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/proxy-addr@2.0.8",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/proxy-addr@2.0.8"
+      ],
+      "parent_ids": [
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/forwarded@0.2.0",
+        "pkg:npm/ipaddr.js@1.9.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/forwarded@0.2.0",
+      "name": "forwarded",
+      "version": "0.2.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/forwarded@0.2.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/proxy-addr@2.0.8",
+        "pkg:npm/forwarded@0.2.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/proxy-addr@2.0.8"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/ipaddr.js@1.9.1",
+      "name": "ipaddr.js",
+      "version": "1.9.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/ipaddr.js@1.9.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/proxy-addr@2.0.8",
+        "pkg:npm/ipaddr.js@1.9.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/proxy-addr@2.0.8"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/range-parser@1.3.0",
+      "name": "range-parser",
+      "version": "1.3.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/range-parser@1.3.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/range-parser@1.3.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/send@1.2.1",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/router@2.2.0",
+      "name": "router",
+      "version": "2.2.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/router@2.2.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/router@2.2.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/debug@4.4.3",
+        "pkg:npm/depd@2.0.0",
+        "pkg:npm/is-promise@4.0.0",
+        "pkg:npm/parseurl@1.3.3",
+        "pkg:npm/path-to-regexp@8.4.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/is-promise@4.0.0",
+      "name": "is-promise",
+      "version": "4.0.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/is-promise@4.0.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/router@2.2.0",
+        "pkg:npm/is-promise@4.0.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/router@2.2.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/path-to-regexp@8.4.2",
+      "name": "path-to-regexp",
+      "version": "8.4.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/path-to-regexp@8.4.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/router@2.2.0",
+        "pkg:npm/path-to-regexp@8.4.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/router@2.2.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/send@1.2.1",
+      "name": "send",
+      "version": "1.2.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/send@1.2.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/send@1.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/serve-static@2.2.1",
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/debug@4.4.3",
+        "pkg:npm/encodeurl@2.0.0",
+        "pkg:npm/escape-html@1.0.3",
+        "pkg:npm/etag@1.8.1",
+        "pkg:npm/fresh@2.0.0",
+        "pkg:npm/http-errors@2.0.1",
+        "pkg:npm/mime-types@3.0.2",
+        "pkg:npm/ms@2.1.3",
+        "pkg:npm/on-finished@2.4.1",
+        "pkg:npm/range-parser@1.3.0",
+        "pkg:npm/statuses@2.0.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/serve-static@2.2.1",
+      "name": "serve-static",
+      "version": "2.2.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/serve-static@2.2.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/serve-static@2.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/express@5.3.0"
+      ],
+      "child_ids": [
+        "pkg:npm/encodeurl@2.0.0",
+        "pkg:npm/escape-html@1.0.3",
+        "pkg:npm/parseurl@1.3.3",
+        "pkg:npm/send@1.2.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/express-rate-limit@8.7.1",
+      "name": "express-rate-limit",
+      "version": "8.7.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/express-rate-limit@8.7.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/express-rate-limit@8.7.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "child_ids": [
+        "pkg:npm/debug@4.4.3",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/ip-address@10.7.4"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/ip-address@10.7.4",
+      "name": "ip-address",
+      "version": "10.7.4",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/ip-address@10.7.4",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/express-rate-limit@8.7.1",
+        "pkg:npm/ip-address@10.7.4"
+      ],
+      "parent_ids": [
+        "pkg:npm/express-rate-limit@8.7.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/jose@6.2.12",
+      "name": "jose",
+      "version": "6.2.12",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/jose@6.2.12",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/jose@6.2.12"
+      ],
+      "parent_ids": [
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/json-schema-typed@8.0.2",
+      "name": "json-schema-typed",
+      "version": "8.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/json-schema-typed@8.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/json-schema-typed@8.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/pkce-challenge@5.0.1",
+      "name": "pkce-challenge",
+      "version": "5.0.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/pkce-challenge@5.0.1",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/pkce-challenge@5.0.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/zod@4.6.7",
+      "name": "zod",
+      "version": "4.6.7",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/zod@4.6.7",
+      "scope": "required",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/zod@4.6.7"
+      ],
+      "parent_ids": [
+        "pkg:npm/zod-to-json-schema@3.25.2",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/udhaar-mcp@0.1.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/zod-to-json-schema@3.25.2",
+      "name": "zod-to-json-schema",
+      "version": "3.25.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/zod-to-json-schema@3.25.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/zod-to-json-schema@3.25.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "child_ids": [
+        "pkg:npm/zod@4.6.7"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@types/express@5.0.6",
+      "name": "@types/express",
+      "version": "5.0.6",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40types/express@5.0.6",
+      "scope": "required",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@types/express@5.0.6"
+      ],
+      "parent_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0"
+      ],
+      "child_ids": [
+        "pkg:npm/@types/body-parser@1.19.6",
+        "pkg:npm/@types/express-serve-static-core@5.1.3",
+        "pkg:npm/@types/serve-static@2.2.0"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@types/body-parser@1.19.6",
+      "name": "@types/body-parser",
+      "version": "1.19.6",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40types/body-parser@1.19.6",
+      "scope": "excluded",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@types/express@5.0.6",
+        "pkg:npm/@types/body-parser@1.19.6"
+      ],
+      "parent_ids": [
+        "pkg:npm/@types/express@5.0.6"
+      ],
+      "child_ids": [
+        "pkg:npm/@types/connect@3.4.38",
+        "pkg:npm/@types/node@26.6.5"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@types/connect@3.4.38",
+      "name": "@types/connect",
+      "version": "3.4.38",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40types/connect@3.4.38",
+      "scope": "excluded",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@types/express@5.0.6",
+        "pkg:npm/@types/body-parser@1.19.6",
+        "pkg:npm/@types/connect@3.4.38"
+      ],
+      "parent_ids": [
+        "pkg:npm/@types/body-parser@1.19.6"
+      ],
+      "child_ids": [
+        "pkg:npm/@types/node@26.6.5"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@types/node@26.6.5",
+      "name": "@types/node",
+      "version": "26.6.5",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40types/node@26.6.5",
+      "scope": "excluded",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@types/node@26.6.5"
+      ],
+      "parent_ids": [
+        "pkg:npm/@types/connect@3.4.38",
+        "pkg:npm/@types/body-parser@1.19.6",
+        "pkg:npm/@types/send@1.2.1",
+        "pkg:npm/@types/express-serve-static-core@5.1.3",
+        "pkg:npm/@types/serve-static@2.2.0",
+        "pkg:npm/udhaar-mcp@0.1.0"
+      ],
+      "child_ids": [
+        "pkg:npm/undici-types@8.9.0"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/undici-types@8.9.0",
+      "name": "undici-types",
+      "version": "8.9.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/undici-types@8.9.0",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@types/node@26.6.5",
+        "pkg:npm/undici-types@8.9.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/@types/node@26.6.5"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@types/express-serve-static-core@5.1.3",
+      "name": "@types/express-serve-static-core",
+      "version": "5.1.3",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40types/express-serve-static-core@5.1.3",
+      "scope": "excluded",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@types/express@5.0.6",
+        "pkg:npm/@types/express-serve-static-core@5.1.3"
+      ],
+      "parent_ids": [
+        "pkg:npm/@types/express@5.0.6"
+      ],
+      "child_ids": [
+        "pkg:npm/@types/node@26.6.5",
+        "pkg:npm/@types/qs@6.15.1",
+        "pkg:npm/@types/range-parser@1.2.7",
+        "pkg:npm/@types/send@1.2.1"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@types/qs@6.15.1",
+      "name": "@types/qs",
+      "version": "6.15.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40types/qs@6.15.1",
+      "scope": "excluded",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@types/express@5.0.6",
+        "pkg:npm/@types/express-serve-static-core@5.1.3",
+        "pkg:npm/@types/qs@6.15.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/@types/express-serve-static-core@5.1.3"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@types/range-parser@1.2.7",
+      "name": "@types/range-parser",
+      "version": "1.2.7",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40types/range-parser@1.2.7",
+      "scope": "excluded",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@types/express@5.0.6",
+        "pkg:npm/@types/express-serve-static-core@5.1.3",
+        "pkg:npm/@types/range-parser@1.2.7"
+      ],
+      "parent_ids": [
+        "pkg:npm/@types/express-serve-static-core@5.1.3"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@types/send@1.2.1",
+      "name": "@types/send",
+      "version": "1.2.1",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40types/send@1.2.1",
+      "scope": "excluded",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@types/express@5.0.6",
+        "pkg:npm/@types/express-serve-static-core@5.1.3",
+        "pkg:npm/@types/send@1.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/@types/express-serve-static-core@5.1.3"
+      ],
+      "child_ids": [
+        "pkg:npm/@types/node@26.6.5"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@types/serve-static@2.2.0",
+      "name": "@types/serve-static",
+      "version": "2.2.0",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40types/serve-static@2.2.0",
+      "scope": "excluded",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@types/express@5.0.6",
+        "pkg:npm/@types/serve-static@2.2.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/@types/express@5.0.6"
+      ],
+      "child_ids": [
+        "pkg:npm/@types/http-errors@2.0.5",
+        "pkg:npm/@types/node@26.6.5"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@types/http-errors@2.0.5",
+      "name": "@types/http-errors",
+      "version": "2.0.5",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40types/http-errors@2.0.5",
+      "scope": "excluded",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@types/express@5.0.6",
+        "pkg:npm/@types/serve-static@2.2.0",
+        "pkg:npm/@types/http-errors@2.0.5"
+      ],
+      "parent_ids": [
+        "pkg:npm/@types/serve-static@2.2.0"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/tsx@4.23.15",
+      "name": "tsx",
+      "version": "4.23.15",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/tsx@4.23.15",
+      "scope": "optional",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15"
+      ],
+      "parent_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0"
+      ],
+      "child_ids": [
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/fsevents@2.3.3"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/esbuild@0.28.2",
+      "name": "esbuild",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/esbuild@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/tsx@4.23.15"
+      ],
+      "child_ids": [
+        "pkg:npm/@esbuild/aix-ppc64@0.28.2",
+        "pkg:npm/@esbuild/android-arm64@0.28.2",
+        "pkg:npm/@esbuild/android-arm@0.28.2",
+        "pkg:npm/@esbuild/android-x64@0.28.2",
+        "pkg:npm/@esbuild/darwin-arm64@0.28.2",
+        "pkg:npm/@esbuild/darwin-x64@0.28.2",
+        "pkg:npm/@esbuild/freebsd-arm64@0.28.2",
+        "pkg:npm/@esbuild/freebsd-x64@0.28.2",
+        "pkg:npm/@esbuild/linux-arm64@0.28.2",
+        "pkg:npm/@esbuild/linux-arm@0.28.2",
+        "pkg:npm/@esbuild/linux-ia32@0.28.2",
+        "pkg:npm/@esbuild/linux-loong64@0.28.2",
+        "pkg:npm/@esbuild/linux-mips64el@0.28.2",
+        "pkg:npm/@esbuild/linux-ppc64@0.28.2",
+        "pkg:npm/@esbuild/linux-riscv64@0.28.2",
+        "pkg:npm/@esbuild/linux-s390x@0.28.2",
+        "pkg:npm/@esbuild/linux-x64@0.28.2",
+        "pkg:npm/@esbuild/netbsd-arm64@0.28.2",
+        "pkg:npm/@esbuild/netbsd-x64@0.28.2",
+        "pkg:npm/@esbuild/openbsd-arm64@0.28.2",
+        "pkg:npm/@esbuild/openbsd-x64@0.28.2",
+        "pkg:npm/@esbuild/openharmony-arm64@0.28.2",
+        "pkg:npm/@esbuild/sunos-x64@0.28.2",
+        "pkg:npm/@esbuild/win32-arm64@0.28.2",
+        "pkg:npm/@esbuild/win32-ia32@0.28.2",
+        "pkg:npm/@esbuild/win32-x64@0.28.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/aix-ppc64@0.28.2",
+      "name": "@esbuild/aix-ppc64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/aix-ppc64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/aix-ppc64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/android-arm@0.28.2",
+      "name": "@esbuild/android-arm",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/android-arm@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/android-arm@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/android-arm64@0.28.2",
+      "name": "@esbuild/android-arm64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/android-arm64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/android-arm64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/android-x64@0.28.2",
+      "name": "@esbuild/android-x64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/android-x64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/android-x64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/darwin-arm64@0.28.2",
+      "name": "@esbuild/darwin-arm64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/darwin-arm64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/darwin-arm64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/darwin-x64@0.28.2",
+      "name": "@esbuild/darwin-x64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/darwin-x64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/darwin-x64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/freebsd-arm64@0.28.2",
+      "name": "@esbuild/freebsd-arm64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/freebsd-arm64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/freebsd-arm64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/freebsd-x64@0.28.2",
+      "name": "@esbuild/freebsd-x64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/freebsd-x64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/freebsd-x64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/linux-arm@0.28.2",
+      "name": "@esbuild/linux-arm",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/linux-arm@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/linux-arm@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/linux-arm64@0.28.2",
+      "name": "@esbuild/linux-arm64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/linux-arm64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/linux-arm64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/linux-ia32@0.28.2",
+      "name": "@esbuild/linux-ia32",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/linux-ia32@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/linux-ia32@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/linux-loong64@0.28.2",
+      "name": "@esbuild/linux-loong64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/linux-loong64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/linux-loong64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/linux-mips64el@0.28.2",
+      "name": "@esbuild/linux-mips64el",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/linux-mips64el@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/linux-mips64el@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/linux-ppc64@0.28.2",
+      "name": "@esbuild/linux-ppc64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/linux-ppc64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/linux-ppc64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/linux-riscv64@0.28.2",
+      "name": "@esbuild/linux-riscv64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/linux-riscv64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/linux-riscv64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/linux-s390x@0.28.2",
+      "name": "@esbuild/linux-s390x",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/linux-s390x@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/linux-s390x@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/linux-x64@0.28.2",
+      "name": "@esbuild/linux-x64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/linux-x64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/linux-x64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/netbsd-arm64@0.28.2",
+      "name": "@esbuild/netbsd-arm64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/netbsd-arm64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/netbsd-arm64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/netbsd-x64@0.28.2",
+      "name": "@esbuild/netbsd-x64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/netbsd-x64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/netbsd-x64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/openbsd-arm64@0.28.2",
+      "name": "@esbuild/openbsd-arm64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/openbsd-arm64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/openbsd-arm64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/openbsd-x64@0.28.2",
+      "name": "@esbuild/openbsd-x64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/openbsd-x64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/openbsd-x64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/openharmony-arm64@0.28.2",
+      "name": "@esbuild/openharmony-arm64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/openharmony-arm64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/openharmony-arm64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/sunos-x64@0.28.2",
+      "name": "@esbuild/sunos-x64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/sunos-x64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/sunos-x64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/win32-arm64@0.28.2",
+      "name": "@esbuild/win32-arm64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/win32-arm64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/win32-arm64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/win32-ia32@0.28.2",
+      "name": "@esbuild/win32-ia32",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/win32-ia32@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/win32-ia32@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@esbuild/win32-x64@0.28.2",
+      "name": "@esbuild/win32-x64",
+      "version": "0.28.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40esbuild/win32-x64@0.28.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/esbuild@0.28.2",
+        "pkg:npm/@esbuild/win32-x64@0.28.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/esbuild@0.28.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/fsevents@2.3.3",
+      "name": "fsevents",
+      "version": "2.3.3",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/fsevents@2.3.3",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/tsx@4.23.15",
+        "pkg:npm/fsevents@2.3.3"
+      ],
+      "parent_ids": [
+        "pkg:npm/tsx@4.23.15"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/typescript@7.0.2",
+      "name": "typescript",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/typescript@7.0.2",
+      "scope": "optional",
+      "dep_type": "direct",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0"
+      ],
+      "child_ids": [
+        "pkg:npm/@typescript/typescript-aix-ppc64@7.0.2",
+        "pkg:npm/@typescript/typescript-darwin-arm64@7.0.2",
+        "pkg:npm/@typescript/typescript-darwin-x64@7.0.2",
+        "pkg:npm/@typescript/typescript-freebsd-arm64@7.0.2",
+        "pkg:npm/@typescript/typescript-freebsd-x64@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-arm64@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-arm@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-loong64@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-mips64el@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-ppc64@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-riscv64@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-s390x@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-x64@7.0.2",
+        "pkg:npm/@typescript/typescript-netbsd-arm64@7.0.2",
+        "pkg:npm/@typescript/typescript-netbsd-x64@7.0.2",
+        "pkg:npm/@typescript/typescript-openbsd-arm64@7.0.2",
+        "pkg:npm/@typescript/typescript-openbsd-x64@7.0.2",
+        "pkg:npm/@typescript/typescript-sunos-x64@7.0.2",
+        "pkg:npm/@typescript/typescript-win32-arm64@7.0.2",
+        "pkg:npm/@typescript/typescript-win32-x64@7.0.2"
+      ],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-aix-ppc64@7.0.2",
+      "name": "@typescript/typescript-aix-ppc64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-aix-ppc64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-aix-ppc64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-darwin-arm64@7.0.2",
+      "name": "@typescript/typescript-darwin-arm64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-darwin-arm64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-darwin-arm64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-darwin-x64@7.0.2",
+      "name": "@typescript/typescript-darwin-x64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-darwin-x64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-darwin-x64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-freebsd-arm64@7.0.2",
+      "name": "@typescript/typescript-freebsd-arm64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-freebsd-arm64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-freebsd-arm64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-freebsd-x64@7.0.2",
+      "name": "@typescript/typescript-freebsd-x64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-freebsd-x64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-freebsd-x64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-linux-arm@7.0.2",
+      "name": "@typescript/typescript-linux-arm",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-linux-arm@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-arm@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-linux-arm64@7.0.2",
+      "name": "@typescript/typescript-linux-arm64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-linux-arm64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-arm64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-linux-loong64@7.0.2",
+      "name": "@typescript/typescript-linux-loong64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-linux-loong64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-loong64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-linux-mips64el@7.0.2",
+      "name": "@typescript/typescript-linux-mips64el",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-linux-mips64el@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-mips64el@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-linux-ppc64@7.0.2",
+      "name": "@typescript/typescript-linux-ppc64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-linux-ppc64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-ppc64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-linux-riscv64@7.0.2",
+      "name": "@typescript/typescript-linux-riscv64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-linux-riscv64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-riscv64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-linux-s390x@7.0.2",
+      "name": "@typescript/typescript-linux-s390x",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-linux-s390x@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-s390x@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-linux-x64@7.0.2",
+      "name": "@typescript/typescript-linux-x64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-linux-x64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-linux-x64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-netbsd-arm64@7.0.2",
+      "name": "@typescript/typescript-netbsd-arm64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-netbsd-arm64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-netbsd-arm64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-netbsd-x64@7.0.2",
+      "name": "@typescript/typescript-netbsd-x64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-netbsd-x64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-netbsd-x64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-openbsd-arm64@7.0.2",
+      "name": "@typescript/typescript-openbsd-arm64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-openbsd-arm64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-openbsd-arm64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-openbsd-x64@7.0.2",
+      "name": "@typescript/typescript-openbsd-x64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-openbsd-x64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-openbsd-x64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-sunos-x64@7.0.2",
+      "name": "@typescript/typescript-sunos-x64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-sunos-x64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-sunos-x64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-win32-arm64@7.0.2",
+      "name": "@typescript/typescript-win32-arm64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-win32-arm64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-win32-arm64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    },
+    {
+      "id": "pkg:npm/@typescript/typescript-win32-x64@7.0.2",
+      "name": "@typescript/typescript-win32-x64",
+      "version": "7.0.2",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40typescript/typescript-win32-x64@7.0.2",
+      "scope": "optional",
+      "dep_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/typescript@7.0.2",
+        "pkg:npm/@typescript/typescript-win32-x64@7.0.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/typescript@7.0.2"
+      ],
+      "child_ids": [],
+      "max_sev": null,
+      "vulns": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "pkg:npm/udhaar-mcp@0.1.0",
+      "to": "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0"
+    },
+    {
+      "from": "pkg:npm/udhaar-mcp@0.1.0",
+      "to": "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+    },
+    {
+      "from": "pkg:npm/udhaar-mcp@0.1.0",
+      "to": "pkg:npm/@types/express@5.0.6"
+    },
+    {
+      "from": "pkg:npm/udhaar-mcp@0.1.0",
+      "to": "pkg:npm/@types/node@26.6.5"
+    },
+    {
+      "from": "pkg:npm/udhaar-mcp@0.1.0",
+      "to": "pkg:npm/express@5.3.0"
+    },
+    {
+      "from": "pkg:npm/udhaar-mcp@0.1.0",
+      "to": "pkg:npm/tsx@4.23.15"
+    },
+    {
+      "from": "pkg:npm/udhaar-mcp@0.1.0",
+      "to": "pkg:npm/typescript@7.0.2"
+    },
+    {
+      "from": "pkg:npm/udhaar-mcp@0.1.0",
+      "to": "pkg:npm/zod@4.6.7"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+      "to": "pkg:npm/@aws-sdk/core@3.978.3"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+      "to": "pkg:npm/@aws-sdk/credential-provider-node@3.972.86"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+      "to": "pkg:npm/@aws-sdk/eventstream-handler-node@3.972.36"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+      "to": "pkg:npm/@aws-sdk/middleware-eventstream@3.972.31"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+      "to": "pkg:npm/@aws-sdk/middleware-websocket@3.972.56"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+      "to": "pkg:npm/@aws-sdk/token-providers@3.1152.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+      "to": "pkg:npm/@smithy/fetch-http-handler@5.8.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+      "to": "pkg:npm/@smithy/node-http-handler@4.12.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/client-bedrock-runtime@3.1152.0",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/core@3.978.3",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/core@3.978.3",
+      "to": "pkg:npm/@aws-sdk/xml-builder@3.972.41"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/core@3.978.3",
+      "to": "pkg:npm/@aws/lambda-invoke-store@0.3.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/core@3.978.3",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/core@3.978.3",
+      "to": "pkg:npm/@smithy/signature-v4@5.7.4"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/core@3.978.3",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/core@3.978.3",
+      "to": "pkg:npm/bowser@2.14.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/core@3.978.3",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/types@3.974.6",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/types@3.974.6",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@smithy/types@4.19.0",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/xml-builder@3.972.41",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/xml-builder@3.972.41",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@smithy/core@3.36.0",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@smithy/core@3.36.0",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@smithy/signature-v4@5.7.4",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@smithy/signature-v4@5.7.4",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@smithy/signature-v4@5.7.4",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+      "to": "pkg:npm/@aws-sdk/credential-provider-env@3.972.74"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+      "to": "pkg:npm/@aws-sdk/credential-provider-http@3.972.76"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+      "to": "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+      "to": "pkg:npm/@aws-sdk/credential-provider-process@3.972.74"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+      "to": "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+      "to": "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+      "to": "pkg:npm/@smithy/credential-provider-imds@4.5.2"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-node@3.972.86",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-env@3.972.74",
+      "to": "pkg:npm/@aws-sdk/core@3.978.3"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-env@3.972.74",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-env@3.972.74",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-env@3.972.74",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-env@3.972.74",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+      "to": "pkg:npm/@aws-sdk/core@3.978.3"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+      "to": "pkg:npm/@smithy/fetch-http-handler@5.8.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+      "to": "pkg:npm/@smithy/node-http-handler@4.12.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-http@3.972.76",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@smithy/fetch-http-handler@5.8.0",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@smithy/fetch-http-handler@5.8.0",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@smithy/fetch-http-handler@5.8.0",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@smithy/node-http-handler@4.12.1",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@smithy/node-http-handler@4.12.1",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@smithy/node-http-handler@4.12.1",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+      "to": "pkg:npm/@aws-sdk/core@3.978.3"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+      "to": "pkg:npm/@aws-sdk/credential-provider-env@3.972.74"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+      "to": "pkg:npm/@aws-sdk/credential-provider-http@3.972.76"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+      "to": "pkg:npm/@aws-sdk/credential-provider-login@3.972.81"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+      "to": "pkg:npm/@aws-sdk/credential-provider-process@3.972.74"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+      "to": "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+      "to": "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+      "to": "pkg:npm/@aws-sdk/nested-clients@3.997.48"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+      "to": "pkg:npm/@smithy/credential-provider-imds@4.5.2"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-ini@3.973.19",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-login@3.972.81",
+      "to": "pkg:npm/@aws-sdk/core@3.978.3"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-login@3.972.81",
+      "to": "pkg:npm/@aws-sdk/nested-clients@3.997.48"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-login@3.972.81",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-login@3.972.81",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-login@3.972.81",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-login@3.972.81",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+      "to": "pkg:npm/@aws-sdk/core@3.978.3"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+      "to": "pkg:npm/@aws-sdk/signature-v4-multi-region@3.996.48"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+      "to": "pkg:npm/@smithy/fetch-http-handler@5.8.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+      "to": "pkg:npm/@smithy/node-http-handler@4.12.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/nested-clients@3.997.48",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/signature-v4-multi-region@3.996.48",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/signature-v4-multi-region@3.996.48",
+      "to": "pkg:npm/@smithy/signature-v4@5.7.4"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/signature-v4-multi-region@3.996.48",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/signature-v4-multi-region@3.996.48",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-process@3.972.74",
+      "to": "pkg:npm/@aws-sdk/core@3.978.3"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-process@3.972.74",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-process@3.972.74",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-process@3.972.74",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-process@3.972.74",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+      "to": "pkg:npm/@aws-sdk/core@3.978.3"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+      "to": "pkg:npm/@aws-sdk/nested-clients@3.997.48"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+      "to": "pkg:npm/@aws-sdk/token-providers@3.1150.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-sso@3.973.18",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/token-providers@3.1150.0",
+      "to": "pkg:npm/@aws-sdk/core@3.978.3"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/token-providers@3.1150.0",
+      "to": "pkg:npm/@aws-sdk/nested-clients@3.997.48"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/token-providers@3.1150.0",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/token-providers@3.1150.0",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/token-providers@3.1150.0",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/token-providers@3.1150.0",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80",
+      "to": "pkg:npm/@aws-sdk/core@3.978.3"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80",
+      "to": "pkg:npm/@aws-sdk/nested-clients@3.997.48"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/credential-provider-web-identity@3.972.80",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@smithy/credential-provider-imds@4.5.2",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@smithy/credential-provider-imds@4.5.2",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@smithy/credential-provider-imds@4.5.2",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/eventstream-handler-node@3.972.36",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/eventstream-handler-node@3.972.36",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/eventstream-handler-node@3.972.36",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/eventstream-handler-node@3.972.36",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/middleware-eventstream@3.972.31",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/middleware-eventstream@3.972.31",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/middleware-eventstream@3.972.31",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/middleware-eventstream@3.972.31",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/middleware-websocket@3.972.56",
+      "to": "pkg:npm/@aws-sdk/core@3.978.3"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/middleware-websocket@3.972.56",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/middleware-websocket@3.972.56",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/middleware-websocket@3.972.56",
+      "to": "pkg:npm/@smithy/fetch-http-handler@5.8.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/middleware-websocket@3.972.56",
+      "to": "pkg:npm/@smithy/signature-v4@5.7.4"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/middleware-websocket@3.972.56",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/middleware-websocket@3.972.56",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/token-providers@3.1152.0",
+      "to": "pkg:npm/@aws-sdk/core@3.978.3"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/token-providers@3.1152.0",
+      "to": "pkg:npm/@aws-sdk/nested-clients@3.997.48"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/token-providers@3.1152.0",
+      "to": "pkg:npm/@aws-sdk/types@3.974.6"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/token-providers@3.1152.0",
+      "to": "pkg:npm/@smithy/core@3.36.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/token-providers@3.1152.0",
+      "to": "pkg:npm/@smithy/types@4.19.0"
+    },
+    {
+      "from": "pkg:npm/@aws-sdk/token-providers@3.1152.0",
+      "to": "pkg:npm/tslib@2.8.1"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/@hono/node-server@2.1.5"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/ajv-formats@3.0.1"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/ajv@8.20.0"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/content-type@1.0.5"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/cors@2.8.6"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/cross-spawn@7.0.6"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/eventsource-parser@3.1.1"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/eventsource@3.0.7"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/express-rate-limit@8.7.1"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/express@5.3.0"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/hono@4.13.13"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/jose@6.2.12"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/json-schema-typed@8.0.2"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/pkce-challenge@5.0.1"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/raw-body@3.0.2"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/zod-to-json-schema@3.25.2"
+    },
+    {
+      "from": "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+      "to": "pkg:npm/zod@4.6.7"
+    },
+    {
+      "from": "pkg:npm/@hono/node-server@2.1.5",
+      "to": "pkg:npm/hono@4.13.13"
+    },
+    {
+      "from": "pkg:npm/ajv@8.20.0",
+      "to": "pkg:npm/fast-deep-equal@3.1.3"
+    },
+    {
+      "from": "pkg:npm/ajv@8.20.0",
+      "to": "pkg:npm/fast-uri@3.1.8"
+    },
+    {
+      "from": "pkg:npm/ajv@8.20.0",
+      "to": "pkg:npm/json-schema-traverse@1.0.0"
+    },
+    {
+      "from": "pkg:npm/ajv@8.20.0",
+      "to": "pkg:npm/require-from-string@2.0.2"
+    },
+    {
+      "from": "pkg:npm/ajv-formats@3.0.1",
+      "to": "pkg:npm/ajv@8.20.0"
+    },
+    {
+      "from": "pkg:npm/cors@2.8.6",
+      "to": "pkg:npm/object-assign@4.1.1"
+    },
+    {
+      "from": "pkg:npm/cors@2.8.6",
+      "to": "pkg:npm/vary@1.1.2"
+    },
+    {
+      "from": "pkg:npm/cross-spawn@7.0.6",
+      "to": "pkg:npm/path-key@3.1.1"
+    },
+    {
+      "from": "pkg:npm/cross-spawn@7.0.6",
+      "to": "pkg:npm/shebang-command@2.0.0"
+    },
+    {
+      "from": "pkg:npm/cross-spawn@7.0.6",
+      "to": "pkg:npm/which@2.0.2"
+    },
+    {
+      "from": "pkg:npm/shebang-command@2.0.0",
+      "to": "pkg:npm/shebang-regex@3.0.0"
+    },
+    {
+      "from": "pkg:npm/which@2.0.2",
+      "to": "pkg:npm/isexe@2.0.0"
+    },
+    {
+      "from": "pkg:npm/eventsource@3.0.7",
+      "to": "pkg:npm/eventsource-parser@3.1.1"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/accepts@2.0.0"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/body-parser@2.3.0"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/content-disposition@2.0.1"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/content-type@2.1.0"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/cookie-signature@1.2.2"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/cookie@0.7.2"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/debug@4.4.3"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/depd@2.0.0"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/encodeurl@2.0.0"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/escape-html@1.0.3"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/etag@1.8.1"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/finalhandler@2.1.1"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/fresh@2.0.0"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/http-errors@2.0.1"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/merge-descriptors@2.0.0"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/mime-types@3.0.2"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/on-finished@2.4.1"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/once@1.4.0"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/parseurl@1.3.3"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/proxy-addr@2.0.8"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/qs@6.16.1"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/range-parser@1.3.0"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/router@2.2.0"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/send@1.2.1"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/serve-static@2.2.1"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/statuses@2.0.2"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/type-is@2.1.0"
+    },
+    {
+      "from": "pkg:npm/express@5.3.0",
+      "to": "pkg:npm/vary@1.1.2"
+    },
+    {
+      "from": "pkg:npm/accepts@2.0.0",
+      "to": "pkg:npm/mime-types@3.0.2"
+    },
+    {
+      "from": "pkg:npm/accepts@2.0.0",
+      "to": "pkg:npm/negotiator@1.1.0"
+    },
+    {
+      "from": "pkg:npm/mime-types@3.0.2",
+      "to": "pkg:npm/mime-db@1.54.0"
+    },
+    {
+      "from": "pkg:npm/negotiator@1.1.0",
+      "to": "pkg:npm/content-type@2.1.0"
+    },
+    {
+      "from": "pkg:npm/body-parser@2.3.0",
+      "to": "pkg:npm/bytes@3.1.2"
+    },
+    {
+      "from": "pkg:npm/body-parser@2.3.0",
+      "to": "pkg:npm/content-type@2.1.0"
+    },
+    {
+      "from": "pkg:npm/body-parser@2.3.0",
+      "to": "pkg:npm/debug@4.4.3"
+    },
+    {
+      "from": "pkg:npm/body-parser@2.3.0",
+      "to": "pkg:npm/http-errors@2.0.1"
+    },
+    {
+      "from": "pkg:npm/body-parser@2.3.0",
+      "to": "pkg:npm/iconv-lite@0.7.3"
+    },
+    {
+      "from": "pkg:npm/body-parser@2.3.0",
+      "to": "pkg:npm/on-finished@2.4.1"
+    },
+    {
+      "from": "pkg:npm/body-parser@2.3.0",
+      "to": "pkg:npm/qs@6.16.1"
+    },
+    {
+      "from": "pkg:npm/body-parser@2.3.0",
+      "to": "pkg:npm/raw-body@3.0.2"
+    },
+    {
+      "from": "pkg:npm/body-parser@2.3.0",
+      "to": "pkg:npm/type-is@2.1.0"
+    },
+    {
+      "from": "pkg:npm/debug@4.4.3",
+      "to": "pkg:npm/ms@2.1.3"
+    },
+    {
+      "from": "pkg:npm/http-errors@2.0.1",
+      "to": "pkg:npm/depd@2.0.0"
+    },
+    {
+      "from": "pkg:npm/http-errors@2.0.1",
+      "to": "pkg:npm/inherits@2.0.4"
+    },
+    {
+      "from": "pkg:npm/http-errors@2.0.1",
+      "to": "pkg:npm/setprototypeof@1.2.0"
+    },
+    {
+      "from": "pkg:npm/http-errors@2.0.1",
+      "to": "pkg:npm/statuses@2.0.2"
+    },
+    {
+      "from": "pkg:npm/http-errors@2.0.1",
+      "to": "pkg:npm/toidentifier@1.0.1"
+    },
+    {
+      "from": "pkg:npm/iconv-lite@0.7.3",
+      "to": "pkg:npm/safer-buffer@2.1.2"
+    },
+    {
+      "from": "pkg:npm/on-finished@2.4.1",
+      "to": "pkg:npm/ee-first@1.1.1"
+    },
+    {
+      "from": "pkg:npm/qs@6.16.1",
+      "to": "pkg:npm/es-define-property@1.0.1"
+    },
+    {
+      "from": "pkg:npm/qs@6.16.1",
+      "to": "pkg:npm/side-channel@1.1.1"
+    },
+    {
+      "from": "pkg:npm/side-channel@1.1.1",
+      "to": "pkg:npm/es-errors@1.3.0"
+    },
+    {
+      "from": "pkg:npm/side-channel@1.1.1",
+      "to": "pkg:npm/object-inspect@1.13.4"
+    },
+    {
+      "from": "pkg:npm/side-channel@1.1.1",
+      "to": "pkg:npm/side-channel-list@1.0.1"
+    },
+    {
+      "from": "pkg:npm/side-channel@1.1.1",
+      "to": "pkg:npm/side-channel-map@1.0.1"
+    },
+    {
+      "from": "pkg:npm/side-channel@1.1.1",
+      "to": "pkg:npm/side-channel-weakmap@1.0.2"
+    },
+    {
+      "from": "pkg:npm/side-channel-list@1.0.1",
+      "to": "pkg:npm/es-errors@1.3.0"
+    },
+    {
+      "from": "pkg:npm/side-channel-list@1.0.1",
+      "to": "pkg:npm/object-inspect@1.13.4"
+    },
+    {
+      "from": "pkg:npm/side-channel-map@1.0.1",
+      "to": "pkg:npm/call-bound@1.0.4"
+    },
+    {
+      "from": "pkg:npm/side-channel-map@1.0.1",
+      "to": "pkg:npm/es-errors@1.3.0"
+    },
+    {
+      "from": "pkg:npm/side-channel-map@1.0.1",
+      "to": "pkg:npm/get-intrinsic@1.3.0"
+    },
+    {
+      "from": "pkg:npm/side-channel-map@1.0.1",
+      "to": "pkg:npm/object-inspect@1.13.4"
+    },
+    {
+      "from": "pkg:npm/call-bound@1.0.4",
+      "to": "pkg:npm/call-bind-apply-helpers@1.0.2"
+    },
+    {
+      "from": "pkg:npm/call-bound@1.0.4",
+      "to": "pkg:npm/get-intrinsic@1.3.0"
+    },
+    {
+      "from": "pkg:npm/call-bind-apply-helpers@1.0.2",
+      "to": "pkg:npm/es-errors@1.3.0"
+    },
+    {
+      "from": "pkg:npm/call-bind-apply-helpers@1.0.2",
+      "to": "pkg:npm/function-bind@1.1.2"
+    },
+    {
+      "from": "pkg:npm/get-intrinsic@1.3.0",
+      "to": "pkg:npm/call-bind-apply-helpers@1.0.2"
+    },
+    {
+      "from": "pkg:npm/get-intrinsic@1.3.0",
+      "to": "pkg:npm/es-define-property@1.0.1"
+    },
+    {
+      "from": "pkg:npm/get-intrinsic@1.3.0",
+      "to": "pkg:npm/es-errors@1.3.0"
+    },
+    {
+      "from": "pkg:npm/get-intrinsic@1.3.0",
+      "to": "pkg:npm/es-object-atoms@1.1.2"
+    },
+    {
+      "from": "pkg:npm/get-intrinsic@1.3.0",
+      "to": "pkg:npm/function-bind@1.1.2"
+    },
+    {
+      "from": "pkg:npm/get-intrinsic@1.3.0",
+      "to": "pkg:npm/get-proto@1.0.1"
+    },
+    {
+      "from": "pkg:npm/get-intrinsic@1.3.0",
+      "to": "pkg:npm/gopd@1.2.0"
+    },
+    {
+      "from": "pkg:npm/get-intrinsic@1.3.0",
+      "to": "pkg:npm/has-symbols@1.1.0"
+    },
+    {
+      "from": "pkg:npm/get-intrinsic@1.3.0",
+      "to": "pkg:npm/hasown@2.0.4"
+    },
+    {
+      "from": "pkg:npm/get-intrinsic@1.3.0",
+      "to": "pkg:npm/math-intrinsics@1.1.0"
+    },
+    {
+      "from": "pkg:npm/es-object-atoms@1.1.2",
+      "to": "pkg:npm/es-errors@1.3.0"
+    },
+    {
+      "from": "pkg:npm/get-proto@1.0.1",
+      "to": "pkg:npm/dunder-proto@1.0.1"
+    },
+    {
+      "from": "pkg:npm/get-proto@1.0.1",
+      "to": "pkg:npm/es-object-atoms@1.1.2"
+    },
+    {
+      "from": "pkg:npm/dunder-proto@1.0.1",
+      "to": "pkg:npm/call-bind-apply-helpers@1.0.2"
+    },
+    {
+      "from": "pkg:npm/dunder-proto@1.0.1",
+      "to": "pkg:npm/es-errors@1.3.0"
+    },
+    {
+      "from": "pkg:npm/dunder-proto@1.0.1",
+      "to": "pkg:npm/gopd@1.2.0"
+    },
+    {
+      "from": "pkg:npm/hasown@2.0.4",
+      "to": "pkg:npm/function-bind@1.1.2"
+    },
+    {
+      "from": "pkg:npm/side-channel-weakmap@1.0.2",
+      "to": "pkg:npm/call-bound@1.0.4"
+    },
+    {
+      "from": "pkg:npm/side-channel-weakmap@1.0.2",
+      "to": "pkg:npm/es-errors@1.3.0"
+    },
+    {
+      "from": "pkg:npm/side-channel-weakmap@1.0.2",
+      "to": "pkg:npm/get-intrinsic@1.3.0"
+    },
+    {
+      "from": "pkg:npm/side-channel-weakmap@1.0.2",
+      "to": "pkg:npm/object-inspect@1.13.4"
+    },
+    {
+      "from": "pkg:npm/side-channel-weakmap@1.0.2",
+      "to": "pkg:npm/side-channel-map@1.0.1"
+    },
+    {
+      "from": "pkg:npm/raw-body@3.0.2",
+      "to": "pkg:npm/bytes@3.1.2"
+    },
+    {
+      "from": "pkg:npm/raw-body@3.0.2",
+      "to": "pkg:npm/http-errors@2.0.1"
+    },
+    {
+      "from": "pkg:npm/raw-body@3.0.2",
+      "to": "pkg:npm/iconv-lite@0.7.3"
+    },
+    {
+      "from": "pkg:npm/raw-body@3.0.2",
+      "to": "pkg:npm/unpipe@1.0.0"
+    },
+    {
+      "from": "pkg:npm/type-is@2.1.0",
+      "to": "pkg:npm/content-type@2.1.0"
+    },
+    {
+      "from": "pkg:npm/type-is@2.1.0",
+      "to": "pkg:npm/media-typer@1.1.1"
+    },
+    {
+      "from": "pkg:npm/type-is@2.1.0",
+      "to": "pkg:npm/mime-types@3.0.2"
+    },
+    {
+      "from": "pkg:npm/finalhandler@2.1.1",
+      "to": "pkg:npm/debug@4.4.3"
+    },
+    {
+      "from": "pkg:npm/finalhandler@2.1.1",
+      "to": "pkg:npm/encodeurl@2.0.0"
+    },
+    {
+      "from": "pkg:npm/finalhandler@2.1.1",
+      "to": "pkg:npm/escape-html@1.0.3"
+    },
+    {
+      "from": "pkg:npm/finalhandler@2.1.1",
+      "to": "pkg:npm/on-finished@2.4.1"
+    },
+    {
+      "from": "pkg:npm/finalhandler@2.1.1",
+      "to": "pkg:npm/parseurl@1.3.3"
+    },
+    {
+      "from": "pkg:npm/finalhandler@2.1.1",
+      "to": "pkg:npm/statuses@2.0.2"
+    },
+    {
+      "from": "pkg:npm/once@1.4.0",
+      "to": "pkg:npm/wrappy@1.0.2"
+    },
+    {
+      "from": "pkg:npm/proxy-addr@2.0.8",
+      "to": "pkg:npm/forwarded@0.2.0"
+    },
+    {
+      "from": "pkg:npm/proxy-addr@2.0.8",
+      "to": "pkg:npm/ipaddr.js@1.9.1"
+    },
+    {
+      "from": "pkg:npm/router@2.2.0",
+      "to": "pkg:npm/debug@4.4.3"
+    },
+    {
+      "from": "pkg:npm/router@2.2.0",
+      "to": "pkg:npm/depd@2.0.0"
+    },
+    {
+      "from": "pkg:npm/router@2.2.0",
+      "to": "pkg:npm/is-promise@4.0.0"
+    },
+    {
+      "from": "pkg:npm/router@2.2.0",
+      "to": "pkg:npm/parseurl@1.3.3"
+    },
+    {
+      "from": "pkg:npm/router@2.2.0",
+      "to": "pkg:npm/path-to-regexp@8.4.2"
+    },
+    {
+      "from": "pkg:npm/send@1.2.1",
+      "to": "pkg:npm/debug@4.4.3"
+    },
+    {
+      "from": "pkg:npm/send@1.2.1",
+      "to": "pkg:npm/encodeurl@2.0.0"
+    },
+    {
+      "from": "pkg:npm/send@1.2.1",
+      "to": "pkg:npm/escape-html@1.0.3"
+    },
+    {
+      "from": "pkg:npm/send@1.2.1",
+      "to": "pkg:npm/etag@1.8.1"
+    },
+    {
+      "from": "pkg:npm/send@1.2.1",
+      "to": "pkg:npm/fresh@2.0.0"
+    },
+    {
+      "from": "pkg:npm/send@1.2.1",
+      "to": "pkg:npm/http-errors@2.0.1"
+    },
+    {
+      "from": "pkg:npm/send@1.2.1",
+      "to": "pkg:npm/mime-types@3.0.2"
+    },
+    {
+      "from": "pkg:npm/send@1.2.1",
+      "to": "pkg:npm/ms@2.1.3"
+    },
+    {
+      "from": "pkg:npm/send@1.2.1",
+      "to": "pkg:npm/on-finished@2.4.1"
+    },
+    {
+      "from": "pkg:npm/send@1.2.1",
+      "to": "pkg:npm/range-parser@1.3.0"
+    },
+    {
+      "from": "pkg:npm/send@1.2.1",
+      "to": "pkg:npm/statuses@2.0.2"
+    },
+    {
+      "from": "pkg:npm/serve-static@2.2.1",
+      "to": "pkg:npm/encodeurl@2.0.0"
+    },
+    {
+      "from": "pkg:npm/serve-static@2.2.1",
+      "to": "pkg:npm/escape-html@1.0.3"
+    },
+    {
+      "from": "pkg:npm/serve-static@2.2.1",
+      "to": "pkg:npm/parseurl@1.3.3"
+    },
+    {
+      "from": "pkg:npm/serve-static@2.2.1",
+      "to": "pkg:npm/send@1.2.1"
+    },
+    {
+      "from": "pkg:npm/express-rate-limit@8.7.1",
+      "to": "pkg:npm/debug@4.4.3"
+    },
+    {
+      "from": "pkg:npm/express-rate-limit@8.7.1",
+      "to": "pkg:npm/express@5.3.0"
+    },
+    {
+      "from": "pkg:npm/express-rate-limit@8.7.1",
+      "to": "pkg:npm/ip-address@10.7.4"
+    },
+    {
+      "from": "pkg:npm/zod-to-json-schema@3.25.2",
+      "to": "pkg:npm/zod@4.6.7"
+    },
+    {
+      "from": "pkg:npm/@types/express@5.0.6",
+      "to": "pkg:npm/@types/body-parser@1.19.6"
+    },
+    {
+      "from": "pkg:npm/@types/express@5.0.6",
+      "to": "pkg:npm/@types/express-serve-static-core@5.1.3"
+    },
+    {
+      "from": "pkg:npm/@types/express@5.0.6",
+      "to": "pkg:npm/@types/serve-static@2.2.0"
+    },
+    {
+      "from": "pkg:npm/@types/body-parser@1.19.6",
+      "to": "pkg:npm/@types/connect@3.4.38"
+    },
+    {
+      "from": "pkg:npm/@types/body-parser@1.19.6",
+      "to": "pkg:npm/@types/node@26.6.5"
+    },
+    {
+      "from": "pkg:npm/@types/connect@3.4.38",
+      "to": "pkg:npm/@types/node@26.6.5"
+    },
+    {
+      "from": "pkg:npm/@types/node@26.6.5",
+      "to": "pkg:npm/undici-types@8.9.0"
+    },
+    {
+      "from": "pkg:npm/@types/express-serve-static-core@5.1.3",
+      "to": "pkg:npm/@types/node@26.6.5"
+    },
+    {
+      "from": "pkg:npm/@types/express-serve-static-core@5.1.3",
+      "to": "pkg:npm/@types/qs@6.15.1"
+    },
+    {
+      "from": "pkg:npm/@types/express-serve-static-core@5.1.3",
+      "to": "pkg:npm/@types/range-parser@1.2.7"
+    },
+    {
+      "from": "pkg:npm/@types/express-serve-static-core@5.1.3",
+      "to": "pkg:npm/@types/send@1.2.1"
+    },
+    {
+      "from": "pkg:npm/@types/send@1.2.1",
+      "to": "pkg:npm/@types/node@26.6.5"
+    },
+    {
+      "from": "pkg:npm/@types/serve-static@2.2.0",
+      "to": "pkg:npm/@types/http-errors@2.0.5"
+    },
+    {
+      "from": "pkg:npm/@types/serve-static@2.2.0",
+      "to": "pkg:npm/@types/node@26.6.5"
+    },
+    {
+      "from": "pkg:npm/tsx@4.23.15",
+      "to": "pkg:npm/esbuild@0.28.2"
+    },
+    {
+      "from": "pkg:npm/tsx@4.23.15",
+      "to": "pkg:npm/fsevents@2.3.3"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/aix-ppc64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/android-arm64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/android-arm@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/android-x64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/darwin-arm64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/darwin-x64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/freebsd-arm64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/freebsd-x64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/linux-arm64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/linux-arm@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/linux-ia32@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/linux-loong64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/linux-mips64el@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/linux-ppc64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/linux-riscv64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/linux-s390x@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/linux-x64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/netbsd-arm64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/netbsd-x64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/openbsd-arm64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/openbsd-x64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/openharmony-arm64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/sunos-x64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/win32-arm64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/win32-ia32@0.28.2"
+    },
+    {
+      "from": "pkg:npm/esbuild@0.28.2",
+      "to": "pkg:npm/@esbuild/win32-x64@0.28.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-aix-ppc64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-darwin-arm64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-darwin-x64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-freebsd-arm64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-freebsd-x64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-linux-arm64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-linux-arm@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-linux-loong64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-linux-mips64el@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-linux-ppc64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-linux-riscv64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-linux-s390x@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-linux-x64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-netbsd-arm64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-netbsd-x64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-openbsd-arm64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-openbsd-x64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-sunos-x64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-win32-arm64@7.0.2"
+    },
+    {
+      "from": "pkg:npm/typescript@7.0.2",
+      "to": "pkg:npm/@typescript/typescript-win32-x64@7.0.2"
+    }
+  ],
+  "unresolved": [],
+  "repo_findings": {
+    "misconfigurations": [
+      {
+        "id": "DS-0026",
+        "avd_id": null,
+        "title": "No HEALTHCHECK defined",
+        "severity": "LOW",
+        "type": "dockerfile",
+        "file": "Dockerfile",
+        "start_line": null,
+        "end_line": null,
+        "message": "Add HEALTHCHECK instruction in your Dockerfile",
+        "resolution": "Add HEALTHCHECK instruction in Dockerfile",
+        "reference": "https://avd.aquasec.com/misconfig/ds-0026",
+        "source_tool": "Trivy"
+      }
+    ],
+    "secrets": []
+  }
+}
