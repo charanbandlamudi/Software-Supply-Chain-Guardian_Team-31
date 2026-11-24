@@ -1,108 +1,84 @@
 {
-  "id": "VAL-1795503191",
-  "started_at": "2026-11-24T06:53:11+00:00",
-  "finished_at": "2026-11-24T06:53:21+00:00",
+  "id": "VAL-1795504722",
+  "started_at": "2026-11-24T07:18:42+00:00",
+  "finished_at": "2026-11-24T07:18:50+00:00",
   "status": "passed",
   "approved_by": "Rithvik Rajesh",
   "plans": [
-    "PLAN::pkg:npm/jsonwebtoken@0.1.0",
-    "PLAN::pkg:npm/jsonwebtoken@0.4.0",
-    "PLAN::pkg:npm/lodash@2.4.2"
+    "PLAN::pkg:npm/jws@0.2.6"
   ],
-  "manual_tasks": [
-    "PLAN::file:terraform/main.tf"
-  ],
+  "manual_tasks": [],
   "steps": [
     {
       "name": "select",
       "status": "ok",
-      "detail": "3 package change(s) to apply; 1 manual task(s) recorded",
+      "detail": "1 package change(s) to apply; 0 manual task(s) recorded",
       "log": "",
-      "ts": "2026-11-24T06:53:11+00:00"
+      "ts": "2026-11-24T07:18:42+00:00"
     },
     {
       "name": "policy",
       "status": "ok",
       "detail": "policy firewall allows pkg.apply, docker.build, test.run on guardian/remediation-20261124-055536 with Gate 1",
       "log": "",
-      "ts": "2026-11-24T06:53:11+00:00"
+      "ts": "2026-11-24T07:18:42+00:00"
     },
     {
       "name": "apply",
       "status": "ok",
-      "detail": "3 change(s) applied to a copy of package.json",
-      "log": "jsonwebtoken: 0.1.0 -> 9.0.0 (direct)\njsonwebtoken: 0.4.0 -> 9.0.0 (direct)\nlodash: 2.4.2 -> 4.18.1 (override)",
-      "ts": "2026-11-24T06:53:12+00:00"
+      "detail": "1 change(s) applied to a copy of package.json",
+      "log": "jws: 0.2.6 -> 3.2.3 (override)",
+      "ts": "2026-11-24T07:18:42+00:00"
     },
     {
       "name": "resolve",
       "status": "ok",
       "detail": "new package-lock.json resolved (no package code executed)",
       "log": "",
-      "ts": "2026-11-24T06:53:13+00:00",
-      "seconds": 1.4
+      "ts": "2026-11-24T07:18:43+00:00",
+      "seconds": 1.0
     },
     {
       "name": "verify",
-      "status": "warn",
-      "detail": "2/3 target versions confirmed in the new lockfile; 2 packages added, 0 removed, 4 changed",
+      "status": "ok",
+      "detail": "1/1 target versions confirmed in the new lockfile; 2 packages added, 1 removed, 2 changed",
       "log": "",
-      "ts": "2026-11-24T06:53:13+00:00"
+      "ts": "2026-11-24T07:18:43+00:00"
     },
     {
       "name": "sandbox_install",
       "status": "ok",
-      "detail": "2 upgraded package(s) installed in a container with install scripts disabled (no package code ran)",
-      "log": "\nadded 9 packages in 2s\n",
-      "ts": "2026-11-24T06:53:17+00:00",
-      "seconds": 3.8
+      "detail": "1 upgraded package(s) installed in a container with install scripts disabled (no package code ran)",
+      "log": "\nadded 5 packages in 597ms\n",
+      "ts": "2026-11-24T07:18:44+00:00",
+      "seconds": 1.1
     },
     {
       "name": "sandbox_test",
       "status": "ok",
-      "detail": "executed in an isolated container (no network, read-only, no capabilities): 2 loaded, 0 without an importable entry point, 0 failed",
-      "log": "{\"jsonwebtoken\":{\"version\":\"9.0.0\",\"status\":\"loaded\"},\"lodash\":{\"version\":\"4.18.1\",\"status\":\"loaded\"}}\n",
-      "ts": "2026-11-24T06:53:17+00:00",
-      "seconds": 0.4
+      "detail": "executed in an isolated container (no network, read-only, no capabilities): 1 loaded, 0 without an importable entry point, 0 failed",
+      "log": "{\"jws\":{\"version\":\"3.2.3\",\"status\":\"loaded\"}}\n",
+      "ts": "2026-11-24T07:18:44+00:00",
+      "seconds": 0.3
     },
     {
       "name": "rescan",
       "status": "ok",
-      "detail": "vulnerabilities 54 \u2192 46: 8 cleared on changed packages, 4 remain on them, 0 newly introduced",
+      "detail": "vulnerabilities 54 \u2192 51: 2 cleared on changed packages, 0 remain on them, 0 newly introduced",
       "log": "",
-      "ts": "2026-11-24T06:53:21+00:00",
-      "seconds": 3.7
+      "ts": "2026-11-24T07:18:50+00:00",
+      "seconds": 5.2
     }
   ],
   "results": {
-    "package_json_diff": "--- a/package.json\n+++ b/package.json\n@@ -120,7 +120,7 @@\n     \"html-entities\": \"^1.4.0\",\n     \"i18n\": \"^0.11.1\",\n     \"js-yaml\": \"^3.14.0\",\n-    \"jsonwebtoken\": \"0.4.0\",\n+    \"jsonwebtoken\": \"9.0.0\",\n     \"libxml2-wasm\": \"^0.7.1\",\n     \"marsdb\": \"^0.6.11\",\n     \"material-icons\": \"^1.13.14\",\n@@ -214,5 +214,8 @@\n     \"esbuild@0.28.1\": true,\n     \"@scarf/scarf\": false,\n     \"cypress@16.2.0\": true\n+  },\n+  \"overrides\": {\n+    \"lodash\": \"4.18.1\"\n   }\n }",
+    "package_json_diff": "--- a/package.json\n+++ b/package.json\n@@ -214,5 +214,8 @@\n     \"esbuild@0.28.1\": true,\n     \"@scarf/scarf\": false,\n     \"cypress@16.2.0\": true\n+  },\n+  \"overrides\": {\n+    \"jws\": \"3.2.3\"\n   }\n }",
     "version_checks": [
       {
-        "package": "jsonwebtoken",
-        "expected": "9.0.0",
-        "was": "0.1.0",
+        "package": "jws",
+        "expected": "3.2.3",
+        "was": "0.2.6",
         "found": [
-          "0.1.0",
-          "9.0.0"
-        ],
-        "ok": false
-      },
-      {
-        "package": "jsonwebtoken",
-        "expected": "9.0.0",
-        "was": "0.4.0",
-        "found": [
-          "0.1.0",
-          "9.0.0"
-        ],
-        "ok": true
-      },
-      {
-        "package": "lodash",
-        "expected": "4.18.1",
-        "was": "2.4.2",
-        "found": [
-          "4.18.1"
+          "3.2.3"
         ],
         "ok": true
       }
@@ -112,43 +88,28 @@
         "buffer-equal-constant-time",
         "ecdsa-sig-formatter"
       ],
-      "removed": [],
+      "removed": [
+        "base64url"
+      ],
       "changed": [
-        "jsonwebtoken",
         "jwa",
-        "jws",
-        "lodash"
+        "jws"
       ]
     },
     "sandbox_load": {
-      "jsonwebtoken": {
-        "version": "9.0.0",
-        "status": "loaded"
-      },
-      "lodash": {
-        "version": "4.18.1",
+      "jws": {
+        "version": "3.2.3",
         "status": "loaded"
       }
     },
     "rescan": {
       "before_total": 54,
-      "after_total": 46,
+      "after_total": 51,
       "cleared": [
-        "jsonwebtoken@0.4.0 GHSA-8cf7-32gw-wr33",
-        "jsonwebtoken@0.4.0 GHSA-c7hr-j4mj-j2w6",
-        "jsonwebtoken@0.4.0 GHSA-hjrf-2m68-5959",
-        "jsonwebtoken@0.4.0 GHSA-qwph-4952-7xr6",
-        "lodash@2.4.2 GHSA-35jh-r3h4-6jhm",
-        "lodash@2.4.2 GHSA-4xc9-xhrj-v574",
-        "lodash@2.4.2 GHSA-fvqr-27wr-82fm",
-        "lodash@2.4.2 GHSA-jf85-cpcp-j695"
+        "jws@0.2.6 GHSA-869p-cjfg-cm3x",
+        "jws@0.2.6 GHSA-gjcw-v447-2w7q"
       ],
-      "residual_on_changed_packages": [
-        "jsonwebtoken@0.1.0 GHSA-8cf7-32gw-wr33",
-        "jsonwebtoken@0.1.0 GHSA-c7hr-j4mj-j2w6",
-        "jsonwebtoken@0.1.0 GHSA-hjrf-2m68-5959",
-        "jsonwebtoken@0.1.0 GHSA-qwph-4952-7xr6"
-      ],
+      "residual_on_changed_packages": [],
       "newly_introduced": []
     }
   }
