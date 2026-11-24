@@ -69,6 +69,10 @@ GitHub URL ───▶ │ 1. clone        git clone --depth 1 (hooks disabled)
                 │ 6. agents       pipeline/agents.py → guardian_v2 (LangGraph)        │
                 │                   supervisor routes 11 specialist agents; critic    │
                 │                   verifies every claim ──▶ agents/guardian-report.* │
+                │                   graph re-rendered with the agents' assessment     │
+                │ 7. report       reporting/guardian_report.py: Pydantic findings,    │
+                │                   evidence validator ──▶ report/guardian-report.    │
+                │                   json / html / pdf                                 │
                 └─────────────────────────────────────────────────────────────────────┘
                                          │
                                          ▼
@@ -240,6 +244,8 @@ data/scans/<owner>__<repo>__<YYYYmmdd-HHMMSS>/
 └── graphs/
     ├── graph.json             # machine-readable graph + merged evidence
     └── dependency_graph.html  # interactive graph, self-contained, works offline
+├── agents/                    # guardian_v2 output: investigation.json, guardian-report.{json,md}, guardian.sarif
+└── report/                    # Final Guardian Report: guardian-report.json / .html / .pdf
 ```
 
 ### `scan.json`
@@ -437,6 +443,10 @@ The pipeline has been verified across multiple language ecosystems:
 | `grype db update` or `npm` stalls | Slow or dropped connection. Re-run it; npm caches what it already downloaded, so a retry is faster. |
 | cdxgen prints a *SECURE MODE: Environment audit* table | It's warning about secrets in the shell environment. The pipeline already runs cdxgen with a clean environment. |
 | Scan shows **Interrupted** | The server restarted mid-scan. Run it again. |
+| Groq returns HTTP 403 (error code 1010) | Cloudflare blocks Python's default User-Agent; fixed in `guardian_v2/providers.py`, which now sends one. |
+| Groq returns HTTP 404 *model_not_found* | The model was retired; list yours with `GET https://api.groq.com/openai/v1/models` and set `GROQ_MODEL`. |
+| Groq returns HTTP 413 / 429 | Request too large or over the tokens-per-minute limit. The explainer batches and retries; a batch that still fails falls back to templates. |
+| PDF step says *no Chromium-based browser found* | Install Chrome, or set `GUARDIAN_PDF_BROWSER` to a Chromium-based browser binary. |
 
 ## Multi-agent investigation
 
@@ -444,8 +454,13 @@ The last pipeline step hands the finished scan to **`guardian_v2`**, a LangGraph
 [`pipeline/agents.py`](pipeline/agents.py). It runs unattended in the `analysis` stage: every agent except the human
 approval gate and sandbox validation, so a web scan never pauses for input.
 
-**Inputs taken from the scan folder:** the SBOM, the npm lockfile and manifest, `requirements.txt`, Grype's output,
-Dockerfiles, `.github/workflows/*`, and the source tree (for reachability).
+**Inputs taken from the scan folder:** the SBOM, the npm lockfile and manifest, `requirements.txt`, Dockerfiles,
+`.github/workflows/*`, the source tree (for reachability) and **all three scanners' outputs**:
+- `vuln_intel` merges the Grype, OSV-Scanner and Trivy advisories with its own live sources (OSV.dev, npm audit),
+  deduplicated by alias.
+- `cicd` turns Trivy's misconfigurations and secrets into findings (secret values are never copied).
+
+For Juice Shop, that is 6 of 6 sources and 188 findings.
 
 **How the supervisor works.** Each turn, the supervisor (the head agent) picks which agents run, from:
 1. which agents have new inputs to work on;
@@ -457,25 +472,79 @@ Every decision and message is logged.
 | Agent | Role |
 |---|---|
 | discovery | SBOM + lockfiles → inventory and dependency graph |
-| cicd | Unpinned base images and GitHub Actions, unsafe workflows |
-| vuln_intel | Advisories from OSV, npm audit, PyPI, Grype (and GHSA with `GITHUB_TOKEN`), deduplicated by alias |
+| cicd | Unpinned base images and GitHub Actions, unsafe workflows, plus Trivy misconfigurations and secrets |
+| vuln_intel | Advisories from Grype, OSV-Scanner, Trivy, OSV.dev, npm audit, PyPI (and GHSA with `GITHUB_TOKEN`), deduplicated by alias |
 | reputation | Registry metadata: yanked/deprecated versions, maintainers, integrity, install scripts |
 | reachability | Is each package imported by the source code? |
 | exploit_intel | CISA KEV and FIRST EPSS |
-| anomaly | Typosquats, malicious packages, lockfile tampering, untrusted URLs, dependency confusion |
+| anomaly | Typosquats (long-established packages are cleared automatically), malicious packages, lockfile tampering, untrusted URLs, dependency confusion |
 | scoring | Explainable risk score, confidence and a simplified SSVC decision |
 | remediation | Verified safe versions and the other packages that must be upgraded with them (proposed only) |
-| explainer | LLM explanations when a key is set (Anthropic → Groq → Gemini); deterministic templates otherwise |
+| explainer | LLM explanations when a key is set (Anthropic → Groq → Gemini), sent in batches of 6 with rate-limit retries. It explains the top 12 findings plus the worst finding of every other type; deterministic templates otherwise. |
 | critic | Rejects claims with missing or unlinked evidence, IDs that aren't aliases of the finding, changed CVSS or KEV values, unverified versions, or exploitation claims without KEV evidence |
 
 **In the UI**, the *Agent investigation* tab shows the agent conversation, prioritised findings (score, SSVC,
-reachability, KEV, EPSS), the critic-checked explanations and the proposed fixes. Outputs are saved in
+reachability, KEV, EPSS), the critic-checked explanations and the proposed fixes.
+
+**In the graph**, clicking a package shows an *Agent assessment* section below the scanner evidence: risk score,
+SSVC, confidence, reachability, supply-chain signals, the critic-verified LLM explanation (labelled "LLM ·
+critic-verified" or "template") and the proposed fix. Packages the agents flag as anomalies get a magenta ring and
+their own filter option. Outputs are saved in
 `data/scans/<scan>/agents/`: `investigation.json`, `guardian-report.json`, `guardian-report.md`, `guardian.sarif`,
 `guardian-sbom.cdx.json` and `dependency-graph.mmd`.
 
 **LLM keys** (optional) come from the environment or a `.env` file: `ANTHROPIC_API_KEY`, `GROQ_API_KEY` or
 `GEMINI_API_KEY`. `GITHUB_TOKEN` enables the GHSA source. Without keys, everything still runs, with template
 explanations.
+
+Groq's default model is `openai/gpt-oss-120b`; override it with `GROQ_MODEL`. On Groq's free tier (8,000 tokens
+per minute) the explainer takes about 80 s for Juice Shop, because it waits between batches as Groq asks.
+
+## Final Guardian Report
+
+The last pipeline step ([`reporting/guardian_report.py`](reporting/guardian_report.py)) turns the scan and the
+agents' results into **`report/guardian-report.json`, `.html` and `.pdf`**. The PDF is printed from the HTML by
+headless Chrome, Brave, Chromium or Edge; set `GUARDIAN_PDF_BROWSER` to choose one. The UI's *Final report* tab shows
+the report with download buttons.
+
+**Every finding is a Pydantic model** with the problem statement's schema (`finding_id`, `category`, `component`,
+`installed_version`, `identifier`, `severity`, `source_tool`, `dependency_type`, `dependency_path`,
+`evidence_reference`, `fixed_version`, `ai_assessment`, `confidence`, `verification_status`) plus `problem`,
+`remediation`, `risk_score`, `ssvc`, `reachability`, `kev`, `epss` and each scanner's view.
+
+**The evidence validator gates every finding.** It rejects any finding whose CVE/GHSA ID isn't in raw scanner output
+or an authoritative advisory API, whose version isn't in the SBOM or lockfile, whose dependency path isn't made of
+real graph edges, whose fixed version no source reported, or whose secret carries a value. Rejected findings are
+listed in the report, not silently dropped (Juice Shop: 188 accepted, 0 rejected).
+
+**Verification status** separates confirmed facts from indicators and hypotheses:
+
+| Status | Meaning |
+|---|---|
+| `multi_scanner_confirmed` | Two or more scanners agree |
+| `scanner_confirmed` | One scanner |
+| `authoritative_source` | An advisory API only |
+| `registry_confirmed` | Registry metadata, e.g. deprecated |
+| `static_check` | A CI/CD or container rule |
+| `suspicious_indicator` | A signal worth investigating |
+| `potential_risk` | Risky but possibly legitimate, e.g. install scripts |
+| `unverified_hypothesis` | A typosquat candidate |
+
+**Report sections:**
+1. executive summary (severity counts, findings per category, top risks, AI usage);
+2. scope and methodology (every pipeline step and tool version);
+3. SBOM statistics;
+4. dependency analysis (depth, which direct dependencies pull in vulnerable code, shared vulnerable packages);
+5. risk prioritisation;
+6. **one section per risk category**: known vulnerabilities, malicious packages, typosquat candidates, lockfile and
+   integrity risks, install-time scripts, suspiciously recent releases, deprecated/yanked versions, CI/CD workflow
+   risks, container image risks, misconfigurations, exposed secrets. Each section opens with *the problem* in plain
+   language, then a card per finding with the problem, dependency path or file location, each scanner's view,
+   verification status, the agents' risk score, the LLM analysis (critic-verified) and the agents' remediation;
+7. scanner agreement and disagreements;
+8. remediation plan;
+9. evidence validation;
+10. limitations.
 
 **Network use.** The agents query the npm, PyPI and OSV registries plus KEV and EPSS. To keep this practical on slow
 links, registry metadata is fetched only for direct dependencies and packages a scanner flagged (98 + about 20 for
@@ -492,15 +561,11 @@ and install scripts disabled.
 
 ## Roadmap
 
-Done in this version: discovery and cloning, SBOM generation, Grype, OSV-Scanner and Trivy scanning (vulnerabilities, misconfigurations, secrets), dependency graph analysis, the interactive graph, the web UI, and the LangGraph multi-agent investigation (supervisor, specialist agents, evidence critic) connected to the pipeline.
+Done in this version: discovery and cloning, SBOM generation, Grype, OSV-Scanner and Trivy scanning (vulnerabilities, misconfigurations, secrets), dependency graph analysis, the interactive graph, the web UI, and the LangGraph multi-agent investigation (supervisor, specialist agents, evidence critic) connected to the pipeline and fed by all three scanners, the agents' assessment in the graph, and the evidence-validated Final Guardian Report (JSON, HTML, PDF).
 
 Planned, following the hackathon problem statement:
 
 - [ ] Human approval gate and sandbox validation in the web UI (currently CLI only)
-- [ ] Feed OSV-Scanner and Trivy results into the agents (they currently query OSV themselves; Trivy findings stay in the scan view)
-- [ ] **Evidence validator** (Pydantic models) that rejects unsupported CVEs, versions or paths before reporting
-- [ ] **Risk engine** and LLM-written summaries that only use validated evidence
-- [ ] **Reports** in JSON, HTML and PDF
 - [ ] **Multi-page dashboard**: overview, SBOM explorer, vulnerabilities, anomalies, agent activity, report
 - [ ] **SQLite** storage for scan history
 

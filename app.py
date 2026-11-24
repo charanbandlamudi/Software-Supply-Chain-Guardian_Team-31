@@ -45,7 +45,7 @@ with st.sidebar:
 
 # ---------------------------------------------------------------- header + input
 st.markdown("## 🛡️ SOFTWARE SUPPLY CHAIN GUARDIAN")
-st.caption("Clone → SBOM (cdxgen) → scan (Grype + OSV-Scanner + Trivy) → interactive dependency graph → multi-agent investigation. "
+st.caption("Clone → SBOM (cdxgen) → scan (Grype + OSV-Scanner + Trivy) → interactive dependency graph → multi-agent investigation → Final Guardian Report. "
            "The target repository is treated as untrusted: none of its code or scripts are executed.")
 
 with st.form("scan"):
@@ -112,8 +112,9 @@ if stats:
                                       ("Medium", sev.get("MEDIUM", 0)), ("Low", sev.get("LOW", 0))]):
         col.metric(lbl, val)
 
-tab_graph, tab_agents, tab_repo, tab_steps, tab_files = st.tabs(
-    ["Dependency graph", "Agent investigation", "Misconfigurations & secrets", "Scan steps & tools", "Artifacts"])
+tab_graph, tab_report, tab_agents, tab_repo, tab_steps, tab_files = st.tabs(
+    ["Dependency graph", "Final report", "Agent investigation", "Misconfigurations & secrets",
+     "Scan steps & tools", "Artifacts"])
 
 with tab_graph:
     html = current["artifacts"].get("graph_html")
@@ -122,6 +123,29 @@ with tab_graph:
         st.caption("Click a node to focus its path and dependencies · `/` to search · `Esc` to clear.")
     else:
         st.error("No graph was produced for this scan.")
+
+with tab_report:
+    rdir = Path(current["scan_dir"]) / "report"
+    rj, rh, rpdf = rdir / "guardian-report.json", rdir / "guardian-report.html", rdir / "guardian-report.pdf"
+    if not rj.exists():
+        st.info("No Final Guardian Report for this scan "
+                f"({current['steps'].get('report', {}).get('detail') or 'scan predates the report step'}).")
+    else:
+        rep = json.loads(rj.read_text())
+        ex = rep["executive_summary"]
+        c = st.columns(5)
+        c[0].metric("Validated findings", ex["total_findings"])
+        for col, sev in zip(c[1:], ("CRITICAL", "HIGH", "MEDIUM", "LOW")):
+            col.metric(sev.title(), ex["by_severity"].get(sev, 0))
+        st.caption(f"{rep['validation']['accepted']} findings passed the evidence validator, "
+                   f"{len(rep['validation']['rejected'])} rejected · AI: {ex['ai']['llm_explanations']} LLM explanations "
+                   f"verified by the critic, {ex['ai']['template_explanations']} templates")
+        d1, d2, d3 = st.columns(3)
+        d1.download_button("⬇️ Report (PDF)", rpdf.read_bytes() if rpdf.exists() else b"", file_name="guardian-report.pdf",
+                           disabled=not rpdf.exists(), key="rep-pdf", width="stretch")
+        d2.download_button("⬇️ Report (HTML)", rh.read_bytes(), file_name="guardian-report.html", key="rep-html", width="stretch")
+        d3.download_button("⬇️ Report (JSON)", rj.read_bytes(), file_name="guardian-report.json", key="rep-json", width="stretch")
+        components.html(rh.read_text(), height=1100, scrolling=True)
 
 with tab_agents:
     adir = Path(current["artifacts"].get("agents_dir") or Path(current["scan_dir"]) / "agents")

@@ -53,6 +53,14 @@ def run_vuln_intel(state: dict, task: dict) -> AgentResult:
             return out["raw_advisories"], out["evidence"], (
                 [] if out["coverage"]["source:ghsa"] == "ok" else [out["coverage"]["source:ghsa"]])
         jobs["ghsa"] = gh
+    from ..sources import scanners as scanner_sources
+    for key, name, fn in (("osv_scanner_report", "osv-scanner", scanner_sources.collect_osv_scanner),
+                          ("trivy_report", "trivy", scanner_sources.collect_trivy)):
+        if state.get("inputs", {}).get(key):
+            def job(path=state["inputs"][key], fn=fn):
+                out = fn(path)
+                return out["raw_advisories"], out["evidence"], []
+            jobs[name] = job
     if state.get("inputs", {}).get("grype_report"):
         def gr():
             out = grype_source.collect(state["inputs"]["grype_report"])

@@ -6,7 +6,26 @@ from ..llm_contract import build_prompt, parse_response, template_claim
 from ..scoring import score
 from .base import AgentResult, handoff
 
-TOP_N = 12
+TOP_N = 12          # highest-scored findings explained
+MAX_EXPLAINED = 24  # plus the worst finding of every other type, so each report section is covered
+BATCH = 6           # findings per LLM request
+
+
+def _call_with_retry(llm_call, msgs, tries: int = 5):
+    """Retry rate limits (HTTP 429, e.g. Groq free tier: 8k tokens/minute) after the wait the
+    provider asks for, and malformed-JSON replies (HTTP 400 json_validate_failed) once or twice."""
+    import re
+    import time
+    for attempt in range(tries):
+        try:
+            return llm_call(msgs)
+        except Exception as exc:
+            text = str(exc)
+            retryable = "429" in text or "json_validate_failed" in text or "HTTP 400" in text
+            if not retryable or attempt == tries - 1:
+                raise
+            m = re.search(r"try again in ([\d.]+)s", text)
+            time.sleep(min(60.0, float(m.group(1)) + 1.0) if m else 5.0 * (attempt + 1))
 
 
 def make_scoring(context: dict):
@@ -28,7 +47,16 @@ def make_scoring(context: dict):
 
 def _top(state):
     fs = state.get("findings", {})
-    return [k for k in sorted(fs, key=lambda k: -(fs[k].get("score") or 0)) if fs[k].get("status") != "info"][:TOP_N]
+    ranked = [k for k in sorted(fs, key=lambda k: -(fs[k].get("score") or 0)) if fs[k].get("status") != "info"]
+    picked = ranked[:TOP_N]
+    seen_types = {fs[k].get("type") for k in picked}
+    for k in ranked[TOP_N:]:                       # worst finding of each type not yet covered
+        if len(picked) >= MAX_EXPLAINED:
+            break
+        if fs[k].get("type") not in seen_types:
+            picked.append(k)
+            seen_types.add(fs[k].get("type"))
+    return picked
 
 
 def make_explainer(llm_call, provider_names):
@@ -41,17 +69,25 @@ def make_explainer(llm_call, provider_names):
     def _explain(state: dict, task: dict) -> AgentResult:
         ids = _top(state)
         if llm_call:
-            msgs = build_prompt(state, ids)
-            if task.get("rejections"):
-                msgs.append({"role": "user", "content": "Your previous claims were rejected: "
-                             + "; ".join(task["rejections"]) + ". Fix them using only the facts given."})
-            try:
-                claims = parse_response(llm_call(msgs))
-                return AgentResult(delta={"llm_claims": claims,
-                                          "coverage": {"llm": f"ok via {provider_names}"}},
-                                   summary=f"LLM produced {len(claims)} evidence-cited claims")
-            except Exception as exc:
-                cov = f"failed ({str(exc)[:120]}); deterministic templates used"
+            # Small batches keep each request under provider payload / tokens-per-minute limits
+            # (one large prompt got HTTP 413 from Groq). A failed batch falls back to templates
+            # for those findings only; the critic fills any finding the LLM skipped.
+            claims, failures = [], []
+            for start in range(0, len(ids), BATCH):
+                msgs = build_prompt(state, ids[start:start + BATCH])
+                if task.get("rejections"):
+                    msgs.append({"role": "user", "content": "Your previous claims were rejected: "
+                                 + "; ".join(task["rejections"]) + ". Fix them using only the facts given."})
+                try:
+                    claims += parse_response(_call_with_retry(llm_call, msgs))
+                except Exception as exc:
+                    failures.append(str(exc)[:120])
+            if claims:
+                cov = f"ok via {provider_names}" + (f"; {len(failures)} batch(es) failed: {failures[0]}" if failures else "")
+                return AgentResult(delta={"llm_claims": claims, "coverage": {"llm": cov}},
+                                   summary=f"LLM produced {len(claims)} evidence-cited claims for {len(ids)} findings"
+                                           + (f" ({len(failures)} batch(es) failed)" if failures else ""))
+            cov = f"failed ({failures[0] if failures else 'no claims'}); deterministic templates used"
         else:
             cov = "no LLM key configured; deterministic templates used"
         fs, plans = state.get("findings", {}), state.get("remediation_plans", {})
@@ -74,6 +110,9 @@ def run_critic(state: dict, task: dict) -> AgentResult:
     out = {c["finding_id"]: {"ai_inferences": [c]} for c in verdict["accepted"]}
     for r in verdict["rejected"]:
         fid = r["claim"].get("finding_id")
+        if fid in fs and fid not in out:
+            out[fid] = {"ai_inferences": [template_claim(fid, fs[fid], plans.get(f"PLAN::{fs[fid]['component_purl']}"))]}
+    for fid in _top(state):                     # the LLM skipped it: deterministic template, labelled as such
         if fid in fs and fid not in out:
             out[fid] = {"ai_inferences": [template_claim(fid, fs[fid], plans.get(f"PLAN::{fs[fid]['component_purl']}"))]}
     delta["findings"] = out

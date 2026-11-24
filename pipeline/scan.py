@@ -33,7 +33,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SCANS_DIR = ROOT / "data" / "scans"
 GITHUB_RE = re.compile(r"^https://github\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+?)(?:\.git)?/?$")
 LOCKFILES = ("package-lock.json", "npm-shrinkwrap.json", "yarn.lock", "pnpm-lock.yaml")
-REQUIRED = ("clone", "sbom", "grype", "osv", "trivy", "graph", "agents")  # any failure here => scan not complete
+REQUIRED = ("clone", "sbom", "grype", "osv", "trivy", "graph", "agents", "report")  # any failure here => scan not complete
 
 STEPS = [
     ("clone", "Clone repository"),
@@ -44,6 +44,7 @@ STEPS = [
     ("trivy", "Scan repository (Trivy)"),
     ("graph", "Build dependency graph"),
     ("agents", "Agent investigation (guardian_v2)"),
+    ("report", "Final Guardian Report (JSON / HTML / PDF)"),
 ]
 
 
@@ -89,9 +90,10 @@ def run(cmd: list[str], *, cwd: Path | None = None, timeout: int = 600, env: dic
 def first_line(cmd: list[str]) -> str:
     try:
         actual_env = safe_env()
-        actual_cmd = resolve_cmd(cmd, actual_env)
+        actual_cmd = resolve_cmd(cmd, actual_env)      # Windows: resolve .cmd/.exe via PATH
         r = subprocess.run(actual_cmd, capture_output=True, text=True, timeout=30, env=actual_env)
-        return (r.stdout or r.stderr).strip().splitlines()[0]
+        line = (r.stdout or r.stderr).strip().splitlines()[0]
+        return re.sub(r"\x1b\[[0-9;]*m", "", line)      # cdxgen colours its version string
     except Exception as e:  # tool missing or broken: record it, don't crash
         return f"unavailable ({type(e).__name__})"
 
@@ -380,12 +382,32 @@ def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) ->
         meta["agents"] = ag
         meta["artifacts"]["agents_dir"] = str(scan_dir / "agents")
         failed_cov = [k for k, v in ag["coverage"].items() if str(v).startswith("failed")]
+        # Re-render the graph with the agents' assessment attached to each package node.
+        build(repo, bom, grype_out if grype_out.exists() else None, osv_out if osv_out.exists() else None,
+              graphs / "dependency_graph.html", graphs / "graph.json", target=meta["repo_name"], scan=scan_info,
+              trivy=trivy_out if trivy_out.exists() else None, agent_report=scan_dir / "agents" / "guardian-report.json")
         step("agents", "warn" if failed_cov else "ok",
              f"{ag['turns']} turns, {ag['findings']} findings, {ag['handoffs']} handoffs, "
              f"LLM: {', '.join(ag['llm']) if ag['llm'] else 'none (templates)'}"
              + (f"; failed: {', '.join(failed_cov)}" if failed_cov else ""), t0)
     except Exception as e:
         step("agents", "failed", f"{type(e).__name__}: {str(e)[:300]}", t0)
+
+    # 7. Final Guardian Report (validated findings -> JSON, HTML, PDF) --------------------
+    t0 = time.monotonic(); step("report", "running")
+    try:
+        from reporting.guardian_report import write_reports
+        rp = write_reports(scan_dir)
+        meta["report"] = rp
+        for ext in ("json", "html", "pdf"):
+            f = Path(rp["dir"]) / f"guardian-report.{ext}"
+            if f.exists():
+                meta["artifacts"][f"report_{ext}"] = str(f)
+        step("report", "ok" if rp["pdf"] == "ok" else "warn",
+             f"{rp['findings']} validated findings in {len(rp['by_category'])} categories, "
+             f"{rp['rejected']} rejected; PDF: {rp['pdf']}", t0)
+    except Exception as e:
+        step("report", "failed", f"{type(e).__name__}: {str(e)[:300]}", t0)
 
     # A scan is only "complete" if every required step succeeded.
     ok = all(meta["steps"][k]["status"] == "ok" for k in REQUIRED)

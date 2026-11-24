@@ -19,7 +19,8 @@ EXPOSURE = {"internet": 1.0, "internal": 0.7, "offline": 0.4}
 INSTALL_TIME = {"malicious_package", "typosquat_suspect", "install_script", "integrity_mismatch",
                 "untrusted_resolved_url", "unpublished_version", "dependency_confusion",
                 "lockfile_tampering", "suspicious_update"}
-PIPELINE = {"unpinned_action", "dangerous_workflow", "excessive_permissions", "unpinned_base_image"}
+PIPELINE = {"unpinned_action", "dangerous_workflow", "excessive_permissions", "unpinned_base_image",
+            "misconfiguration", "exposed_secret"}
 # Exploitation status implied by the finding itself (SSVC "Exploitation").
 IMPLIED_EXPLOITATION = {"malicious_package": "active", "integrity_mismatch": "poc",
                         "lockfile_tampering": "poc", "dependency_confusion": "poc",

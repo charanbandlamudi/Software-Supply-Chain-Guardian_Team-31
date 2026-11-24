@@ -25,7 +25,9 @@ BASE = {"malicious_package": 9.5, "integrity_mismatch": 8.5, "untrusted_resolved
         "yanked_or_deprecated": 4.0, "environment_only": 1.0, "unexpected_dependency": 5.0,
         "lockfile_tampering": 8.5, "dependency_confusion": 9.0, "suspicious_update": 6.0,
         "dependency_added": 2.0}
-MIN_RELEASE_AGE_DAYS = 14   # cooling-off window: most hijacked releases are pulled within days
+MIN_RELEASE_AGE_DAYS = 14
+ESTABLISHED_MIN_VERSIONS = 20      # typosquat check: long-lived projects are not squats
+ESTABLISHED_MIN_AGE_DAYS = 730   # cooling-off window: most hijacked releases are pulled within days
 
 
 def _lock_entries(path: str) -> dict[str, dict]:
@@ -82,7 +84,7 @@ def run(state: dict, task: dict) -> AgentResult:
             "direct": c.get("direct", False), "paths": [],
         }
 
-    suspicious = []
+    suspicious, established = [], []
     for purl, c in comps.items():
         reg, lock, eco = c.get("registry") or {}, c.get("lock") or {}, c.get("ecosystem")
         if reg.get("security_holding"):
@@ -98,9 +100,21 @@ def run(state: dict, task: dict) -> AgentResult:
             suspicious.append(purl)
         target = typosquat_target(c["name"], eco)
         if target:
-            add("typosquat_suspect", purl, f"'{c['name']}' is within edit distance 2 of popular package '{target}'.",
-                {"name": c["name"], "looks_like": target})
-            suspicious.append(purl)
+            # Name similarity alone is not evidence of malice (e.g. cypress vs express). Skip packages
+            # whose registry history shows an established project; flag the rest as unverified suspects.
+            rel = c.get("registry_versions") or []
+            first = min((r["uploaded"] for r in rel if r.get("uploaded")), default=None)
+            age = _age_days(first, datetime.now(timezone.utc)) if first else None
+            if len(rel) >= ESTABLISHED_MIN_VERSIONS and age is not None and age > ESTABLISHED_MIN_AGE_DAYS:
+                established.append(f"{c['name']} (~{target}: {len(rel)} versions, {int(age / 365)}y)")
+            else:
+                basis = (f"{len(rel)} published versions, first release {int(age)} days ago" if rel and age is not None
+                         else "no registry history checked")
+                add("typosquat_suspect", purl,
+                    f"'{c['name']}' is within edit distance 2 of popular package '{target}' ({basis}); "
+                    f"unverified: name similarity alone does not prove malicious intent.",
+                    {"name": c["name"], "looks_like": target, "registry_versions": len(rel), "age_days": age})
+                suspicious.append(purl)
         if lock.get("resolved"):
             host = urlparse(lock["resolved"]).hostname
             if host not in TRUSTED_HOSTS:
@@ -199,5 +213,6 @@ def run(state: dict, task: dict) -> AgentResult:
     for f in findings.values():
         kinds[f["type"]] = kinds.get(f["type"], 0) + 1
     return AgentResult(delta={"findings": findings, "evidence": evidence},
-                       summary=f"{len(findings)} non-CVE findings: {kinds}",
+                       summary=f"{len(findings)} non-CVE findings: {kinds}"
+                               + (f"; name-similarity cleared as established: {', '.join(established[:5])}" if established else ""),
                        requests=requests, metrics=kinds)

@@ -7,3 +7,4 @@ langgraph==1.2.24  # supervisor + agent graph
 univers==32.0.1    # ecosystem-aware version ranges
 packaging==26.3
 cvss==3.6          # CVSS vector -> base score
+pydantic==2.14.4   # validated report findings

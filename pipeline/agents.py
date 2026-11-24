@@ -72,8 +72,12 @@ def build_inputs(scan_dir: Path, repo: Path) -> dict:
         inputs["npm_lock"] = str(repo / "package-lock.json")
     if (repo / "requirements.txt").exists():
         inputs["python_manifest"] = str(repo / "requirements.txt")
-    if grype.exists():
-        inputs["grype_report"] = str(grype)
+    # All three scanners feed the agents: vuln_intel merges their advisories with its own
+    # live sources (dedup by alias); cicd turns Trivy misconfigurations/secrets into findings.
+    for key, fname in (("grype_report", "grype.json"), ("osv_scanner_report", "osv.json"),
+                       ("trivy_report", "trivy.json")):
+        if (scan_dir / "scanner_results" / fname).exists():
+            inputs[key] = str(scan_dir / "scanner_results" / fname)
     return inputs
 
 

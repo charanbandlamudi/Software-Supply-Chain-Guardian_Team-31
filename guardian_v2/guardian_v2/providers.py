@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -30,10 +31,16 @@ def _load_dotenv() -> None:
 
 
 def _post(url, body, headers):
+    # An explicit User-Agent is required: Groq's Cloudflare front rejects Python's default
+    # "Python-urllib" agent with HTTP 403 (error code 1010).
     req = urllib.request.Request(url, data=json.dumps(body).encode(), method="POST",
-                                 headers={"Content-Type": "application/json", **headers})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return json.loads(r.read())
+                                 headers={"Content-Type": "application/json",
+                                          "User-Agent": "supply-chain-guardian/2.0", **headers})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.loads(r.read())
+    except urllib.error.HTTPError as e:   # keep the provider's error message (never the request/key)
+        raise RuntimeError(f"HTTP {e.code}: {e.read().decode('utf-8', 'replace')[:300]}") from None
 
 
 def anthropic(messages):
@@ -48,7 +55,7 @@ def anthropic(messages):
 
 def groq(messages):
     data = _post("https://api.groq.com/openai/v1/chat/completions",
-                 {"model": os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"), "messages": messages,
+                 {"model": os.getenv("GROQ_MODEL", "openai/gpt-oss-120b"), "messages": messages,
                   "temperature": 0.1, "response_format": {"type": "json_object"}},
                  {"Authorization": f"Bearer {os.environ['GROQ_API_KEY']}"})
     return data["choices"][0]["message"]["content"]

@@ -45,6 +45,15 @@ def run(state: dict, task: dict) -> AgentResult:
         if re.search(r"permissions:\s*write-all", text):
             i = next(n for n, l in enumerate(lines, 1) if "write-all" in l)
             add("excessive_permissions", wf, i, lines[i - 1], "Workflow token has write-all permissions.", 6.0)
+    own = len(findings)
+    extra = ""
+    if inp.get("trivy_report"):
+        from ..sources.scanners import trivy_repo_findings
+        tf, tev = trivy_repo_findings(inp["trivy_report"])
+        findings.update(tf)
+        evidence.update(tev)
+        nm = sum(1 for f in tf.values() if f["type"] == "misconfiguration")
+        extra = f"; Trivy: {nm} misconfigurations, {len(tf) - nm} secrets (values redacted)"
     return AgentResult(delta={"findings": findings, "evidence": evidence},
-                       summary=f"{len(findings)} container/CI findings in "
-                               f"{len(inp.get('dockerfiles', [])) + len(inp.get('workflows', []))} files")
+                       summary=f"{own} container/CI findings in "
+                               f"{len(inp.get('dockerfiles', [])) + len(inp.get('workflows', []))} files" + extra)

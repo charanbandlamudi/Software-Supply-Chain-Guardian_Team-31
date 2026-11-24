@@ -42,6 +42,7 @@ def run(state: dict, task: dict) -> AgentResult:
                                             "confidence", "ssvc", "score_breakdown", "reachability_state", "kev",
                                             "epss", "sources", "source_conflicts", "paths", "introduced_by",
                                             "recommended_fix", "summary", "evidence_ids", "ai_inferences",
+                                            "tool_severity", "recommended_action", "reference", "facts",
                                             "resolution", "location")} for f in fs],
         "remediation_plans": plans, "approvals": state.get("approvals", []),
         "validation": state.get("validation", {}), "coverage": state.get("coverage", {}),

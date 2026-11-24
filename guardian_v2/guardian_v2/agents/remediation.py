@@ -34,7 +34,14 @@ ANOMALY_ACTIONS = {
     "unpinned_base_image": ("pin", "Pin the base image by @sha256 digest (and move off EOL tags)."),
     "dangerous_workflow": ("request_review", "Use pull_request, or never check out PR head with secrets."),
     "excessive_permissions": ("pin", "Set least-privilege `permissions:` (e.g. contents: read)."),
+    "misconfiguration": ("fix_config", "Apply the fix described by the failed Trivy check."),
+    "exposed_secret": ("rotate_secret", "Revoke and rotate the credential, then remove it from the code "
+                                        "and git history; load it from a secret store instead."),
 }
+
+# Which signal drives the plan when one file/package has several (most urgent first).
+ACTION_PRIORITY = {"exposed_secret": 0, "malicious_package": 1, "dangerous_workflow": 2,
+                   "lockfile_tampering": 3, "integrity_mismatch": 3}
 
 
 def _norm(n):
@@ -165,8 +172,11 @@ def run(state: dict, task: dict) -> AgentResult:
                     plan.update(action="request_review", status="needs_review",
                                 rationale="no clean, non-yanked release found within the lookup budget")
         elif others:
+            others.sort(key=lambda f: (ACTION_PRIORITY.get(f["type"], 9), -(f.get("calibrated_base") or 0)))
             act, why = ANOMALY_ACTIONS[others[0]["type"]]
-            plan.update(action=act, target_version=None, rationale=why,
+            tool_fix = others[0].get("recommended_action")
+            plan.update(action=act, target_version=None,
+                        rationale=f"{why} {tool_fix}".strip() if tool_fix else why,
                         status="proposed" if act != "request_review" else "needs_review")
         else:
             continue

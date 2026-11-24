@@ -25,6 +25,7 @@ from pyvis.network import Network
 SEV_ORDER = ["CRITICAL", "HIGH", "MEDIUM", "LOW", "NEGLIGIBLE", "UNKNOWN"]
 SEV_COLOR = {"CRITICAL": "#dc2626", "HIGH": "#ea580c", "MEDIUM": "#d97706",
              "LOW": "#65a30d", "NEGLIGIBLE": "#94a3b8", "UNKNOWN": "#94a3b8"}
+SUSPICIOUS_COLOR = "#c026d3"
 COLOR = {"root": "#0f172a", "direct": "#2563eb", "transitive": "#94a3b8", "unresolved": "#9333ea"}
 
 
@@ -206,6 +207,50 @@ def annotate(g: nx.DiGraph, vulns: dict[str, list[dict]]) -> None:
                            key=SEV_ORDER.index, default="UNKNOWN" if d["vulns"] else None)
         d["parent_ids"] = list(g.predecessors(n))
         d["child_ids"] = list(g.successors(n))
+        d["agent"] = None   # filled by attach_agents() when an agent report exists
+
+
+def attach_agents(g: nx.DiGraph, report_path: Path, bom_path: Path) -> None:
+    """Attach the guardian_v2 agents' assessment to graph nodes (agent analysis, not scanner fact).
+    Agent findings are keyed by SBOM purl; nodes by bom-ref, so map through the SBOM."""
+    rep = json.loads(report_path.read_text())
+    bom = json.loads(bom_path.read_text()) if bom_path.exists() else {}
+    to_node = {c["purl"]: c.get("bom-ref", c["purl"]) for c in bom.get("components", []) if c.get("purl")}
+    plans = rep.get("remediation_plans", {})
+    per_node: dict[str, list[dict]] = {}
+    unmapped = 0
+    for f in rep.get("findings", []):
+        purl = f.get("component_purl") or ""
+        if not purl.startswith("pkg:"):
+            continue                                   # file-level findings live in the report
+        node = to_node.get(purl) or (purl.replace("%40", "@") if purl.replace("%40", "@") in g else None)
+        if node not in g:
+            unmapped += 1
+            continue
+        per_node.setdefault(node, []).append(f)
+    for n, d in g.nodes(data=True):
+        fs = per_node.get(n)
+        if not fs:
+            continue
+        fs.sort(key=lambda f: -(f.get("score") or 0))
+        top = fs[0]
+        plan = plans.get(f"PLAN::{top['component_purl']}") or {}
+        d["agent"] = {
+            "score": top.get("score"), "ssvc": (top.get("ssvc") or {}).get("decision"),
+            "confidence": top.get("confidence"), "reachability": top.get("reachability_state"),
+            "suspicious": sorted({f["type"] for f in fs if f.get("type") != "vulnerability"}),
+            "findings": [{"type": f.get("type"), "id": f.get("canonical_id"), "score": f.get("score"),
+                          "ssvc": (f.get("ssvc") or {}).get("decision"), "kev": f.get("kev"),
+                          "epss": (f.get("epss") or {}).get("epss") if isinstance(f.get("epss"), dict) else None,
+                          "summary": (f.get("summary") or "")[:300],
+                          "explanations": [{"kind": a.get("kind"), "statement": a.get("statement"),
+                                            "next_step": a.get("next_step")} for a in (f.get("ai_inferences") or [])]}
+                         for f in fs[:12]],
+            "plan": {k: plan.get(k) for k in ("action", "target_version", "rationale", "status",
+                                              "compatibility_blocker")} if plan else None,
+        }
+    g.graph["agents"] = {"findings": len(rep.get("findings", [])), "unmapped_package_findings": unmapped,
+                         "llm": next((v for k, v in rep.get("coverage", {}).items() if k == "llm"), None)}
 
 
 # ---------------------------------------------------------------- render
@@ -223,7 +268,11 @@ def node_style(d: dict) -> dict:
              "highlight": {"background": base, "border": "#0f172a"},
              "hover": {"background": base, "border": "#0f172a"}}
     shape = "star" if dt == "root" else "diamond" if vuln else "dot"
-    return {"color": color, "size": size, "font": font, "shape": shape}
+    style = {"color": color, "size": size, "font": font, "shape": shape}
+    if (d.get("agent") or {}).get("suspicious"):          # agent-flagged supply-chain anomaly: magenta ring
+        color.update(border=SUSPICIOUS_COLOR)
+        style.update(borderWidth=4, size=max(size, 11))
+    return style
 
 
 def export_json(g: nx.DiGraph, out: Path, inputs: dict, scan: dict | None = None,
@@ -231,7 +280,7 @@ def export_json(g: nx.DiGraph, out: Path, inputs: dict, scan: dict | None = None
     """Machine-readable graph + evidence for agents, reports and the dashboard.
     Same data the HTML embeds: nodes, directed edges, dependency paths, merged scanner findings."""
     node_keys = ("name", "version", "ecosystem", "purl", "scope", "dep_type", "path_ids",
-                 "parent_ids", "child_ids", "max_sev", "vulns")
+                 "parent_ids", "child_ids", "max_sev", "vulns", "agent")
     nodes = [{"id": n, **{k: d[k] for k in node_keys}} for n, d in g.nodes(data=True)]
     sev = Counter(v["severity"] for _, d in g.nodes(data=True) for v in d["vulns"])
     doc = {
@@ -295,7 +344,7 @@ def render(g: nx.DiGraph, out: Path, target: str = "", scanners_used: list | Non
         net.nodes[-1]["font"] = font  # pyvis overwrites a `font` kwarg with font_color only
         details[n] = {k: d[k] for k in ("name", "label", "version", "ecosystem", "purl", "scope",
                                          "dep_type", "path_ids", "vulns", "max_sev",
-                                         "parent_ids", "child_ids")}
+                                         "parent_ids", "child_ids", "agent")}
     for a, b in g.edges():
         net.add_edge(a, b)
     net.set_options(json.dumps({
@@ -318,6 +367,8 @@ def render(g: nx.DiGraph, out: Path, target: str = "", scanners_used: list | Non
              "direct": sum(1 for _, d in g.nodes(data=True) if d["dep_type"] == "direct"),
              "transitive": sum(1 for _, d in g.nodes(data=True) if d["dep_type"] == "transitive"),
              "vulnerable": sum(1 for _, d in g.nodes(data=True) if d["vulns"]),
+             "suspicious": sum(1 for _, d in g.nodes(data=True) if (d.get("agent") or {}).get("suspicious")),
+             "agents": g.graph.get("agents"),
              "findings": sum(len(d["vulns"]) for _, d in g.nodes(data=True)),
              "unresolved": len(g.graph.get("unresolved", [])), "root": g.graph["root"],
              "scanners": scanners_used or []}
@@ -407,6 +458,7 @@ UI_HTML = r"""
    <option value="HIGH">High and above (with paths)</option>
    <option value="MEDIUM">Medium and above (with paths)</option>
    <option value="LOW">Any vulnerability (with paths)</option>
+   <option value="SUSPICIOUS">Supply-chain anomalies (agents)</option>
   </select>
   <div class="section">Legend</div>
   <div class="legend">
@@ -414,6 +466,7 @@ UI_HTML = r"""
    <div><span class="sw" style="background:#2563eb"></span>Direct dependency</div>
    <div><span class="sw" style="background:#94a3b8"></span>Transitive dependency</div>
    <div><span class="sw" style="background:#9333ea"></span>Not linked in SBOM (e.g. CI GitHub Actions)</div>
+   <div><span class="sw" style="background:#fff;border:3px solid #c026d3;box-sizing:border-box"></span>Supply-chain anomaly flagged by agents</div>
    <div><span class="sw dia" style="background:#dc2626"></span>Critical · <span class="sw dia" style="background:#ea580c"></span>High · <span class="sw dia" style="background:#d97706"></span>Medium · <span class="sw dia" style="background:#65a30d"></span>Low</div>
    <div><span class="sw line" style="background:var(--path)"></span>Focused path to root</div>
    <div><span class="sw line" style="background:var(--child)"></span>Focused node's dependencies</div>
@@ -439,14 +492,14 @@ const sevIdx = s => s ? SEV.indexOf(s) : 99;
 const badge = s => s ? `<span class="badge" style="background:${SEVC[s]}">${esc(s)}</span>` : "";
 
 // Snapshot original styling so focus/filters can be undone exactly.
-const BASE = {}; nodes.get().forEach(n => BASE[n.id] = {id:n.id, color:n.color, font:n.font, borderWidth:1});
+const BASE = {}; nodes.get().forEach(n => BASE[n.id] = {id:n.id, color:n.color, font:n.font, borderWidth:n.borderWidth||1});
 const EDGE_ID = {}; const ALL_EDGES = edges.get().map(e => { EDGE_ID[e.from + "\u0000" + e.to] = e.id; return e.id; });
 let focused = null, frozen = false, active = -1, results = [];
 
 // ---- header stats
 $("ssg-source").textContent = (STATS.target ? STATS.target + " · " : "") + STATS.source +
   (STATS.scanners && STATS.scanners.length ? " · scanned by " + STATS.scanners.join(", ") : "");
-const st = [["nodes","Packages"],["direct","Direct"],["transitive","Transitive"],["vulnerable","Vulnerable"],["findings","Findings"],["edges","Edges"]];
+const st = [["nodes","Packages"],["direct","Direct"],["transitive","Transitive"],["vulnerable","Vulnerable"],["findings","Findings"],["suspicious","Anomalies (agents)"]];
 $("ssg-stats").innerHTML = st.map(([k,l]) => `<div class="stat"><b>${STATS[k]}</b><span>${l}</span></div>`).join("");
 
 // ---- motion control: auto-freeze once the layout has settled
@@ -518,6 +571,33 @@ function clearFocus(){
 }
 network.on("click", p => p.nodes.length ? focusNode(p.nodes[0]) : (focused && clearFocus()));
 
+// ---- agent assessment (guardian_v2): analysis, kept visually separate from scanner facts
+const TYPE_LABEL = {vulnerability:"Known vulnerability", typosquat_suspect:"Typosquat suspect (unverified)",
+  install_script:"Install-time script", yanked_or_deprecated:"Deprecated / yanked version",
+  suspicious_update:"Suspicious recent release", malicious_package:"Malicious package",
+  integrity_mismatch:"Integrity mismatch", lockfile_tampering:"Lockfile tampering",
+  untrusted_resolved_url:"Untrusted download source", dependency_confusion:"Dependency confusion",
+  unpublished_version:"Unpublished version", unexpected_dependency:"Unexpected dependency"};
+function agentSection(d){
+  const a = d.agent;
+  if(!a) return STATS.agents ? `<div class="section">Agent assessment</div><div class="note">No agent findings for this package.</div>` : "";
+  const chips = `<span class="chip">risk score <b>${esc(a.score)}</b>/100</span> <span class="chip">SSVC: ${esc(a.ssvc||"—")}</span>
+    <span class="chip">confidence: ${esc(a.confidence||"—")}</span> <span class="chip">reachability: ${esc(a.reachability||"—")}</span>`;
+  const sus = a.suspicious.length ? `<div class="warn" style="color:#a21caf;margin-top:6px">⚑ Supply-chain signals: ${a.suspicious.map(t => esc(TYPE_LABEL[t]||t)).join(", ")}</div>` : "";
+  const fcards = a.findings.filter(f => f.type !== "vulnerability" || f.explanations.length).slice(0,6).map(f => `
+    <div class="vuln" style="border-left-color:${f.type==="vulnerability" ? "#2563eb" : "#c026d3"}">
+      <div style="display:flex;justify-content:space-between;gap:6px"><b>${esc(TYPE_LABEL[f.type]||f.type)}</b><span class="chip">${esc(f.id)} · ${esc(f.score)}</span></div>
+      ${f.type !== "vulnerability" ? `<div class="tool">${esc(f.summary)}</div>` : ""}
+      ${f.explanations.map(x => `<div class="tool" style="margin-top:6px"><span class="chip" style="${x.kind==="inference"?"background:#ede9fe;color:#5b21b6":""}">${x.kind==="inference" ? "LLM · critic-verified" : "template"}</span> ${esc(x.statement)}</div>`).join("")}
+    </div>`).join("");
+  const p = a.plan;
+  const plan = p ? `<div class="vuln" style="border-left-color:#16a34a"><b>Proposed remediation</b> <span class="chip">${esc(p.action)}${p.target_version ? " → "+esc(p.target_version) : ""}</span>
+      <div class="tool">${esc(p.rationale||"")}</div>${p.compatibility_blocker ? `<div class="warn">Blocker: ${esc(p.compatibility_blocker)}</div>` : ""}
+      <div class="note">Status: ${esc(p.status||"proposed")} — requires human approval; nothing is changed automatically.</div></div>` : "";
+  return `<div class="section">Agent assessment <span class="note">(agent analysis, not scanner fact)</span></div>
+    <div class="list">${chips}</div>${sus}${fcards}${plan}`;
+}
+
 // ---- detail drawer
 const chipLink = (k, cls="crumb") => `<span class="${cls}" data-id="${esc(k)}" title="${esc(SSG[k].name+'@'+SSG[k].version)}">${esc(SSG[k].label)}${SSG[k].vulns.length?" "+badge(SSG[k].max_sev):""}</span>`;
 function renderDrawer(id){
@@ -542,7 +622,8 @@ function renderDrawer(id){
   const list = (ids, empty) => ids.length ? `<div class="list">${ids.slice(0,80).map(k => chipLink(k)).join("")}${ids.length>80?`<span class="chip">+${ids.length-80} more</span>`:""}</div>` : `<div class="note">${empty}</div>`;
   $("ssg-dbody").innerHTML = `
     <div class="section">Path to root <span style="color:var(--path)">━</span></div><div class="crumbs">${path}</div>
-    <div class="section">Vulnerabilities (${d.vulns.length})</div>${vulns}
+    <div class="section">Vulnerabilities — scanner evidence (${d.vulns.length})</div>${vulns}
+    ${agentSection(d)}
     <div class="section">Depends on (${d.child_ids.length}) <span style="color:var(--child)">━</span></div>${list(d.child_ids, "No dependencies")}
     <div class="section">Required by (${d.parent_ids.length})</div>${list(d.parent_ids, "—")}
     <div class="section">Package URL</div><div class="ids" style="font-family:ui-monospace,monospace">${esc(d.purl || "Evidence unavailable")}</div>`;
@@ -564,7 +645,7 @@ function runSearch(){
   $("ssg-results").innerHTML = `<div class="note" style="margin:2px 0 4px">${results.length} match${results.length===1?"":"es"}${results.length>60?" (showing 60)":""}</div>` +
     shown.map((x,i) => `<div class="res${i===active?" act":""}" data-id="${esc(x.id)}" data-i="${i}">
       <span class="nm">${hlText(x.d.name, q)}</span><span class="vr">${esc(x.d.version)}</span>
-      <span class="chip">${esc(x.d.dep_type)}</span>${x.d.vulns.length ? badge(x.d.max_sev) : ""}</div>`).join("");
+      <span class="chip">${esc(x.d.dep_type)}</span>${x.d.vulns.length ? badge(x.d.max_sev) : ""}${(x.d.agent||{}).suspicious && x.d.agent.suspicious.length ? '<span class="chip" style="color:#a21caf;border-color:#c026d3">⚑</span>' : ""}</div>`).join("");
 }
 function moveActive(delta){
   const rows = [...document.querySelectorAll("#ssg-results .res")]; if(!rows.length) return;
@@ -591,14 +672,16 @@ function applySevFilter(){
   edges.update(ALL_EDGES.map(e => ({id:e, color:{color:EDGE_BASE.color}, width:EDGE_BASE.width})));
   if(!min){ nodes.update(Object.keys(BASE).map(k => ({id:k, hidden:false}))); return; }
   const keep = new Set([STATS.root]), pathEdges = new Set();
+  const match = d => min === "SUSPICIOUS" ? ((d.agent||{}).suspicious||[]).length > 0
+                                          : d.vulns.length && sevIdx(d.max_sev) <= SEV.indexOf(min);
   for(const [k,d] of Object.entries(SSG))
-    if(d.vulns.length && sevIdx(d.max_sev) <= SEV.indexOf(min)) {
+    if(match(d)) {
       const p = d.path_ids.length ? d.path_ids : [k];
       p.forEach(x => keep.add(x));
       for(let i=0;i<p.length-1;i++){ const e = EDGE_ID[p[i]+"\u0000"+p[i+1]]; if(e) pathEdges.add(e); }
     }
   nodes.update(Object.keys(BASE).map(k => ({id:k, hidden:!keep.has(k)})));
-  edges.update([...pathEdges].map(e => ({id:e, color:{color:"rgba(220,38,38,0.6)"}, width:1.5})));
+  edges.update([...pathEdges].map(e => ({id:e, color:{color: min === "SUSPICIOUS" ? "rgba(192,38,211,0.6)" : "rgba(220,38,38,0.6)"}, width:1.5})));
   fitTo([...keep], 1.2);
 }
 $("ssg-sev").addEventListener("change", () => focused ? clearFocus() : applySevFilter());  // clearFocus re-applies the filter
@@ -623,7 +706,7 @@ def main() -> None:
 
 def build(repo: Path, bom: Path, grype: Path | None, osv: Path | None, out_html: Path,
           out_json: Path, target: str = "", scan: dict | None = None,
-          trivy: Path | None = None) -> dict:
+          trivy: Path | None = None, agent_report: Path | None = None) -> dict:
     """Build graph.json + interactive HTML from an SBOM and optional scanner reports.
     Returns graph statistics. Missing scanner files are skipped and reported, never faked."""
     g = load_bom(bom) if bom.exists() else None
@@ -643,6 +726,8 @@ def build(repo: Path, bom: Path, grype: Path | None, osv: Path | None, out_html:
         else:
             print(f"[warn] {name} results not available — not included in overlay.")
     annotate(g, merge_findings(*sources))
+    if agent_report and agent_report.exists():
+        attach_agents(g, agent_report, bom)
     repo_findings = (load_trivy_repo_findings(trivy) if trivy and trivy.exists()
                      else {"misconfigurations": [], "secrets": [], "note": "Trivy results not available"})
     export_json(g, out_json, {"sbom": str(bom), "repo": str(repo),

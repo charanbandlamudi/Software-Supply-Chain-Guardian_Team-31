@@ -1,0 +1,739 @@
+{
+  "summary": {
+    "agents": [
+      "discovery",
+      "cicd",
+      "vuln_intel",
+      "reputation",
+      "reachability",
+      "exploit_intel",
+      "anomaly",
+      "scoring",
+      "remediation",
+      "explainer",
+      "critic"
+    ],
+    "llm": [
+      "groq"
+    ],
+    "turns": 9,
+    "seconds": 77.9,
+    "findings": 188,
+    "by_type": {
+      "misconfiguration": 87,
+      "vulnerability": 58,
+      "yanked_or_deprecated": 11,
+      "unpinned_action": 7,
+      "unpinned_base_image": 6,
+      "install_script": 6,
+      "exposed_secret": 5,
+      "suspicious_update": 5,
+      "typosquat_suspect": 3
+    },
+    "handoffs": 1,
+    "critic": {
+      "accepted": 19,
+      "rejected": 0
+    },
+    "remediation_plans": 47,
+    "coverage": {
+      "discovery": "SBOM CycloneDX 1.7: 1134 components; package-lock v3: 1249 packages",
+      "reputation": "110 ok, 0 failed",
+      "source:pypi-osv": "ok",
+      "source:npm-audit": "ok",
+      "source:osv": "ok",
+      "source:osv-scanner": "ok",
+      "source:trivy": "ok",
+      "source:grype": "ok",
+      "source:ghsa": "skipped: set GITHUB_TOKEN (unauthenticated limit is 60 req/h)",
+      "source:cisa-kev": "ok (1792 entries)",
+      "source:epss": "ok (47/48)",
+      "llm": "ok via ['groq']"
+    },
+    "reputation_focus": 110,
+    "report_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/agents"
+  },
+  "inputs": {
+    "sbom": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/sbom/bom.json",
+    "source_dirs": [
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo"
+    ],
+    "dockerfiles": [
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/Dockerfile",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/infrastructure/Dockerfile",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/test/smoke/Dockerfile"
+    ],
+    "workflows": [
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/ci.yml",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/codeql-analysis.yml",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/frontend-bundle-analysis.yml",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/image_actions.yml",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/issue-compliance.yml",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/lint-fixer.yml",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/lock.yml",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/pr-compliance.yml",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/rebase.yml",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/release.yml",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/stale.yml",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/update-challenges-ebook.yml",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/update-challenges-www-legacy.yml",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/update-challenges-www.yml",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/update-news-www-legacy.yml",
+      "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/update-news-www.yml"
+    ],
+    "out_dir": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/agents",
+    "stage": "analysis",
+    "reputation_focus": [
+      "pkg:npm/%40ai-sdk/openai-compatible@2.0.94",
+      "pkg:npm/%40cyclonedx/cyclonedx-npm@4.2.1",
+      "pkg:npm/%40eslint/js@9.39.5",
+      "pkg:npm/%40fontsource/roboto@5.3.0",
+      "pkg:npm/%40istanbuljs/nyc-config-typescript@1.0.2",
+      "pkg:npm/%40simplewebauthn/server@14.1.0",
+      "pkg:npm/%40tootallnate/once@1.1.2",
+      "pkg:npm/%40types/clarinet@0.12.3",
+      "pkg:npm/%40types/compression@1.8.1",
+      "pkg:npm/%40types/config@3.3.5",
+      "pkg:npm/%40types/cookie-parser@1.4.10",
+      "pkg:npm/%40types/cors@2.8.19",
+      "pkg:npm/%40types/cross-spawn@6.0.6",
+      "pkg:npm/%40types/diff@7.0.2",
+      "pkg:npm/%40types/errorhandler@1.5.3",
+      "pkg:npm/%40types/exif@0.6.5",
+      "pkg:npm/%40types/express-jwt@6.0.4",
+      "pkg:npm/%40types/express@4.17.25",
+      "pkg:npm/%40types/i18n@0.12.0",
+      "pkg:npm/%40types/js-yaml@3.12.10",
+      "pkg:npm/%40types/jsonwebtoken@8.5.9",
+      "pkg:npm/%40types/jws@3.2.11",
+      "pkg:npm/%40types/lodash@4.17.27",
+      "pkg:npm/%40types/morgan@1.9.10",
+      "pkg:npm/%40types/multer@1.4.13",
+      "pkg:npm/%40types/node@26.6.6",
+      "pkg:npm/%40types/pdfkit@0.10.6",
+      "pkg:npm/%40types/pug@2.0.10",
+      "pkg:npm/%40types/sanitize-html@1.27.2",
+      "pkg:npm/%40types/semver@7.8.0",
+      "pkg:npm/%40types/sequelize@4.28.20",
+      "pkg:npm/%40types/serve-index@1.9.4",
+      "pkg:npm/%40types/supertest@7.2.1",
+      "pkg:npm/%40types/swagger-ui-express@4.1.8",
+      "pkg:npm/%40types/unzipper@0.10.11",
+      "pkg:npm/ai@6.0.336",
+      "pkg:npm/base64url@0.0.6",
+      "pkg:npm/beercss@4.0.23",
+      "pkg:npm/clarinet@0.12.6",
+      "pkg:npm/compression@1.8.2",
+      "pkg:npm/concurrently@5.3.0",
+      "pkg:npm/config@3.3.12",
+      "pkg:npm/cookie-parser@1.4.7",
+      "pkg:npm/cookieconsent@3.1.1",
+      "pkg:npm/cors@2.8.6",
+      "pkg:npm/crypto-js@3.3.0",
+      "pkg:npm/cypress@16.3.0",
+      "pkg:npm/diff@9.0.0",
+      "pkg:npm/errorhandler@1.5.2",
+      "pkg:npm/eslint@9.39.5",
+      "pkg:npm/ethers@6.17.0",
+      "pkg:npm/exif@0.6.0",
+      "pkg:npm/express-ipfilter@1.4.0",
+      "pkg:npm/express-jwt@0.1.3",
+      "pkg:npm/express-rate-limit@7.5.1",
+      "pkg:npm/express-robots-txt@0.5.0",
+      "pkg:npm/express-security.txt@2.0.0",
+      "pkg:npm/express@4.22.3",
+      "pkg:npm/feature-policy@0.6.0",
+      "pkg:npm/file-stream-rotator@1.0.0",
+      "pkg:npm/file-type@16.5.4",
+      "pkg:npm/finale-rest@1.2.2",
+      "pkg:npm/glob@10.5.0",
+      "pkg:npm/globals@17.14.0",
+      "pkg:npm/hashids@2.3.0",
+      "pkg:npm/hbs@4.4.0",
+      "pkg:npm/helmet@4.6.0",
+      "pkg:npm/html-entities@1.4.0",
+      "pkg:npm/i18n@0.11.1",
+      "pkg:npm/js-yaml@3.15.2",
+      "pkg:npm/jsonwebtoken@0.1.0",
+      "pkg:npm/jsonwebtoken@0.4.0",
+      "pkg:npm/jws@0.2.6",
+      "pkg:npm/libxml2-wasm@0.7.2",
+      "pkg:npm/lodash@2.4.2",
+      "pkg:npm/marsdb@0.6.11",
+      "pkg:npm/material-icons@1.13.14",
+      "pkg:npm/messageformat@2.3.0",
+      "pkg:npm/minimatch@9.0.9",
+      "pkg:npm/moment@2.0.0",
+      "pkg:npm/morgan@1.12.1",
+      "pkg:npm/multer@2.5.0",
+      "pkg:npm/neostandard@0.13.0",
+      "pkg:npm/notevil@1.3.3",
+      "pkg:npm/nyc@15.1.0",
+      "pkg:npm/otplib@13.6.0",
+      "pkg:npm/pdfkit@0.11.0",
+      "pkg:npm/prom-client@15.1.3",
+      "pkg:npm/proxy-agent@8.0.3",
+      "pkg:npm/pug@3.0.4",
+      "pkg:npm/sanitize-filename@1.6.5",
+      "pkg:npm/sanitize-html@1.4.2",
+      "pkg:npm/semver@7.8.6",
+      "pkg:npm/sequelize@6.37.8",
+      "pkg:npm/serve-index@1.9.2",
+      "pkg:npm/socket.io-client@4.8.4",
+      "pkg:npm/socket.io@4.8.4",
+      "pkg:npm/sqlite3@5.1.7",
+      "pkg:npm/supertest@7.3.2",
+      "pkg:npm/svg-captcha@1.4.0",
+      "pkg:npm/swagger-ui-express@5.0.1",
+      "pkg:npm/tar@6.2.1",
+      "pkg:npm/tsx@4.23.15",
+      "pkg:npm/typescript-eslint@8.74.0",
+      "pkg:npm/typescript@6.0.3",
+      "pkg:npm/unzipper@0.12.5",
+      "pkg:npm/uuid@8.3.2",
+      "pkg:npm/winston@3.19.0",
+      "pkg:npm/z85@0.0.2",
+      "pkg:npm/zod@4.6.7"
+    ],
+    "npm_manifest": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/package.json",
+    "npm_lock": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/package-lock.json",
+    "grype_report": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/scanner_results/grype.json",
+    "osv_scanner_report": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/scanner_results/osv.json",
+    "trivy_report": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/scanner_results/trivy.json"
+  },
+  "messages": [
+    {
+      "turn": 1,
+      "from": "supervisor",
+      "to": [
+        "discovery",
+        "cicd"
+      ],
+      "text": "policy: ready=['discovery', 'cicd'], handoffs=[]"
+    },
+    {
+      "turn": 1,
+      "from": "discovery",
+      "to": "supervisor",
+      "text": "1137 components (105 direct), 2323 edges; SBOM CycloneDX 1.7: 1134 components; package-lock v3: 1249 packages"
+    },
+    {
+      "turn": 1,
+      "from": "cicd",
+      "to": "supervisor",
+      "text": "13 container/CI findings in 19 files; Trivy: 87 misconfigurations, 5 secrets (values redacted)"
+    },
+    {
+      "turn": 2,
+      "from": "supervisor",
+      "to": [
+        "vuln_intel",
+        "reputation",
+        "reachability"
+      ],
+      "text": "policy: ready=['vuln_intel', 'reputation', 'reachability'], handoffs=[]"
+    },
+    {
+      "turn": 2,
+      "from": "reputation",
+      "to": "supervisor",
+      "text": "registry metadata for 110 packages"
+    },
+    {
+      "turn": 2,
+      "from": "vuln_intel",
+      "to": "supervisor",
+      "text": "294 raw advisory records from 6/6 sources -> 58 unique vulnerabilities on 20 packages (tar@6.2.1=12, sanitize-html@1.4.2=11, jsonwebtoken@0.1.0=5, jsonwebtoken@0.4.0=5, lodash@2.4.2=4, moment@2.0.0=3)  [2.6s]"
+    },
+    {
+      "turn": 2,
+      "from": "reachability",
+      "to": "supervisor",
+      "text": "reachability: {'imported': 61, 'used_transitively': 656, 'not_imported': 420}  [2.7s]"
+    },
+    {
+      "turn": 3,
+      "from": "supervisor",
+      "to": [
+        "exploit_intel",
+        "anomaly"
+      ],
+      "text": "policy: ready=['exploit_intel', 'anomaly'], handoffs=[]"
+    },
+    {
+      "turn": 3,
+      "from": "exploit_intel",
+      "to": "supervisor",
+      "text": "48 CVEs checked: 0 in CISA KEV, EPSS for 47"
+    },
+    {
+      "turn": 3,
+      "from": "anomaly",
+      "to": "supervisor",
+      "text": "25 non-CVE findings: {'yanked_or_deprecated': 11, 'install_script': 6, 'typosquat_suspect': 3, 'suspicious_update': 5}; name-similarity cleared as established: cors (~colors: 35 versions, 13y), cypress (~express: 298 versions, 11y)  [1.4s]"
+    },
+    {
+      "turn": 3,
+      "from": "anomaly",
+      "to": "reachability",
+      "text": "handoff: suspicious packages found; check whether source code imports them"
+    },
+    {
+      "turn": 4,
+      "from": "supervisor",
+      "to": [
+        "reachability"
+      ],
+      "text": "policy: ready=['scoring'], handoffs=['reachability']"
+    },
+    {
+      "turn": 4,
+      "from": "reachability",
+      "to": "supervisor",
+      "text": "reachability: {'imported': 61, 'used_transitively': 656, 'not_imported': 420}; handoff check on 3 suspicious packages: imported by source = none"
+    },
+    {
+      "turn": 5,
+      "from": "supervisor",
+      "to": [
+        "scoring"
+      ],
+      "text": "policy: ready=['scoring'], handoffs=[]"
+    },
+    {
+      "turn": 5,
+      "from": "scoring",
+      "to": "supervisor",
+      "text": "scored 188 findings; top: CVE-2015-9235 on jsonwebtoken@0.1.0 = 57.4; CVE-2015-9235 on jsonwebtoken@0.4.0 = 57.4; CVE-2022-25887 on sanitize-html@1.4.2 = 45.7"
+    },
+    {
+      "turn": 6,
+      "from": "supervisor",
+      "to": [
+        "remediation"
+      ],
+      "text": "policy: ready=['remediation'], handoffs=[]"
+    },
+    {
+      "turn": 6,
+      "from": "remediation",
+      "to": "supervisor",
+      "text": "47 plans (strategy=minimal): upgrades [express-jwt 0.1.3->6.0.0, jsonwebtoken 0.1.0->9.0.0, jws 0.2.6->3.2.3, base64url 0.0.6->3.0.0, moment 2.0.0->2.31.0, file-type 16.5.4->21.3.2, jsonwebtoken 0.4.0->9.0.0, sanitize-html 1.4.2->2.18.1, lodash 2.4.2->4.18.1, uuid 8.3.2->13.0.1, tar 6.2.1->7.5.21, @tootallnate/once 1.1.2->2.0.1, @cyclonedx/cyclonedx-npm 4.2.1->6.0.0, glob 10.5.0->14.0.2, minimatch 9.0.9->11.0.1, messageformat 2.3.0->4.0.0]; other actions {'pin': 11, 'fix_config': 8, 'rotate_secret': 5, 'request_review': 4, 'remove': 3}; resolver: blocker: jwa needs base64url ~0.0.3; no clean match; blocker: jws needs jwa ^2.0.1; no clean match; jws -> 3.2.3 to satisfy jsonwebtoken ^3.2.2; blocker: express-jwt needs jsonwebtoken ^8.1.0; no clean match; blocker: file-type needs strtok3 ^10.3.4; no clean match; blocker: file-type needs token-types ^6.1.1; no clean match; blocker: i18n needs messageformat ^2.3.0; no clean match; blocker: sanitize-html needs htmlparser2 ^12.0.0; no clean match; blocker: sequelize needs uuid ^8.3.2; no clean match; blocker: tar needs chownr ^3.0.0; no clean match; blocker: tar needs minipass ^7.1.2; no clean match; blocker: tar needs minizlib ^3.1.0; no clean match; blocker: tar needs yallist ^5.0.0; no clean match; blocker: cacache needs tar ^6.0.2; no clean match; blocker: http-proxy-agent needs @tootallnate/once 1; no clean match; blocker: node-gyp needs tar ^6.1.2; no clean match; blocker: sqlite3 needs tar ^6.1.11; no clean match; blocker: minimatch needs brace-expansion ^5.0.12; no clean match; blocker: glob needs path-scurry ^3.0.0; no clean match; blocker: cacache needs glob ^10.2.2; no clean match; blocker: istanbul-lib-processinfo needs uuid ^8.3.2; no clean match; blocker: @cyclonedx/cyclonedx-npm needs commander ^14.0.0; no clean match; blocker: @cyclonedx/cyclonedx-npm needs normalize-package-data ^7.0.0 || ^8.0.0; no clean match; blocker: express-jwt needs jsonwebtoken ^8.1.0; no clean match; blocker: jsonwebtoken needs moment ~2.0.0; no clean match; blocker: jwa needs base64url ~0.0.3; no clean match; blocker: jws needs jwa ^1.4.2; no clean match; blocker: express-jwt needs jsonwebtoken ^8.1.0; no clean match; blocker: file-type needs strtok3 ^10.3.4; no clean match; blocker: file-type needs token-types ^6.1.1; no clean match; blocker: i18n needs messageformat ^2.3.0; no clean match; blocker: sanitize-html needs htmlparser2 ^12.0.0; no clean match; blocker: sequelize needs uuid ^8.3.2; no clean match; blocker: tar needs chownr ^3.0.0; no clean match; blocker: tar needs minipass ^7.1.2; no clean match; blocker: tar needs minizlib ^3.1.0; no clean match; blocker: tar needs yallist ^5.0.0; no clean match; blocker: cacache needs tar ^6.0.2; no clean match; blocker: http-proxy-agent needs @tootallnate/once 1; no clean match; blocker: node-gyp needs tar ^6.1.2; no clean match; blocker: sqlite3 needs tar ^6.1.11; no clean match; blocker: minimatch needs brace-expansion ^5.0.12; no clean match; blocker: glob needs path-scurry ^3.0.0; no clean match; blocker: cacache needs glob ^10.2.2; no clean match; blocker: istanbul-lib-processinfo needs uuid ^8.3.2; no clean match; blocker: @cyclonedx/cyclonedx-npm needs commander ^14.0.0; no clean match; blocker: @cyclonedx/cyclonedx-npm needs normalize-package-data ^7.0.0 || ^8.0.0; no clean match; blocker: express-jwt needs jsonwebtoken ^8.1.0; no clean match; blocker: jsonwebtoken needs moment ~2.0.0; no clean match"
+    },
+    {
+      "turn": 7,
+      "from": "supervisor",
+      "to": [
+        "explainer"
+      ],
+      "text": "policy: ready=['explainer'], handoffs=[]"
+    },
+    {
+      "turn": 7,
+      "from": "explainer",
+      "to": "supervisor",
+      "text": "LLM produced 19 evidence-cited claims for 20 findings  [73.1s]"
+    },
+    {
+      "turn": 8,
+      "from": "supervisor",
+      "to": [
+        "critic"
+      ],
+      "text": "policy: ready=['critic'], handoffs=[]"
+    },
+    {
+      "turn": 8,
+      "from": "critic",
+      "to": "supervisor",
+      "text": "verified 19 claims; 0 replaced by templates"
+    },
+    {
+      "turn": 9,
+      "from": "supervisor",
+      "to": "report",
+      "text": "finish: no agent has new inputs and no handoffs are open"
+    },
+    {
+      "turn": 9,
+      "from": "report",
+      "to": "supervisor",
+      "text": "wrote guardian-report.json/.md, guardian.sarif, guardian-sbom.cdx.json, dependency-graph.mmd to /Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/agents"
+    }
+  ],
+  "plan_log": [
+    {
+      "turn": 1,
+      "run": [
+        "discovery",
+        "cicd"
+      ],
+      "reason": "policy: ready=['discovery', 'cicd'], handoffs=[]"
+    },
+    {
+      "turn": 2,
+      "run": [
+        "vuln_intel",
+        "reputation",
+        "reachability"
+      ],
+      "reason": "policy: ready=['vuln_intel', 'reputation', 'reachability'], handoffs=[]"
+    },
+    {
+      "turn": 3,
+      "run": [
+        "exploit_intel",
+        "anomaly"
+      ],
+      "reason": "policy: ready=['exploit_intel', 'anomaly'], handoffs=[]"
+    },
+    {
+      "turn": 4,
+      "run": [
+        "reachability"
+      ],
+      "reason": "policy: ready=['scoring'], handoffs=['reachability']"
+    },
+    {
+      "turn": 5,
+      "run": [
+        "scoring"
+      ],
+      "reason": "policy: ready=['scoring'], handoffs=[]"
+    },
+    {
+      "turn": 6,
+      "run": [
+        "remediation"
+      ],
+      "reason": "policy: ready=['remediation'], handoffs=[]"
+    },
+    {
+      "turn": 7,
+      "run": [
+        "explainer"
+      ],
+      "reason": "policy: ready=['explainer'], handoffs=[]"
+    },
+    {
+      "turn": 8,
+      "run": [
+        "critic"
+      ],
+      "reason": "policy: ready=['critic'], handoffs=[]"
+    }
+  ],
+  "critic": {
+    "accepted": [
+      {
+        "finding_id": "VULN::CVE-2015-9235::pkg:npm/jsonwebtoken@0.1.0",
+        "statement": "The jsonwebtoken 0.1.0 package has a verification bypass (CVE\u20112015\u20119235) that can allow attackers to forge JWTs. It is imported directly by the app and also via express\u2011jwt, giving it full reachability. With a CVSS of 9.8, a score of 57.4 and a high EPS\u2011S percentile (0.951), this vulnerability is critical. Upgrade to jsonwebtoken\u202f9.0.0.",
+        "evidence_ids": [
+          "EV-grype-b8372ef527a9bcdd",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-2917e3709dc4344f",
+          "EV-osv-scanner-419e8ba035143ca2"
+        ],
+        "facts": {
+          "cvss": 9.8,
+          "kev": false,
+          "target_version": "9.0.0"
+        },
+        "next_step": "Upgrade jsonwebtoken to 9.0.0 and run sandbox tests.",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "VULN::CVE-2015-9235::pkg:npm/jsonwebtoken@0.4.0",
+        "statement": "The jsonwebtoken 0.4.0 package has a verification bypass (CVE\u20112015\u20119235) that can allow attackers to forge JWTs. It is imported directly by the app and also via express\u2011jwt, giving it full reachability. With a CVSS of 9.8, a score of 57.4 and a high EPS\u2011S percentile (0.951), this vulnerability is critical. Upgrade to jsonwebtoken\u202f9.0.0.",
+        "evidence_ids": [
+          "EV-grype-6a9376bfd822ec70",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-2917e3709dc4344f",
+          "EV-osv-scanner-c0d9cc0fd57d350d"
+        ],
+        "facts": {
+          "cvss": 9.8,
+          "kev": false,
+          "target_version": "9.0.0"
+        },
+        "next_step": "Upgrade jsonwebtoken to 9.0.0 and run sandbox tests.",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "VULN::CVE-2022-25887::pkg:npm/sanitize-html@1.4.2",
+        "statement": "sanitize\u2011html 1.4.2 is vulnerable to a regular expression denial\u2011of\u2011service (CVE\u20112022\u201125887) that can be triggered by crafted input. The package is imported directly by the application, providing full reachability. Its CVSS of 7.5, score 45.7 and EPS\u2011S percentile 0.764 indicate a moderate risk. Upgrade to sanitize\u2011html\u202f2.18.1.",
+        "evidence_ids": [
+          "EV-grype-e6817ae5f7c17eba",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-ecf6b7e2965dce36",
+          "EV-osv-scanner-98634f8f7e628973"
+        ],
+        "facts": {
+          "cvss": 7.5,
+          "kev": false,
+          "target_version": "2.18.1"
+        },
+        "next_step": "Upgrade sanitize-html to 2.18.1 and verify functionality.",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "VULN::CVE-2020-15084::pkg:npm/express-jwt@0.1.3",
+        "statement": "express\u2011jwt 0.1.3 contains an authorization bypass (CVE\u20112020\u201115084) that may let unauthenticated requests access protected routes. It is imported directly by the app, so the vulnerability is reachable. With CVSS 7.7, score 44.6 and EPS\u2011S percentile 0.659, it is a notable concern. Upgrade to express\u2011jwt\u202f6.0.0.",
+        "evidence_ids": [
+          "EV-grype-b2a5241757ec44f8",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-ccb507a9a6c64c3d",
+          "EV-osv-scanner-7242b497b7cffa5e"
+        ],
+        "facts": {
+          "cvss": 7.7,
+          "kev": false,
+          "target_version": "6.0.0"
+        },
+        "next_step": "Upgrade express-jwt to 6.0.0 and run integration tests.",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "VULN::CVE-2019-10744::pkg:npm/lodash@2.4.2",
+        "statement": "lodash 2.4.2 suffers from prototype pollution (CVE\u20112019\u201110744) that can modify object prototypes across the runtime. It is used transitively through finale\u2011rest, sanitize\u2011html and sequelize, giving the vulnerability indirect reach into the app. The CVSS of 9.1, score 44.5 and EPS\u2011S percentile 0.924 make it high\u2011severity. Upgrade to lodash\u202f4.18.1.",
+        "evidence_ids": [
+          "EV-grype-59aa595ffd262d2d",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-dc0bb95ac8d9c951",
+          "EV-osv-scanner-6e28083ea601e804"
+        ],
+        "facts": {
+          "cvss": 9.1,
+          "kev": false,
+          "target_version": "4.18.1"
+        },
+        "next_step": "Upgrade lodash to 4.18.1 and perform regression testing.",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "VULN::CVE-2022-23539::pkg:npm/jsonwebtoken@0.4.0",
+        "statement": "The jsonwebtoken 0.4.0 package permits unrestricted key types, which can allow legacy keys and enable token forgery. It is imported directly by the application and also pulled in via express\u2011jwt, as shown in the dependency paths. With a CVSS of 8.1, a score of 42.3, a Track SSVC, and an EPS\u2011S of 0.00524, this is a high\u2011severity issue that should be addressed. Upgrade jsonwebtoken to version 9.0.0 and re\u2011scan the application.",
+        "evidence_ids": [
+          "EV-grype-34beb6ad5c898821",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-e72bb9b159a435c4",
+          "EV-osv-scanner-8db74f636b9814ce"
+        ],
+        "facts": {
+          "cvss": 8.1,
+          "kev": false,
+          "target_version": "9.0.0"
+        },
+        "next_step": "Upgrade jsonwebtoken to 9.0.0 and retest",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "VULN::CVE-2022-24785::pkg:npm/moment@2.0.0",
+        "statement": "Moment 2.0.0 contains a path\u2011traversal flaw in its locale handling that can lead to arbitrary file access. The vulnerable module is used transitively through jsonwebtoken and express\u2011jwt, as reflected in the dependency paths. Its CVSS of 7.5, score of 40.0, Track SSVC and EPS\u2011S of 0.05338 make it a serious concern. Upgrade moment to version 2.31.0 and re\u2011scan the project.",
+        "evidence_ids": [
+          "EV-grype-e83ff1a7097171f0",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-a4eaf6331a0016ac",
+          "EV-osv-scanner-5c1a2c4c2a5e4b04"
+        ],
+        "facts": {
+          "cvss": 7.5,
+          "kev": false,
+          "target_version": "2.31.0"
+        },
+        "next_step": "Upgrade moment to 2.31.0 and verify functionality",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "VULN::CVE-2017-16016::pkg:npm/sanitize-html@1.4.2",
+        "statement": "Sanitize\u2011html 1.4.2 is vulnerable to cross\u2011site scripting, allowing injection of malicious HTML into rendered pages. The package is imported directly by the application. With a CVSS of 6.1, a score of 39.8, Track SSVC and EPS\u2011S of 0.01311, the issue poses a moderate to high risk. Upgrade sanitize\u2011html to version 2.18.1 and re\u2011run security scans.",
+        "evidence_ids": [
+          "EV-grype-c3da12132bc16549",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-e96d2999b45c590a",
+          "EV-osv-scanner-0598dafed3a07249"
+        ],
+        "facts": {
+          "cvss": 6.1,
+          "kev": false,
+          "target_version": "2.18.1"
+        },
+        "next_step": "Upgrade sanitize-html to 2.18.1 and test for regressions",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "VULN::CVE-2021-23337::pkg:npm/lodash@2.4.2",
+        "statement": "Lodash 2.4.2 suffers from a command\u2011injection vulnerability that can be triggered by crafted input. It is used transitively via finale\u2011rest, sanitize\u2011html, and sequelize, as shown in the paths. The CVSS of 7.2, score of 39.8, Track SSVC and EPS\u2011S of 0.20158 indicate a high\u2011impact problem. Upgrade lodash to version 4.18.1 and perform sandbox testing before release.",
+        "evidence_ids": [
+          "EV-grype-bb1fbfe30a5defb6",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-1cee82c254d58a08",
+          "EV-osv-scanner-41d701ead2d797c7"
+        ],
+        "facts": {
+          "cvss": 7.2,
+          "kev": false,
+          "target_version": "4.18.1"
+        },
+        "next_step": "Upgrade lodash to 4.18.1 and conduct compatibility tests",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "VULN::CVE-2017-18214::pkg:npm/moment@2.0.0",
+        "statement": "Moment 2.0.0 is affected by a regular\u2011expression denial\u2011of\u2011service that can cause the process to hang on crafted dates. The library is used transitively through jsonwebtoken and express\u2011jwt. Its CVSS of 7.5, score of 39.5, Track SSVC and EPS\u2011S of 0.03649 make it a notable performance risk. Upgrade moment to version 2.31.0 and re\u2011evaluate the application\u2019s responsiveness.",
+        "evidence_ids": [
+          "EV-grype-9c31adedc7399bb7",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-bd4c008b6258c450",
+          "EV-osv-scanner-17698b35a385d915"
+        ],
+        "facts": {
+          "cvss": 7.5,
+          "kev": false,
+          "target_version": "2.31.0"
+        },
+        "next_step": "Upgrade moment to 2.31.0 and verify no DoS occurs",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "VULN::CVE-2021-26539::pkg:npm/sanitize-html@1.4.2",
+        "statement": "Sanitize\u2011html 1.4.2 has improper input validation that can allow malicious content to bypass sanitisation. The package is imported directly by the application. With a CVSS of 5.3, score of 38.7, Track SSVC and EPS\u2011S of 0.01977, the vulnerability is moderate but still warrants remediation. Upgrade sanitize\u2011html to version 2.18.1 and re\u2011scan for remaining issues.",
+        "evidence_ids": [
+          "EV-grype-b2713e48f0c413cb",
+          "EV-npm-audit-b23934214a0c7796",
+          "EV-osv-f36486418b11427b",
+          "EV-osv-scanner-f886e7f2ccf5e0df"
+        ],
+        "facts": {
+          "cvss": 5.3,
+          "kev": false,
+          "target_version": "2.18.1"
+        },
+        "next_step": "Upgrade sanitize-html to 2.18.1 and perform regression testing",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "MISCONFIGURATION::AWS-0054::data/static/codefixes/iacLeakedKeyChallenge_1.tf:156",
+        "statement": "The application load balancer listener is configured to use plain HTTP instead of HTTPS, exposing traffic to potential interception. This configuration is defined in data/static/codefixes/iacLeakedKeyChallenge_1.tf at line 156. With a score of 36.0 and an Ssvc of Track, the risk is notable even though reachability is not applicable. Apply the fix described by the failed Trivy check and switch the listener to HTTPS.",
+        "evidence_ids": [
+          "EV-trivy-misconfig-aa83db68355cd0e3"
+        ],
+        "facts": {
+          "cvss": null,
+          "kev": null,
+          "target_version": null
+        },
+        "next_step": "Apply the recommended action",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "EXPOSED_SECRET::private-key::infrastructure/terraform/networking.tf:171",
+        "statement": "An asymmetric private key was committed directly in infrastructure/terraform/networking.tf at line 171, exposing a credential in source control. The secret is reachable in the Terraform configuration and can be extracted by anyone with repository access. With a score of 30.0 and an Ssvc of Track, this poses a significant credential leakage risk. Revoke and rotate the key, remove it from the code and git history, and load it from a secret store instead.",
+        "evidence_ids": [
+          "EV-trivy-secret-631fdc50e10dbcdf"
+        ],
+        "facts": {
+          "cvss": null,
+          "kev": null,
+          "target_version": null
+        },
+        "next_step": "Apply the recommended action",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "SUSPICIOUS_UPDATE::pkg:npm/cypress@16.3.0",
+        "statement": "The npm package cypress@16.3.0 was published only 13.4 days ago, which is within the 14\u2011day cooling\u2011off window and may indicate a suspicious update. The package is imported into the application, making the potentially risky version part of the dependency chain. It carries a score of 29.0 and an Ssvc of Track, highlighting the need for caution. Pin the dependency to the previous release until the cooling\u2011off period has passed.",
+        "evidence_ids": [
+          "EV-anomaly-suspicious_update-055d8474d6ada21b",
+          "EV-input-9d4c5d82055ea10f",
+          "EV-ast-import-scan-41c06c5923a97ead"
+        ],
+        "facts": {
+          "cvss": null,
+          "kev": null,
+          "target_version": null
+        },
+        "next_step": "Apply the recommended action",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "TYPOSQUAT_SUSPECT::pkg:npm/color@5.0.3",
+        "statement": "The npm package named \"color\" is within an edit distance of two from the popular package \"colors\", raising a possible typosquat concern. It is used transitively in the application, so the suspect package could be pulled in without direct reference. With a score of 28.0 and an Ssvc of Track, the similarity warrants review. Remove the package or replace it with the intended one after verification.",
+        "evidence_ids": [
+          "EV-anomaly-typosquat_suspect-e1b29135c1d84501",
+          "EV-input-9d4c5d82055ea10f"
+        ],
+        "facts": {
+          "cvss": null,
+          "kev": null,
+          "target_version": null
+        },
+        "next_step": "Apply the recommended action",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "INSTALL_SCRIPT::pkg:npm/cypress@16.3.0",
+        "statement": "The cypress package executes code at install time, which can introduce unwanted behavior during dependency installation. This install script runs because the package is imported into the project. The finding has a score of 25.0 and an Ssvc of Track, indicating a moderate risk. Pin the dependency to the previous release until the new version passes the cooling\u2011off window.",
+        "evidence_ids": [
+          "EV-anomaly-install_script-64447212153055b1",
+          "EV-input-9d4c5d82055ea10f",
+          "EV-ast-import-scan-41c06c5923a97ead"
+        ],
+        "facts": {
+          "cvss": null,
+          "kev": null,
+          "target_version": null
+        },
+        "next_step": "Apply the recommended action",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "UNPINNED_BASE_IMAGE::/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/Dockerfile:1",
+        "statement": "The Dockerfile references the base image node:24 by tag rather than a immutable digest, allowing the underlying image to be changed without notice. This unpinned base image appears at line 1 of the Dockerfile and affects the entire container build. With a score of 22.0 and an Ssvc of Track, the risk of pulling a compromised or outdated image exists. Pin the base image using its @sha256 digest and avoid end\u2011of\u2011life tags.",
+        "evidence_ids": [
+          "EV-cicd-301ced8250ce0d00"
+        ],
+        "facts": {
+          "cvss": null,
+          "kev": null,
+          "target_version": null
+        },
+        "next_step": "Apply the recommended action",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "UNPINNED_ACTION::/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-055536/repo/.github/workflows/ci.yml:198",
+        "statement": "The CI workflow uses the coverallsapp/github-action@v2 action referenced by a tag/branch instead of a fixed commit SHA. This unpinned reference appears in .github/workflows/ci.yml at line\u202f198, so the workflow can pull a malicious version if the tag is moved. With a score of\u202f20.0 and an Ssvc of\u202fTrack, the issue is considered high\u2011impact and should be addressed promptly. Pin the action to a specific 40\u2011character commit SHA as recommended.",
+        "evidence_ids": [
+          "EV-cicd-661d9d4d8f42ce03"
+        ],
+        "facts": {
+          "cvss": null,
+          "kev": null,
+          "target_version": null
+        },
+        "next_step": "pin",
+        "kind": "inference"
+      },
+      {
+        "finding_id": "YANKED_OR_DEPRECATED::pkg:npm/jsonwebtoken@0.1.0",
+        "statement": "The project imports jsonwebtoken@0.1.0, which has been yanked or deprecated from the npm registry. Because the package is imported directly, the vulnerable code can be pulled into the application at build time. The finding has a score of\u202f14.4 and an Ssvc of\u202fTrack, indicating it should be tracked for remediation. Upgrade the dependency to version\u202f9.0.0, which is clean on the registry.",
+        "evidence_ids": [
+          "EV-anomaly-yanked_or_deprecated-eba333b1e1e1e05e",
+          "EV-input-9d4c5d82055ea10f",
+          "EV-ast-import-scan-9f0e2991732e37c3"
+        ],
+        "facts": {
+          "cvss": null,
+          "kev": null,
+          "target_version": "9.0.0"
+        },
+        "next_step": "upgrade",
+        "kind": "inference"
+      }
+    ],
+    "rejected": [],
+    "pass": true,
+    "final": true
+  }
+}

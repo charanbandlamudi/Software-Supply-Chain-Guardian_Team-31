@@ -9,7 +9,13 @@
           "version": "2.0",
           "rules": [
             {
+              "id": "exposed_secret"
+            },
+            {
               "id": "install_script"
+            },
+            {
+              "id": "misconfiguration"
             },
             {
               "id": "suspicious_update"
@@ -294,26 +300,6 @@
           }
         },
         {
-          "ruleId": "typosquat_suspect",
-          "level": "warning",
-          "message": {
-            "text": "TYPOSQUAT_SUSPECT in pkg:npm/cypress@16.3.0: 'cypress' is within edit distance 2 of popular package 'express'."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "pkg:npm/cypress@16.3.0"
-                }
-              }
-            }
-          ],
-          "properties": {
-            "score": 38.0,
-            "confidence": "High"
-          }
-        },
-        {
           "ruleId": "vulnerability",
           "level": "warning",
           "message": {
@@ -394,6 +380,466 @@
           }
         },
         {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0054 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: Use of plain HTTP.: Listener for application load balancer does not use HTTPS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 156
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0104 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: A security group rule should not allow unrestricted egress to any IP address.: Security group rule allows unrestricted egress to any IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 85
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0104 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: A security group rule should not allow unrestricted egress to any IP address.: Security group rule allows unrestricted egress to any IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 111
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0104 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: A security group rule should not allow unrestricted egress to any IP address.: Security group rule allows unrestricted egress to any IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 238
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0054 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: Use of plain HTTP.: Listener for application load balancer does not use HTTPS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 156
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0104 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: A security group rule should not allow unrestricted egress to any IP address.: Security group rule allows unrestricted egress to any IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 85
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0104 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: A security group rule should not allow unrestricted egress to any IP address.: Security group rule allows unrestricted egress to any IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 111
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0104 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: A security group rule should not allow unrestricted egress to any IP address.: Security group rule allows unrestricted egress to any IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 238
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0054 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: Use of plain HTTP.: Listener for application load balancer does not use HTTPS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 156
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0104 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: A security group rule should not allow unrestricted egress to any IP address.: Security group rule allows unrestricted egress to any IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 85
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0104 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: A security group rule should not allow unrestricted egress to any IP address.: Security group rule allows unrestricted egress to any IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 111
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0104 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: A security group rule should not allow unrestricted egress to any IP address.: Security group rule allows unrestricted egress to any IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 238
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0054 in file:infrastructure/terraform/networking.tf: Use of plain HTTP.: Listener for application load balancer does not use HTTPS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 157
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0104 in file:infrastructure/terraform/networking.tf: A security group rule should not allow unrestricted egress to any IP address.: Security group rule allows unrestricted egress to any IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 86
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0104 in file:infrastructure/terraform/networking.tf: A security group rule should not allow unrestricted egress to any IP address.: Security group rule allows unrestricted egress to any IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 112
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0104 in file:infrastructure/terraform/networking.tf: A security group rule should not allow unrestricted egress to any IP address.: Security group rule allows unrestricted egress to any IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 239
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0054 in file:terraform/networking.tf: Use of plain HTTP.: Listener for application load balancer does not use HTTPS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 157
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0104 in file:terraform/networking.tf: A security group rule should not allow unrestricted egress to any IP address.: Security group rule allows unrestricted egress to any IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 86
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0104 in file:terraform/networking.tf: A security group rule should not allow unrestricted egress to any IP address.: Security group rule allows unrestricted egress to any IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 112
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0104 in file:terraform/networking.tf: A security group rule should not allow unrestricted egress to any IP address.: Security group rule allows unrestricted egress to any IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 239
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 36.0,
+            "confidence": "Medium"
+          }
+        },
+        {
           "ruleId": "vulnerability",
           "level": "warning",
           "message": {
@@ -451,26 +897,6 @@
           "properties": {
             "score": 34.9,
             "confidence": "Medium"
-          }
-        },
-        {
-          "ruleId": "suspicious_update",
-          "level": "warning",
-          "message": {
-            "text": "SUSPICIOUS_UPDATE in pkg:npm/cypress@16.3.0: cypress@16.3.0 was published 13.4 days ago (< 14-day cooling-off window)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "pkg:npm/cypress@16.3.0"
-                }
-              }
-            }
-          ],
-          "properties": {
-            "score": 34.0,
-            "confidence": "High"
           }
         },
         {
@@ -654,23 +1080,532 @@
           }
         },
         {
-          "ruleId": "install_script",
+          "ruleId": "misconfiguration",
           "level": "warning",
           "message": {
-            "text": "INSTALL_SCRIPT in pkg:npm/cypress@16.3.0: cypress runs code at install time."
+            "text": "AWS-0037 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: EFS Encryption has not been enabled: File system is not encrypted."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "pkg:npm/cypress@16.3.0"
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 250
                 }
               }
             }
           ],
           "properties": {
             "score": 30.0,
-            "confidence": "High"
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0052 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: Load balancers should drop invalid headers: Application load balancer is not set to drop invalid headers."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 121
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0053 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: Load balancer is exposed to the internet.: Load balancer is exposed publicly."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 123
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0164 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: Instances in a subnet should not receive a public IP address by default.: Subnet associates public IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 22
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0037 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: EFS Encryption has not been enabled: File system is not encrypted."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 250
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0052 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: Load balancers should drop invalid headers: Application load balancer is not set to drop invalid headers."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 121
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0053 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: Load balancer is exposed to the internet.: Load balancer is exposed publicly."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 123
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0164 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: Instances in a subnet should not receive a public IP address by default.: Subnet associates public IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 22
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0037 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: EFS Encryption has not been enabled: File system is not encrypted."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 250
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0052 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: Load balancers should drop invalid headers: Application load balancer is not set to drop invalid headers."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 121
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0053 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: Load balancer is exposed to the internet.: Load balancer is exposed publicly."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 123
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0164 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: Instances in a subnet should not receive a public IP address by default.: Subnet associates public IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 22
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0052 in file:infrastructure/terraform/networking.tf: Load balancers should drop invalid headers: Application load balancer is not set to drop invalid headers."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 122
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0053 in file:infrastructure/terraform/networking.tf: Load balancer is exposed to the internet.: Load balancer is exposed publicly."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 124
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0164 in file:infrastructure/terraform/networking.tf: Instances in a subnet should not receive a public IP address by default.: Subnet associates public IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 23
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0052 in file:terraform/networking.tf: Load balancers should drop invalid headers: Application load balancer is not set to drop invalid headers."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 122
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0053 in file:terraform/networking.tf: Load balancer is exposed to the internet.: Load balancer is exposed publicly."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 124
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "AWS-0164 in file:terraform/networking.tf: Instances in a subnet should not receive a public IP address by default.: Subnet associates public IP address."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 23
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "DS-0002 in file:test/smoke/Dockerfile: Image user should not be 'root': Specify at least 1 USER command in Dockerfile with non-root user as argument"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/smoke/Dockerfile"
+                },
+                "region": {
+                  "startLine": null
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "warning",
+          "message": {
+            "text": "DS-0025 in file:test/smoke/Dockerfile: 'apk add' is missing '--no-cache': '--no-cache' is missed: apk add curl"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/smoke/Dockerfile"
+                },
+                "region": {
+                  "startLine": 3
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "exposed_secret",
+          "level": "warning",
+          "message": {
+            "text": "SECRET-private-key in file:infrastructure/terraform/networking.tf: Asymmetric Private Key committed in infrastructure/terraform/networking.tf (line 171); value redacted."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 171
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "exposed_secret",
+          "level": "warning",
+          "message": {
+            "text": "SECRET-private-key in file:lib/insecurity.ts: Asymmetric Private Key committed in lib/insecurity.ts (line 21); value redacted."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "lib/insecurity.ts"
+                },
+                "region": {
+                  "startLine": 21
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "exposed_secret",
+          "level": "warning",
+          "message": {
+            "text": "SECRET-private-key in file:terraform/networking.tf: Asymmetric Private Key committed in terraform/networking.tf (line 171); value redacted."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 171
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 30.0,
+            "confidence": "Medium"
           }
         },
         {
@@ -694,30 +1629,30 @@
           }
         },
         {
-          "ruleId": "typosquat_suspect",
+          "ruleId": "suspicious_update",
           "level": "note",
           "message": {
-            "text": "TYPOSQUAT_SUSPECT in pkg:npm/cors@2.8.6: 'cors' is within edit distance 2 of popular package 'colors'."
+            "text": "SUSPICIOUS_UPDATE in pkg:npm/cypress@16.3.0: cypress@16.3.0 was published 13.4 days ago (< 14-day cooling-off window)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "pkg:npm/cors@2.8.6"
+                  "uri": "pkg:npm/cypress@16.3.0"
                 }
               }
             }
           ],
           "properties": {
-            "score": 28.0,
-            "confidence": "Medium"
+            "score": 29.0,
+            "confidence": "High"
           }
         },
         {
           "ruleId": "typosquat_suspect",
           "level": "note",
           "message": {
-            "text": "TYPOSQUAT_SUSPECT in pkg:npm/color@5.0.3: 'color' is within edit distance 2 of popular package 'colors'."
+            "text": "TYPOSQUAT_SUSPECT in pkg:npm/color@5.0.3: 'color' is within edit distance 2 of popular package 'colors' (no registry history checked); unverified: name similarity alone does not prove malicious intent."
           },
           "locations": [
             {
@@ -737,7 +1672,7 @@
           "ruleId": "typosquat_suspect",
           "level": "note",
           "message": {
-            "text": "TYPOSQUAT_SUSPECT in pkg:npm/commondir@1.0.1: 'commondir' is within edit distance 2 of popular package 'commander'."
+            "text": "TYPOSQUAT_SUSPECT in pkg:npm/commondir@1.0.1: 'commondir' is within edit distance 2 of popular package 'commander' (no registry history checked); unverified: name similarity alone does not prove malicious intent."
           },
           "locations": [
             {
@@ -757,7 +1692,7 @@
           "ruleId": "typosquat_suspect",
           "level": "note",
           "message": {
-            "text": "TYPOSQUAT_SUSPECT in pkg:npm/esquery@1.7.0: 'esquery' is within edit distance 2 of popular package 'jquery'."
+            "text": "TYPOSQUAT_SUSPECT in pkg:npm/esquery@1.7.0: 'esquery' is within edit distance 2 of popular package 'jquery' (no registry history checked); unverified: name similarity alone does not prove malicious intent."
           },
           "locations": [
             {
@@ -794,10 +1729,30 @@
           }
         },
         {
+          "ruleId": "install_script",
+          "level": "note",
+          "message": {
+            "text": "INSTALL_SCRIPT in pkg:npm/cypress@16.3.0: cypress runs code at install time."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/cypress@16.3.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 25.0,
+            "confidence": "High"
+          }
+        },
+        {
           "ruleId": "suspicious_update",
           "level": "note",
           "message": {
-            "text": "SUSPICIOUS_UPDATE in pkg:npm/%40ai-sdk/openai-compatible@2.0.94: @ai-sdk/openai-compatible@2.0.94 was published 6.4 days ago (< 14-day cooling-off window)."
+            "text": "SUSPICIOUS_UPDATE in pkg:npm/%40ai-sdk/openai-compatible@2.0.94: @ai-sdk/openai-compatible@2.0.94 was published 6.5 days ago (< 14-day cooling-off window)."
           },
           "locations": [
             {
@@ -837,7 +1792,7 @@
           "ruleId": "suspicious_update",
           "level": "note",
           "message": {
-            "text": "SUSPICIOUS_UPDATE in pkg:npm/proxy-agent@8.0.3: proxy-agent@8.0.3 was published 7.4 days ago (< 14-day cooling-off window)."
+            "text": "SUSPICIOUS_UPDATE in pkg:npm/proxy-agent@8.0.3: proxy-agent@8.0.3 was published 7.5 days ago (< 14-day cooling-off window)."
           },
           "locations": [
             {
@@ -874,16 +1829,76 @@
           }
         },
         {
-          "ruleId": "unpinned_base_image",
+          "ruleId": "vulnerability",
           "level": "note",
           "message": {
-            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/Dockerfile: Base image node:24 is referenced by tag, not digest; the tag can be re-pointed."
+            "text": "NSWG-ECO-17 in pkg:npm/jsonwebtoken@0.1.0: Verification Bypass"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/Dockerfile"
+                  "uri": "pkg:npm/jsonwebtoken@0.1.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 23.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "NSWG-ECO-17 in pkg:npm/jsonwebtoken@0.4.0: Verification Bypass"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/jsonwebtoken@0.4.0"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 23.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "NSWG-ECO-154 in pkg:npm/sanitize-html@1.4.2: Cross Site Scripting"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/sanitize-html@1.4.2"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 23.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "unpinned_base_image",
+          "level": "note",
+          "message": {
+            "text": "UNPINNED_BASE_IMAGE in file:data/scans/juice-shop__juice-shop__20261124-050704/repo/Dockerfile: Base image node:24 is referenced by tag, not digest; the tag can be re-pointed."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-050704/repo/Dockerfile"
                 },
                 "region": {
                   "startLine": 1
@@ -900,13 +1915,13 @@
           "ruleId": "unpinned_base_image",
           "level": "note",
           "message": {
-            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/Dockerfile: Base image gcr.io/distroless/nodejs24-debian13 is referenced by tag, not digest; the tag can be re-pointed."
+            "text": "UNPINNED_BASE_IMAGE in file:data/scans/juice-shop__juice-shop__20261124-050704/repo/Dockerfile: Base image gcr.io/distroless/nodejs24-debian13 is referenced by tag, not digest; the tag can be re-pointed."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/Dockerfile"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-050704/repo/Dockerfile"
                 },
                 "region": {
                   "startLine": 22
@@ -923,13 +1938,13 @@
           "ruleId": "unpinned_base_image",
           "level": "note",
           "message": {
-            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/infrastructure/Dockerfile: Base image node:20.19.2-bookworm-slim is referenced by tag, not digest; the tag can be re-pointed."
+            "text": "UNPINNED_BASE_IMAGE in file:data/scans/juice-shop__juice-shop__20261124-050704/repo/infrastructure/Dockerfile: Base image node:20.19.2-bookworm-slim is referenced by tag, not digest; the tag can be re-pointed."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/infrastructure/Dockerfile"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-050704/repo/infrastructure/Dockerfile"
                 },
                 "region": {
                   "startLine": 1
@@ -946,13 +1961,13 @@
           "ruleId": "unpinned_base_image",
           "level": "note",
           "message": {
-            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/infrastructure/Dockerfile: Base image node:20.19.2-bookworm is referenced by tag, not digest; the tag can be re-pointed."
+            "text": "UNPINNED_BASE_IMAGE in file:data/scans/juice-shop__juice-shop__20261124-050704/repo/infrastructure/Dockerfile: Base image node:20.19.2-bookworm is referenced by tag, not digest; the tag can be re-pointed."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/infrastructure/Dockerfile"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-050704/repo/infrastructure/Dockerfile"
                 },
                 "region": {
                   "startLine": 6
@@ -969,13 +1984,13 @@
           "ruleId": "unpinned_base_image",
           "level": "note",
           "message": {
-            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/infrastructure/Dockerfile: Base image base is referenced by tag, not digest; the tag can be re-pointed."
+            "text": "UNPINNED_BASE_IMAGE in file:data/scans/juice-shop__juice-shop__20261124-050704/repo/infrastructure/Dockerfile: Base image base is referenced by tag, not digest; the tag can be re-pointed."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/infrastructure/Dockerfile"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-050704/repo/infrastructure/Dockerfile"
                 },
                 "region": {
                   "startLine": 14
@@ -992,13 +2007,13 @@
           "ruleId": "unpinned_base_image",
           "level": "note",
           "message": {
-            "text": "UNPINNED_BASE_IMAGE in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/test/smoke/Dockerfile: Base image alpine is referenced by tag, not digest; the tag can be re-pointed."
+            "text": "UNPINNED_BASE_IMAGE in file:data/scans/juice-shop__juice-shop__20261124-050704/repo/test/smoke/Dockerfile: Base image alpine is referenced by tag, not digest; the tag can be re-pointed."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/test/smoke/Dockerfile"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-050704/repo/test/smoke/Dockerfile"
                 },
                 "region": {
                   "startLine": 1
@@ -1015,13 +2030,13 @@
           "ruleId": "unpinned_action",
           "level": "note",
           "message": {
-            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/ci.yml: Action coverallsapp/github-action@v2 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+            "text": "UNPINNED_ACTION in file:data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/ci.yml: Action coverallsapp/github-action@v2 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/ci.yml"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/ci.yml"
                 },
                 "region": {
                   "startLine": 198
@@ -1038,13 +2053,13 @@
           "ruleId": "unpinned_action",
           "level": "note",
           "message": {
-            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/codeql-analysis.yml: Action github/codeql-action/init@v3 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+            "text": "UNPINNED_ACTION in file:data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/codeql-analysis.yml: Action github/codeql-action/init@v3 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/codeql-analysis.yml"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/codeql-analysis.yml"
                 },
                 "region": {
                   "startLine": 23
@@ -1061,13 +2076,13 @@
           "ruleId": "unpinned_action",
           "level": "note",
           "message": {
-            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/codeql-analysis.yml: Action github/codeql-action/autobuild@v3 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+            "text": "UNPINNED_ACTION in file:data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/codeql-analysis.yml: Action github/codeql-action/autobuild@v3 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/codeql-analysis.yml"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/codeql-analysis.yml"
                 },
                 "region": {
                   "startLine": 34
@@ -1084,13 +2099,13 @@
           "ruleId": "unpinned_action",
           "level": "note",
           "message": {
-            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/codeql-analysis.yml: Action github/codeql-action/analyze@v3 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+            "text": "UNPINNED_ACTION in file:data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/codeql-analysis.yml: Action github/codeql-action/analyze@v3 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/codeql-analysis.yml"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/codeql-analysis.yml"
                 },
                 "region": {
                   "startLine": 36
@@ -1107,13 +2122,13 @@
           "ruleId": "unpinned_action",
           "level": "note",
           "message": {
-            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/image_actions.yml: Action actions/checkout@v6 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+            "text": "UNPINNED_ACTION in file:data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/image_actions.yml: Action actions/checkout@v6 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/image_actions.yml"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/image_actions.yml"
                 },
                 "region": {
                   "startLine": 30
@@ -1130,13 +2145,13 @@
           "ruleId": "unpinned_action",
           "level": "note",
           "message": {
-            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/image_actions.yml: Action calibreapp/image-actions@main is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+            "text": "UNPINNED_ACTION in file:data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/image_actions.yml: Action calibreapp/image-actions@main is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/image_actions.yml"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/image_actions.yml"
                 },
                 "region": {
                   "startLine": 33
@@ -1153,16 +2168,223 @@
           "ruleId": "unpinned_action",
           "level": "note",
           "message": {
-            "text": "UNPINNED_ACTION in file:/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/image_actions.yml: Action peter-evans/create-pull-request@v8 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
+            "text": "UNPINNED_ACTION in file:data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/image_actions.yml: Action peter-evans/create-pull-request@v8 is pinned to a tag/branch, not a commit SHA (tags were re-pointed in the tj-actions/changed-files compromise, CVE-2025-30066)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/Users/rithvikrajesh/Projects/Dummies/Software-Supply-Chain-Guardian_Team-31/data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/image_actions.yml"
+                  "uri": "data/scans/juice-shop__juice-shop__20261124-050704/repo/.github/workflows/image_actions.yml"
                 },
                 "region": {
                   "startLine": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "DS-0001 in file:Dockerfile: ':latest' tag used: Specify a tag in the 'FROM' statement for image 'gcr.io/distroless/nodejs24-debian13'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Dockerfile"
+                },
+                "region": {
+                  "startLine": 22
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0178 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC. After you've created a flow log, you can view and retrieve its"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0178 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC. After you've created a flow log, you can view and retrieve its"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0178 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC. After you've created a flow log, you can view and retrieve its"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0178 in file:infrastructure/terraform/networking.tf: VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC. After you've created a flow log, you can view and retrieve its"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 6
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0178 in file:terraform/networking.tf: VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC. After you've created a flow log, you can view and retrieve its"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 6
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "DS-0001 in file:test/smoke/Dockerfile: ':latest' tag used: Specify a tag in the 'FROM' statement for image 'alpine'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/smoke/Dockerfile"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "exposed_secret",
+          "level": "note",
+          "message": {
+            "text": "SECRET-jwt-token in file:frontend/src/app/app.guard.spec.ts: JWT token committed in frontend/src/app/app.guard.spec.ts (line 46); value redacted."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "frontend/src/app/app.guard.spec.ts"
+                },
+                "region": {
+                  "startLine": 46
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 20.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "exposed_secret",
+          "level": "note",
+          "message": {
+            "text": "SECRET-jwt-token in file:frontend/src/app/last-login-ip/last-login-ip.component.spec.ts: JWT token committed in frontend/src/app/last-login-ip/last-login-ip.component.spec.ts (line 72); value redacted."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "frontend/src/app/last-login-ip/last-login-ip.component.spec.ts"
+                },
+                "region": {
+                  "startLine": 72
                 }
               }
             }
@@ -1277,6 +2499,26 @@
           "level": "note",
           "message": {
             "text": "GHSA-rvg8-pwq2-xj7q in pkg:npm/base64url@0.0.6: Out-of-bounds Read in base64url"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pkg:npm/base64url@0.0.6"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 19.4,
+            "confidence": "Low"
+          }
+        },
+        {
+          "ruleId": "vulnerability",
+          "level": "note",
+          "message": {
+            "text": "NSWG-ECO-428 in pkg:npm/base64url@0.0.6: Out-of-bounds Read"
           },
           "locations": [
             {
@@ -1729,6 +2971,926 @@
           ],
           "properties": {
             "score": 12.3,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "DS-0026 in file:Dockerfile: No HEALTHCHECK defined: Add HEALTHCHECK instruction in your Dockerfile"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Dockerfile"
+                },
+                "region": {
+                  "startLine": null
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 67
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 74
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 81
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 100
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 107
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 227
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_1.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+                },
+                "region": {
+                  "startLine": 234
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 67
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 74
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 81
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 100
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 107
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 227
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_2.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+                },
+                "region": {
+                  "startLine": 234
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 67
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 74
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 81
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 100
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 107
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 227
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+                },
+                "region": {
+                  "startLine": 234
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "DS-0026 in file:infrastructure/Dockerfile: No HEALTHCHECK defined: Add HEALTHCHECK instruction in your Dockerfile"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/Dockerfile"
+                },
+                "region": {
+                  "startLine": null
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0017 in file:infrastructure/terraform/main.tf: CloudWatch log groups should be encrypted using CMK: Log group is not encrypted."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/main.tf"
+                },
+                "region": {
+                  "startLine": 126
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:infrastructure/terraform/networking.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 75
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:infrastructure/terraform/networking.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 68
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:infrastructure/terraform/networking.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 82
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:infrastructure/terraform/networking.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 101
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:infrastructure/terraform/networking.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 108
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:infrastructure/terraform/networking.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 228
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:infrastructure/terraform/networking.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infrastructure/terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 235
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0017 in file:terraform/main.tf: CloudWatch log groups should be encrypted using CMK: Log group is not encrypted."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/main.tf"
+                },
+                "region": {
+                  "startLine": 126
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:terraform/networking.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 68
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:terraform/networking.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 75
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:terraform/networking.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 82
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:terraform/networking.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 101
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:terraform/networking.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 108
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:terraform/networking.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 228
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "AWS-0124 in file:terraform/networking.tf: Missing description for security group rule.: Security group rule does not have a description."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "terraform/networking.tf"
+                },
+                "region": {
+                  "startLine": 235
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
+            "confidence": "Medium"
+          }
+        },
+        {
+          "ruleId": "misconfiguration",
+          "level": "note",
+          "message": {
+            "text": "DS-0026 in file:test/smoke/Dockerfile: No HEALTHCHECK defined: Add HEALTHCHECK instruction in your Dockerfile"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/smoke/Dockerfile"
+                },
+                "region": {
+                  "startLine": null
+                }
+              }
+            }
+          ],
+          "properties": {
+            "score": 12.0,
             "confidence": "Medium"
           }
         },

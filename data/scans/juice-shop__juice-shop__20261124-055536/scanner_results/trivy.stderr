@@ -1,0 +1,14 @@
+2026-11-24T11:26:12+05:30	INFO	[vuln] Vulnerability scanning is enabled
+2026-11-24T11:26:12+05:30	INFO	[misconfig] Misconfiguration scanning is enabled
+2026-11-24T11:26:12+05:30	INFO	[checks-client] No downloadable checks were loaded as --skip-check-update is enabled, loading from existing cache...
+2026-11-24T11:26:12+05:30	ERROR	[misconfig] Falling back to embedded checks	err="failed to check cache: cache does not exist at \"/Users/rithvikrajesh/Library/Caches/trivy/policy/content\""
+2026-11-24T11:26:12+05:30	INFO	[secret] Secret scanning is enabled
+2026-11-24T11:26:12+05:30	INFO	[secret] If your scanning is slow, please try '--scanners vuln,misconfig' to disable secret scanning
+2026-11-24T11:26:12+05:30	INFO	[secret] Please see https://trivy.dev/docs/v0.76/guide/scanner/secret#recommendation for faster secret detection
+2026-11-24T11:26:13+05:30	INFO	[npm] Run "npm install" to collect the license information of packages	dir="node_modules"
+2026-11-24T11:26:13+05:30	INFO	[terraform scanner] Scanning root module	file_path="data/static/codefixes"
+2026-11-24T11:26:13+05:30	INFO	[terraform scanner] Scanning root module	file_path="infrastructure/terraform"
+2026-11-24T11:26:13+05:30	INFO	[terraform scanner] Scanning root module	file_path="terraform"
+2026-11-24T11:26:13+05:30	INFO	Number of language-specific files	num=1
+2026-11-24T11:26:13+05:30	INFO	[npm] Detecting vulnerabilities...
+2026-11-24T11:26:13+05:30	INFO	Detected config files	num=13

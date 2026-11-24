@@ -37089,7 +37089,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "critical",
           "score": 9.8,
@@ -37132,7 +37132,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "critical",
           "score": 9.8,
@@ -37175,7 +37175,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 8.7,
@@ -37218,7 +37218,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 6.1,
@@ -37261,7 +37261,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 6.5,
@@ -37304,7 +37304,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 6.1,
@@ -37347,7 +37347,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 7.5,
@@ -37390,7 +37390,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 5.6,
@@ -37433,7 +37433,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 6.5,
@@ -37482,7 +37482,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "critical",
           "score": 9.1,
@@ -37525,7 +37525,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 6.1,
@@ -37568,7 +37568,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 7.7,
@@ -37611,7 +37611,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 7.2,
@@ -37654,7 +37654,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 6.5,
@@ -37697,7 +37697,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 5.3,
@@ -37740,7 +37740,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 5.3,
@@ -37783,7 +37783,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 4.0,
@@ -37826,7 +37826,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 8.1,
@@ -37869,7 +37869,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 8.1,
@@ -37912,7 +37912,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 6.4,
@@ -37955,7 +37955,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 6.4,
@@ -37998,7 +37998,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 5.0,
@@ -38041,7 +38041,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 5.0,
@@ -38084,7 +38084,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 7.5,
@@ -38127,7 +38127,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 7.5,
@@ -38170,7 +38170,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "critical",
           "score": 9.1,
@@ -38213,7 +38213,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 5.3,
@@ -38256,7 +38256,7 @@
       "ratings": [
         {
           "source": {
-            "name": "osv"
+            "name": "osv,osv-scanner,trivy"
           },
           "severity": "low",
           "score": 1.7,
@@ -38299,7 +38299,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 7.5,
@@ -38342,7 +38342,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 5.3,
@@ -38385,7 +38385,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 5.4,
@@ -38428,7 +38428,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 6.9,
@@ -38471,7 +38471,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 6.3,
@@ -38514,7 +38514,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 8.2,
@@ -38557,7 +38557,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 8.8,
@@ -38600,7 +38600,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 8.2,
@@ -38643,7 +38643,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 7.1,
@@ -38686,7 +38686,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 8.2,
@@ -38729,7 +38729,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 8.2,
@@ -38772,7 +38772,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 5.3,
@@ -38815,7 +38815,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit"
+            "name": "grype,npm-audit,osv-scanner,trivy"
           },
           "severity": "low",
           "score": 3.3,
@@ -38864,7 +38864,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 7.5,
@@ -38907,7 +38907,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 6.9,
@@ -38950,7 +38950,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit"
+            "name": "grype,npm-audit,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 8.5,
@@ -38993,7 +38993,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 5.3,
@@ -39036,7 +39036,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 7.5,
@@ -39079,7 +39079,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 7.5,
@@ -39122,7 +39122,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 5.3,
@@ -39165,7 +39165,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "medium",
           "score": 6.1,
@@ -39208,7 +39208,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit"
+            "name": "grype,npm-audit,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 8.5,
@@ -39251,7 +39251,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "critical",
           "score": 9.0,
@@ -39294,7 +39294,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "high",
           "score": 7.5,
@@ -39330,7 +39330,7 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "unknown"
         }
@@ -39363,12 +39363,144 @@
       "ratings": [
         {
           "source": {
-            "name": "grype,npm-audit,osv"
+            "name": "grype,npm-audit,osv,osv-scanner,trivy"
           },
           "severity": "unknown"
         }
       ],
       "description": "Out-of-bounds Read in base64url",
+      "recommendation": "Fixed in 3.0.0",
+      "affects": [
+        {
+          "ref": "pkg:npm/base64url@0.0.6"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "19.4"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:npm/jsonwebtoken@0.1.0 > pkg:npm/jws@0.2.6 > pkg:npm/base64url@0.0.6"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::NSWG-ECO-154::pkg:npm/sanitize-html@1.4.2",
+      "id": "NSWG-ECO-154",
+      "source": {
+        "name": "OSV"
+      },
+      "references": [],
+      "ratings": [
+        {
+          "source": {
+            "name": "trivy"
+          },
+          "severity": "unknown"
+        }
+      ],
+      "description": "Cross Site Scripting",
+      "recommendation": "Fixed in 1.11.4",
+      "affects": [
+        {
+          "ref": "pkg:npm/sanitize-html@1.4.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "23.0"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:npm/sanitize-html@1.4.2"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::NSWG-ECO-17::pkg:npm/jsonwebtoken@0.1.0",
+      "id": "NSWG-ECO-17",
+      "source": {
+        "name": "OSV"
+      },
+      "references": [],
+      "ratings": [
+        {
+          "source": {
+            "name": "trivy"
+          },
+          "severity": "unknown"
+        }
+      ],
+      "description": "Verification Bypass",
+      "recommendation": "Fixed in 4.2.2",
+      "affects": [
+        {
+          "ref": "pkg:npm/jsonwebtoken@0.1.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "23.0"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:npm/jsonwebtoken@0.1.0"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::NSWG-ECO-17::pkg:npm/jsonwebtoken@0.4.0",
+      "id": "NSWG-ECO-17",
+      "source": {
+        "name": "OSV"
+      },
+      "references": [],
+      "ratings": [
+        {
+          "source": {
+            "name": "trivy"
+          },
+          "severity": "unknown"
+        }
+      ],
+      "description": "Verification Bypass",
+      "recommendation": "Fixed in 4.2.2",
+      "affects": [
+        {
+          "ref": "pkg:npm/jsonwebtoken@0.4.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "guardian:risk_score",
+          "value": "23.0"
+        },
+        {
+          "name": "guardian:dependency_path",
+          "value": "app > pkg:npm/jsonwebtoken@0.4.0"
+        }
+      ]
+    },
+    {
+      "bom-ref": "VULN::NSWG-ECO-428::pkg:npm/base64url@0.0.6",
+      "id": "NSWG-ECO-428",
+      "source": {
+        "name": "OSV"
+      },
+      "references": [],
+      "ratings": [
+        {
+          "source": {
+            "name": "trivy"
+          },
+          "severity": "unknown"
+        }
+      ],
+      "description": "Out-of-bounds Read",
       "recommendation": "Fixed in 3.0.0",
       "affects": [
         {

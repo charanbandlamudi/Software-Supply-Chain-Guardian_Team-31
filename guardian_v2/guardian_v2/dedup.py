@@ -10,7 +10,7 @@ from __future__ import annotations
 from . import versions as V
 
 # Severity source preference: reviewed GHSA / CNA first, NVD next, scanners last.
-SEVERITY_PREFERENCE = ["ghsa", "cna", "nvd", "osv", "grype", "trivy"]
+SEVERITY_PREFERENCE = ["ghsa", "cna", "nvd", "osv", "osv-scanner", "grype", "trivy"]
 
 
 class _UnionFind:
