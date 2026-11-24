@@ -1,0 +1,340 @@
+{
+  "plan_id": "f9bdc9f5-bc71-45bb-962e-550c90a03def",
+  "created_at": "2026-11-24T06:06:18.317980+00:00",
+  "status": "awaiting_approval",
+  "changes": [
+    {
+      "package": "body-parser",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/body-parser@2.3.0",
+      "current_version": "2.3.0",
+      "recommended_version": "2.4.0",
+      "candidate_versions": [
+        "2.4.0"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-27r3-jxmh-p828",
+      "aliases": [
+        "GHSA-27r3-jxmh-p828",
+        "CVE-2026-111181"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/express@5.3.0",
+        "pkg:npm/body-parser@2.3.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/express@5.3.0"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "@hono/node-server",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40hono/node-server@2.1.5",
+      "current_version": "2.1.5",
+      "recommended_version": "2.1.6",
+      "candidate_versions": [
+        "2.1.6"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-qv5m-9pm6-hqp3",
+      "aliases": [
+        "GHSA-qv5m-9pm6-hqp3",
+        "CVE-2026-126343"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/@hono/node-server@2.1.5"
+      ],
+      "parent_ids": [
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "hono",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/hono@4.13.13",
+      "current_version": "4.13.13",
+      "recommended_version": "4.13.16",
+      "candidate_versions": [
+        "4.13.16"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-4m76-xfj5-7975",
+      "aliases": [
+        "GHSA-4m76-xfj5-7975",
+        "CVE-2026-126357"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/hono@4.13.13"
+      ],
+      "parent_ids": [
+        "pkg:npm/@hono/node-server@2.1.5",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "hono",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/hono@4.13.13",
+      "current_version": "4.13.13",
+      "recommended_version": "4.13.16",
+      "candidate_versions": [
+        "4.13.16"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-4h7h-rv7c-7m2v",
+      "aliases": [
+        "GHSA-4h7h-rv7c-7m2v",
+        "CVE-2026-126356"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/hono@4.13.13"
+      ],
+      "parent_ids": [
+        "pkg:npm/@hono/node-server@2.1.5",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "@hono/node-server",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40hono/node-server@2.1.5",
+      "current_version": "2.1.5",
+      "recommended_version": "2.1.6",
+      "candidate_versions": [
+        "2.1.6"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-jpvv-r467-5p4w",
+      "aliases": [
+        "GHSA-jpvv-r467-5p4w",
+        "CVE-2026-126210"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/@hono/node-server@2.1.5"
+      ],
+      "parent_ids": [
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "hono",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/hono@4.13.13",
+      "current_version": "4.13.13",
+      "recommended_version": "4.13.16",
+      "candidate_versions": [
+        "4.13.16"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-h7mg-cq63-vhpq",
+      "aliases": [
+        "GHSA-h7mg-cq63-vhpq",
+        "CVE-2026-126358"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/hono@4.13.13"
+      ],
+      "parent_ids": [
+        "pkg:npm/@hono/node-server@2.1.5",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "fast-uri",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/fast-uri@3.1.8",
+      "current_version": "3.1.8",
+      "recommended_version": "3.1.9",
+      "candidate_versions": [
+        "3.1.9"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-w74x-v6f9-j3xg",
+      "aliases": [
+        "GHSA-w74x-v6f9-j3xg",
+        "CVE-2026-110306"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/ajv@8.20.0",
+        "pkg:npm/fast-uri@3.1.8"
+      ],
+      "parent_ids": [
+        "pkg:npm/ajv@8.20.0"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "fast-uri",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/fast-uri@3.1.8",
+      "current_version": "3.1.8",
+      "recommended_version": "3.1.9",
+      "candidate_versions": [
+        "3.1.9"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-wjr9-j795-jxcr",
+      "aliases": [
+        "GHSA-wjr9-j795-jxcr",
+        "CVE-2026-110180"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/ajv@8.20.0",
+        "pkg:npm/fast-uri@3.1.8"
+      ],
+      "parent_ids": [
+        "pkg:npm/ajv@8.20.0"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "fast-uri",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/fast-uri@3.1.8",
+      "current_version": "3.1.8",
+      "recommended_version": "3.1.9",
+      "candidate_versions": [
+        "3.1.9"
+      ],
+      "severity": "LOW",
+      "vulnerability_id": "GHSA-333x-w4r6-6crp",
+      "aliases": [
+        "GHSA-333x-w4r6-6crp",
+        "CVE-2026-110725"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/ajv@8.20.0",
+        "pkg:npm/fast-uri@3.1.8"
+      ],
+      "parent_ids": [
+        "pkg:npm/ajv@8.20.0"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "fast-uri",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/fast-uri@3.1.8",
+      "current_version": "3.1.8",
+      "recommended_version": "3.1.9",
+      "candidate_versions": [
+        "3.1.9"
+      ],
+      "severity": "LOW",
+      "vulnerability_id": "GHSA-xhq7-xmqj-769h",
+      "aliases": [
+        "GHSA-xhq7-xmqj-769h",
+        "CVE-2026-110095"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/ajv@8.20.0",
+        "pkg:npm/fast-uri@3.1.8"
+      ],
+      "parent_ids": [
+        "pkg:npm/ajv@8.20.0"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "hono",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/hono@4.13.13",
+      "current_version": "4.13.13",
+      "recommended_version": "4.13.16",
+      "candidate_versions": [
+        "4.13.16"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-46wx-v44x-9hh2",
+      "aliases": [
+        "GHSA-46wx-v44x-9hh2",
+        "CVE-2026-126355"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/hono@4.13.13"
+      ],
+      "parent_ids": [
+        "pkg:npm/@hono/node-server@2.1.5",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "hono",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/hono@4.13.13",
+      "current_version": "4.13.13",
+      "recommended_version": "4.13.16",
+      "candidate_versions": [
+        "4.13.16"
+      ],
+      "severity": "LOW",
+      "vulnerability_id": "GHSA-3gg2-335m-rxc6",
+      "aliases": [
+        "GHSA-3gg2-335m-rxc6",
+        "CVE-2026-126359"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/udhaar-mcp@0.1.0",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1",
+        "pkg:npm/hono@4.13.13"
+      ],
+      "parent_ids": [
+        "pkg:npm/@hono/node-server@2.1.5",
+        "pkg:npm/@modelcontextprotocol/sdk@1.32.1"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    }
+  ]
+}

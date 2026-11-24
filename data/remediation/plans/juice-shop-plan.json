@@ -1,0 +1,1453 @@
+{
+  "plan_id": "6c1a86fe-7f21-4f6e-8d40-50f96fa0f19f",
+  "created_at": "2026-11-24T06:05:24.485924+00:00",
+  "status": "awaiting_approval",
+  "changes": [
+    {
+      "package": "lodash",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/lodash@2.4.2",
+      "current_version": "2.4.2",
+      "recommended_version": "4.17.21",
+      "candidate_versions": [
+        "4.17.21"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-35jh-r3h4-6jhm",
+      "aliases": [
+        "GHSA-35jh-r3h4-6jhm",
+        "CVE-2021-23337"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sanitize-html@1.4.2",
+        "pkg:npm/lodash@2.4.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/sanitize-html@1.4.2"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "moment",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/moment@2.0.0",
+      "current_version": "2.0.0",
+      "recommended_version": "2.29.2",
+      "candidate_versions": [
+        "2.29.2"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-8hfj-j24r-96c4",
+      "aliases": [
+        "GHSA-8hfj-j24r-96c4",
+        "CVE-2022-24785"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/express-jwt@0.1.3",
+        "pkg:npm/jsonwebtoken@0.1.0",
+        "pkg:npm/moment@2.0.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/jsonwebtoken@0.1.0"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "jsonwebtoken",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/jsonwebtoken@0.1.0",
+      "current_version": "0.1.0",
+      "recommended_version": "4.2.2",
+      "candidate_versions": [
+        "4.2.2"
+      ],
+      "severity": "CRITICAL",
+      "vulnerability_id": "GHSA-c7hr-j4mj-j2w6",
+      "aliases": [
+        "GHSA-c7hr-j4mj-j2w6",
+        "CVE-2015-9235"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/express-jwt@0.1.3",
+        "pkg:npm/jsonwebtoken@0.1.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/express-jwt@0.1.3"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "jsonwebtoken",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/jsonwebtoken@0.4.0",
+      "current_version": "0.4.0",
+      "recommended_version": "4.2.2",
+      "candidate_versions": [
+        "4.2.2"
+      ],
+      "severity": "CRITICAL",
+      "vulnerability_id": "GHSA-c7hr-j4mj-j2w6",
+      "aliases": [
+        "GHSA-c7hr-j4mj-j2w6",
+        "CVE-2015-9235"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/jsonwebtoken@0.4.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "moment",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/moment@2.0.0",
+      "current_version": "2.0.0",
+      "recommended_version": "2.11.2",
+      "candidate_versions": [
+        "2.11.2"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-87vv-r9j6-g5qv",
+      "aliases": [
+        "GHSA-87vv-r9j6-g5qv",
+        "CVE-2016-4055"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/express-jwt@0.1.3",
+        "pkg:npm/jsonwebtoken@0.1.0",
+        "pkg:npm/moment@2.0.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/jsonwebtoken@0.1.0"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "lodash",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/lodash@2.4.2",
+      "current_version": "2.4.2",
+      "recommended_version": "4.17.12",
+      "candidate_versions": [
+        "4.17.12"
+      ],
+      "severity": "CRITICAL",
+      "vulnerability_id": "GHSA-jf85-cpcp-j695",
+      "aliases": [
+        "GHSA-jf85-cpcp-j695",
+        "CVE-2019-10744"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sanitize-html@1.4.2",
+        "pkg:npm/lodash@2.4.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/sanitize-html@1.4.2"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "moment",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/moment@2.0.0",
+      "current_version": "2.0.0",
+      "recommended_version": "2.19.3",
+      "candidate_versions": [
+        "2.19.3"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-446m-mv8f-q348",
+      "aliases": [
+        "GHSA-446m-mv8f-q348",
+        "CVE-2017-18214"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/express-jwt@0.1.3",
+        "pkg:npm/jsonwebtoken@0.1.0",
+        "pkg:npm/moment@2.0.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/jsonwebtoken@0.1.0"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "lodash",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/lodash@2.4.2",
+      "current_version": "2.4.2",
+      "recommended_version": "4.17.5",
+      "candidate_versions": [
+        "4.17.5"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-fvqr-27wr-82fm",
+      "aliases": [
+        "GHSA-fvqr-27wr-82fm",
+        "CVE-2018-3721"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sanitize-html@1.4.2",
+        "pkg:npm/lodash@2.4.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/sanitize-html@1.4.2"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "sanitize-html",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/sanitize-html@1.4.2",
+      "current_version": "1.4.2",
+      "recommended_version": "2.7.1",
+      "candidate_versions": [
+        "2.7.1"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-cgfm-xwp7-2cvr",
+      "aliases": [
+        "GHSA-cgfm-xwp7-2cvr",
+        "CVE-2022-25887"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sanitize-html@1.4.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "lodash",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/lodash@2.4.2",
+      "current_version": "2.4.2",
+      "recommended_version": "4.17.11",
+      "candidate_versions": [
+        "4.17.11"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-4xc9-xhrj-v574",
+      "aliases": [
+        "GHSA-4xc9-xhrj-v574",
+        "CVE-2018-16487"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sanitize-html@1.4.2",
+        "pkg:npm/lodash@2.4.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/sanitize-html@1.4.2"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "sanitize-html",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/sanitize-html@1.4.2",
+      "current_version": "1.4.2",
+      "recommended_version": "2.3.1",
+      "candidate_versions": [
+        "2.3.1"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-rjqq-98f6-6j3r",
+      "aliases": [
+        "GHSA-rjqq-98f6-6j3r",
+        "CVE-2021-26539"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sanitize-html@1.4.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "sanitize-html",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/sanitize-html@1.4.2",
+      "current_version": "1.4.2",
+      "recommended_version": "2.3.2",
+      "candidate_versions": [
+        "2.3.2"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-mjxr-4v3x-q3m4",
+      "aliases": [
+        "GHSA-mjxr-4v3x-q3m4",
+        "CVE-2021-26540"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sanitize-html@1.4.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "express-jwt",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/express-jwt@0.1.3",
+      "current_version": "0.1.3",
+      "recommended_version": "6.0.0",
+      "candidate_versions": [
+        "6.0.0"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-6g6m-m6h5-w9gf",
+      "aliases": [
+        "GHSA-6g6m-m6h5-w9gf",
+        "CVE-2020-15084"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/express-jwt@0.1.3"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "sanitize-html",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/sanitize-html@1.4.2",
+      "current_version": "1.4.2",
+      "recommended_version": "1.11.4",
+      "candidate_versions": [
+        "1.11.4"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-xc6g-ggrc-qq4r",
+      "aliases": [
+        "GHSA-xc6g-ggrc-qq4r",
+        "CVE-2017-16016"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sanitize-html@1.4.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "notevil",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/notevil@1.3.3",
+      "current_version": "1.3.3",
+      "recommended_version": null,
+      "candidate_versions": [],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-8g4m-cjm2-96wq",
+      "aliases": [
+        "GHSA-8g4m-cjm2-96wq",
+        "CVE-2021-23771"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/notevil@1.3.3"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "manual_review",
+      "status": "requires_review"
+    },
+    {
+      "package": "crypto-js",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/crypto-js@3.3.0",
+      "current_version": "3.3.0",
+      "recommended_version": "4.2.0",
+      "candidate_versions": [
+        "4.2.0"
+      ],
+      "severity": "CRITICAL",
+      "vulnerability_id": "GHSA-xwcq-pm8m-c4vf",
+      "aliases": [
+        "GHSA-xwcq-pm8m-c4vf",
+        "CVE-2023-46233"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/pdfkit@0.11.0",
+        "pkg:npm/crypto-js@3.3.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/pdfkit@0.11.0"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "sanitize-html",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/sanitize-html@1.4.2",
+      "current_version": "1.4.2",
+      "recommended_version": "2.12.1",
+      "candidate_versions": [
+        "2.12.1"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-rm97-x556-q36h",
+      "aliases": [
+        "GHSA-rm97-x556-q36h",
+        "CVE-2024-21501"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sanitize-html@1.4.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "tar",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/tar@6.2.1",
+      "current_version": "6.2.1",
+      "recommended_version": "7.5.19",
+      "candidate_versions": [
+        "7.5.19"
+      ],
+      "severity": "CRITICAL",
+      "vulnerability_id": "GHSA-23hp-3jrh-7fpw",
+      "aliases": [
+        "GHSA-23hp-3jrh-7fpw",
+        "CVE-2026-59873"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sqlite3@5.1.7",
+        "pkg:npm/tar@6.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/cacache@15.3.0",
+        "pkg:npm/node-gyp@8.4.1",
+        "pkg:npm/sqlite3@5.1.7"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "crypto-js",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/crypto-js@3.3.0",
+      "current_version": "3.3.0",
+      "recommended_version": "4.0.0",
+      "candidate_versions": [
+        "4.0.0"
+      ],
+      "severity": "CRITICAL",
+      "vulnerability_id": "GHSA-rg76-677x-56q9",
+      "aliases": [
+        "GHSA-rg76-677x-56q9",
+        "CVE-2026-71851"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/pdfkit@0.11.0",
+        "pkg:npm/crypto-js@3.3.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/pdfkit@0.11.0"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "tar",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/tar@6.2.1",
+      "current_version": "6.2.1",
+      "recommended_version": "7.5.7",
+      "candidate_versions": [
+        "7.5.7"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-34x7-hfp2-rc4v",
+      "aliases": [
+        "GHSA-34x7-hfp2-rc4v",
+        "CVE-2026-24842"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sqlite3@5.1.7",
+        "pkg:npm/tar@6.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/cacache@15.3.0",
+        "pkg:npm/node-gyp@8.4.1",
+        "pkg:npm/sqlite3@5.1.7"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "sanitize-html",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/sanitize-html@1.4.2",
+      "current_version": "1.4.2",
+      "recommended_version": "1.4.3",
+      "candidate_versions": [
+        "1.4.3"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-3j7m-hmh3-9jmp",
+      "aliases": [
+        "GHSA-3j7m-hmh3-9jmp",
+        "CVE-2016-1000237"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sanitize-html@1.4.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "tar",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/tar@6.2.1",
+      "current_version": "6.2.1",
+      "recommended_version": "7.5.3",
+      "candidate_versions": [
+        "7.5.3"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-8qq5-rm4j-mr97",
+      "aliases": [
+        "GHSA-8qq5-rm4j-mr97",
+        "CVE-2026-23745"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sqlite3@5.1.7",
+        "pkg:npm/tar@6.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/cacache@15.3.0",
+        "pkg:npm/node-gyp@8.4.1",
+        "pkg:npm/sqlite3@5.1.7"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "hbs",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/hbs@4.4.0",
+      "current_version": "4.4.0",
+      "recommended_version": null,
+      "candidate_versions": [],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-7f5c-rpf4-86p8",
+      "aliases": [
+        "GHSA-7f5c-rpf4-86p8",
+        "CVE-2021-32822"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/hbs@4.4.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "manual_review",
+      "status": "requires_review"
+    },
+    {
+      "package": "jsonwebtoken",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/jsonwebtoken@0.1.0",
+      "current_version": "0.1.0",
+      "recommended_version": "9.0.0",
+      "candidate_versions": [
+        "9.0.0"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-8cf7-32gw-wr33",
+      "aliases": [
+        "GHSA-8cf7-32gw-wr33",
+        "CVE-2022-23539"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/express-jwt@0.1.3",
+        "pkg:npm/jsonwebtoken@0.1.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/express-jwt@0.1.3"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "jsonwebtoken",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/jsonwebtoken@0.4.0",
+      "current_version": "0.4.0",
+      "recommended_version": "9.0.0",
+      "candidate_versions": [
+        "9.0.0"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-8cf7-32gw-wr33",
+      "aliases": [
+        "GHSA-8cf7-32gw-wr33",
+        "CVE-2022-23539"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/jsonwebtoken@0.4.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "jsonwebtoken",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/jsonwebtoken@0.1.0",
+      "current_version": "0.1.0",
+      "recommended_version": "9.0.0",
+      "candidate_versions": [
+        "9.0.0"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-hjrf-2m68-5959",
+      "aliases": [
+        "GHSA-hjrf-2m68-5959",
+        "CVE-2022-23541"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/express-jwt@0.1.3",
+        "pkg:npm/jsonwebtoken@0.1.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/express-jwt@0.1.3"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "jsonwebtoken",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/jsonwebtoken@0.4.0",
+      "current_version": "0.4.0",
+      "recommended_version": "9.0.0",
+      "candidate_versions": [
+        "9.0.0"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-hjrf-2m68-5959",
+      "aliases": [
+        "GHSA-hjrf-2m68-5959",
+        "CVE-2022-23541"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/jsonwebtoken@0.4.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "tar",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/tar@6.2.1",
+      "current_version": "6.2.1",
+      "recommended_version": "7.5.10",
+      "candidate_versions": [
+        "7.5.10"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-qffp-2rhf-9h96",
+      "aliases": [
+        "GHSA-qffp-2rhf-9h96",
+        "CVE-2026-29786"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sqlite3@5.1.7",
+        "pkg:npm/tar@6.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/cacache@15.3.0",
+        "pkg:npm/node-gyp@8.4.1",
+        "pkg:npm/sqlite3@5.1.7"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "tar",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/tar@6.2.1",
+      "current_version": "6.2.1",
+      "recommended_version": "7.5.21",
+      "candidate_versions": [
+        "7.5.21"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-r292-9mhp-454m",
+      "aliases": [
+        "GHSA-r292-9mhp-454m",
+        "CVE-2026-73566"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sqlite3@5.1.7",
+        "pkg:npm/tar@6.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/cacache@15.3.0",
+        "pkg:npm/node-gyp@8.4.1",
+        "pkg:npm/sqlite3@5.1.7"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "tar",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/tar@6.2.1",
+      "current_version": "6.2.1",
+      "recommended_version": "7.5.18",
+      "candidate_versions": [
+        "7.5.18"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-8x88-c5mf-7j5w",
+      "aliases": [
+        "GHSA-8x88-c5mf-7j5w",
+        "CVE-2026-59874"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sqlite3@5.1.7",
+        "pkg:npm/tar@6.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/cacache@15.3.0",
+        "pkg:npm/node-gyp@8.4.1",
+        "pkg:npm/sqlite3@5.1.7"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "tar",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/tar@6.2.1",
+      "current_version": "6.2.1",
+      "recommended_version": "7.5.18",
+      "candidate_versions": [
+        "7.5.18"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-w8wr-v893-vjvp",
+      "aliases": [
+        "GHSA-w8wr-v893-vjvp",
+        "CVE-2026-59871"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sqlite3@5.1.7",
+        "pkg:npm/tar@6.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/cacache@15.3.0",
+        "pkg:npm/node-gyp@8.4.1",
+        "pkg:npm/sqlite3@5.1.7"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "jsonwebtoken",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/jsonwebtoken@0.1.0",
+      "current_version": "0.1.0",
+      "recommended_version": "9.0.0",
+      "candidate_versions": [
+        "9.0.0"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-qwph-4952-7xr6",
+      "aliases": [
+        "GHSA-qwph-4952-7xr6",
+        "CVE-2022-23540"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/express-jwt@0.1.3",
+        "pkg:npm/jsonwebtoken@0.1.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/express-jwt@0.1.3"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "jsonwebtoken",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/jsonwebtoken@0.4.0",
+      "current_version": "0.4.0",
+      "recommended_version": "9.0.0",
+      "candidate_versions": [
+        "9.0.0"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-qwph-4952-7xr6",
+      "aliases": [
+        "GHSA-qwph-4952-7xr6",
+        "CVE-2022-23540"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/jsonwebtoken@0.4.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "glob",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/glob@10.5.0",
+      "current_version": "10.5.0",
+      "recommended_version": "14.0.2",
+      "candidate_versions": [
+        "14.0.2"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-3g3m-2fjr-6pw4",
+      "aliases": [
+        "GHSA-3g3m-2fjr-6pw4",
+        "CVE-2026-118773"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/@cyclonedx/cyclonedx-npm@4.2.1",
+        "pkg:npm/libxmljs2@0.37.0",
+        "pkg:npm/node-gyp@11.5.0",
+        "pkg:npm/make-fetch-happen@14.0.3",
+        "pkg:npm/cacache@19.0.1",
+        "pkg:npm/glob@10.5.0"
+      ],
+      "parent_ids": [
+        "pkg:npm/cacache@19.0.1"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "minimatch",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/minimatch@9.0.9",
+      "current_version": "9.0.9",
+      "recommended_version": "11.0.1",
+      "candidate_versions": [
+        "11.0.1"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-g3hv-75wg-m249",
+      "aliases": [
+        "GHSA-g3hv-75wg-m249",
+        "CVE-2026-118764"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/@cyclonedx/cyclonedx-npm@4.2.1",
+        "pkg:npm/libxmljs2@0.37.0",
+        "pkg:npm/node-gyp@11.5.0",
+        "pkg:npm/make-fetch-happen@14.0.3",
+        "pkg:npm/cacache@19.0.1",
+        "pkg:npm/glob@10.5.0",
+        "pkg:npm/minimatch@9.0.9"
+      ],
+      "parent_ids": [
+        "pkg:npm/glob@10.5.0"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "uuid",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/uuid@8.3.2",
+      "current_version": "8.3.2",
+      "recommended_version": "11.1.1",
+      "candidate_versions": [
+        "11.1.1"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-w5hq-g745-h8pq",
+      "aliases": [
+        "GHSA-w5hq-g745-h8pq",
+        "CVE-2026-41907"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sequelize@6.37.8",
+        "pkg:npm/uuid@8.3.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/sequelize@6.37.8",
+        "pkg:npm/istanbul-lib-processinfo@2.0.3"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "tar",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/tar@6.2.1",
+      "current_version": "6.2.1",
+      "recommended_version": "7.5.8",
+      "candidate_versions": [
+        "7.5.8"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-83g3-92jg-28cx",
+      "aliases": [
+        "GHSA-83g3-92jg-28cx",
+        "CVE-2026-26960"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sqlite3@5.1.7",
+        "pkg:npm/tar@6.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/cacache@15.3.0",
+        "pkg:npm/node-gyp@8.4.1",
+        "pkg:npm/sqlite3@5.1.7"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "tar",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/tar@6.2.1",
+      "current_version": "6.2.1",
+      "recommended_version": "7.5.11",
+      "candidate_versions": [
+        "7.5.11"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-9ppj-qmqm-q256",
+      "aliases": [
+        "GHSA-9ppj-qmqm-q256",
+        "CVE-2026-31802"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sqlite3@5.1.7",
+        "pkg:npm/tar@6.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/cacache@15.3.0",
+        "pkg:npm/node-gyp@8.4.1",
+        "pkg:npm/sqlite3@5.1.7"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "sanitize-html",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/sanitize-html@1.4.2",
+      "current_version": "1.4.2",
+      "recommended_version": "2.18.0",
+      "candidate_versions": [
+        "2.18.0"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-x3q4-9hxx-gx8m",
+      "aliases": [
+        "GHSA-x3q4-9hxx-gx8m",
+        "CVE-2026-113654"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sanitize-html@1.4.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "tar",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/tar@6.2.1",
+      "current_version": "6.2.1",
+      "recommended_version": "7.5.4",
+      "candidate_versions": [
+        "7.5.4"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-r6q2-hw4h-h46w",
+      "aliases": [
+        "GHSA-r6q2-hw4h-h46w",
+        "CVE-2026-23950"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sqlite3@5.1.7",
+        "pkg:npm/tar@6.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/cacache@15.3.0",
+        "pkg:npm/node-gyp@8.4.1",
+        "pkg:npm/sqlite3@5.1.7"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "file-type",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/file-type@16.5.4",
+      "current_version": "16.5.4",
+      "recommended_version": "21.3.1",
+      "candidate_versions": [
+        "21.3.1"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-5v7r-6r5c-r473",
+      "aliases": [
+        "GHSA-5v7r-6r5c-r473",
+        "CVE-2026-31808"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/file-type@16.5.4"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "@cyclonedx/cyclonedx-npm",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40cyclonedx/cyclonedx-npm@4.2.1",
+      "current_version": "4.2.1",
+      "recommended_version": "5.0.0",
+      "candidate_versions": [
+        "5.0.0"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-v75r-vx73-82pj",
+      "aliases": [
+        "GHSA-v75r-vx73-82pj",
+        "CVE-2026-55849"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/@cyclonedx/cyclonedx-npm@4.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "tar",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/tar@6.2.1",
+      "current_version": "6.2.1",
+      "recommended_version": "7.5.17",
+      "candidate_versions": [
+        "7.5.17"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-gvwx-54wh-qm9j",
+      "aliases": [
+        "GHSA-gvwx-54wh-qm9j",
+        "CVE-2026-59875"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sqlite3@5.1.7",
+        "pkg:npm/tar@6.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/cacache@15.3.0",
+        "pkg:npm/node-gyp@8.4.1",
+        "pkg:npm/sqlite3@5.1.7"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "sanitize-html",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/sanitize-html@1.4.2",
+      "current_version": "1.4.2",
+      "recommended_version": "2.17.6",
+      "candidate_versions": [
+        "2.17.6"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-jxwj-j7wr-gfrw",
+      "aliases": [
+        "GHSA-jxwj-j7wr-gfrw",
+        "CVE-2026-63670"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sanitize-html@1.4.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "jws",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/jws@0.2.6",
+      "current_version": "0.2.6",
+      "recommended_version": "3.2.3",
+      "candidate_versions": [
+        "3.2.3"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-869p-cjfg-cm3x",
+      "aliases": [
+        "GHSA-869p-cjfg-cm3x",
+        "CVE-2025-65945"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/jsonwebtoken@0.4.0",
+        "pkg:npm/jws@0.2.6"
+      ],
+      "parent_ids": [
+        "pkg:npm/jsonwebtoken@0.1.0",
+        "pkg:npm/jsonwebtoken@0.4.0"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "@cyclonedx/cyclonedx-npm",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40cyclonedx/cyclonedx-npm@4.2.1",
+      "current_version": "4.2.1",
+      "recommended_version": "6.0.0",
+      "candidate_versions": [
+        "6.0.0"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-q69g-4hcv-6jg4",
+      "aliases": [
+        "GHSA-q69g-4hcv-6jg4",
+        "CVE-2026-71538"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/@cyclonedx/cyclonedx-npm@4.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "sanitize-html",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/sanitize-html@1.4.2",
+      "current_version": "1.4.2",
+      "recommended_version": "2.0.0-beta",
+      "candidate_versions": [
+        "2.0.0-beta"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-qhxp-v273-g94h",
+      "aliases": [
+        "GHSA-qhxp-v273-g94h",
+        "CVE-2019-25225"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sanitize-html@1.4.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "sanitize-html",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/sanitize-html@1.4.2",
+      "current_version": "1.4.2",
+      "recommended_version": "2.18.0",
+      "candidate_versions": [
+        "2.18.0"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-cv27-6wvh-8x7j",
+      "aliases": [
+        "GHSA-cv27-6wvh-8x7j",
+        "CVE-2026-113661"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sanitize-html@1.4.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "direct_upgrade",
+      "status": "pending_approval"
+    },
+    {
+      "package": "tar",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/tar@6.2.1",
+      "current_version": "6.2.1",
+      "recommended_version": "7.5.16",
+      "candidate_versions": [
+        "7.5.16"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-vmf3-w455-68vh",
+      "aliases": [
+        "GHSA-vmf3-w455-68vh",
+        "CVE-2026-53655"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sqlite3@5.1.7",
+        "pkg:npm/tar@6.2.1"
+      ],
+      "parent_ids": [
+        "pkg:npm/cacache@15.3.0",
+        "pkg:npm/node-gyp@8.4.1",
+        "pkg:npm/sqlite3@5.1.7"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "@tootallnate/once",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/%40tootallnate/once@1.1.2",
+      "current_version": "1.1.2",
+      "recommended_version": "2.0.1",
+      "candidate_versions": [
+        "2.0.1"
+      ],
+      "severity": "LOW",
+      "vulnerability_id": "GHSA-vpq2-c234-7xj6",
+      "aliases": [
+        "GHSA-vpq2-c234-7xj6",
+        "CVE-2026-3449"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/sqlite3@5.1.7",
+        "pkg:npm/node-gyp@8.4.1",
+        "pkg:npm/make-fetch-happen@9.1.0",
+        "pkg:npm/http-proxy-agent@4.0.1",
+        "pkg:npm/@tootallnate/once@1.1.2"
+      ],
+      "parent_ids": [
+        "pkg:npm/http-proxy-agent@4.0.1"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "marsdb",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/marsdb@0.6.11",
+      "current_version": "0.6.11",
+      "recommended_version": null,
+      "candidate_versions": [],
+      "severity": "CRITICAL",
+      "vulnerability_id": "GHSA-5mrr-rgp6-x4gr",
+      "aliases": [
+        "GHSA-5mrr-rgp6-x4gr"
+      ],
+      "dependency_type": "direct",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/marsdb@0.6.11"
+      ],
+      "parent_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT"
+      ],
+      "strategy": "manual_review",
+      "status": "requires_review"
+    },
+    {
+      "package": "jws",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/jws@0.2.6",
+      "current_version": "0.2.6",
+      "recommended_version": "3.0.0",
+      "candidate_versions": [
+        "3.0.0"
+      ],
+      "severity": "HIGH",
+      "vulnerability_id": "GHSA-gjcw-v447-2w7q",
+      "aliases": [
+        "GHSA-gjcw-v447-2w7q",
+        "CVE-2016-1000223"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/jsonwebtoken@0.4.0",
+        "pkg:npm/jws@0.2.6"
+      ],
+      "parent_ids": [
+        "pkg:npm/jsonwebtoken@0.1.0",
+        "pkg:npm/jsonwebtoken@0.4.0"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    },
+    {
+      "package": "base64url",
+      "ecosystem": "npm",
+      "purl": "pkg:npm/base64url@0.0.6",
+      "current_version": "0.0.6",
+      "recommended_version": "3.0.0",
+      "candidate_versions": [
+        "3.0.0"
+      ],
+      "severity": "MEDIUM",
+      "vulnerability_id": "GHSA-rvg8-pwq2-xj7q",
+      "aliases": [
+        "GHSA-rvg8-pwq2-xj7q"
+      ],
+      "dependency_type": "transitive",
+      "path_ids": [
+        "pkg:npm/juice-shop@20.4.0-SNAPSHOT",
+        "pkg:npm/jsonwebtoken@0.4.0",
+        "pkg:npm/jws@0.2.6",
+        "pkg:npm/base64url@0.0.6"
+      ],
+      "parent_ids": [
+        "pkg:npm/jwa@0.0.1",
+        "pkg:npm/jws@0.2.6"
+      ],
+      "strategy": "transitive_review",
+      "status": "pending_approval"
+    }
+  ]
+}
