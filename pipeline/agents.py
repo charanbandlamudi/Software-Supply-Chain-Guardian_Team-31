@@ -78,6 +78,10 @@ def build_inputs(scan_dir: Path, repo: Path) -> dict:
                        ("trivy_report", "trivy.json")):
         if (scan_dir / "scanner_results" / fname).exists():
             inputs[key] = str(scan_dir / "scanner_results" / fname)
+    # Baseline lockfile (from git history or the previous scan): lets the anomaly agent flag
+    # unexpected dependencies, lockfile tampering and suspicious version updates.
+    if (scan_dir / "changes" / "baseline-package-lock.json").exists() and "npm_lock" in inputs:
+        inputs["npm_lock_baseline"] = str(scan_dir / "changes" / "baseline-package-lock.json")
     return inputs
 
 

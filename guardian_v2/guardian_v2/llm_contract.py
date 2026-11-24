@@ -79,7 +79,7 @@ def template_claim(finding_id: str, f: dict, plan: dict | None) -> dict:
                 "statement": f"{(f.get('summary') or f.get('canonical_id') or '').rstrip('.')}{where}. Recommended: {action}",
                 "evidence_ids": f.get("evidence_ids", [])[:3],
                 "facts": {"cvss": None, "kev": f.get("kev"), "target_version": None},
-                "next_step": (plan or {}).get("action") or "security review", "kind": "template"}
+                "next_step": (plan or {}).get("action") or "security review", "kind": "template", "agent": "explainer", "llm_provider": None, "llm_model": None}
     short = lambda purl: purl.split("/", 1)[-1].replace("%40", "@") if purl.startswith("pkg:") else purl
     title = (f.get("summary") or "").strip().split("\n")[0][:140]
     parts = [f"{f.get('canonical_id')}{f' ({title})' if title else ''} affects {short(f.get('component_purl', ''))}"]
@@ -96,4 +96,4 @@ def template_claim(finding_id: str, f: dict, plan: dict | None) -> dict:
             "facts": {"cvss": (f.get("cvss") or {}).get("score"), "kev": f.get("kev"),
                       "target_version": target},
             "next_step": "approve remediation plan" if target else "security review",
-            "kind": "template"}
+            "kind": "template", "agent": "explainer", "llm_provider": None, "llm_model": None}

@@ -113,8 +113,8 @@ if stats:
                                       ("Medium", sev.get("MEDIUM", 0)), ("Low", sev.get("LOW", 0))]):
         col.metric(lbl, val)
 
-tab_graph, tab_report, tab_agents, tab_fix, tab_repo, tab_steps, tab_files = st.tabs(
-    ["Dependency graph", "Final report", "Agent investigation", "Remediation review (human-in-the-loop)",
+tab_graph, tab_report, tab_changes, tab_agents, tab_fix, tab_repo, tab_steps, tab_files = st.tabs(
+    ["Dependency graph", "Final report", "What changed", "Agent investigation", "Remediation review (human-in-the-loop)",
      "Misconfigurations & secrets", "Scan steps & tools", "Artifacts"])
 
 with tab_graph:
@@ -147,6 +147,75 @@ with tab_report:
         d2.download_button("⬇️ Report (HTML)", rh.read_bytes(), file_name="guardian-report.html", key="rep-html", width="stretch")
         d3.download_button("⬇️ Report (JSON)", rj.read_bytes(), file_name="guardian-report.json", key="rep-json", width="stretch")
         components.html(rh.read_text(encoding="utf-8"), height=1100, scrolling=True)
+
+with tab_changes:
+    cpath = Path(current["scan_dir"]) / "changes" / "changes.json"
+    if not cpath.exists():
+        st.info("Change detection did not run for this scan (it predates the step).")
+    else:
+        ch = json.loads(cpath.read_text(encoding="utf-8"))
+        st.caption("Facts from the repository's git history and from the previous scan of this repository. "
+                   "Nothing here is inferred.")
+
+        def diff_block(details: dict):
+            for f, d in details.items():
+                with st.expander(f"`{f}` — {d.get('kind')}", expanded=d.get("kind") != "file"):
+                    cols = [k for k in ("added", "removed", "changed", "version_changed", "integrity_changed",
+                                        "source_host_changed") if k in d]
+                    c = st.columns(len(cols))
+                    for col, k in zip(c, cols):
+                        col.metric(k.replace("_", " ").capitalize(), len(d[k]))
+                    if d.get("integrity_changed"):
+                        st.error("Same package version with a different integrity hash — the published tarball changed "
+                                 "under the same version (possible tampering): " + ", ".join(d["integrity_changed"][:10]))
+                    if d.get("source_host_changed"):
+                        st.warning("Download source changed: " + ", ".join(d["source_host_changed"][:10]))
+                    for k in cols:
+                        if d[k]:
+                            st.markdown(f"**{k.replace('_', ' ').capitalize()}**")
+                            st.code("\n".join(d[k][:150]), language=None)
+
+        g = ch.get("git") or {}
+        st.markdown("#### 1 · Git history")
+        if not g.get("available"):
+            st.caption(f"Unavailable: {g.get('reason')}")
+        else:
+            st.caption(f"{g.get('history_depth')} commits fetched (blobless clone).")
+            if g.get("timeline"):
+                st.markdown("**Recent commits that touched dependency manifests, lockfiles, Dockerfiles or workflows**")
+                st.dataframe([{"Commit": t["commit"][:10], "Date": t["date"][:19].replace("T", " "), "Author": t["author"],
+                               "Subject": t["subject"]} for t in g["timeline"]], hide_index=True, width="stretch")
+            else:
+                st.caption(g.get("reason", ""))
+            if g.get("baseline"):
+                b = g["baseline"]
+                st.markdown(f"**Latest dependency change:** `{b['compared_commit'][:10]}` — {b['subject']} "
+                            f"({b['author']}, {b['date'][:10]}) compared with its parent `{b['commit'][:10]}`")
+                diff_block(g.get("details", {}))
+            if g.get("window") and g["window"].get("details"):
+                w = g["window"]
+                st.markdown(f"**Cumulative over the fetched history:** `{w['from_commit'][:10]}` → `{w['to_commit'][:10]}` "
+                            f"({w['commits']} commits)")
+                diff_block(w["details"])
+        st.markdown("#### 2 · Since the previous scan of this repository")
+        sl = ch.get("since_last_scan")
+        if not sl:
+            st.caption("No earlier scan of this repository to compare with.")
+        else:
+            st.caption(f"Previous scan `{sl['previous_scan']}` at commit `{(sl.get('previous_commit') or 'n/a')[:10]}` "
+                       f"({(sl.get('previous_started_at') or '')[:16].replace('T', ' ')} UTC)")
+            m = st.columns(5)
+            for col, (k, label) in zip(m, (("components_added", "Components added"), ("components_removed", "Removed"),
+                                           ("versions_changed", "Version changes"), ("vulnerabilities_new", "New vulns"),
+                                           ("vulnerabilities_resolved", "Resolved vulns"))):
+                col.metric(label, len(sl[k]))
+            for k in ("components_added", "components_removed", "versions_changed", "vulnerabilities_new", "vulnerabilities_resolved"):
+                if sl[k]:
+                    with st.expander(k.replace("_", " ").capitalize()):
+                        st.code("\n".join(sl[k][:200]), language=None)
+        if ch.get("baseline_lockfile"):
+            st.caption(f"Baseline lockfile for the anomaly agent: {ch['baseline_lockfile']['source']} — used to flag "
+                       "unexpected dependencies, lockfile tampering and suspicious updates.")
 
 with tab_agents:
     adir = Path(current["artifacts"].get("agents_dir") or Path(current["scan_dir"]) / "agents")
@@ -200,7 +269,11 @@ with tab_agents:
         for f, a in explained[:25]:
             with st.expander(f"[{a.get('kind')}] {f.get('canonical_id')} · {(f.get('component_purl') or '').replace('pkg:', '')}"):
                 st.write(a.get("statement"))
-                st.caption(f"Next step: {a.get('next_step')} · evidence: {', '.join(a.get('evidence_ids', [])[:3])}")
+                who = (f"explainer agent using {a.get('llm_provider')} · {a.get('llm_model') or ''}" if a.get("kind") == "inference"
+                       else "explainer agent (deterministic template)")
+                if a.get("verified_by"):
+                    who += f" · verified by {a['verified_by']} agent"
+                st.caption(f"Written by: {who} · Next step: {a.get('next_step')} · evidence: {', '.join(a.get('evidence_ids', [])[:3])}")
 
         plans = rep.get("remediation_plans", {})
         if plans:
@@ -243,12 +316,13 @@ with tab_fix:
 
         # ---------------- Gate 1
         st.markdown("#### 1 · Gate 1 — review the agents' remediation plans")
-        st.caption("Tick the plans you approve; unticked plans are recorded as rejected. *Sandbox* rows are package "
-                   "changes the system will apply and test; *Manual* rows (pins, secret rotation, config fixes) become "
-                   "a checklist in the draft PR.")
+        st.caption("Choose a decision per plan: **approve** (apply & test it), **reject** (don't do it), or **accept risk** "
+                   "(knowingly keep the risk — needs a written justification in the comment). Undecided rows are not recorded. "
+                   "*Sandbox* rows are package changes the system applies and tests; *Manual* rows (pins, secret rotation, "
+                   "config fixes) become a checklist in the draft PR.")
         import pandas as pd
         df = pd.DataFrame([{
-            "Approve": g1.get(p["plan_id"], {}).get("decision") == "approve",
+            "Decision": g1.get(p["plan_id"], {}).get("decision", "—"),
             "Mode": "Sandbox" if p["automatable"] else "Manual",
             "Component": p["name"] + (f"@{p['version']}" if p.get("version") else ""),
             "Action": p["action"], "Target": p.get("target_version") or "",
@@ -259,17 +333,19 @@ with tab_fix:
             "plan_id": p["plan_id"]} for p in plans])
         edited = st.data_editor(
             df, hide_index=True, width="stretch", height=420, key=f"g1-{current['scan_id']}",
-            column_config={"Approve": st.column_config.CheckboxColumn("Approve", help="Approve this plan"),
+            column_config={"Decision": st.column_config.SelectboxColumn(
+                               "Decision", options=["—", "approve", "reject", "accept_risk"], required=True,
+                               help="approve = apply & test · reject = don't · accept_risk = keep the risk (justify it)"),
                            "plan_id": None, "Risk": st.column_config.NumberColumn(format="%.1f")},
-            disabled=[c for c in df.columns if c != "Approve"])
+            disabled=[c for c in df.columns if c != "Decision"])
         c1, c2, c3 = st.columns([2, 3, 2])
         reviewer = c1.text_input("Reviewer name", key="rev-name", placeholder="e.g. Asha (security lead)")
         note = c2.text_input("Comment (optional)", key="rev-note")
-        n_sel = int(edited["Approve"].sum())
-        if c3.button(f"Submit Gate 1 ({n_sel} approve / {len(edited) - n_sel} reject)", type="primary",
-                     disabled=running, width="stretch"):
+        counts = edited["Decision"].value_counts().to_dict()
+        if c3.button(f"Submit Gate 1 ({counts.get('approve', 0)} approve · {counts.get('reject', 0)} reject · "
+                     f"{counts.get('accept_risk', 0)} accept risk)", type="primary", disabled=running, width="stretch"):
             try:
-                RM.record_gate1(sdir, {r.plan_id: ("approve" if r.Approve else "reject") for r in edited.itertuples()},
+                RM.record_gate1(sdir, {r.plan_id: r.Decision for r in edited.itertuples() if r.Decision != "—"},
                                 reviewer, note)
                 st.success("Gate 1 decisions recorded in the audit trail.")
                 st.rerun()
@@ -328,9 +404,48 @@ with tab_fix:
                 st.dataframe([{"Package": n, "Version": r.get("version", ""), "Result": r.get("status"),
                                "Error": r.get("error", "")} for n, r in res["sandbox_load"].items()],
                              hide_index=True, width="stretch")
+            conf = val.get("final_confidence") or {}
+            if conf:
+                icon = {"high": "🟢", "medium": "🟡", "low": "🔴"}.get(conf.get("level"), "⚪")
+                st.markdown(f"**Final confidence: {icon} {conf.get('level', '').upper()}** — {'; '.join(conf.get('reasons', []))}")
+            app_r = res.get("app") or {}
+            if app_r.get("variants"):
+                st.markdown("**Whole application — before vs after** (sandbox; install scripts off except the allow-listed "
+                            f"native module(s) {', '.join(app_r.get('native_allowlist') or [])}; build and tests with no network)")
+                rows = []
+                for script in (app_r["scripts"].get("build") or []) + (app_r["scripts"].get("tests") or []):
+                    b_, a_ = app_r["variants"].get("before", {}).get(script, {}), app_r["variants"].get("after", {}).get(script, {})
+                    fmt = lambda x: ("✅" if x.get("ok") else "❌") + (f" {x.get('passed')} passed / {x.get('failed')} failed"
+                                                                      if x.get("passed") is not None else (f" exit {x.get('exit')}" if x else " not run"))
+                    rows.append({"Step": f"npm run {script}", "Before the change": fmt(b_), "After the change": fmt(a_)})
+                st.dataframe(rows, hide_index=True, width="stretch")
+                st.caption("Regressions: " + ("; ".join(app_r.get("regressions") or []) or "none — anything failing fails the same way on the original code"))
+            if app_r.get("image_diff") or app_r.get("sbom_diff"):
+                idf, sd = app_r.get("image_diff") or {}, app_r.get("sbom_diff") or {}
+                m2 = st.columns(4)
+                m2[0].metric("Image vulns before", idf.get("vulns_before", "—"))
+                m2[1].metric("Image vulns after", idf.get("vulns_after", "—"),
+                             delta=(idf.get("vulns_after", 0) - idf.get("vulns_before", 0)) if idf else None, delta_color="inverse")
+                m2[2].metric("SBOM components", f"{sd.get('components_before', '—')} → {sd.get('components_after', '—')}")
+                m2[3].metric("SBOM version changes", len(sd.get("changed", [])))
+                with st.expander("SBOM diff (image, CycloneDX) and image scan details"):
+                    for k in ("changed", "added", "removed"):
+                        if sd.get(k):
+                            st.markdown(f"**{k.capitalize()}**")
+                            st.code("\n".join(sd[k][:200]), language=None)
+                    if idf.get("introduced"):
+                        st.markdown("**Introduced in the image**"); st.code("\n".join(idf["introduced"][:100]), language=None)
             if res.get("package_json_diff"):
                 with st.expander("Proposed change (package.json diff)", expanded=True):
                     st.code(res["package_json_diff"], language="diff")
+            if res.get("rollback"):
+                rb = res["rollback"]
+                with st.expander("Rollback — how to undo this change", expanded=False):
+                    st.info(rb["meaning"])
+                    for i, x in enumerate(rb.get("steps", []), 1):
+                        st.markdown(f"{i}. {x}")
+                    st.caption(f"Originals saved in `{rb.get('saved_in')}` with SHA-256: " +
+                               ", ".join(f"{k} `{v[:16]}…`" for k, v in rb.get("original_files", {}).items()))
             if res.get("rescan"):
                 with st.expander("Re-scan details"):
                     st.write("**Cleared**", res["rescan"]["cleared"] or "—")
@@ -373,6 +488,51 @@ with tab_fix:
                     with st.expander("Draft PR description", expanded=True):
                         st.markdown(Path(art["pr_draft"]).read_text(encoding="utf-8"))
                 st.caption("Not pushed or merged: the policy firewall keeps merge/publish/deploy human-only.")
+            rr = g2.get("remediation_report") or {}
+            if rr.get("html") and Path(rr["html"]).exists():
+                st.markdown("**Remediation report** (validation results, before/after risk, remaining & accepted risk, rollback, audit)")
+                d2 = st.columns(3)
+                for col, (k, label) in zip(d2, (("pdf", "⬇️ Remediation report (PDF)"), ("html", "⬇️ HTML"), ("json", "⬇️ JSON"))):
+                    if rr.get(k) and Path(rr[k]).exists():
+                        col.download_button(label, Path(rr[k]).read_bytes(), file_name=Path(rr[k]).name, key=f"rr-{k}", width="stretch")
+                with st.expander("Preview remediation report"):
+                    components.html(Path(rr["html"]).read_text(encoding="utf-8"), height=900, scrolling=True)
+            if g2.get("decision") == "approve":
+                st.markdown("#### 4 · Open a draft pull request (optional)")
+                pr = review.get("pr")
+                if pr:
+                    st.success(f"Draft PR opened on **{pr['target']}**: {pr['url']} (branch `{pr['branch']}` → `{pr['base']}`, "
+                               f"files: {', '.join(pr['files'])})")
+                else:
+                    tgt = RM.pr_target(sdir)
+                    if not tgt["ok"]:
+                        st.caption(f"Draft PR unavailable: {tgt['reason']}")
+                    else:
+                        st.caption(f"Target: **{tgt['target']}** — {tgt['reason']}. The PR is a **draft**; it is never merged "
+                                   "automatically. Only the approved package.json patch (and the lockfile, if the repository tracks it) is committed.")
+                        pc = st.columns([2, 4, 2, 2])
+                        prev_name = pc[0].text_input("Reviewer name", key="pr-name")
+                        confirm = pc[1].checkbox(f"I confirm: push branch guardian/remediation-… to {tgt['target']} and open a draft PR", key="pr-ok")
+                        if pc[2].button("Preview PR (dry run)", width="stretch"):
+                            try:
+                                with st.spinner("Cloning the target branch and applying the change locally…"):
+                                    st.session_state["pr_preview"] = RM.open_draft_pr(sdir, prev_name, dry_run=True)
+                            except (ValueError, RuntimeError) as e:
+                                st.error(str(e))
+                        pv = st.session_state.get("pr_preview")
+                        if pv:
+                            st.markdown(f"**Dry run** — nothing pushed. Target `{pv['target']}` (fork exists: {pv['fork_exists']}), "
+                                        f"branch `{pv['branch']}` → `{pv['base']}`, local commit `{pv['commit']}`")
+                            st.code(pv["diff"], language="diff")
+                            st.markdown("Opening the PR would run:")
+                            st.code("\n".join(pv["would_run"]), language="bash")
+                        if pc[3].button("Open draft PR", disabled=not confirm, type="primary", width="stretch"):
+                            try:
+                                with st.spinner("Pushing branch and opening the draft PR…"):
+                                    RM.open_draft_pr(sdir, prev_name)
+                                st.rerun()
+                            except (ValueError, RuntimeError) as e:
+                                st.error(str(e))
 
         # ---------------- audit trail
         entries = RM.audit_entries(sdir)

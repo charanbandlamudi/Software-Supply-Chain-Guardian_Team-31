@@ -30,6 +30,8 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
+from graph.build_graph import detected_by
+
 SEV = ["CRITICAL", "HIGH", "MEDIUM", "LOW", "INFO", "UNKNOWN"]
 Severity = Literal["CRITICAL", "HIGH", "MEDIUM", "LOW", "INFO", "UNKNOWN"]
 Verification = Literal["multi_scanner_confirmed", "scanner_confirmed", "authoritative_source",
@@ -151,6 +153,9 @@ class Finding(BaseModel):
     verification_status: Verification
     scanner_views: dict = Field(default_factory=dict)
     severity_disagreement: bool = False
+    detected_by: str = ""                       # which agent produced the finding, from which sources
+    explained_by: str | None = None             # which agent / LLM wrote ai_assessment, and who verified it
+    origin: dict | None = None                  # where the component comes from (cdxgen + lockfile)
 
 
 # ------------------------------------------------------------------ validation
@@ -204,6 +209,13 @@ class EvidenceValidator:
 
 
 # ------------------------------------------------------------------ assembly
+def _read_json(p: Path):
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError):
+        return None
+
+
 def _short(purl: str) -> str:
     return purl.split("/", 1)[-1].replace("%40", "@") if purl.startswith("pkg:") else purl
 
@@ -290,6 +302,14 @@ def build_report(scan_dir: Path) -> dict:
                 problem += f" ({location})"
 
         ai = next(iter(f.get("ai_inferences") or []), None)
+        if ai and ai.get("kind") == "inference":
+            explained_by = (f"explainer agent using {ai.get('llm_provider') or 'an LLM'}"
+                            + (f" · {ai['llm_model']}" if ai.get("llm_model") else "")
+                            + (f", verified by the {ai['verified_by']} agent" if ai.get("verified_by") else ""))
+        elif ai:
+            explained_by = "explainer agent (deterministic template, no LLM)"
+        else:
+            explained_by = None
         plan = plans.get(f"PLAN::{purl}")
         if plan and plan.get("action"):
             remediation = Remediation(action=plan["action"], target_version=plan.get("target_version"),
@@ -319,7 +339,8 @@ def build_report(scan_dir: Path) -> dict:
             reachability=f.get("reachability_state"), kev=f.get("kev"),
             epss=(f.get("epss") or {}).get("epss") if isinstance(f.get("epss"), dict) else None,
             confidence=(f.get("confidence") or "Low").lower() if (f.get("confidence") or "").lower() in ("high", "medium", "low") else "low",
-            verification_status=verification, scanner_views=views, severity_disagreement=disagreement))
+            verification_status=verification, scanner_views=views, severity_disagreement=disagreement,
+            detected_by=detected_by(f), explained_by=explained_by, origin=(node or {}).get("origin")))
 
     order = {k: i for i, (k, _, _) in enumerate(SEGMENTS)}
     drafts.sort(key=lambda x: (order[x.segment], SEV.index(x.severity), -(x.risk_score or 0), x.component))
@@ -382,6 +403,7 @@ def build_report(scan_dir: Path) -> dict:
                                       "vulnerabilities": len(n["vulns"])} for n in vuln_nodes],
                                     key=lambda x: -x["parents"])[:10]},
         "scanner_agreement": {"by_scanner_combination": dict(combos.most_common()), "disagreements": disagreements},
+        "what_changed": _read_json(scan_dir / "changes" / "changes.json"),
         "findings": [d.model_dump() for d in accepted],
         "remediation_summary": dict(Counter(d.remediation.action for d in accepted if d.remediation)),
         "validation": {"accepted": len(accepted), "rejected": rejected, "rules": [
@@ -468,6 +490,14 @@ def _finding_card(d: dict) -> str:
         facts.append(f'<span class="chip">EPSS {_e(round(d["epss"], 4))}</span>')
     if d.get("kev"):
         facts.append('<span class="chip warn">CISA KEV: actively exploited</span>')
+    o = d.get("origin") or {}
+    prov = (f'<div class="small muted" style="margin-top:4px">Detected by: {_e(d.get("detected_by"))}'
+            + (f' · Explained by: {_e(d["explained_by"])}' if d.get("explained_by") else "")
+            + (f'<br>Downloaded from: {_e(o.get("resolved_url"))}' if o.get("resolved_url") else "")
+            + (f' · declared in <code>{_e(o.get("declared_in"))}</code>' if o.get("declared_in") else "")
+            + (f' · {"development" if o.get("development") else "production"} dependency' if o else "")
+            + (f'<br>Used in code: {_e(", ".join(o.get("used_in", [])[:6]))}' if o.get("used_in") else "")
+            + "</div>")
     comp = f'{d["component"]}{"@" + d["installed_version"] if d.get("installed_version") else ""}'
     return (f'<div class="card"><h4>{_sev(d["severity"])} <span>{_e(d["finding_id"])}</span> <code>{_e(d["identifier"])}</code>'
             f' <span>{_e(comp)}</span></h4>'
@@ -477,7 +507,54 @@ def _finding_card(d: dict) -> str:
             + (f' · fixed version: <b>{_e(d["fixed_version"])}</b>' if d.get("fixed_version") else
                (" · fixed version: Evidence unavailable" if d["finding_type"] == "vulnerability" else "")) + "</div>"
             f'<div class="lbl">Problem</div><div>{_e(d["problem"])}</div>{views}'
-            f'<div style="margin-top:6px">{"".join(facts)}</div>{ai}{rem_html}</div>')
+            f'<div style="margin-top:6px">{"".join(facts)}</div>{prov}{ai}{rem_html}</div>')
+
+
+def _changes_html(ch: dict | None) -> str:
+    h = ["<h2 id='changes'>5. What changed</h2>"]
+    if not ch:
+        return h[0] + "<p class='muted'>Change detection did not run for this scan.</p>"
+    h.append("<p class='small muted'>Facts from git history and the previous scan of this repository; nothing inferred.</p>")
+    g = ch.get("git") or {}
+
+    def det(details):
+        rows = []
+        for f, d in details.items():
+            counts = ", ".join(f"{k.replace('_', ' ')}: {len(v)}" for k, v in d.items() if isinstance(v, list))
+            flag = ""
+            if d.get("integrity_changed"):
+                flag += f"<div class='warn small'>Integrity hash changed for an unchanged version: {_e(', '.join(d['integrity_changed'][:8]))}</div>"
+            if d.get("source_host_changed"):
+                flag += f"<div class='warn small'>Download source changed: {_e(', '.join(d['source_host_changed'][:8]))}</div>"
+            sample = "; ".join((d.get("added") or [])[:6] + [f"−{x}" for x in (d.get("removed") or [])[:4]]
+                               + (d.get("changed") or d.get("version_changed") or [])[:6])
+            rows.append(f"<tr><td><code>{_e(f)}</code></td><td>{_e(d.get('kind'))}</td><td>{_e(counts)}{flag}"
+                        f"<div class='small muted'>{_e(sample[:400])}</div></td></tr>")
+        return "<table><tr><th>File</th><th>Kind</th><th>Changes</th></tr>" + "".join(rows) + "</table>"
+    if g.get("available"):
+        if g.get("timeline"):
+            h.append("<h3>Recent dependency-related commits</h3><table><tr><th>Commit</th><th>Date</th><th>Author</th><th>Subject</th></tr>"
+                     + "".join(f"<tr><td><code>{_e(t['commit'][:10])}</code></td><td>{_e(t['date'][:10])}</td><td>{_e(t['author'])}</td>"
+                               f"<td>{_e(t['subject'])}</td></tr>" for t in g["timeline"][:10]) + "</table>")
+        if g.get("baseline"):
+            b = g["baseline"]
+            h.append(f"<h3>Latest dependency change <code>{_e(b['compared_commit'][:10])}</code> vs its parent</h3>" + det(g.get("details", {})))
+        if (g.get("window") or {}).get("details"):
+            w = g["window"]
+            h.append(f"<h3>Cumulative over {w['commits']} fetched commits</h3>" + det(w["details"]))
+        if g.get("reason"):
+            h.append(f"<p class='small muted'>{_e(g['reason'])}</p>")
+    else:
+        h.append(f"<p class='small muted'>Git history unavailable: {_e(g.get('reason'))}</p>")
+    sl = ch.get("since_last_scan")
+    if sl:
+        h.append(f"<h3>Since the previous scan ({_e(sl['previous_scan'])})</h3><table><tr><th>Change</th><th>Count</th><th>Examples</th></tr>"
+                 + "".join(f"<tr><td>{_e(k.replace('_', ' '))}</td><td>{len(sl[k])}</td><td class='small'>{_e(', '.join(sl[k][:6]))}</td></tr>"
+                           for k in ("components_added", "components_removed", "versions_changed", "vulnerabilities_new",
+                                     "vulnerabilities_resolved")) + "</table>")
+    else:
+        h.append("<p class='small muted'>No earlier scan of this repository to compare with.</p>")
+    return "".join(h)
 
 
 def render_html(r: dict) -> str:
@@ -496,7 +573,7 @@ def render_html(r: dict) -> str:
            f"scanned {_e((t.get('scanned_at') or '').replace('T', ' '))} UTC · scan status <b>{_e(t['scan_status'])}</b></div>"]
 
     toc = [("summary", "Executive summary"), ("method", "Scope & methodology"), ("sbom", "SBOM statistics"),
-           ("deps", "Dependency analysis"), ("priority", "Risk prioritisation")]
+           ("deps", "Dependency analysis"), ("changes", "What changed"), ("priority", "Risk prioritisation")]
     toc += [(f"seg-{k}", f"{title} ({len(by_seg[k])})") for k, title, _ in SEGMENTS if by_seg.get(k)]
     toc += [("agree", "Scanner agreement & disagreements"), ("remed", "Remediation plan"),
             ("valid", "Evidence validation"), ("limits", "Limitations")]
@@ -558,9 +635,12 @@ def render_html(r: dict) -> str:
                + "<h3>Vulnerable packages shared across dependency paths</h3><table><tr><th>Package</th><th>Parents</th><th>Vulnerabilities</th></tr>"
                + "".join(f"<tr><td>{_e(x['package'])}</td><td>{x['parents']}</td><td>{x['vulnerabilities']}</td></tr>" for x in da["shared_vulnerable_packages"]) + "</table>")
 
+    # what changed
+    out.append(_changes_html(r.get("what_changed")))
+
     # prioritisation
     top = sorted(fs, key=lambda d: -(d.get("risk_score") or 0))[:15]
-    out.append("<h2 id='priority'>5. Risk prioritisation</h2><p class='small muted'>Ordered by the scoring agent's explainable "
+    out.append("<h2 id='priority'>6. Risk prioritisation</h2><p class='small muted'>Ordered by the scoring agent's explainable "
                "risk score (base severity, exploit signals such as KEV/EPSS, import-based reachability, scope and exposure) "
                "with a simplified SSVC decision. This is agent analysis, not scanner output.</p><table><tr><th>ID</th><th>Score</th><th>SSVC</th>"
                "<th>Finding</th><th>Component</th><th>Reachability</th><th>Confidence</th></tr>" + "".join(
@@ -568,7 +648,7 @@ def render_html(r: dict) -> str:
         f"<td>{_e(d['component'])}</td><td>{_e(d['reachability'])}</td><td>{_e(d['confidence'])}</td></tr>" for d in top) + "</table>")
 
     # segments
-    n = 6
+    n = 7
     for key, title, what in SEGMENTS:
         items = by_seg.get(key)
         if not items:

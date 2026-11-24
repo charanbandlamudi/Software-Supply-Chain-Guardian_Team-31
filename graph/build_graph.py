@@ -36,6 +36,34 @@ def ecosystem_from_purl(purl: str | None) -> str:
 
 
 # ---------------------------------------------------------------- loaders
+def _rel(path: str | None) -> str | None:
+    """Scan-folder paths -> repository-relative paths (data/scans/<scan>/repo/x -> x)."""
+    return path.split("/repo/", 1)[1] if path and "/repo/" in path else path
+
+
+def component_origin(c: dict) -> dict:
+    """Where a component's data comes from, as recorded by cdxgen (never inferred)."""
+    props = {}
+    for p in c.get("properties", []):
+        props.setdefault(p.get("name"), p.get("value"))
+    url = props.get("ResolvedUrl") or next((r.get("url") for r in c.get("externalReferences", [])
+                                            if r.get("type") == "distribution"), None)
+    ev = c.get("evidence") or {}
+    method = next((m.get("technique") for i in ev.get("identity", []) for m in i.get("methods", [])), None)
+    return {
+        "declared_in": _rel(props.get("SrcFile")),
+        "resolved_url": url,
+        "registry": url.split("/")[2] if url and "://" in url else None,
+        "development": props.get("cdx:npm:package:development") == "true",
+        "deprecated": props.get("cdx:npm:deprecated"),
+        "identified_by": method,
+        "used_in": [f"{o.get('location')}:{o.get('line')}" for o in ev.get("occurrences", [])[:12]],
+        "integrity": None,                      # filled from the lockfile in build()
+        "sbom_tool": "cdxgen",
+    }
+
+
+
 def load_bom(path: Path) -> nx.DiGraph | None:
     """Graph from CycloneDX components + dependencies. None if SBOM is empty."""
     bom = json.loads(path.read_text(encoding="utf-8"))
@@ -54,7 +82,7 @@ def load_bom(path: Path) -> nx.DiGraph | None:
         name = f"{c['group']}/{c['name']}" if c.get("group") else c.get("name")
         g.add_node(ref, name=name, version=c.get("version") or "Evidence unavailable",
                    ecosystem=ecosystem_from_purl(c.get("purl")), purl=c.get("purl"),
-                   scope=c.get("scope", "required"), kind="component")
+                   scope=c.get("scope", "required"), kind="component", origin=component_origin(c))
     for d in bom.get("dependencies") or []:
         src = d.get("ref")
         for dst in d.get("dependsOn") or []:
@@ -208,6 +236,23 @@ def annotate(g: nx.DiGraph, vulns: dict[str, list[dict]]) -> None:
         d["parent_ids"] = list(g.predecessors(n))
         d["child_ids"] = list(g.successors(n))
         d["agent"] = None   # filled by attach_agents() when an agent report exists
+        d.setdefault("origin", None)   # root / package.json-fallback nodes have no SBOM origin
+
+
+CICD_TYPES = {"unpinned_action", "unpinned_base_image", "dangerous_workflow", "excessive_permissions"}
+
+
+def detected_by(f: dict) -> str:
+    """Which agent produced a finding, and from which sources (taken from the finding itself)."""
+    t, src = f.get("type"), ", ".join(f.get("sources") or [])
+    if t == "vulnerability":
+        return f"vuln_intel agent (sources: {src})"
+    if t in ("misconfiguration", "exposed_secret"):
+        return "cicd agent (from Trivy)"
+    if t in CICD_TYPES:
+        return "cicd agent (static check)"
+    return "anomaly agent" + (" (npm registry metadata via reputation agent)" if t in (
+        "install_script", "suspicious_update", "yanked_or_deprecated", "malicious_package", "unpublished_version") else "")
 
 
 def attach_agents(g: nx.DiGraph, report_path: Path, bom_path: Path) -> None:
@@ -243,8 +288,12 @@ def attach_agents(g: nx.DiGraph, report_path: Path, bom_path: Path) -> None:
                           "ssvc": (f.get("ssvc") or {}).get("decision"), "kev": f.get("kev"),
                           "epss": (f.get("epss") or {}).get("epss") if isinstance(f.get("epss"), dict) else None,
                           "summary": (f.get("summary") or "")[:300],
+                          "detected_by": detected_by(f),
                           "explanations": [{"kind": a.get("kind"), "statement": a.get("statement"),
-                                            "next_step": a.get("next_step")} for a in (f.get("ai_inferences") or [])]}
+                                            "next_step": a.get("next_step"), "agent": a.get("agent", "explainer"),
+                                            "llm_provider": a.get("llm_provider"), "llm_model": a.get("llm_model"),
+                                            "verified_by": a.get("verified_by")}
+                                           for a in (f.get("ai_inferences") or [])]}
                          for f in fs[:12]],
             "plan": {k: plan.get(k) for k in ("action", "target_version", "rationale", "status",
                                               "compatibility_blocker")} if plan else None,
@@ -280,7 +329,7 @@ def export_json(g: nx.DiGraph, out: Path, inputs: dict, scan: dict | None = None
     """Machine-readable graph + evidence for agents, reports and the dashboard.
     Same data the HTML embeds: nodes, directed edges, dependency paths, merged scanner findings."""
     node_keys = ("name", "version", "ecosystem", "purl", "scope", "dep_type", "path_ids",
-                 "parent_ids", "child_ids", "max_sev", "vulns", "agent")
+                 "parent_ids", "child_ids", "max_sev", "vulns", "agent", "origin")
     nodes = [{"id": n, **{k: d[k] for k in node_keys}} for n, d in g.nodes(data=True)]
     sev = Counter(v["severity"] for _, d in g.nodes(data=True) for v in d["vulns"])
     doc = {
@@ -344,7 +393,7 @@ def render(g: nx.DiGraph, out: Path, target: str = "", scanners_used: list | Non
         net.nodes[-1]["font"] = font  # pyvis overwrites a `font` kwarg with font_color only
         details[n] = {k: d[k] for k in ("name", "label", "version", "ecosystem", "purl", "scope",
                                          "dep_type", "path_ids", "vulns", "max_sev",
-                                         "parent_ids", "child_ids", "agent")}
+                                         "parent_ids", "child_ids", "agent", "origin")}
     for a, b in g.edges():
         net.add_edge(a, b)
     net.set_options(json.dumps({
@@ -588,14 +637,34 @@ function agentSection(d){
     <div class="vuln" style="border-left-color:${f.type==="vulnerability" ? "#2563eb" : "#c026d3"}">
       <div style="display:flex;justify-content:space-between;gap:6px"><b>${esc(TYPE_LABEL[f.type]||f.type)}</b><span class="chip">${esc(f.id)} · ${esc(f.score)}</span></div>
       ${f.type !== "vulnerability" ? `<div class="tool">${esc(f.summary)}</div>` : ""}
-      ${f.explanations.map(x => `<div class="tool" style="margin-top:6px"><span class="chip" style="${x.kind==="inference"?"background:#ede9fe;color:#5b21b6":""}">${x.kind==="inference" ? "LLM · critic-verified" : "template"}</span> ${esc(x.statement)}</div>`).join("")}
+      <div class="note" style="margin-top:2px">Detected by: ${esc(f.detected_by || "—")}</div>
+      ${f.explanations.map(x => `<div class="tool" style="margin-top:6px"><span class="chip" style="${x.kind==="inference"?"background:#ede9fe;color:#5b21b6":""}">${x.kind==="inference" ? "LLM · critic-verified" : "template"}</span> ${esc(x.statement)}
+        <div class="note">Explained by: ${esc(x.agent || "explainer")} agent${x.kind==="inference" ? ` using ${esc(x.llm_provider || "LLM")}${x.llm_model ? " · " + esc(x.llm_model) : ""}` : " (deterministic template, no LLM)"}${x.verified_by ? ` · verified by ${esc(x.verified_by)} agent` : ""}</div></div>`).join("")}
     </div>`).join("");
   const p = a.plan;
-  const plan = p ? `<div class="vuln" style="border-left-color:#16a34a"><b>Proposed remediation</b> <span class="chip">${esc(p.action)}${p.target_version ? " → "+esc(p.target_version) : ""}</span>
+  const plan = p ? `<div class="vuln" style="border-left-color:#16a34a"><b>Proposed remediation</b> <span class="note">(remediation agent)</span> <span class="chip">${esc(p.action)}${p.target_version ? " → "+esc(p.target_version) : ""}</span>
       <div class="tool">${esc(p.rationale||"")}</div>${p.compatibility_blocker ? `<div class="warn">Blocker: ${esc(p.compatibility_blocker)}</div>` : ""}
       <div class="note">Status: ${esc(p.status||"proposed")} — requires human approval; nothing is changed automatically.</div></div>` : "";
   return `<div class="section">Agent assessment <span class="note">(agent analysis, not scanner fact)</span></div>
-    <div class="list">${chips}</div>${sus}${fcards}${plan}`;
+    <div class="list">${chips}</div><div class="note">Risk score & SSVC: scoring agent · reachability: reachability agent (import analysis)</div>${sus}${fcards}${plan}`;
+}
+
+// ---- provenance: where each piece of data about this package comes from
+function originSection(d){
+  const o = d.origin;
+  if(!o) return "";
+  const row = (k, v) => v ? `<div class="kv"><span class="note" style="display:inline-block;width:118px">${k}</span>${v}</div>` : "";
+  const used = (o.used_in||[]).length ? (o.used_in.slice(0,8).map(esc).join(", ") + (o.used_in.length > 8 ? " …" : "")) : "";
+  return `<div class="section">Where this data comes from</div>
+    ${row("Component data", `CycloneDX SBOM by <b>${esc(o.sbom_tool)}</b>${o.identified_by ? " (" + esc(o.identified_by) + ")" : ""}`)}
+    ${row("Declared in", o.declared_in ? `<code>${esc(o.declared_in)}</code>` : "")}
+    ${row("Downloaded from", o.resolved_url ? `<span class="ids">${esc(o.resolved_url)}</span>` : "Evidence unavailable")}
+    ${row("Registry", o.registry ? esc(o.registry) + (o.registry === "registry.npmjs.org" ? " (official npm registry)" : ' <span class="warn">(not the official registry)</span>') : "")}
+    ${row("Integrity", o.integrity ? `<span class="ids">${esc(o.integrity.slice(0, 32))}…</span> (lockfile)` : "")}
+    ${row("Dependency kind", o.development ? "development only" : "production / runtime")}
+    ${row("Used in code", used ? `<span class="ids">${used}</span> <span class="note">(cdxgen source evidence)</span>` : "")}
+    ${row("Registry notice", o.deprecated ? `<span class="warn">deprecated: ${esc(o.deprecated.slice(0, 160))}</span>` : "")}
+    ${row("Vulnerabilities", "Grype · OSV-Scanner · Trivy (each scanner's view shown above)")}`;
 }
 
 // ---- detail drawer
@@ -626,6 +695,7 @@ function renderDrawer(id){
     ${agentSection(d)}
     <div class="section">Depends on (${d.child_ids.length}) <span style="color:var(--child)">━</span></div>${list(d.child_ids, "No dependencies")}
     <div class="section">Required by (${d.parent_ids.length})</div>${list(d.parent_ids, "—")}
+    ${originSection(d)}
     <div class="section">Package URL</div><div class="ids" style="font-family:ui-monospace,monospace">${esc(d.purl || "Evidence unavailable")}</div>`;
   $("ssg-drawer").classList.add("open");
 }
@@ -704,6 +774,23 @@ def main() -> None:
     build(a.repo, a.bom, a.grype, a.osv, a.out, a.json, trivy=a.trivy)
 
 
+def _attach_integrity(g: nx.DiGraph, repo: Path) -> None:
+    lock_path = repo / "package-lock.json"
+    if not lock_path.exists():
+        return
+    try:
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return
+    by_nv = {}
+    for path, meta in (lock.get("packages") or {}).items():
+        if path and meta.get("version"):
+            by_nv[(path.split("node_modules/")[-1], meta["version"])] = meta.get("integrity")
+    for _, d in g.nodes(data=True):
+        if d.get("origin") is not None:
+            d["origin"]["integrity"] = by_nv.get((d.get("name"), d.get("version")))
+
+
 def build(repo: Path, bom: Path, grype: Path | None, osv: Path | None, out_html: Path,
           out_json: Path, target: str = "", scan: dict | None = None,
           trivy: Path | None = None, agent_report: Path | None = None) -> dict:
@@ -726,6 +813,7 @@ def build(repo: Path, bom: Path, grype: Path | None, osv: Path | None, out_html:
         else:
             print(f"[warn] {name} results not available — not included in overlay.")
     annotate(g, merge_findings(*sources))
+    _attach_integrity(g, repo)
     if agent_report and agent_report.exists():
         attach_agents(g, agent_report, bom)
     repo_findings = (load_trivy_repo_findings(trivy) if trivy and trivy.exists()

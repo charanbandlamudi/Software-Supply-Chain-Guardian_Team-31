@@ -327,7 +327,9 @@ data/scans/<owner>__<repo>__<YYYYmmdd-HHMMSS>/
 ├── pipeline/
 │   ├── scan.py               # pipeline: clone → lockfile → SBOM → scanners → graph → agents; scan.json; background runner
 │   ├── agents.py             # bridge: scan folder → guardian_v2 inputs; runs the agents; saves investigation.json
-│   └── remediation.py        # Gate 1 → policy → apply → resolve → Docker sandbox (install, test) → re-scan → Gate 2
+│   ├── changes.py            # what changed: git history diff + previous-scan diff + baseline lockfile
+│   └── remediation.py        # Gate 1 → policy → apply → resolve → sandbox (packages + whole app before/after:
+│                             #   install, build, tests, image, Trivy, SBOM diff) → re-scan → Gate 2 → report → draft PR
 ├── graph/
 │   └── build_graph.py        # SBOM + scanner output → NetworkX graph → graph.json + PyVis HTML (+ graph UI)
 ├── guardian_v2/              # LangGraph multi-agent system (supervisor, agents, critic, CLI with approval gate)
@@ -335,6 +337,8 @@ data/scans/<owner>__<repo>__<YYYYmmdd-HHMMSS>/
 ├── data/scans/               # one folder per scan (cloned repos are git-ignored)
 ├── .streamlit/config.toml    # light theme
 ├── .claude/launch.json       # dev-server launch config
+├── docs/PROMPTS.md           # every LLM prompt, the critic's rules, what the LLM never sees
+├── tests/                    # unit tests for the pipeline (.venv/bin/python -m pytest -q tests)
 ├── requirements.txt
 └── README.md
 ```
@@ -570,55 +574,117 @@ Juice Shop, instead of 1,135). Responses are cached in `data/agent_cache/` and r
 - The agents' report also includes OpenVEX "not affected" statements and an in-toto statement
   (`guardian.openvex.json`, `guardian.in-toto.json`).
 
+## What changed (git history + previous scan)
+
+Pipeline step 6 ([`pipeline/changes.py`](pipeline/changes.py)) answers the Day 1 question *"what changed?"*
+using facts only:
+- **Git history.** The clone carries the last 100 commits (blobless, so it stays fast). The step finds the most
+  recent commit that touched a dependency manifest, lockfile, Dockerfile or workflow, and diffs it against its
+  parent. It also gives a cumulative diff over the whole fetched history. For each `package.json`: dependencies
+  added, removed or with changed version ranges. For each lockfile: packages added, removed or version-changed,
+  **the same version with a different integrity hash** (a tampering signal) and **download-source changes**.
+  Other files get a line-level diff.
+- **Previous scan of the same repository.** Components added, removed or version-changed, and vulnerabilities new
+  or resolved since then.
+- **Baseline lockfile for the agents.** The lockfile from before the last dependency commit, or the previous
+  scan's lockfile, goes to the anomaly agent, which then flags unexpected dependencies, lockfile tampering and
+  suspicious version updates.
+
+The UI's *What changed* tab and the report's *What changed* section show the timeline and the diffs. On Juice
+Shop, the latest dependency commit ("Replace module dependencies with native Node.") removed seven `@types/*`
+dev dependencies.
+
+## Provenance: where each piece of data comes from
+
+Clicking a package in the graph shows **"Where this data comes from"**, with values taken from cdxgen and the
+lockfile, never inferred:
+- the manifest it's declared in, and the exact download URL and registry (warning if it isn't the official one);
+- the lockfile integrity hash, and whether it's a development or production dependency;
+- any registry deprecation notice;
+- **where the source code uses it** (cdxgen evidence, for example `lib/insecurity.ts:11`).
+
+Every finding records **which agent detected it** and from which sources (for example *vuln_intel agent:
+grype, npm-audit, osv, osv-scanner, trivy*). Every explanation records **which agent wrote it, with which LLM
+provider and model** (for example *explainer agent using gemini · gemini-flash-lite-latest*), or that it's a
+deterministic template, and **whether the critic agent verified it**. The graph panel, the Final Guardian
+Report and the UI all show this. The LLM prompts are documented in [`docs/PROMPTS.md`](docs/PROMPTS.md).
+
 ## Human-in-the-loop remediation (sandboxed)
 
-The UI's **Remediation review** tab ([`pipeline/remediation.py`](pipeline/remediation.py)) turns the agents'
-proposed fixes into verified changes. Nothing touches your code, gets pushed or gets merged.
+The UI's **Remediation review** tab ([`pipeline/remediation.py`](pipeline/remediation.py)) takes the agents'
+proposed fixes through human approval, real execution in a sandbox, and a second approval. Nothing touches
+your checkout, and nothing is merged.
 
-1. **Gate 1, human approval.** The reviewer sees every plan (component, action, target version, CVEs it clears,
-   blockers, risk) and ticks the ones to approve. Unticked plans are recorded as rejected, under the reviewer's name.
-   - *Sandbox* rows are npm package changes the system applies and tests.
-   - *Manual* rows (pinning actions or images, rotating secrets, fixing config, transitive removals) become a
-     checklist in the draft PR.
-2. **Sandbox validation** (runs in the background; the page shows live progress):
-   1. **Policy firewall:** `pkg.apply`, `docker.build` and `test.run` must be allowed on a
-      `guardian/remediation-*` branch with Gate 1.
-   2. **Apply** to a *copy* of `package.json`: direct dependencies get the new version; packages pulled in
-      indirectly are forced with npm `overrides`.
-   3. **Resolve** the new lockfile with `npm install --package-lock-only --ignore-scripts`. This only reads
-      metadata; no package code runs.
-   4. **Verify** the target versions are in the new lockfile and the vulnerable versions are gone.
-   5. **Sandbox install** in Docker (`node:22-slim`): network on so packages can download, install scripts **off**.
-   6. **Sandbox test:** each upgraded package's code is loaded in a container with **no network, a read-only
-      filesystem, all capabilities dropped, a non-root user and pid/memory/CPU limits**.
-   7. **Re-scan** the new lockfile with OSV-Scanner: vulnerabilities before and after, cleared, remaining and
-      newly introduced.
-3. **Gate 2, human approval of the validated change.** The firewall must allow a **draft** PR. The system then
-   writes `remediation/guardian-remediation.patch`, `package-lock.remediated.json` and `PR_DRAFT.md`, which holds
-   the changes, the validation evidence, the manual-task checklist and the audit-chain head. Merging stays
-   human-only.
+**1. Gate 1, human decision per plan:**
+- **approve:** apply and test the change;
+- **reject:** don't make the change;
+- **accept risk:** knowingly keep the risk. This requires a written justification and is listed in the report as
+  an accepted risk.
 
-Every human decision, policy verdict and sandbox result is appended to `remediation/audit.jsonl`, a hash chain
-whose integrity the tab checks and displays.
+*Sandbox* plans are npm package changes the system applies and tests. *Manual* plans (pinning actions or images,
+rotating secrets, fixing config, transitive removals) become a checklist in the draft PR.
 
-Juice Shop example (approving `jsonwebtoken@0.4.0` → 9.0.0, `lodash` → 4.18.1, `moment` → 2.31.0):
-- all steps pass, and all 3 packages load in the network-less sandbox;
-- known vulnerabilities go from **54 to 43** (11 cleared, 0 newly introduced);
-- the whole run takes about 10 s.
+**2. Sandbox validation**, which runs in the background with live progress:
 
-**Requires** Docker Desktop (or another Docker engine) running. Without it, the sandbox steps are reported as
-skipped and the other steps still run. Only npm changes are executed in the web sandbox; other ecosystems are
-handled as manual tasks. The CLI flow (`guardian_v2/run_guardian.py`, which pauses for a reviewer in the terminal)
-is still available.
+| Step | What happens |
+|---|---|
+| Policy | The firewall must allow `pkg.apply`, `docker.build` and `test.run` on `guardian/remediation-*` with Gate 1 |
+| Apply | The approved changes go into a *copy* of `package.json`. Direct dependencies get the new version; indirect ones an npm `overrides` entry. Only those keys change. |
+| Resolve | `npm install --package-lock-only --ignore-scripts` (metadata only, no package code runs) |
+| Verify | The target versions are in the new lockfile and the vulnerable versions are gone |
+| Package sandbox | Install with scripts off, then **load each upgraded package** with no network, a read-only filesystem, all capabilities dropped and a non-root user |
+| Re-scan | OSV-Scanner on the new lockfile: cleared, remaining and newly introduced vulnerabilities |
+| **Whole app, before and after** | Full `npm ci` (install scripts off, except the explicit native-module allow-list `GUARDIAN_SANDBOX_NATIVE_ALLOWLIST`, default `sqlite3`, which needs its prebuilt binary); then **build** (`build:server`/`build`) and **unit and integration tests** (`test:server`/`test:unit`, `test:api`/`test:integration`) with **no network**. Before and after are compared, so failures that already existed aren't blamed on the fix. |
+| **Image** | Each variant is built from a generated Dockerfile with **no RUN steps** (nothing executes at build time), scanned with **Trivy**, and its **CycloneDX SBOM** is compared exactly by name@version |
+| Confidence | **high**, **medium** or **low**, with reasons derived from what actually ran |
+
+**Rollback** (shown in the UI, the draft PR and the report) is the plan for undoing the change if it causes
+problems after merging. The original `package.json` and lockfile are kept with their SHA-256 hashes, along with
+step-by-step restore instructions.
+
+**3. Gate 2, human approval of the validated change.** The firewall must allow a **draft** PR. This writes a
+valid git patch, the remediated lockfile, `PR_DRAFT.md` and the **post-remediation report**
+(`remediation/remediation-report.{json,html,pdf}`). That report covers:
+- the original findings and their evidence;
+- the approved, rejected and accepted-risk actions, with reviewers;
+- build and test results before and after;
+- lockfile, image and SBOM changes before and after;
+- remaining risk (residual vulnerabilities, rejected and undecided plans, pending manual tasks);
+- final confidence, rollback, and the audit-chain head.
+
+**4. Draft PR (optional).** *Preview PR (dry run)* clones the target branch, applies the approved change to its
+*current* `package.json`, commits locally and shows the diff and the exact commands, without pushing anything.
+*Open draft PR*, after ticking a confirmation box, pushes a `guardian/remediation-*` branch and opens a
+**draft** PR with `gh`:
+- **to the scanned repository** if you have push access to it;
+- **otherwise to your own fork** (created if needed). Upstream is never touched.
+
+The lockfile is committed only if the repository tracks it. Merging stays human-only.
+
+Every human decision, policy verdict, sandbox result and PR action is appended to `remediation/audit.jsonl`, a
+SHA-256 hash chain whose integrity the tab checks.
+
+**Juice Shop example:**
+
+| Run | Approved | Result |
+|---|---|---|
+| 1 | `jsonwebtoken` 0.4.0 → 9.0.0, `lodash` → 4.18.1, `moment` → 2.31.0 | ❌ **Failed, correctly.** `test:server` went from 441 passed / 0 failed to **20 failed**, because jsonwebtoken 9 enforces ≥2048-bit RSA keys and Juice Shop deliberately uses a weak one. The sandbox caught a breaking change that version metadata alone couldn't. |
+| 2 | `lodash`, `moment` (jsonwebtoken rejected, citing run 1) | ✅ **Passed, confidence medium.** Lockfile 54 → **47** known vulnerabilities (7 cleared, 0 new); `build:server` passes before and after; `test:server` has 0 failures before and after; image (Trivy) 323 → **316**; image SBOM: `lodash@2.4.2` and `moment@2.0.0` removed, nothing added. `test:api` fails before and after alike: those integration tests need a running server and network. |
+
+**Requires** Docker Desktop (or another Docker engine) running. Without it, the sandbox and whole-app steps are
+reported as skipped and the other steps still run. Only npm projects are executed in the sandbox; other
+ecosystems are handled as manual tasks. The terminal flow (`guardian_v2/run_guardian.py`) is still available.
 
 ## Roadmap
 
-Done in this version: discovery and cloning, SBOM generation, Grype, OSV-Scanner and Trivy scanning (vulnerabilities, misconfigurations, secrets), dependency graph analysis, the interactive graph, the web UI, and the LangGraph multi-agent investigation (supervisor, specialist agents, evidence critic) connected to the pipeline and fed by all three scanners, the agents' assessment in the graph, the evidence-validated Final Guardian Report (JSON, HTML, PDF), the hash-chained audit trail and policy firewall, and human-in-the-loop remediation with sandboxed validation.
+Done in this version: discovery and cloning, SBOM generation, Grype, OSV-Scanner and Trivy scanning (vulnerabilities, misconfigurations, secrets), dependency graph analysis, the interactive graph, the web UI, and the LangGraph multi-agent investigation (supervisor, specialist agents, evidence critic) connected to the pipeline and fed by all three scanners, the agents' assessment in the graph, the evidence-validated Final Guardian Report (JSON, HTML, PDF), the hash-chained audit trail and policy firewall, and human-in-the-loop remediation with sandboxed whole-application validation (build, tests, image scan, SBOM diff), rollback, accepted-risk tracking, a post-remediation report and draft PRs, plus change detection from git history and previous scans, and per-field provenance.
 
 Planned, following the hackathon problem statement:
 
 - [ ] Sandbox execution for PyPI / Go / Maven changes (npm only today)
-- [ ] Run the project's own test suite in the sandbox (today: install + load each changed package)
+- [ ] Integration tests that need a running app (start the app inside the sandbox network for `test:api`)
+- [ ] When a sandbox run finds a regression, ask the remediation agent for an alternative version automatically
+- [ ] Continuous monitoring: re-assess saved SBOMs when new vulnerabilities are published
 - [ ] **Multi-page dashboard**: overview, SBOM explorer, vulnerabilities, anomalies, agent activity, report
 - [ ] **SQLite** storage for scan history
 

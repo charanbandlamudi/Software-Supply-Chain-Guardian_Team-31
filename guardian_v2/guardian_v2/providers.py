@@ -75,12 +75,19 @@ def gemini(messages):
                          {"contents": [{"parts": [{"text": text}]}],
                           "generationConfig": {"temperature": 0.1, "responseMimeType": "application/json"}},
                          {"x-goog-api-key": os.environ["GEMINI_API_KEY"]})
+            gemini.last_model = model             # which model actually answered (main or fallback)
             return data["candidates"][0]["content"]["parts"][0]["text"]
         except RuntimeError as exc:
             last = exc
             if not any(code in str(exc) for code in ("HTTP 503", "HTTP 404")):
                 raise                                # 429 / auth errors apply to the whole key
     raise last
+
+
+def _default_model(name: str) -> str | None:
+    return {"groq": os.getenv("GROQ_MODEL", "openai/gpt-oss-120b"),
+            "anthropic": os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-6"),
+            "gemini": os.getenv("GEMINI_MODEL", "gemini-flash-latest")}.get(name)
 
 
 class ProviderPool:
@@ -101,6 +108,7 @@ class ProviderPool:
         self._lock = threading.Lock()
         self.cooldown_until: dict[str, float] = {}
         self.stats = {n: {"calls": 0, "ok": 0, "failed": 0, "rate_limited": 0} for n in self.names}
+        self.last_served: dict | None = None     # {"provider", "model"} of the most recent successful call
 
     @staticmethod
     def _wait_for(err: str) -> float:
@@ -130,6 +138,7 @@ class ProviderPool:
             try:
                 out = fn(messages)
                 self.stats[name]["ok"] += 1
+                self.last_served = {"provider": name, "model": getattr(fn, "last_model", None) or _default_model(name)}
                 return out
             except Exception as exc:
                 err = str(exc)

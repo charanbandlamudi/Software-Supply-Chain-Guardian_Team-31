@@ -43,6 +43,7 @@ STEPS = [
     ("osv", "Scan repository (OSV-Scanner)"),
     ("trivy", "Scan repository (Trivy)"),
     ("graph", "Build dependency graph"),
+    ("changes", "What changed (git history + previous scan)"),
     ("agents", "Agent investigation (guardian_v2)"),
     ("report", "Final Guardian Report (JSON / HTML / PDF)"),
 ]
@@ -238,7 +239,7 @@ def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) ->
     t0 = time.monotonic(); step("clone", "running")
     try:
         if kind == "github":
-            rc = run(["git", "-c", "core.hooksPath=/dev/null", "-c", "credential.helper=", "-c", "core.longpaths=true", "clone", "--depth", "1", "--no-tags",
+            rc = run(["git", "-c", "core.hooksPath=/dev/null", "-c", "credential.helper=", "-c", "core.longpaths=true", "clone", "--depth", "100", "--filter=blob:none", "--no-tags",
                       f"https://github.com/{owner}/{name}.git", str(repo)],
                      timeout=600, env=safe_env(GIT_TERMINAL_PROMPT="0"), stderr=res / "git.stderr")
             if rc != 0:
@@ -367,6 +368,16 @@ def run_scan(target: str, on_update: Callable[[dict], None] = lambda m: None) ->
         step("graph", "ok", f"{meta['stats']['nodes']} nodes, {meta['stats']['findings']} findings", t0)
     except Exception as e:
         return fail("graph", f"{type(e).__name__}: {e}", t0)
+
+    # 5b. what changed: last dependency commit vs its parent, and vs the previous scan ---------
+    t0 = time.monotonic(); step("changes", "running")
+    try:
+        from pipeline.changes import detect_changes, summarize
+        ch = detect_changes(scan_dir, repo, meta["repo_name"])
+        meta["artifacts"]["changes"] = str(scan_dir / "changes" / "changes.json")
+        step("changes", "ok", summarize(ch), t0)
+    except Exception as e:      # informational: a history problem must not fail the scan
+        step("changes", "warn", f"{type(e).__name__}: {str(e)[:200]}", t0)
 
     # 6. multi-agent investigation (guardian_v2 supervisor + specialist agents) ----------
     t0 = time.monotonic(); step("agents", "running", "starting supervisor")

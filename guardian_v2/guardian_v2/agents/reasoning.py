@@ -79,7 +79,11 @@ def make_explainer(llm_call, provider_names):
                     msgs.append({"role": "user", "content": "Your previous claims were rejected: "
                                  + "; ".join(task["rejections"]) + ". Fix them using only the facts given."})
                 try:
-                    claims += parse_response(_call_with_retry(llm_call, msgs))
+                    batch = parse_response(_call_with_retry(llm_call, msgs))
+                    served = getattr(llm_call, "last_served", None) or {"provider": ",".join(provider_names), "model": None}
+                    for c in batch:
+                        c.update(agent="explainer", llm_provider=served["provider"], llm_model=served["model"])
+                    claims += batch
                 except Exception as exc:
                     failures.append(str(exc)[:120])
             if claims:
@@ -107,7 +111,7 @@ def run_critic(state: dict, task: dict) -> AgentResult:
                            summary=f"rejected {len(verdict['rejected'])}/{len(verdict['rejected']) + len(verdict['accepted'])} claims",
                            requests=[handoff("explainer", "claims failed verification", rejections=reasons[:10])])
     fs, plans = state.get("findings", {}), state.get("remediation_plans", {})
-    out = {c["finding_id"]: {"ai_inferences": [c]} for c in verdict["accepted"]}
+    out = {c["finding_id"]: {"ai_inferences": [{**c, "verified_by": "critic"}]} for c in verdict["accepted"]}
     for r in verdict["rejected"]:
         fid = r["claim"].get("finding_id")
         if fid in fs and fid not in out:
