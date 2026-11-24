@@ -78,7 +78,14 @@ def run(state: dict, task: dict) -> AgentResult:
         if purl in out:
             continue
         state_ = "not_in_runtime" if c.get("scope") == "environment" else "not_imported"
-        out[purl] = {"reachability": {"state": state_, "evidence_ids": [], "method": "import analysis"}}
+        eid, ev = make_evidence(
+            "tool_output",
+            "ast-import-scan",
+            purl,
+            {"method": "import analysis", "state": state_, "source_dirs": state.get("inputs", {}).get("source_dirs", [])},
+        )
+        evidence[eid] = ev
+        out[purl] = {"reachability": {"state": state_, "evidence_ids": [eid], "method": "import analysis"}}
 
     focus = task.get("focus") or []
     focus_msg = ""

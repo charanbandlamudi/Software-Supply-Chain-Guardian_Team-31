@@ -1,0 +1,14 @@
+{
+  "langgraph": ">=0.2",
+  "opa": "1.1.0",
+  "gitea": "1.22.3",
+  "verdaccio": "6",
+  "registry": "2",
+  "postgres": "17.2",
+  "cdxgen": "12.9.3",
+  "grype": "0.122.1",
+  "osv-scanner": "2.7.1",
+  "trivy": "0.76.2",
+  "node": "20",
+  "python": "3.12"
+}

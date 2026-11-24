@@ -1,0 +1,38 @@
+services:
+  gitea:
+    image: gitea/gitea:1.22.3
+    ports: ["3000:3000", "2222:22"]
+    environment:
+      GITEA__security__INSTALL_LOCK: "true"
+    volumes: ["gitea:/data"]
+
+  verdaccio:
+    image: verdaccio/verdaccio:6
+    ports: ["4873:4873"]
+    volumes: ["verdaccio:/verdaccio/storage"]
+
+  registry:
+    image: registry:2
+    ports: ["5000:5000"]
+    volumes: ["registry:/var/lib/registry"]
+
+  opa:
+    image: openpolicyagent/opa:1.1.0
+    command: ["run", "--server", "--addr", ":8181", "/policies"]
+    ports: ["8181:8181"]
+    volumes: ["./policies:/policies:ro"]
+
+  postgres:
+    image: postgres:17.2
+    environment:
+      POSTGRES_DB: guardian
+      POSTGRES_USER: guardian
+      POSTGRES_PASSWORD: guardian-local-only
+    ports: ["5432:5432"]
+    volumes: ["postgres:/var/lib/postgresql/data"]
+
+volumes:
+  gitea:
+  verdaccio:
+  registry:
+  postgres:
